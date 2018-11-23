@@ -3,10 +3,8 @@ package model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LoginCheck {
@@ -23,11 +21,9 @@ public class LoginCheck {
         }
 
         Session session = sessionFactory.openSession();
-        Transaction transaction = null;
 
         try {
-            List<Employee> employeeList = new ArrayList<Employee>();
-            employeeList = session.createQuery("FROM Employee ").list();
+            List<Employee> employeeList = session.createQuery("FROM Employee ").list();
 
             for (Employee employee : employeeList) {
                 if(employee.getUsername().equals(username)){
