@@ -32,6 +32,18 @@ public class Employee {
     public void withUsername(String username){
         setUsername(username);
     }
+    public void withPassword(String password){
+        setPassword(password);
+    }
+    public void withFirstName(String firstName){
+        setFirstname(firstName);
+    }
+    public void withLastName(String lastName){
+        setLastname(lastName);
+    }
+    public void withRole(int role){
+        setRole(role);
+    }
 
     public int getId() {
         return id;
@@ -79,5 +91,17 @@ public class Employee {
 
     public void setRole(int role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role=" + role +
+                '}';
     }
 }
