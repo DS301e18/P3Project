@@ -7,7 +7,7 @@ public class Employee {
     private String password;
     private String firstname;
     private String lastname;
-    private int role;
+    private String role;
     // private boolean state;
 
     public Employee() {
@@ -22,27 +22,12 @@ public class Employee {
         this.role = role;
     }
 
-    public Employee(String firstname, String lastname, int role) {
+    public Employee(String firstname, String lastname, String role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
     }
 
-    public void withUsername(String username){
-        setUsername(username);
-    }
-    public void withPassword(String password){
-        setPassword(password);
-    }
-    public void withFirstName(String firstName){
-        setFirstname(firstName);
-    }
-    public void withLastName(String lastName){
-        setLastname(lastName);
-    }
-    public void withRole(int role){
-        setRole(role);
-    }
 
     public int getId() {
         return id;
@@ -84,11 +69,11 @@ public class Employee {
         this.lastname = lastname;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 

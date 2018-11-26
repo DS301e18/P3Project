@@ -11,6 +11,31 @@
     <title>Welcome</title>
 </head>
 <body>
-Welcome ${username}
+
+<!-- Assures that the user can't go back after logout (removes cache) -->
+<%
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
+    response.setHeader("Pragma", "no-cache");// HTTP 1.0
+    response.setHeader("Expires", "0");// Proxies
+
+    //Assures that the pages can't be accessed from the url alone
+    if (session.getAttribute("username")==null)
+    {
+        response.sendRedirect("login.jsp");
+    }
+%>
+
+<!-- Check which role the user has -->
+<% if (session.getAttribute("role").equals("Employee")) { %>
+    <p>Is employee</p>
+<%} else if (session.getAttribute("role").equals("Manager")) {
+    %><p>Is manager</p><%
+}
+%>
+
+<form action="Login" method="get">
+    <input type="submit" value="Logout">
+</form>
+
 </body>
 </html>

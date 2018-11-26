@@ -8,27 +8,28 @@ import java.util.List;
 
 public class LoginCheck {
 
+    private SessionFactory sessionFactory;
+    private Employee employee;
+
+
+    public LoginCheck() {
+        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+
+    }
+
+    /** Check if the username equals the corresponding password **/
     public boolean check(String username, String password){
-
-        SessionFactory sessionFactory;
-
-        try{
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable e){
-            System.out.println("Failed to create session factory");
-            throw new ExceptionInInitializerError(e);
-        }
 
         Session session = sessionFactory.openSession();
 
         try {
+            // Create list of the employees in the database
             List<Employee> employeeList = session.createQuery("FROM Employee ").list();
 
             for (Employee employee : employeeList) {
-                if(employee.getUsername().equals(username)){
-                    if(employee.getPassword().equals(password)){
-                        return true;
-                    }
+                if(employee.getUsername().equals(username) && employee.getPassword().equals(password)){
+                    this.employee = employee;
+                    return true;
                 }
             }
         } catch (HibernateException e){
@@ -37,5 +38,9 @@ public class LoginCheck {
         }
 
         return false;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 }

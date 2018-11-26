@@ -29,7 +29,7 @@ public class EmployeeExample {
             employee.setPassword("admin123");
             employee.setFirstname("Halleluja");
             employee.setLastname("My god");
-            employee.setRole(1);
+            employee.setRole("Chef");
             session.save(employee);
             transaction.commit();
         } catch (HibernateException e){
