@@ -7,11 +7,13 @@ public class Employee {
     private String password;
     private String firstname;
     private String lastname;
-    private int role;
+    private String role;
     // private boolean state;
 
+    public Employee() {
+    }
 
-    public Employee(int id, String username, String password, String firstname, String lastname, int role) {
+    public Employee(int id, String username, String password, String firstname, String lastname, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -20,18 +22,12 @@ public class Employee {
         this.role = role;
     }
 
-    public Employee(String firstname, String lastname, int role) {
+    public Employee(String firstname, String lastname, String role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
     }
 
-    public Employee() {
-    }
-
-    public void withUsername(String username){
-        setUsername(username);
-    }
 
     public int getId() {
         return id;
@@ -73,11 +69,23 @@ public class Employee {
         this.lastname = lastname;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", role=" + role +
+                '}';
     }
 }

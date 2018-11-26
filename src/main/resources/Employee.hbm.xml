@@ -18,7 +18,7 @@
         <property name = "password" column = "password" type = "string"/>
         <property name = "firstname" column = "firstname" type = "string"/>
         <property name = "lastname" column = "lastname" type = "string"/>
-        <property name = "role" column = "role" type = "int"/>
+        <property name = "role" column = "role" type = "string"/>
 
     </class>
 </hibernate-mapping>
