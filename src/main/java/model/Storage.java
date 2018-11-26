@@ -23,4 +23,22 @@ public class Storage {
     public void setName(int name) {
         this.name = name;
     }
+
+    public void addProductType(){
+    }
+
+    public void removeProductType(){
+    }
+
+    public void addBatch(){
+    }
+
+    public void collectProductType(){
+    }
+
+    public void sortProductType(){
+    }
+
+    public void calculateTotalPrice(){
+    }
 }
