@@ -8,9 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Login Dalle Valle Lager</title>
   </head>
   <body>
-  $END$
+  <form action="Login" method="post">
+    Enter username : <input type="text" name="username"><br>
+    Enter password : <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+  </form>
   </body>
 </html>
