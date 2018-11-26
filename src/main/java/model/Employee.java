@@ -8,12 +8,11 @@ public class Employee {
     private String firstname;
     private String lastname;
     private String role;
-    // private boolean state;
 
     public Employee() {
     }
 
-    public Employee(int id, String username, String password, String firstname, String lastname, String role) {
+    /*public Employee(int id, String username, String password, String firstname, String lastname, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -26,7 +25,7 @@ public class Employee {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
-    }
+    }*/
 
 
     public int getId() {

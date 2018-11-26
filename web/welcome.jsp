@@ -12,8 +12,8 @@
 </head>
 <body>
 
-<!-- Assures that the user can't go back after logout (removes cache) -->
 <%
+    //Assures that the user can't go back after logout (removes cache)
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
     response.setHeader("Pragma", "no-cache");// HTTP 1.0
     response.setHeader("Expires", "0");// Proxies
@@ -22,15 +22,15 @@
     if (session.getAttribute("username")==null)
     {
         response.sendRedirect("login.jsp");
-    }
-%>
+    } else {
+        //Check which role the user has
+        if (session.getAttribute("role").equals("Employee")) { %>
+            <p>Is employee</p>
+        <%} else if (session.getAttribute("role").equals("Manager")) {
+            %><p>Is manager</p><%
+        }
 
-<!-- Check which role the user has -->
-<% if (session.getAttribute("role").equals("Employee")) { %>
-    <p>Is employee</p>
-<%} else if (session.getAttribute("role").equals("Manager")) {
-    %><p>Is manager</p><%
-}
+    }
 %>
 
 <form action="Login" method="get">
