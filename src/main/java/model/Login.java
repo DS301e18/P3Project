@@ -17,6 +17,7 @@ import java.util.List;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 
+    /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String username = request.getParameter("username");

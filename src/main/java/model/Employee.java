@@ -10,8 +10,10 @@ public class Employee {
     private int role;
     // private boolean state;
 
+    public Employee() {
+    }
 
-    public Employee(int id, String username, String password, String firstname, String lastname, int role) {
+    public Employee(int id, String username, String password, String firstname, String lastname, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -24,9 +26,6 @@ public class Employee {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
-    }
-
-    public Employee() {
     }
 
     public void withUsername(String username){
