@@ -21,7 +21,7 @@
     //Assures that the pages can't be accessed from the url alone
     if (session.getAttribute("username")==null)
     {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
     } else {
         //Check which role the user has
         if (session.getAttribute("role").equals("Employee")) { %>
