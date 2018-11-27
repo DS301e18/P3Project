@@ -41,20 +41,16 @@ public class Restaurant {
         try{
             transaction = session.beginTransaction();
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
-            assignedEmployee.setRestaurantId(3);
+            assignedEmployee.setRestaurantId(this.id);
             session.save(assignedEmployee);
             transaction.commit();
 
         } catch (HibernateException e){
-            System.out.println("intet bliver assigned");
+            System.out.println("Nothing to assign");
             e.printStackTrace();
             factory.close();
         } finally {
             session.close();
         }
-
-
     }
-
-
 }
