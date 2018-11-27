@@ -24,6 +24,7 @@ public class ProductType {
         this.cost = prize;
     }
 
+    /** Methods **/
     public Storage getStorage() {
         return storage;
     }
@@ -35,7 +36,7 @@ public class ProductType {
     public BigDecimal getCost() {
         return cost;
     }
-
+  
     public int getId() {
         return id;
     }
@@ -127,7 +128,7 @@ public class ProductType {
         this.batches.add(batch);
 
     }
-
+/**
     public static void main(String[] args) {
 
         ProductType cola = new ProductType("coca cola", "22", 89, 109);
@@ -137,5 +138,5 @@ public class ProductType {
 
 
     }
-
+**/
 }
