@@ -8,12 +8,12 @@ import org.hibernate.Transaction;
 
 public class Restaurant {
 
-    /** Field **/
+    /** Field */
     private int id;
     private String name;
     private SessionFactory factory;
 
-    /** Methods **/
+    /** Methods */
     public int getId() {
         return id;
     }
@@ -30,6 +30,7 @@ public class Restaurant {
         this.name = name;
     }
 
+
     //TODO slette sessionfactory efter vi har fundet ud af det med static
     private void employEmployee(Employee employee){
         factory = new SessionFactoryCfg().createSessionFactory();
@@ -41,7 +42,8 @@ public class Restaurant {
             transaction = session.beginTransaction();
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
             assignedEmployee.setRestaurantId(3);
-
+            session.save(assignedEmployee);
+            transaction.commit();
 
         } catch (HibernateException e){
             System.out.println("intet bliver assigned");
