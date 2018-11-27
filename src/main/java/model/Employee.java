@@ -8,6 +8,7 @@ public class Employee {
     private String firstname;
     private String lastname;
     private String role;
+    private int restaurantId;
 
     public Employee() {
     }
@@ -76,6 +77,8 @@ public class Employee {
         this.role = role;
     }
 
+    public int getRestaurantId() { return restaurantId; }
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -87,4 +90,5 @@ public class Employee {
                 ", role=" + role +
                 '}';
     }
+
 }
