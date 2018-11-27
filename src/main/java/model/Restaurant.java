@@ -1,6 +1,7 @@
 package model;
 
 import controller.AssignedEmployeesController;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -30,7 +31,7 @@ public class Restaurant {
     }
 
     //TODO slette sessionfactory efter vi har fundet ud af det med static
-    private void employEmployee(){
+    private void employEmployee(Employee employee){
         factory = new SessionFactoryCfg().createSessionFactory();
         Session session = factory.openSession();
 
@@ -38,12 +39,17 @@ public class Restaurant {
 
         try{
             transaction = session.beginTransaction();
-            Employee employee = new Employee();
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
+            assignedEmployee.setRestaurantId(3);
 
 
+        } catch (HibernateException e){
+            System.out.println("intet bliver assigned");
+            e.printStackTrace();
+            factory.close();
+        } finally {
+            session.close();
         }
-
 
 
     }
