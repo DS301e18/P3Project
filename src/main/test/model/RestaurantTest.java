@@ -29,8 +29,7 @@ class RestaurantTest {
 
 
     private SessionFactory createSessionFactory(){
-        AnnotationConfiguration annotationConfiguration = new AnnotationConfiguration();
-
+        AnnotationConfiguration annotationConfiguration = new AnnotationConfiguration()
 
     }
 
