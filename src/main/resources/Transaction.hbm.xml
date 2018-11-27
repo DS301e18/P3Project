@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "model.Transactions" table = "transactions">
+
+        <meta attribute = "class-description">
+            This class contains the details of all transactions.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "date" column = "date" type = "date"/>
+        <property name = "batch" column = "batch_number" type = "string"/>
+        <property name = "transtype" column = "transtype" type = "string"/>
+        <property name = "product" column = "product_type" type = "string"/>
+        <property name = "amount" column = "amount" type = "int"/>
+        <property name = "name" column = "employee" type = "string"/>
+
+    </class>
+</hibernate-mapping>
