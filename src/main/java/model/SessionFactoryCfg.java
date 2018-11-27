@@ -8,7 +8,7 @@ public class SessionFactoryCfg {
     private static SessionFactory sessionFactory;
 
     /** Create SessionFactory **/
-    public SessionFactory createSessionFactory(){
+    SessionFactory createSessionFactory(){
         try{
             sessionFactory = new Configuration().configure().buildSessionFactory();
             return sessionFactory;

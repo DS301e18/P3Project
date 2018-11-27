@@ -31,6 +31,8 @@ public class Batch {
         this.price = calcBatchPrice(productType);
     }
 
+    public Batch(){}
+
 
     public void takeFromBatch(Batch batch, int amount) {
         batch.productAmount = batch.productAmount - amount;

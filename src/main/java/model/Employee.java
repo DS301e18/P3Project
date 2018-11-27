@@ -27,6 +27,9 @@ public class Employee {
         this.role = role;
     }*/
 
+    public void registerTransaction(){
+
+    }
 
     public int getId() {
         return id;

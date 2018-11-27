@@ -24,6 +24,9 @@ public class ProductType {
         this.cost = prize;
     }
 
+    public ProductType() {
+    }
+
     /** Methods **/
     public Storage getStorage() {
         return storage;
