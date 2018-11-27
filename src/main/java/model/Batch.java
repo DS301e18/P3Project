@@ -1,17 +1,64 @@
 package model;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.sql.Timestamp;
 
 public class Batch {
 
-    /** Field **/
+    /**
+     * Field
+     **/
     private int id;
     private String batchNumber;
     private Timestamp date;
     private int productAmount;
-    private int price;
+    private BigDecimal price;
+    private ProductType productType;
+    //private List<ProductType> batchList = new ArrayList<ProductType>();
 
-    /** Methods **/
+    /**
+     * Methods
+     **/
+
+    //Constructor
+    public Batch(ProductType productType) {
+
+        this.id = productType.getId();
+        this.batchNumber = productType.getProductNumber();
+        this.date = new Timestamp(System.currentTimeMillis());
+        this.productAmount = productType.getBatchSize();
+        this.price = calcBatchPrice(productType);
+    }
+
+
+    public void takeFromBatch(Batch batch, int amount) {
+        batch.productAmount = batch.productAmount - amount;
+    }
+
+
+    private BigDecimal calcBatchPrice(ProductType productType) {
+
+        MathContext mc = new MathContext(2);
+
+        BigDecimal a = BigDecimal.valueOf(productType.getBatchSize());
+        BigDecimal b = productType.getCost();
+
+        return a.multiply(b, mc);
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
     public int getId() {
         return id;
     }
@@ -44,11 +91,8 @@ public class Batch {
         this.productAmount = productAmount;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
 }
