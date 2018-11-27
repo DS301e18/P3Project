@@ -1,5 +1,9 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Timestamp;
@@ -24,11 +28,27 @@ public class Batch {
     //Constructor
     public Batch(ProductType productType) {
 
-        this.id = productType.getId();
-        this.batchNumber = productType.getProductNumber();
-        this.date = new Timestamp(System.currentTimeMillis());
-        this.productAmount = productType.getBatchSize();
-        this.price = calcBatchPrice(productType);
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            this.id = productType.getId();
+            this.batchNumber = productType.getProductNumber();
+            this.date = new Timestamp(System.currentTimeMillis());
+            this.productAmount = productType.getBatchSize();
+            this.price = calcBatchPrice(productType);
+
+            session.save(this);
+            transaction.commit();
+        }
+        catch (HibernateException e){
+            System.out.println("Could not save the transaction");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
 

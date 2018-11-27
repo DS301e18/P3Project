@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "model.Employee" table = "employees">
+    <class name = "model.Batch" table = "Batch">
 
         <meta attribute = "class-description">
             This class contains the employee detail.
@@ -14,11 +14,9 @@
             <generator class="native"/>
         </id>
 
-        <property name = "username" column = "username" type = "string"/>
-        <property name = "password" column = "password" type = "string"/>
-        <property name = "firstname" column = "firstname" type = "string"/>
-        <property name = "lastname" column = "lastname" type = "string"/>
-        <property name = "role" column = "role" type = "string"/>
+        <property name = "batchNumber" column = "batch_number" type = "string"/>
+        <property name = "date" column = "date" type = "date"/>
+        <property name = "productAmount" column = "amount" type = "int"/>
 
     </class>
 </hibernate-mapping>
