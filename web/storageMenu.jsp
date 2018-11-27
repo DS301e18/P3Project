@@ -9,10 +9,28 @@
 <html>
 <head>
     <title>Storage Menu</title>
+
+    <!-- Adjust after the size of the device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Import Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="storageMenu.css">
 </head>
 <body>
 
-
+    <div class="sidenav">
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+        <button><span class="dot"></span></button>
+    </div>
 
 </body>
 </html>

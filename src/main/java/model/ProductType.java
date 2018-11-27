@@ -17,11 +17,11 @@ public class ProductType {
     private final List<Batch> batches = new ArrayList<Batch>();
 
     // Constructor
-    public ProductType(String name, String productNumber, int id, BigDecimal prize){
+    public ProductType(String name, String productNumber, int batchSize, double batchCost){
         this.id = id;
         this.name = name;
         this.productNumber = productNumber;
-        this.cost = prize;
+        this.batchCost = batchCost;
     }
 
     /** Methods **/

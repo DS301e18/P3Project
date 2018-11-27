@@ -1,0 +1,33 @@
+.sidenav{
+    height: 100%;
+    width: 150px;
+    position: fixed;
+    background-color: #d7736f;
+    border-color: #d7736f;
+    text-align: center;
+    top: 0;
+    left: 0;
+    overflow: scroll;
+}
+
+button {
+    background-color: transparent;
+    border: transparent;
+    margin: 10px;
+}
+
+.dot {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot:hover {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 10%;
+    display: inline-block;
+}
