@@ -28,6 +28,7 @@
           <element id="library" level="project" name="Maven: org.jboss:jandex:2.0.5.Final" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="P3ProjectTest/web/Web2" />
     </root>
   </artifact>
 </component>

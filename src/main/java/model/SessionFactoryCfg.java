@@ -5,7 +5,7 @@ import org.hibernate.cfg.Configuration;
 
 public class SessionFactoryCfg {
 
-    private SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
     /** Create SessionFactory **/
     public SessionFactory createSessionFactory(){

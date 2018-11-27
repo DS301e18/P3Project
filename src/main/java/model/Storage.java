@@ -2,12 +2,16 @@ package model;
 
 public class Storage {
 
-    /** Field **/
+    /**
+     * Field
+     **/
     private int id;
     private int name;
 
 
-    /** Methods **/
+    /**
+     * Methods
+     **/
     public int getId() {
         return id;
     }
@@ -23,4 +27,31 @@ public class Storage {
     public void setName(int name) {
         this.name = name;
     }
+
+
+    public void addProduct() {
+
+    }
+
+    public void removeProduct() {
+
+    }
+
+    public void addBatch() {
+
+    }
+
+    public void collectProducts() {
+
+    }
+
+    public void sortProducts() {
+
+    }
+
+    public void calculateTotalPrice() {
+
+    }
+
+
 }
