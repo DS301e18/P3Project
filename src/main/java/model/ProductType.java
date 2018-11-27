@@ -7,6 +7,7 @@ import java.util.List;
 public class ProductType {
 
     /** Field **/
+    private Storage storage;
     private int id;
     private String name;
     private String productNumber;   // Purpose?
@@ -23,7 +24,14 @@ public class ProductType {
         this.cost = prize;
     }
 
-    /** Methods **/
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
     public BigDecimal getCost() {
         return cost;
     }
