@@ -1,0 +1,62 @@
+/* General style settings */
+body{
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    text-align: left;
+}
+
+/* Center elements */
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contain different elements in a closed environment*/
+.container{
+    padding-top: 5%;
+    margin: auto;
+    width: 50%;
+}
+
+/* Image style*/
+img{
+    width: 80%;
+    margin-bottom: 5%;
+}
+
+/* Label style */
+label{
+    text-align: left;
+}
+
+/* Style input boxes */
+input[type=text], input[type=password] {
+    border-radius: 3px; /* Makes the corners soft*/
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 100%;
+    border-color: #f72645;
+    background-color: white;
+}
+
+/* Style of login button */
+input[type=submit] {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+    border-color: #f72645;
+    background-color: #f72645;
+}
+
+/* Any window/viewport width under 420px will get this configuration */
+@media all and (max-width: 420px) {
+    .container {
+        width: 100%;
+    }
+}

@@ -7,10 +7,30 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+    <head>
+        <!-- Tab title -->
+        <title>Login Dalle Valle Lager</title>
+
+        <!-- Adjust after the size of the device -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Import Stylesheet -->
+        <link rel="stylesheet" type="text/css" href="login.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Icon -->
+            <img src="dallevalle.png" class="center">
+
+            <!-- Call class Login and do the "post" method -->
+            <form action="Login" method="post">
+                <label><b>Brugernavn:</b></label><br>
+                <input type="text" placeholder="Indtast Brugernavn" name="username"><br>
+                <label><b>Password:</b></label><br>
+                <input type="password" placeholder="Indtast Password" name="password"><br>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </body>
 </html>

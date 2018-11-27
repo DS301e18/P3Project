@@ -1,4 +1,6 @@
-package model;
+package controller;
+
+import model.LoginCheck;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +28,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("welcome.jsp");
 
         } else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
 
         }
 
@@ -39,7 +41,7 @@ public class Login extends HttpServlet {
         session.removeAttribute("username");
         session.removeAttribute("role");
         session.invalidate();
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
 
     }
 
