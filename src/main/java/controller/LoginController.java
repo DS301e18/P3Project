@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
             response.sendRedirect("welcome.jsp");
 
         } else {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
 
         }
 
@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
         session.removeAttribute("username");
         session.removeAttribute("role");
         session.invalidate();
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("index.jsp");
 
     }
 

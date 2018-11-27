@@ -1,21 +1,23 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductType {
 
     /** Field **/
+    private Storage storage;
     private int id;
     private String name;
     private String productNumber;   // Purpose?
     private int batchSize;  // Redundant
     private double batchCost;   // Redundant
-    private double cost;
+    private BigDecimal cost;
     private final List<Batch> batches = new ArrayList<Batch>();
 
     // Constructor
-    public ProductType(String name, String productNumber, int id, double prize){
+    public ProductType(String name, String productNumber, int id, BigDecimal prize){
         this.id = id;
         this.name = name;
         this.productNumber = productNumber;
@@ -23,6 +25,18 @@ public class ProductType {
     }
 
     /** Methods **/
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+  
     public int getId() {
         return id;
     }
@@ -114,7 +128,7 @@ public class ProductType {
         this.batches.add(batch);
 
     }
-
+/**
     public static void main(String[] args) {
 
         ProductType cola = new ProductType("coca cola", "22", 89, 109);
@@ -124,5 +138,5 @@ public class ProductType {
 
 
     }
-
+**/
 }
