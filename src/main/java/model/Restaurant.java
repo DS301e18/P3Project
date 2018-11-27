@@ -1,5 +1,6 @@
 package model;
 
+import controller.AssignedEmployeesController;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,7 +29,8 @@ public class Restaurant {
         this.name = name;
     }
 
-    /*private void employEmployee(){
+    //TODO slette sessionfactory efter vi har fundet ud af det med static
+    private void employEmployee(){
         factory = new SessionFactoryCfg().createSessionFactory();
         Session session = factory.openSession();
 
@@ -37,12 +39,14 @@ public class Restaurant {
         try{
             transaction = session.beginTransaction();
             Employee employee = new Employee();
+            AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
+
 
         }
 
 
 
-    }*/
+    }
 
 
 }

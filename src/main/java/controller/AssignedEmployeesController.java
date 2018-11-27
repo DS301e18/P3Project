@@ -5,12 +5,7 @@ public class AssignedEmployeesController {
     private int restaurantId;
     private int employeeId;
 
-    /*public AssignedEmployeesController(int id, int restaurantId, int employeeId) {
-        this.id = id;
-        this.restaurantId = restaurantId;
-        this.employeeId = employeeId;
-    }
-*/
+
     public int getId() {
         return id;
     }
@@ -34,4 +29,10 @@ public class AssignedEmployeesController {
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
+
+
+
+
+
+
 }

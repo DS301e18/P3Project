@@ -13,15 +13,14 @@ public class Employee {
     public Employee() {
     }
 
-    /*public Employee(int id, String username, String password, String firstname, String lastname, String role) {
-        this.id = id;
+    public Employee(String username, String password, String firstname, String lastname, String role) {
         this.username = username;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
     }
-
+/*
     public Employee(String firstname, String lastname, String role) {
         this.firstname = firstname;
         this.lastname = lastname;
