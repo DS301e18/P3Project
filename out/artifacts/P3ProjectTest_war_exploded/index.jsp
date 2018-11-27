@@ -21,7 +21,7 @@
     <body>
         <div class="container">
             <!-- Icon -->
-            <img src="dallevalle.png"class="center">
+            <img src="dallevalle.png" class="center">
 
             <!-- Call class Login and do the "post" method -->
             <form action="Login" method="post">
