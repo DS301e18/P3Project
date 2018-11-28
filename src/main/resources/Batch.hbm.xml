@@ -17,7 +17,7 @@
         <property name = "batchNumber" column = "batch_number" type = "string"/>
         <property name = "date" column = "timestamp" type = "date"/>
         <property name = "remainingInBox" column = "amount" type = "int"/>
-        <property name = "value" column = "batch_value" type = "string"/>
+        <property name = "value" column = "batch_value" type = "big_decimal"/>
         <property name = "typeName" column = "type_name" type = "string"/>
 
     </class>
