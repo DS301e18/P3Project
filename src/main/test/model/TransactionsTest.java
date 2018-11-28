@@ -58,7 +58,7 @@ class TransactionsTest {
     }
 
     @Test
-    void hibernateException(){
+    void hibernateException() {
 
     }
 
