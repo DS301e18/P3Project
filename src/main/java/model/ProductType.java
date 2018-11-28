@@ -76,6 +76,5 @@ public class ProductType {
         this.batchSize += factor;
     }
 
-
 }
 
