@@ -89,7 +89,7 @@ public class ProductType {
         int counter = 0;
 
         for (Batch batch : this.batches){
-            counter += batch.getProductAmount();
+            counter += batch.getRemainingInBox();
         }
 
         return counter;

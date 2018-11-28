@@ -27,7 +27,7 @@ class TransactionsTest {
 
         b.setBatchNumber("213123");
         b.setProductType(p);
-        b.setProductAmount(p.getBatchSize());
+        b.setRemainingInBox(p.getBatchSize());
 
         Transactions transactions = new Transactions();
         Transaction transaction;
