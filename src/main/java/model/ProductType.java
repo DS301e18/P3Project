@@ -72,5 +72,7 @@ public class ProductType {
     public void setBatchSize(int factor) {
         this.batchSize += factor;
     }
+
+
 }
 
