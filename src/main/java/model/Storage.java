@@ -4,14 +4,19 @@ public class Storage {
 
     /**
      * Field
-     **/
+     */
     private int id;
-    private int name;
+    private String name;
+    private Restaurant restaurant;
 
+    public Storage(String name, Restaurant restaurant) {
+        this.name = name;
+        this.restaurant = restaurant;
+    }
 
     /**
      * Methods
-     **/
+     */
     public int getId() {
         return id;
     }
@@ -20,25 +25,30 @@ public class Storage {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
 
-    public void addProduct() {
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public void addProduct(ProductType productType) {
 
     }
 
-    public void removeProduct() {
-
+    public void removeProduct(ProductType productType) {
     }
 
-    public void addBatch() {
-
+    public void addBatch(Batch batch) {
     }
 
     public void collectProducts() {
@@ -52,6 +62,5 @@ public class Storage {
     public void calculateTotalPrice() {
 
     }
-
-
+    
 }
