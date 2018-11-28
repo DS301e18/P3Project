@@ -13,10 +13,9 @@ public class Batch {
     /**
      * Field
      **/
-    private int id;
     private String batchNumber;
     private Timestamp date;
-    private int productAmount;
+    private int remainingInBox;
     private BigDecimal price;
     private ProductType productType;
     //private List<ProductType> batchList = new ArrayList<ProductType>();
@@ -26,7 +25,7 @@ public class Batch {
      **/
 
     //Constructor
-    public Batch(ProductType productType) {
+    public Batch(ProductType productType, String batchNumber) {
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
@@ -34,10 +33,9 @@ public class Batch {
         try {
             transaction = session.beginTransaction();
 
-            this.id = productType.getId();
-            this.batchNumber = productType.getProductNumber();
+            this.batchNumber = batchNumber;
             this.date = new Timestamp(System.currentTimeMillis());
-            this.productAmount = productType.getBatchSize();
+            this.remainingInBox = productType.getBatchSize();
             this.price = calcBatchPrice(productType);
 
             session.save(this);
@@ -53,9 +51,17 @@ public class Batch {
 
 
     public void takeFromBatch(Batch batch, int amount) {
-        batch.productAmount = batch.productAmount - amount;
+        if (amount == 0){
+            batch.remainingInBox = batch.remainingInBox - 1;
+        }
+        else{
+            batch.remainingInBox = batch.remainingInBox - amount;
+        }
     }
 
+    private void calcBatchPrice(Batch batch, int amount){
+
+    }
 
     private BigDecimal calcBatchPrice(ProductType productType) {
 
@@ -79,13 +85,6 @@ public class Batch {
         this.productType = productType;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getBatchNumber() {
         return batchNumber;
@@ -104,11 +103,11 @@ public class Batch {
     }
 
     public int getProductAmount() {
-        return productAmount;
+        return remainingInBox;
     }
 
     public void setProductAmount(int productAmount) {
-        this.productAmount = productAmount;
+        this.remainingInBox = productAmount;
     }
 
     public BigDecimal getPrice() {
