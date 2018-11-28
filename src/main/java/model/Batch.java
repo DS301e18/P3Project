@@ -13,11 +13,13 @@ public class Batch {
     /**
      * Field
      **/
+    int id;
     private String batchNumber;
     private Timestamp date;
     private int remainingInBox;
     private BigDecimal value;
     private ProductType productType;
+    private String typeName;
     //private List<ProductType> batchList = new ArrayList<ProductType>();
 
     /**
@@ -37,6 +39,8 @@ public class Batch {
             this.date = new Timestamp(System.currentTimeMillis());
             this.remainingInBox = productType.getBatchSize();
             this.value = productType.getCost();
+            this.typeName = productType.getName();
+            this.productType = productType;
 
             session.save(this);
             transaction.commit();
@@ -57,15 +61,22 @@ public class Batch {
         else{
             batch.setRemainingInBox(batch.remainingInBox - amount);
         }
+        calcBatchValue(batch, amount);
     }
 
-    private void calcBatchPrice(Batch batch, int amount){
+    private void calcBatchValue(Batch batch, int amount){
         if (amount == 0){amount = 1;}
 
         MathContext mc = new MathContext(2);
-        BigDecimal batchsize = BigDecimal.valueOf(batch.productType.getBatchSize());
 
-        batch.setValue(batch.productType.getCost().divide(batchsize, mc));
+        BigDecimal batchsize = BigDecimal.valueOf(batch.productType.getBatchSize());
+        BigDecimal bAmount = BigDecimal.valueOf(amount);
+
+        BigDecimal oneFracion = batch.productType.getCost().divide(batchsize, mc);
+        BigDecimal multiplySum = oneFracion.multiply(bAmount, mc);
+
+
+        batch.setValue(multiplySum);
     }
 
 
@@ -109,5 +120,21 @@ public class Batch {
 
     public void setRemainingInBox(int remainingInBox) {
         this.remainingInBox = remainingInBox;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
