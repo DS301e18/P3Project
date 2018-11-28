@@ -25,6 +25,9 @@ public class ProductType {
         this.storage = storage;
     }
 
+    public ProductType() {
+    }
+
     /** Methods **/
     public Storage getStorage() {
         return storage;

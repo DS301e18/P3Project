@@ -18,27 +18,26 @@ public class Transactions {
     private Timestamp date;
     private int amount;
     private String transtype;
-    private Session session;
-    private SessionFactory sessionFactory;
 
     /** Methods **/
 
-    public void registerTransaction(Employee employee, Batch batch, ProductType product, int amount, String transtype) {
+    public void registerTransaction(Employee employee, Batch batch, int amount, String transtype) {
+
+        this.date = getDate();
+        this.name = employee.getFirstname();
+        this.batch = batch.getBatchNumber();
+        this.product = batch.getProductType().getName();
+        this.amount = amount;
+        this.transtype = transtype;
 
         //TODO: Delete sessionFactory later
-        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
         Session session = sessionFactory.openSession();
 
-        Transaction transaction = null;
+        Transaction transaction;
 
         try {
             transaction = session.beginTransaction();
-            this.date = getDate();
-            this.name = employee.getFirstname();
-            this.batch = batch.getBatchNumber();
-            this.product = product.getProductNumber();
-            this.amount = amount;
-            this.transtype = transtype;
 
             session.save(this);
             transaction.commit();
@@ -49,6 +48,30 @@ public class Transactions {
         } finally {
             session.close();
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public int getId() {
@@ -82,4 +105,20 @@ public class Transactions {
     public void setTranstype(String transtype) {
         this.transtype = transtype;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Transactions that = (Transactions) o;
+
+        if (id != that.id) return false;
+        if (amount != that.amount) return false;
+        if (!name.equals(that.name)) return false;
+        if (!batch.equals(that.batch)) return false;
+        if (!product.equals(that.product)) return false;
+        return transtype.equals(that.transtype);
+    }
+
 }

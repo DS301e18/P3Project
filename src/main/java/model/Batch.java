@@ -1,5 +1,9 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Timestamp;
@@ -9,12 +13,13 @@ public class Batch {
     /**
      * Field
      **/
-    private int id;
+    int id;
     private String batchNumber;
     private Timestamp date;
-    private int productAmount;
-    private BigDecimal price;
+    private int remainingInBox;
+    private BigDecimal value;
     private ProductType productType;
+    private String typeName;
     //private List<ProductType> batchList = new ArrayList<ProductType>();
 
     /**
@@ -22,33 +27,63 @@ public class Batch {
      **/
 
     //Constructor
-    public Batch(ProductType productType) {
+    public Batch(ProductType productType, String batchNumber) {
 
-        this.id = productType.getId();
-        this.batchNumber = productType.getProductNumber();
-        this.date = new Timestamp(System.currentTimeMillis());
-        this.productAmount = productType.getBatchSize();
-        this.price = calcBatchPrice(productType);
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            this.batchNumber = batchNumber;
+            this.date = new Timestamp(System.currentTimeMillis());
+            this.remainingInBox = productType.getBatchSize();
+            this.value = productType.getCost();
+            this.typeName = productType.getName();
+            this.productType = productType;
+
+            session.save(this);
+            transaction.commit();
+        }
+        catch (HibernateException e){
+            System.out.println("Could not save the transaction");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
+
+    public Batch(){}
 
 
     public void takeFromBatch(Batch batch, int amount) {
-        batch.productAmount = batch.productAmount - amount;
+        if (amount == 0){
+            batch.setRemainingInBox(batch.remainingInBox - 1);
+        }
+        else{
+            batch.setRemainingInBox(batch.remainingInBox - amount);
+        }
+        calcBatchValue(batch, amount);
     }
 
-
-    private BigDecimal calcBatchPrice(ProductType productType) {
+    private void calcBatchValue(Batch batch, int amount){
+        if (amount == 0){amount = 1;}
 
         MathContext mc = new MathContext(2);
 
-        BigDecimal a = BigDecimal.valueOf(productType.getBatchSize());
-        BigDecimal b = productType.getCost();
+        BigDecimal batchsize = BigDecimal.valueOf(batch.productType.getBatchSize());
+        BigDecimal bAmount = BigDecimal.valueOf(amount);
 
-        return a.multiply(b, mc);
+        BigDecimal oneFracion = batch.productType.getCost().divide(batchsize, mc);
+        BigDecimal multiplySum = oneFracion.multiply(bAmount, mc);
+
+
+        batch.setValue(multiplySum);
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     public ProductType getProductType() {
@@ -59,13 +94,6 @@ public class Batch {
         this.productType = productType;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getBatchNumber() {
         return batchNumber;
@@ -83,16 +111,32 @@ public class Batch {
         this.date = date;
     }
 
-    public int getProductAmount() {
-        return productAmount;
+
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public void setProductAmount(int productAmount) {
-        this.productAmount = productAmount;
+    public int getRemainingInBox() {
+        return remainingInBox;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public void setRemainingInBox(int remainingInBox) {
+        this.remainingInBox = remainingInBox;
     }
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
