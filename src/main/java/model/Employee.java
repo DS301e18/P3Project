@@ -87,4 +87,30 @@ public class Employee {
                 ", role=" + role +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (id != employee.id) return false;
+        if (username != null ? !username.equals(employee.username) : employee.username != null) return false;
+        if (password != null ? !password.equals(employee.password) : employee.password != null) return false;
+        if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
+        return role != null ? role.equals(employee.role) : employee.role == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        return result;
+    }
 }

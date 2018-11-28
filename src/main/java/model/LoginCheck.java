@@ -36,8 +36,6 @@ public class LoginCheck {
         } catch (HibernateException e){
             System.out.println("Something went wrong");
             e.printStackTrace();
-            sessionFactory.close();
-
         } finally {
             session.close();
 
