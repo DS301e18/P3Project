@@ -11,14 +11,15 @@ public class ProductType {
     private int batchSize;
     private BigDecimal price;
     private Storage storage;
+    private int storageID;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
-    public ProductType(String name, int batchSize, BigDecimal prize, Storage storage){
+    public ProductType(String name, int batchSize, BigDecimal price, int storageID){
         this.name = name;
         //this.productNumber = productNumber;
         this.batchSize = batchSize;
-        this.price = prize;
-        this.storage = storage;
+        this.price = price;
+        this.storageID = storageID;
     }
 
     public ProductType() {
@@ -64,5 +65,12 @@ public class ProductType {
         this.batchSize += factor;
     }
 
+    public int getStorageID() {
+        return storageID;
+    }
+
+    public void setStorageID(int storageID) {
+        this.storageID = storageID;
+    }
 }
 
