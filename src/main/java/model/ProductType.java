@@ -1,8 +1,6 @@
 package model;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProductType {
 
@@ -10,18 +8,16 @@ public class ProductType {
 
     private int id;
     private String name;
-    //private String productNumber;
     private int batchSize;
-    private BigDecimal prize;
+    private BigDecimal price;
     private Storage storage;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
-    public ProductType(int id, String name, String productNumber, int batchSize, BigDecimal prize, Storage storage){
-        this.id = id;
+    public ProductType(String name, int batchSize, BigDecimal prize, Storage storage){
         this.name = name;
         //this.productNumber = productNumber;
         this.batchSize = batchSize;
-        this.prize = prize;
+        this.price = prize;
         this.storage = storage;
     }
 
@@ -37,11 +33,11 @@ public class ProductType {
         this.storage = storage;
     }
 
-    public BigDecimal getPrize() {
-        return prize;
+    public BigDecimal getPrice() {
+        return price;
     }
-    public void setPrize(BigDecimal prize){
-        this.prize = prize;
+    public void setPrice(BigDecimal price){
+        this.price = price;
     }
   
     public int getId() {
@@ -59,14 +55,6 @@ public class ProductType {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public String getProductNumber() {
-//        return productNumber;
-//    }
-//
-//    public void setProductNumber(String productNumber) {
-//        this.productNumber = productNumber;
-//    }
 
     public int getBatchSize() {
         return batchSize;

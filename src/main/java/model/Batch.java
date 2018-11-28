@@ -38,7 +38,7 @@ public class Batch {
             this.batchNumber = batchNumber;
             this.date = new Timestamp(System.currentTimeMillis());
             this.remainingInBox = productType.getBatchSize();
-            this.value = productType.getCost();
+            this.value = productType.getPrice();
             this.typeName = productType.getName();
             this.productType = productType;
 
@@ -74,7 +74,7 @@ public class Batch {
         BigDecimal batchsize = BigDecimal.valueOf(batch.productType.getBatchSize());
         BigDecimal bAmount = BigDecimal.valueOf(amount);
 
-        BigDecimal oneFracion = batch.productType.getCost().divide(batchsize, mc);
+        BigDecimal oneFracion = batch.productType.getPrice().divide(batchsize, mc);
         BigDecimal multiplySum = oneFracion.multiply(bAmount, mc);
 
 

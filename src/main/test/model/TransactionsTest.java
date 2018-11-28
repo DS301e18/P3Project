@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionsTest {
@@ -21,9 +23,8 @@ class TransactionsTest {
         //Setting random values for the objects
         e.setFirstname("Kaj");
         p.setName("Pepsi Max");
-        p.setBatchCost(23);
+        p.setPrice(BigDecimal.valueOf(23));
         p.setBatchSize(3);
-        p.setProductNumber("w573y785");
 
         b.setBatchNumber("213123");
         b.setProductType(p);
@@ -79,8 +80,8 @@ class TransactionsTest {
     @Test
     void getProduct() {
         ProductType product = new ProductType();
-        product.setProductNumber("4321HK");
-        assertEquals("4321HK", product.getProductNumber());
+        product.setName("Pepsi Max");
+        assertEquals("Pepsi Max", product.getName());
     }
 
     @Test
