@@ -1,5 +1,11 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.math.BigDecimal;
+
 public class Storage {
 
     /**
@@ -41,15 +47,28 @@ public class Storage {
         this.restaurant = restaurant;
     }
 
-    public void addProduct(ProductType productType) {
+    public void addProduct(String name, int batchSize, BigDecimal price) {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Transaction transaction;
 
+        try {
+            transaction = session.beginTransaction();
+
+            ProductType productType = new ProductType(name, batchSize, price, getId());
+            session.save(productType);
+            transaction.commit();
+
+        } catch (HibernateException e) {
+            System.out.println("Couldn't save");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     public void removeProduct(ProductType productType) {
     }
 
-    public void addBatch(Batch batch) {
-    }
 
     public void collectProducts() {
 
@@ -62,5 +81,5 @@ public class Storage {
     public void calculateTotalPrice() {
 
     }
-    
+
 }
