@@ -1,5 +1,6 @@
 package model;
 
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -57,15 +58,29 @@ class TransactionsTest {
     }
 
     @Test
+    void hibernateException(){
+
+    }
+
+    @Test
     void getName() {
+        Employee employee = new Employee();
+        employee.setFirstname("Kaj");
+        assertEquals("Kaj", employee.getFirstname());
     }
 
     @Test
     void getBatch() {
+        Batch batch = new Batch();
+        batch.setBatchNumber("123KH");
+        assertEquals("123KH", batch.getBatchNumber());
     }
 
     @Test
     void getProduct() {
+        ProductType product = new ProductType();
+        product.setProductNumber("4321HK");
+        assertEquals("4321HK", product.getProductNumber());
     }
 
     @Test
