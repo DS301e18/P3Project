@@ -23,16 +23,35 @@
         <button><div class="menuDot"></div></button>
         <button><div class="menuDot"></div></button>
         <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+        <button><div class="menuDot"></div></button>
+
     </div>
     <div class="topNav">
         <a><form action="Login" method="get">
-            <button type="submit" value="Logout"><span style="font-size: 45px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
+            <button type="submit" value="Logout"><span style="font-size: 40px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
         </form></a>
-        <a1><label style="float:right">Role</label></a1>
+        <a1><label style="float:right; color: white">Role</label></a1>
     </div>
 
     <div class="container" id="storage">
-        <p>Hello</p>
+        <section>
+            <div class="contentBox">
+                Storage Name
+            </div>
+            <div class="contentBox">
+                <input type="text" placeholder="Søg" name="search">
+            </div>
+        </section>
+        <aside></aside>
     </div>
+
 </body>
 </html>
