@@ -49,6 +49,8 @@
             <div class="contentBox">
                 <input type="text" placeholder="Søg" name="search">
             </div>
+            <button><div class="tab">Registrer Vare</div></button>
+            <button><div class="tab">Historik</div></button>
         </section>
         <aside></aside>
     </div>
