@@ -24,13 +24,13 @@
     <div class="sideNav">
         <button><div class="menuDot"></div></button>
         <button><div class="menuDot"></div></button>
-        <button><span style="font-size: 80px; margin-top: 10px; display: inline-block; color:white; opacity: 0.5;"><i class="fas fa-plus-circle"></i></span></button>
+        <button><i class="fas fa-plus-circle"></i></button>
     </div>
 
     <!-- Top navigation (restaurant navigation/logout) -->
     <div class="topNav">
         <a><form action="Login" method="get">
-            <button type="submit" value="Logout"><span style="font-size: 40px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
+            <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
         </form></a>
         <!-- TODO: Make dynamic -->
         <a1><label style="float:right; color: white">Employee</label></a1>
@@ -62,9 +62,13 @@
             </div>
 
             <!-- Price-box -->
-            <div class="contentBox" style="font-size: 15px; bottom: 0">Total price</div>
+            <div class="priceBox">Total pris: "Actual price" kr.</div>
         </section>
-        <aside></aside>
+
+        <!-- Product information -->
+        <aside>
+            Hello
+        </aside>
     </div>
 
 </body>

@@ -33,6 +33,10 @@ body {
     font-size: 20px;
 }
 
+.fa-sign-out-alt:hover {
+    color: black;
+}
+
 /* TODO: Something wrong with overflow (padding) */
 .sideNav{
     height: 100%;
@@ -72,6 +76,18 @@ button:focus {
     border-radius: 10%;
 }
 
+.fa-plus-circle {
+    font-size: 80px;
+    margin-top: 10px;
+    display: inline-block;
+    color:white;
+    opacity: 0.5;
+}
+
+.fa-plus-circle:hover{
+    opacity: 1;
+}
+
 img {
     top: 0;
     left: 0;
@@ -87,6 +103,7 @@ img {
 
 section{
     border-right: solid #f2b8b6;
+    float: left;
     width: 40%;
     height: 100%;
 }
@@ -96,6 +113,10 @@ section{
     background-color: #f2b8b6;
     border: #f2b8b6;
     font-size: 25px;
+}
+
+.fa-hammer:hover {
+    color: white;
 }
 
 input {
@@ -131,9 +152,15 @@ input {
     background-color: #f2b8b6;
 }
 
-footer {
-    background-color: #777;
-    padding: 10px;
-    text-align: center;
-    color: white;
+.priceBox {
+    padding: 15px;
+    background-color: #f2b8b6;
+    border: #f2b8b6;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+aside {
+    height: 100%;
 }
