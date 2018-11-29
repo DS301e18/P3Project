@@ -1,6 +1,7 @@
 package model;
 
 import controller.AssignedEmployeesController;
+import controller.AssignedStorageController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -52,7 +53,7 @@ public class Restaurant {
             transaction.commit();
 
         } catch (HibernateException e) {
-            System.out.println("Nothing to assign");
+            System.out.println("No employee to assign");
             e.printStackTrace();
         } finally {
             session.close();
@@ -61,7 +62,7 @@ public class Restaurant {
 
 
     public void resignEmployee(Employee employee) {
-        Session session = factory.openSession();
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Transaction transaction = null;
 
@@ -76,10 +77,56 @@ public class Restaurant {
             }
 
         } catch (HibernateException e) {
-            System.out.println("nothing to resign");
+            System.out.println("no employee to resign");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+
+    public void addStorage(Storage storage) {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Transaction transaction;
+
+        try {
+            transaction = session.beginTransaction();
+            AssignedStorageController assignedStorage = new AssignedStorageController();
+            assignedStorage.setRestaurantId(this.id);
+            assignedStorage.setStorageId(storage.getId());
+            session.save(assignedStorage);
+            transaction.commit();
+        } catch (HibernateException e) {
+            System.out.println("no storage to assign");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public void removeStorage(Storage storage) {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Transaction transaction = null;
+
+        try {
+            List<AssignedStorageController> storageList = session.createQuery("FROM AssignedStorageController ").list();
+            for (AssignedStorageController assignedStorage : storageList) {
+                if (assignedStorage.getStorageId() == storage.getId()) {
+                    transaction = session.beginTransaction();
+                    session.delete(assignedStorage);
+                    transaction.commit();
+                }
+            }
+        } catch (HibernateException e) {
+            System.out.println("Can't find storage to remove");
             e.printStackTrace();
         } finally {
             session.close();
         }
     }
 }
+
+
+

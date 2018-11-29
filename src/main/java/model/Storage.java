@@ -9,6 +9,10 @@ public class Storage {
     private String name;
     private Restaurant restaurant;
 
+    public Storage(){
+
+    }
+
     public Storage(String name, Restaurant restaurant) {
         this.name = name;
         this.restaurant = restaurant;
