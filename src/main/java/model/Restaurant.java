@@ -5,15 +5,20 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import java.util.List;
 
 public class Restaurant {
 
-    /** Field */
+    /**
+     * Field
+     */
     private int id;
     private String name;
     private SessionFactory factory;
 
-    /** Methods */
+    /**
+     * Methods
+     */
     public int getId() {
         return id;
     }
@@ -32,23 +37,45 @@ public class Restaurant {
 
 
     //TODO slette sessionfactory efter vi har fundet ud af det med static
-    private void employEmployee(Employee employee){
-        factory = new SessionFactoryCfg().createSessionFactory();
+    private void employEmployee(Employee employee) {
         Session session = factory.openSession();
 
         Transaction transaction = null;
 
-        try{
+        try {
             transaction = session.beginTransaction();
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
             assignedEmployee.setRestaurantId(this.id);
             session.save(assignedEmployee);
             transaction.commit();
 
-        } catch (HibernateException e){
+        } catch (HibernateException e) {
             System.out.println("Nothing to assign");
             e.printStackTrace();
-            factory.close();
+        } finally {
+            session.close();
+        }
+    }
+
+
+    private void resignEmployee(Employee employee) {
+        Session session = factory.openSession();
+
+        Transaction transaction = null;
+
+        try {
+            List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController ").list();
+            for (AssignedEmployeesController aec : employeeList) {
+                if (aec.getEmployeeId() == employee.getId()) {
+                    transaction = session.beginTransaction();
+                    session.delete(aec);
+                    transaction.commit();
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("nothing to resign");
+            e.printStackTrace();
         } finally {
             session.close();
         }
