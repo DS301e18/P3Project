@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class Restaurant {
@@ -37,15 +38,16 @@ public class Restaurant {
 
 
     //TODO slette sessionfactory efter vi har fundet ud af det med static
-    private void employEmployee(Employee employee) {
-        Session session = factory.openSession();
+    public void employEmployee(Employee employee) {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        Transaction transaction = null;
+        Transaction transaction;
 
         try {
             transaction = session.beginTransaction();
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
             assignedEmployee.setRestaurantId(this.id);
+            assignedEmployee.setEmployeeId(employee.getId());
             session.save(assignedEmployee);
             transaction.commit();
 
@@ -58,7 +60,7 @@ public class Restaurant {
     }
 
 
-    private void resignEmployee(Employee employee) {
+    public void resignEmployee(Employee employee) {
         Session session = factory.openSession();
 
         Transaction transaction = null;

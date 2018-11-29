@@ -31,8 +31,21 @@ public class AssignedEmployeesController {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        AssignedEmployeesController that = (AssignedEmployeesController) o;
 
+        if (restaurantId != that.restaurantId) return false;
+        return employeeId == that.employeeId;
+    }
 
-
+    @Override
+    public int hashCode() {
+        int result = restaurantId;
+        result = 31 * result + employeeId;
+        return result;
+    }
 }

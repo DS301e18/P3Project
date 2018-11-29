@@ -29,5 +29,7 @@
         <mapping resource = "Employee.hbm.xml"/>
         <mapping resource="Transaction.hbm.xml"/>
 
+        <mapping resource="AssignedEmployees.hbm.xml"/>
+
     </session-factory>
 </hibernate-configuration>
