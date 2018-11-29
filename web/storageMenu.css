@@ -51,6 +51,7 @@ body {
 button {
     border: transparent;
     background-color: transparent;
+    font-size: 15px;
 }
 
 button:focus {
@@ -119,4 +120,20 @@ input {
 
 .tab:hover, .tab:focus{
     background-color: #f2b8b6;
+}
+
+.productTab {
+    padding: 15px 25px 10px;
+    font-size: 15px;
+}
+
+.productTab:hover, .productTab:focus{
+    background-color: #f2b8b6;
+}
+
+footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
 }
