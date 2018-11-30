@@ -132,4 +132,16 @@ public class Transactions {
         result = 31 * result + (transtype != null ? transtype.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return '\n'+"Transactions:" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", batch='" + batch + '\'' +
+                ", product='" + product + '\'' +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", transtype='" + transtype;
+    }
 }

@@ -41,6 +41,7 @@ class TransactionsTest {
         //Assuring that the transaction also is stored in the database
         assertEquals(transactions, session.get(model.Transactions.class, transactions.getId()));
         session.close();
+
         session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
