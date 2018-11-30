@@ -1,8 +1,8 @@
 body {
     font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    color: white;
+    font-size: 15px;
     margin: 0;
+    overflow: hidden;
 }
 
 .topNav {
@@ -14,6 +14,7 @@ body {
     border-color: #ba2924;
     top: 0;
     left: 0;
+
 }
 
 .topNav a {
@@ -32,10 +33,16 @@ body {
     font-size: 20px;
 }
 
+.fa-sign-out-alt:hover {
+    color: black;
+}
+
+/* TODO: Something wrong with overflow (padding) */
 .sideNav{
-    margin-top: 50px;
     height: 100%;
     width: 100px;
+    padding-top: 50px;
+    margin-bottom: 50px;
     position: fixed;
     background-color: #d7736f;
     border-color: #d7736f;
@@ -48,6 +55,11 @@ body {
 button {
     border: transparent;
     background-color: transparent;
+    font-size: 15px;
+}
+
+button:focus {
+    border: transparent;
 }
 
 .menuDot {
@@ -61,13 +73,19 @@ button {
 
 .menuDot:hover {
     border: transparent;
-    height: 80px;
-    width: 80px;
-    background-color: white;
     border-radius: 10%;
+}
+
+.fa-plus-circle {
+    font-size: 80px;
+    margin-top: 10px;
     display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    color:white;
+    opacity: 0.5;
+}
+
+.fa-plus-circle:hover{
+    opacity: 1;
 }
 
 img {
@@ -76,6 +94,73 @@ img {
 }
 
 .container{
-    border: transparent;
-    background-color: green;
+    width: 100%;
+    height: 100%;
+    margin-top: 50px;
+    margin-left: 100px;
+    overflow: hidden;
+}
+
+section{
+    border-right: solid #f2b8b6;
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+
+.contentBox{
+    padding: 15px 15px 10px;
+    background-color: #f2b8b6;
+    border: #f2b8b6;
+    font-size: 25px;
+}
+
+.fa-hammer:hover {
+    color: white;
+}
+
+input {
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+    border-color: transparent;
+}
+
+.tab{
+    text-decoration: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    float: left;
+    height: 40px;
+    width: 120px;
+    line-height: 40px;
+    padding: 0 10px;
+    background-color: #f7e8e8;
+    font-size: 15px;
+}
+
+.tab:hover, .tab:focus{
+    background-color: #f2b8b6;
+}
+
+.productTab {
+    padding: 15px 25px 10px;
+    font-size: 15px;
+}
+
+.productTab:hover, .productTab:focus{
+    background-color: #f2b8b6;
+}
+
+.priceBox {
+    padding: 15px;
+    background-color: #f2b8b6;
+    border: #f2b8b6;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+aside {
+    height: 100%;
 }

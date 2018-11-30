@@ -19,20 +19,57 @@
 </head>
 <body>
 
+    <!-- TODO: Make dynamic -->
+    <!-- Side navigation (storage navigation)-->
     <div class="sideNav">
         <button><div class="menuDot"></div></button>
         <button><div class="menuDot"></div></button>
-        <button><div class="menuDot"></div></button>
-    </div>
-    <div class="topNav">
-        <a><form action="Login" method="get">
-            <button type="submit" value="Logout"><span style="font-size: 45px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
-        </form></a>
-        <a1><label style="float:right">Role</label></a1>
+        <button><i class="fas fa-plus-circle"></i></button>
     </div>
 
-    <div class="container" id="storage">
-        <p>Hello</p>
+    <!-- Top navigation (restaurant navigation/logout) -->
+    <div class="topNav">
+        <a><form action="Login" method="get">
+            <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
+        </form></a>
+        <!-- TODO: Make dynamic -->
+        <a1><label style="float:right; color: white">Employee</label></a1>
     </div>
+
+    <!-- TODO: Make storage inventory dynamic -->
+    <!-- Storage inventory-->
+    <div class="container" id="storage">
+        <section>
+            <!-- Inventory header -->
+            <div class="contentBox">
+                <label>Storage Name</label>
+                <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
+            </div>
+            <div class="contentBox">
+                <input type="text" placeholder="Søg" name="search">
+            </div>
+            <button><div class="tab">Registrer Vare</div></button>
+            <button><div class="tab">Historik</div></button><br>
+
+            <!-- Inventory products -->
+            <div class="productTab">
+                <label>Carlsberg Sport</label>
+                <label style="float: right">4</label>
+            </div>
+            <div class="productTab">
+                <label>Pepsi Max</label>
+                <label style="float: right">10</label>
+            </div>
+
+            <!-- Price-box -->
+            <div class="priceBox">Total pris: "Actual price" kr.</div>
+        </section>
+
+        <!-- Product information -->
+        <aside>
+            Hello
+        </aside>
+    </div>
+
 </body>
 </html>
