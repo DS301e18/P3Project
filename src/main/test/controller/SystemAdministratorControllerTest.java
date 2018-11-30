@@ -23,6 +23,8 @@ class SystemAdministratorControllerTest {
 
     @Test
     void removeRestaurant() {
+        SystemAdministratorController admin = new SystemAdministratorController();
+        admin.removeRestaurant("Mogens");
     }
 
     @Test

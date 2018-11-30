@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class SystemAdministratorController {
 
     /**Fields**/
@@ -53,7 +55,32 @@ public class SystemAdministratorController {
 
     }
 
-    public void removeRestaurant(Restaurant restaurant){
+    public void removeRestaurant(String restaurantName){
+
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction;
+
+        try {
+            // Create list of the employees in the database
+            List<Restaurant> restaurantList = session.createQuery("FROM Restaurant ").list();
+
+            for (Restaurant restaurant : restaurantList) {
+                if(restaurant.getName().equals(restaurantName)){
+                    this.restaurant = restaurant;
+                    transaction = session.beginTransaction();
+                    session.delete(this.restaurant);
+                    transaction.commit();
+                }
+            }
+
+        } catch (HibernateException e){
+            System.out.println("Could not delete the restaurant");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
     }
 
