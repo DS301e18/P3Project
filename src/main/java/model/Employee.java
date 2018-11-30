@@ -9,27 +9,7 @@ public class Employee {
     private String lastname;
     private String role;
 
-    public Employee() {
-    }
-
-    /*public Employee(int id, String username, String password, String firstname, String lastname, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-    }
-
-    public Employee(String firstname, String lastname, String role) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.role = role;
-    }*/
-
-    public void registerTransaction(){
-
-    }
+    public Employee() { }
 
     public int getId() {
         return id;
@@ -87,7 +67,7 @@ public class Employee {
                 ", password='" + password + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                ", role=" + role +
+                ", role='" + role + '\'' +
                 '}';
     }
 
@@ -101,9 +81,9 @@ public class Employee {
         if (id != employee.id) return false;
         if (username != null ? !username.equals(employee.username) : employee.username != null) return false;
         if (password != null ? !password.equals(employee.password) : employee.password != null) return false;
-        if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
-        return role != null ? role.equals(employee.role) : employee.role == null;
+        if (!firstname.equals(employee.firstname)) return false;
+        if (!lastname.equals(employee.lastname)) return false;
+        return role.equals(employee.role);
     }
 
     @Override
@@ -111,9 +91,9 @@ public class Employee {
         int result = id;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + firstname.hashCode();
+        result = 31 * result + lastname.hashCode();
+        result = 31 * result + role.hashCode();
         return result;
     }
 }

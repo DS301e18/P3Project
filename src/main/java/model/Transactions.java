@@ -121,4 +121,15 @@ public class Transactions {
         return transtype.equals(that.transtype);
     }
 
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (batch != null ? batch.hashCode() : 0);
+        result = 31 * result + (product != null ? product.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + amount;
+        result = 31 * result + (transtype != null ? transtype.hashCode() : 0);
+        return result;
+    }
 }
