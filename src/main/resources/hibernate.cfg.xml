@@ -28,6 +28,7 @@
         <!-- List of XML mapping files -->
         <mapping resource = "Employee.hbm.xml"/>
         <mapping resource="Transaction.hbm.xml"/>
+        <mapping resource = "Batch.hbm.xml"/>
 
         <mapping resource="Storage.hbm.xml"/>
 
