@@ -12,8 +12,8 @@
 </head>
 <body>
 <form action="RegisterProduct" method="post">
+    <input name="storageID" value="1">
     <input type="text" placeholder="Indtast navnet på produktet" name="name">
-    <input type="text" placeholder="Indtast varenummeret" name="productNumber">
     <input type="text" placeholder="Indtast antal per batch" name="batchSize">
     <input type="text" placeholder="Indtast prisen for en batch" name="cost">
     <input type="submit" value="Registrer">
