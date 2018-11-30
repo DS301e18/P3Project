@@ -22,33 +22,26 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
     response.setHeader("Pragma", "no-cache");// HTTP 1.0
     response.setHeader("Expires", "0");// Proxies
-
-    //Assures that the pages can't be accessed from the url alone
-    if (session.getAttribute("username")==null)
-    {
-        response.sendRedirect("index.jsp");
-    } else {
-        //Check which role the user has
-        if (session.getAttribute("role").equals("Employee")) {
-            System.out.println("Employee");%>
-
-<%} else if (session.getAttribute("role").equals("Manager")) {
-
-    System.out.println("Manager");
-}
-
-}
 %>
 <!-- Top navigation (restaurant navigation/logout) -->
-<div class="topNav">
+<!--<div class="topNav">
     <a><form action="Login" method="get">
         <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
     </form></a>
-    <!-- TODO: Make dynamic -->
+    <!-- TODO: Make dynamic
     <a1><label style="float:right; color: white">Employee</label></a1>
-</div>
+</div>-->
 
-<nav>
+<nav class="topNav">
+    <ul><li>
+        <form action="Login" method="get">
+            <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
+        </form>
+    </li>
+        <li>
+            <a style="float:right; color: white">Employee</a>
+        </li>
+    </ul>
 
 </nav>
 

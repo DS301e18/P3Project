@@ -17,20 +17,24 @@ body {
 
 }
 
-.topNav a {
+.topNav ul form button {
     float: right;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
     padding: 3px;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.topNav a1 {
+.topNav ul li  {
     float: right;
     text-align: center;
-    padding: 10px 16px;
+    padding: 0px 16px;
     text-decoration: none;
     font-size: 20px;
+    list-style-type: none;
 }
 
 .fa-sign-out-alt:hover {
