@@ -1,5 +1,11 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+
 public class Employee {
 
     private int id;
@@ -7,9 +13,50 @@ public class Employee {
     private String password;
     private String firstname;
     private String lastname;
-    private String role;
+    private String role = "Medarbejder";
 
-    public Employee() { }
+    public void addEmployee(){
+        //TODO: getSession instead
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try{
+            if(username != null && password != null && firstname != null && lastname != null){
+                transaction = session.beginTransaction();
+                session.save(this);
+                transaction.commit();
+            }
+            else {
+                throw new IllegalEmployeeException();
+            }
+
+        } catch (HibernateException e){
+            System.out.println("Couldn't save employee");
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
+    }
+
+    public void removeEmployee(){
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Transaction transaction = null;
+
+        try{
+            transaction = session.beginTransaction();
+            session.delete(this);
+            transaction.commit();
+
+        } catch (HibernateException e){
+            System.out.println("Couldn't delete employee");
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+        }
+
+    }
 
     public int getId() {
         return id;
