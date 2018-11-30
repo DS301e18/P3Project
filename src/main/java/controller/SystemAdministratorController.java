@@ -2,14 +2,25 @@ package controller;
 
 import model.Manager;
 import model.Restaurant;
+import model.SessionFactoryCfg;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 public class SystemAdministratorController {
+
+    /**Fields**/
+
+    private int id;
     private Restaurant restaurant;
+    private int restaurantId;
     private Manager manager;
+    private int employeeId;
     private String restaurantName;
 
 
-
+    /**Methods**/
     public void addManager(Restaurant restaurant, Manager manager){
 
     }
@@ -18,7 +29,27 @@ public class SystemAdministratorController {
 
     }
 
-    public void addRestaurant(){
+    public void addRestaurant(String restaurantName){
+
+        restaurant = new Restaurant();
+        restaurant.setName(restaurantName);
+
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction;
+
+        try {
+            transaction = session.beginTransaction();
+            session.save(restaurant);
+            transaction.commit();
+
+        } catch (HibernateException e){
+            System.out.println("Could not save the restaurant");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
     }
 
@@ -40,5 +71,37 @@ public class SystemAdministratorController {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
