@@ -1,6 +1,7 @@
 package model;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeTest {
 
     private Employee employee;
+    private SessionFactory sessionFactory;
 
     @BeforeEach
     void before(){
+        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+
         employee = new Employee();
 
         employee.setUsername("Pommes");
@@ -37,6 +41,7 @@ class EmployeeTest {
     @Test
     void addEmployeeExceptionTest(){
         Employee employeeTest = new Employee();
+        employeeTest.setUsername("Kaj");
 
         assertThrows(IllegalEmployeeException.class, () -> employeeTest.addEmployee());
     }
@@ -49,7 +54,7 @@ class EmployeeTest {
 
         Employee employeeTest = null;
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<Employee> employeeList = session.createQuery("FROM Employee ").list();
 

@@ -16,11 +16,11 @@ public class Employee {
     private String role = "Medarbejder";
 
     public void addEmployee(){
-        //TODO: getSession instead
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
 
         try{
+            //If any attribute equals Null, throw exception
             if(username != null && password != null && firstname != null && lastname != null){
                 transaction = session.beginTransaction();
                 session.save(this);
@@ -40,7 +40,7 @@ public class Employee {
     }
 
     public void removeEmployee(){
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
 
         try{
