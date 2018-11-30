@@ -27,11 +27,13 @@
 
         <!-- List of XML mapping files -->
         <mapping resource="Transaction.hbm.xml"/>
-        <mapping resource = "Batch.hbm.xml"/>
+        <mapping resource="Batch.hbm.xml"/>
         <mapping resource="Storage.hbm.xml"/>
         <mapping resource="AssignedEmployees.hbm.xml"/>
         <mapping resource="AssignedStorage.hbm.xml"/>
         <mapping resource="Employee.hbm.xml"/>
+        <mapping resource="Restaurant.hbm.xml"/>
+
 
     </session-factory>
 </hibernate-configuration>
