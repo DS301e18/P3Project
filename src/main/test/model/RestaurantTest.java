@@ -28,7 +28,12 @@ class RestaurantTest {
         storage = new Storage();
 
         // hardcoder værdier af employee og restaurant
-        employee.setId(1);
+        employee.setUsername("Pommes");
+        employee.setPassword("wef7913d");
+        employee.setFirstname("Pommes");
+        employee.setLastname("Frites");
+        employee.addEmployee();
+
         restaurant.setId(1);
         storage.setId(1);
     }

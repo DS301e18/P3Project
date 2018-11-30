@@ -70,11 +70,9 @@ public class Restaurant {
             List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController ").list();
             for (AssignedEmployeesController aec : employeeList) {
                 if (aec.getEmployeeId() == employee.getId()) {
+
                     transaction = session.beginTransaction();
                     session.delete(aec);
-                    if(employee.getRole().equals("Medarbejder")){
-                        session.delete(employee);
-                    }
                     transaction.commit();
                 }
             }
@@ -85,6 +83,8 @@ public class Restaurant {
         } finally {
             session.close();
         }
+
+        employee.removeEmployee();
     }
 
 
