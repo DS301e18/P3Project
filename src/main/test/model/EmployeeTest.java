@@ -44,6 +44,7 @@ class EmployeeTest {
     @Test
     void removeEmployeeTest(){
 
+        employee.addEmployee();
         employee.removeEmployee();
 
         Employee employeeTest = null;
