@@ -72,6 +72,9 @@ public class Restaurant {
                 if (aec.getEmployeeId() == employee.getId()) {
                     transaction = session.beginTransaction();
                     session.delete(aec);
+                    if(employee.getRole().equals("Medarbejder")){
+                        session.delete(employee);
+                    }
                     transaction.commit();
                 }
             }

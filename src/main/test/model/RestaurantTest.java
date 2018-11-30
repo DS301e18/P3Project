@@ -20,7 +20,7 @@ class RestaurantTest {
     private Storage storage;
 
     @BeforeEach
-    public void before() {
+    void before() {
 
         // opretter nye objekter af Employee og Restaurant
         employee = new Employee();
@@ -134,6 +134,7 @@ class RestaurantTest {
         } finally {
             session.close();
         }
-        assertTrue(assignedStorageDB == null);
+
+        assertNull(assignedStorageDB);
     }
 }
