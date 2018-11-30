@@ -76,7 +76,6 @@ img {
 }
 
 .container{
-    height: 100%;
-    margin-top: 50px;
-    margin-left: 100px;
+    border: transparent;
+    background-color: green;
 }
