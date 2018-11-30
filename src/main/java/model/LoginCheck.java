@@ -33,12 +33,18 @@ public class LoginCheck {
                 }
             }
 
-        } catch (HibernateException e){
+            //TODO: Check if this exception is the correct one
+        } catch (NullPointerException e){
             System.out.println("Something went wrong");
             e.printStackTrace();
             sessionFactory.close();
 
-        } finally {
+        } catch (HibernateException e){
+            System.out.println("Something went wrong");
+            e.printStackTrace();
+            sessionFactory.close();
+        }
+            finally {
             session.close();
 
         }
