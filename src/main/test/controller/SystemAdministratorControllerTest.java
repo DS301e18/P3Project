@@ -1,5 +1,7 @@
 package controller;
 
+import model.Employee;
+import model.Manager;
 import model.Restaurant;
 import model.SessionFactoryCfg;
 import org.hibernate.HibernateException;
@@ -15,10 +17,56 @@ class SystemAdministratorControllerTest {
 
     @Test
     void addManager() {
+        //Establishing a connection to the database
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        SystemAdministratorController admin = new SystemAdministratorController();
+
+        Manager manager = new Manager();
+
+        manager.setUsername("Kajmanden");
+        manager.setPassword("hejmeddig123");
+        manager.setFirstname("Kaj");
+        manager.setLastname("Kaj");
+
+        admin.addManager(manager);
+
+        Manager manager1 = session.get(Manager.class, manager.getId());
+
+        assertEquals(manager.getId(), manager1.getId());
+
     }
 
     @Test
     void removeManager() {
+        SystemAdministratorController admin = new SystemAdministratorController();
+
+        Manager manager = new Manager();
+
+        manager.setUsername("Kajmanden");
+        manager.setPassword("hejmeddig123");
+        manager.setFirstname("Kaj");
+        manager.setLastname("Kaj");
+
+        admin.addManager(manager);
+        admin.removeManager(manager);
+
+        Manager emptyManager = null;
+
+        //Establishing a connection to the database
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        List<Manager> managerList = session.createQuery("FROM Manager ").list();
+
+       for (Manager managers : managerList){
+            if (managers.getId() == manager.getId()){
+                emptyManager = managers;
+            }
+        }
+
+        session.close();
+
+        assertNull(emptyManager);
     }
 
     @Test

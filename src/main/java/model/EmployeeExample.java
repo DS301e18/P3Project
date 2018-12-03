@@ -1,5 +1,6 @@
 package model;
 
+import controller.SystemAdministratorController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
