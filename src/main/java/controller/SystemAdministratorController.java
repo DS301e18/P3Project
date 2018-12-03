@@ -32,6 +32,7 @@ public class SystemAdministratorController {
 
         try {
             transaction = session.beginTransaction();
+            this.manager = manager;
             session.save(manager);
             transaction.commit();
 

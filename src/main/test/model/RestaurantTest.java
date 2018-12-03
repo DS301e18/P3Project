@@ -2,6 +2,7 @@ package model;
 
 import controller.AssignedEmployeesController;
 import controller.AssignedStorageController;
+import controller.SystemAdministratorController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,6 +20,7 @@ class RestaurantTest {
     private Restaurant restaurant;
     private Storage storage;
 
+
     @BeforeEach
     void before() {
 
@@ -29,33 +31,34 @@ class RestaurantTest {
         restaurant = new Restaurant();
         storage = new Storage();
 
-        // hardcoder værdier af employee og restaurant
-        employee.setUsername("Pommes");
-        employee.setPassword("wef7913d");
-        employee.setFirstname("Pommes");
-        employee.setLastname("Frites");
-        employee.addEmployee();
+        employee.setFirstname("Noah");
+        employee.setUsername("Noah123");
+        employee.setLastname("Herlig");
+        employee.setPassword("123");
 
-        restaurant.setId(1);
-        storage.setId(1);
+        employee.addEmployee();
     }
 
     @Test
     void employEmployeeTest() {
+        SystemAdministratorController sac = new SystemAdministratorController();
+        sac.addRestaurant("Aalborg");
+
+        sac.getRestaurant().employEmployee(employee);
 
         AssignedEmployeesController aecTest = new AssignedEmployeesController();
+        aecTest.setRestaurantId(sac.getRestaurant().getId());
         aecTest.setEmployeeId(employee.getId());
-        aecTest.setRestaurantId(restaurant.getId());
-
-        restaurant.employEmployee(employee);
 
         AssignedEmployeesController aecDB = new AssignedEmployeesController();
+
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
             List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController").list();
             for (AssignedEmployeesController aec : employeeList) {
                 if (aec.getEmployeeId() == employee.getId()) {
+
                     aecDB = aec;
                 }
             }
@@ -66,8 +69,8 @@ class RestaurantTest {
         } finally {
             session.close();
         }
-        assertEquals(aecTest, aecDB);
 
+        assertEquals(aecTest, aecDB);
     }
 
 
@@ -121,7 +124,6 @@ class RestaurantTest {
             session.close();
         }
         assertEquals(ascTest, ascDB);
-
     }
 
     @Test
