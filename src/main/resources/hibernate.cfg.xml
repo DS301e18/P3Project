@@ -33,7 +33,6 @@
         <mapping resource="AssignedStorage.hbm.xml"/>
         <mapping resource="Employee.hbm.xml"/>
         <mapping resource="Restaurant.hbm.xml"/>
-
-
+      
     </session-factory>
 </hibernate-configuration>

@@ -5,40 +5,51 @@ body {
     overflow: hidden;
 }
 
-.topNav {
+.topnav {
     overflow: hidden;
-    width: 100%;
+    background-color: #ba2924;
     height: 50px;
-    position: fixed;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.topnav button {
+    float: left;
+    color: #f2f2f2;
     background-color: #ba2924;
     border-color: #ba2924;
-    top: 0;
-    left: 0;
-
-}
-
-.topNav a {
-    float: right;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
-    padding: 3px;
 }
 
-.topNav a1 {
-    float: right;
-    text-align: center;
-    padding: 10px 16px;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-.fa-sign-out-alt:hover {
+.topnav a:hover {
+    background-color: #e74c3c;
     color: black;
+}
+
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.topnav-right {
+    float: right;
+}
+.formbutton {
+    float: right
 }
 
 /* TODO: Something wrong with overflow (padding) */
 .sideNav{
+    margin-top: 50px;
     height: 100%;
     width: 100px;
     padding-top: 50px;
@@ -49,7 +60,7 @@ body {
     text-align: center;
     top: 0;
     left: 0;
-    overflow: scroll;
+    overflow: auto;
 }
 
 button {
@@ -96,7 +107,6 @@ img {
 .container{
     width: 100%;
     height: 100%;
-    margin-top: 50px;
     margin-left: 100px;
     overflow: hidden;
 }
@@ -104,7 +114,7 @@ img {
 section{
     border-right: solid #f2b8b6;
     float: left;
-    width: 40%;
+    width: 470px;
     height: 100%;
 }
 
@@ -153,12 +163,19 @@ input {
 }
 
 .priceBox {
-    padding: 15px;
+    padding: 15px 0px 15px 0px;
     background-color: #f2b8b6;
-    border: #f2b8b6;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 470px;
+}
+
+.priceBox  a{
+    padding-left: 15px;
+}
+
+.test {
+    padding-left: 15px;
 }
 
 aside {
