@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Maria
+  User: Hasseris
   Date: 27/11/2018
   Time: 11.09
   To change this template use File | Settings | File Templates.
@@ -18,6 +18,5 @@
     <input type="text" placeholder="Indtast prisen for en batch" name="cost">
     <input type="submit" value="Registrer">
 </form>
-
 </body>
 </html>

@@ -32,7 +32,7 @@
     <a1><label style="float:right; color: white">Employee</label></a1>
 </div>-->
 
-<nav class="topNav">
+<!--<nav class="topNav">
     <ul><li>
         <form action="Login" method="get">
             <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
@@ -43,7 +43,20 @@
         </li>
     </ul>
 
-</nav>
+</nav>-->
+
+<div class="topnav">
+    <a>Logo</a>
+    <div class="topnav-right">
+        <a>Employee</a>
+        <div class="formbutton">
+            <form action="Login" method="get">
+                <button type="submit" value="Logout"><a>Log ud</a></button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
