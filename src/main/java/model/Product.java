@@ -83,12 +83,13 @@ public class Product {
         this.storageID = storageID;
     }
 
-    public BigDecimal calculateBatchPrice() {
+    //TODO Gør sådan at den tjekker hvilket lager en bestemt varetype/batch ligger. Ellers kommer denne kode til at tage alle batches pris i alle lagre.
+    public BigDecimal priceOfAllBatches() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         BigDecimal totalPrice = new BigDecimal(0);
 
         try {
-            List<Batch> batchList = session.createQuery("FROM Batch ").list();
+            List<Batch> batchList = session.createQuery("FROM Batch").list();
             for (Batch batch : batchList) {
                 totalPrice = totalPrice.add(batch.getValue());
             }
