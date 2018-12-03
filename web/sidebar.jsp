@@ -1,3 +1,15 @@
+<%@ page import="java.util.List" %>
+<%@ page import="model.Storage" %>
+<%@ page import="org.hibernate.Session" %>
+<%@ page import="model.SessionFactoryCfg" %>
+<%@ page import="org.hibernate.Transaction" %>
+<%@ page import="org.hibernate.HibernateException" %>
+<%@ page import="controller.AssignedEmployeesController" %>
+<%@ page import="org.hibernate.query.Query" %>
+<%@ page import="model.Employee" %>
+<%@ page import="controller.AssignedStorageController" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="controller.StorageInitializerController" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kristoffer
@@ -16,14 +28,18 @@
     response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
     response.setHeader("Pragma", "no-cache");// HTTP 1.0
     response.setHeader("Expires", "0");// Proxies
+
+    StorageInitializerController storageList = new StorageInitializerController(session);
 %>
 
-<!-- TODO: Make dynamic -->
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav">
-    <button><div class="menuDot"></div></button>
-    <button><div class="menuDot"></div></button>
+
+    <%for (Storage storage : storageList.getStorageInfo()) {%>
+        <button><div class="menuDot"><a><%=storage.getName()%></a></div></button>
+    <%}%>
     <button><i class="fas fa-plus-circle"></i></button>
+
 </div>
 
 
