@@ -3,7 +3,6 @@ package controller;
 import model.SessionFactoryCfg;
 import model.Transactions;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class HistoryController {
         List<Transactions> transactionsList = getHistory();
         List<Transactions> sortedList = new ArrayList<>();
 
+        //TODO: find a method without this many if statements
         for(Transactions transactions : transactionsList){
             if(transactions.getProduct().toLowerCase().contains(input.toLowerCase())){
                 sortedList.add(transactions);
@@ -47,6 +47,8 @@ public class HistoryController {
             }
 
         }
+
+        session.close();
 
         return sortedList;
     }

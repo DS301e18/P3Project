@@ -12,11 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeTest {
 
     private Employee employee;
-    private SessionFactory sessionFactory;
 
     @BeforeEach
     void before(){
-        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
 
         employee = new Employee();
 
@@ -24,18 +23,20 @@ class EmployeeTest {
         employee.setPassword("wef7913d");
         employee.setFirstname("Pommes");
         employee.setLastname("Frites");
+
+        employee.addEmployee();
     }
 
     @Test
     void addEmployeeTest(){
-
-        employee.addEmployee();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         assertEquals(employee, session.get(Employee.class, employee.getId()));
 
         session.close();
+
+        employee.removeEmployee();
     }
 
     @Test
@@ -49,7 +50,6 @@ class EmployeeTest {
     @Test
     void removeEmployeeTest(){
 
-        employee.addEmployee();
         employee.removeEmployee();
 
         Employee employeeTest = null;
