@@ -35,8 +35,8 @@
             <div class="contentBox">
                 <input type="text" placeholder="Søg" name="search">
             </div>
-            <button><div class="tab">Registrer Vare</div></button>
-            <button><div class="tab">Historik</div></button><br>
+            <button class="test"><div class="tab">Registrer Vare</div></button>
+            <button class="test"><div class="tab">Historik</div></button><br>
 
             <!-- Inventory products -->
             <div class="productTab">
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Price-box -->
-            <div class="priceBox">Total pris: "Actual price" kr.</div>
+            <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
         </section>
 
         <!-- Product information -->
