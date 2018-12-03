@@ -101,7 +101,7 @@ public class SystemAdministratorController {
     }
 
     public int getRestaurantId() {
-        return restaurantId;
+        return restaurant.getId();
     }
 
     public void setRestaurantId(int restaurantId) {
