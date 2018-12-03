@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -116,34 +117,58 @@ public class Storage {
         }
     }
 
-    public void collectProducts() {
+    public List<StorageProductController> collectProducts(Storage storage) {
+        final List<StorageProductController> storageProducts = new ArrayList<>();
 
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        try {
+            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController ").list();
+            for (StorageProductController storageProduct : storageProductList) {
+                if (storage.getId() == storageProduct.getStorageId()) {
+                    storageProducts.add(storageProduct);
+                }
+            }
+        } catch (HibernateException e) {
+            System.out.println("Couldn't find any products in this storage");
+            e.printStackTrace();
+        } finally {
+            session.close();
+            return storageProducts;
+        }
     }
 
     //TODO Gør sådan at den tjekket hvilket lager produktet ligger i.
     public void sortProducts() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        try {
-            List<Product> productList = session.createQuery("FROM Product").list();
-            productList.sort(Comparator.comparing(Product::getName));
-        } catch (HibernateException e) {
-            System.out.println("Couldn't sort the products");
-            e.printStackTrace();
-        } finally {
-            session.close();
+        List<StorageProductController> storageProducts = collectProducts(this);
+        List<Product> productList = session.createQuery("FROM Product").list();
+        List<Product> totalStorageProducts = new ArrayList<>();
+
+        for (int i = 0; i < storageProducts.size(); i++) {
+            for (Product product : productList) {
+                if (product.getId() == storageProducts.get(i).getProductId()) {
+                    totalStorageProducts.add(product);
+                }
+            }
         }
+        totalStorageProducts.sort(Comparator.comparing(Product::getName));
     }
 
     //TODO Gør sådan at den tjekker hvilket lager en bestemt varetype/batch ligger. Ellers kommer denne kode til at tage alle  pris i alle lagre.
-    public BigDecimal calculateTotalPrice() {
+    public BigDecimal calculateTotalPrice(Storage storage) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         BigDecimal totalPrice = new BigDecimal(0);
 
         try {
-            List<Product> productList = session.createQuery("FROM Product").list();
-            for (Product product : productList) {
-                totalPrice = totalPrice.add(product.priceOfAllBatches());
+            List<Storage> storageList = session.createQuery("FROM Storage").list();
+            for (Storage storage1 : storageList) {
+                if (storage.getId() == storage1.getId()) {
+                    List<Product> productList = session.createQuery("FROM Product").list();
+                    for (Product product : productList) {
+                        totalPrice = totalPrice.add(product.priceOfAllBatches(this));
+                    }
+                }
             }
 
         } catch (HibernateException e) {
