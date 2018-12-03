@@ -48,4 +48,13 @@ public class AssignedEmployeesController {
         result = 31 * result + employeeId;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "AssignedEmployeesController{" +
+                "id=" + id +
+                ", restaurantId=" + restaurantId +
+                ", employeeId=" + employeeId +
+                '}';
+    }
 }

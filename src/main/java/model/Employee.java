@@ -15,6 +15,7 @@ public class Employee {
     private String lastname;
     private String role = "Medarbejder";
 
+
     public void addEmployee(){
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
