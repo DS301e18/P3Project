@@ -15,26 +15,13 @@
 
     <!-- Import Stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="storageMenu.css">
+    <link rel="stylesheet" type="text/css" href="style/storageMenu.css">
+
 </head>
 <body>
 
-    <!-- TODO: Make dynamic -->
-    <!-- Side navigation (storage navigation)-->
-    <div class="sideNav">
-        <button><div class="menuDot"></div></button>
-        <button><div class="menuDot"></div></button>
-        <button><i class="fas fa-plus-circle"></i></button>
-    </div>
-
-    <!-- Top navigation (restaurant navigation/logout) -->
-    <div class="topNav">
-        <a><form action="Login" method="get">
-            <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
-        </form></a>
-        <!-- TODO: Make dynamic -->
-        <a1><label style="float:right; color: white">Employee</label></a1>
-    </div>
+    <jsp:include page="navigation.jsp" />
+    <jsp:include page="sidebar.jsp"/>
 
     <!-- TODO: Make storage inventory dynamic -->
     <!-- Storage inventory-->
@@ -48,8 +35,8 @@
             <div class="contentBox">
                 <input type="text" placeholder="Søg" name="search">
             </div>
-            <button><div class="tab">Registrer Vare</div></button>
-            <button><div class="tab">Historik</div></button><br>
+            <button class="test"><div class="tab">Registrer Vare</div></button>
+            <button class="test"><div class="tab">Historik</div></button><br>
 
             <!-- Inventory products -->
             <div class="productTab">
@@ -62,7 +49,7 @@
             </div>
 
             <!-- Price-box -->
-            <div class="priceBox">Total pris: "Actual price" kr.</div>
+            <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
         </section>
 
         <!-- Product information -->
