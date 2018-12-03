@@ -25,6 +25,7 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role", loginCheck.getEmployee().getRole());
+            session.setAttribute("employeeID", loginCheck.getEmployee().getId());
             response.sendRedirect("webpanel.jsp");
 
         } else {
