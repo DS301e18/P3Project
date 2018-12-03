@@ -1,14 +1,4 @@
-<%@ page import="java.util.List" %>
 <%@ page import="model.Storage" %>
-<%@ page import="org.hibernate.Session" %>
-<%@ page import="model.SessionFactoryCfg" %>
-<%@ page import="org.hibernate.Transaction" %>
-<%@ page import="org.hibernate.HibernateException" %>
-<%@ page import="controller.AssignedEmployeesController" %>
-<%@ page import="org.hibernate.query.Query" %>
-<%@ page import="model.Employee" %>
-<%@ page import="controller.AssignedStorageController" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="controller.StorageInitializerController" %>
 <%--
   Created by IntelliJ IDEA.
