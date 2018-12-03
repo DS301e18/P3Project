@@ -84,26 +84,7 @@ public class Product {
     }
 
     public BigDecimal priceOfAllBatches(Storage storage) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         BigDecimal totalPrice = new BigDecimal(0);
-
-        try {
-            List<Storage> storageList = session.createQuery("FROM Storage").list();
-            for (Storage storage1 : storageList) {
-                if (storage.getId() == storage1.getId()) {
-                    List<Batch> batchList = session.createQuery("FROM Batch").list();
-                    for (Batch batch : batchList) {
-                        totalPrice = totalPrice.add(batch.getValue());
-                    }
-                }
-            }
-        } catch (
-                HibernateException e) {
-            System.out.println("Couldn't find any products");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
 
         return totalPrice;
     }
