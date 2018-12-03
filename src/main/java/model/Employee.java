@@ -126,8 +126,8 @@ public class Employee {
         Employee employee = (Employee) o;
 
         if (id != employee.id) return false;
-        if (username != null ? !username.equals(employee.username) : employee.username != null) return false;
-        if (password != null ? !password.equals(employee.password) : employee.password != null) return false;
+        if (!username.equals(employee.username)) return false;
+        if (!password.equals(employee.password)) return false;
         if (!firstname.equals(employee.firstname)) return false;
         if (!lastname.equals(employee.lastname)) return false;
         return role.equals(employee.role);
@@ -136,8 +136,8 @@ public class Employee {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + username.hashCode();
+        result = 31 * result + password.hashCode();
         result = 31 * result + firstname.hashCode();
         result = 31 * result + lastname.hashCode();
         result = 31 * result + role.hashCode();

@@ -1,5 +1,6 @@
 package controller;
 
+import model.Employee;
 import model.Manager;
 import model.Restaurant;
 import model.SessionFactoryCfg;
@@ -23,11 +24,49 @@ public class SystemAdministratorController {
 
 
     /**Methods**/
-    public void addManager(Restaurant restaurant, Manager manager){
+    public void addManager(Manager manager){
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = sessionFactory.openSession();
 
+        Transaction transaction;
+
+        try {
+            transaction = session.beginTransaction();
+            session.save(manager);
+            transaction.commit();
+
+        } catch (HibernateException e){
+            System.out.println("Could not save the manager");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
-    public void removeManager(Restaurant restaurant, Manager manager){
+    public void removeManager(Manager manager){
+
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction;
+
+        try {
+            // Create list of the employees in the database
+            List<Manager> managerList = session.createQuery("FROM Manager").list();
+
+            for (Manager manager1 : managerList) {
+                if(manager.getId() == manager1.getId()){
+                    transaction = session.beginTransaction();
+                    session.delete(manager1);
+                    transaction.commit();
+                }
+            }
+        } catch (HibernateException e){
+            System.out.println("Could not delete the manager");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
 
     }
 
@@ -101,7 +140,7 @@ public class SystemAdministratorController {
     }
 
     public int getRestaurantId() {
-        return restaurantId;
+        return restaurant.getId();
     }
 
     public void setRestaurantId(int restaurantId) {
