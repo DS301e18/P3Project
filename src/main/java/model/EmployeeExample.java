@@ -38,5 +38,7 @@ public class EmployeeExample {
         } finally {
             session.close();
         }
+
+        factory.close();
     }
 }
