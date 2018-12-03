@@ -26,7 +26,7 @@ public class Transactions {
         this.date = getDate();
         this.name = employee.getFirstname();
         this.batch = batch.getBatchNumber();
-        this.product = batch.getProductType().getName();
+        this.product = batch.getProduct().getName();
         this.amount = amount;
         this.transtype = transtype;
 

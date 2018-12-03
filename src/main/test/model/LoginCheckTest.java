@@ -22,6 +22,7 @@ class LoginCheckTest {
 
     }
 
+    //TODO: insert employee in the test
     //Tester om initializere objekter er indentisk med databaser.
     @Test
     void getEmployee() {

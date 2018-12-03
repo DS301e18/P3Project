@@ -1,9 +1,7 @@
 package controller;
 
-import model.ProductType;
 import model.SessionFactoryCfg;
 import model.Storage;
-import model.Transactions;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -42,7 +40,7 @@ public class RegisterProductController extends HttpServlet {
             session.close();
         }
 
-        currentStorage.addProduct(name, batchSize, batchCost);
+        currentStorage.createProduct(name, batchSize, batchCost);
 
     }
 }

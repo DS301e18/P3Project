@@ -2,7 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 
-public class ProductType {
+public class Product {
 
     /** Field **/
 
@@ -14,7 +14,7 @@ public class ProductType {
     private int storageID;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
-    public ProductType(String name, int batchSize, BigDecimal price, int storageID){
+    public Product(String name, int batchSize, BigDecimal price, int storageID){
         this.name = name;
         //this.productNumber = productNumber;
         this.batchSize = batchSize;
@@ -22,7 +22,7 @@ public class ProductType {
         this.storageID = storageID;
     }
 
-    public ProductType() {
+    public Product() {
     }
 
     /** Methods **/
