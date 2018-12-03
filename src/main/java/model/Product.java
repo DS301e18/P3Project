@@ -1,6 +1,10 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product {
 
@@ -79,8 +83,25 @@ public class Product {
         this.storageID = storageID;
     }
 
-    public void calculateBatchPrice() {
+    public BigDecimal calculateBatchPrice() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        BigDecimal totalPrice = new BigDecimal(0);
+
+        try {
+            List<Batch> batchList = session.createQuery("FROM Batch ").list();
+            for (Batch batch : batchList) {
+                totalPrice = totalPrice.add(batch.getValue());
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("Couldn't find any products");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return totalPrice;
     }
-    
+
 }
 
