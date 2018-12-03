@@ -54,9 +54,7 @@ public class Storage {
 
     public void relateProductToStorage(Product product) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
         Transaction transaction;
-
 
         try {
             transaction = session.beginTransaction();
@@ -97,7 +95,7 @@ public class Storage {
         }
     }
 
-
+    // Kode til Jonas
     public void createProduct(String name, int batchSize, BigDecimal price) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         Transaction transaction;
@@ -125,8 +123,25 @@ public class Storage {
 
     }
 
-    public void calculateTotalPrice() {
+    //TODO Gør sådan at den tjekker hvilket lager en bestemt varetype/batch ligger. Ellers kommer denne kode til at tage alle  pris i alle lagre.
+    public BigDecimal calculateTotalPrice() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        BigDecimal totalPrice = new BigDecimal(0);
 
+        try {
+            List<Product> productList = session.createQuery("FROM Product").list();
+            for (Product product : productList) {
+                totalPrice = totalPrice.add(product.priceOfAllBatches());
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("Couldn't find any products");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return totalPrice;
     }
 
     @Override
