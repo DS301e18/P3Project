@@ -4,23 +4,17 @@ import controller.AssignedEmployeesController;
 import controller.AssignedStorageController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.util.List;
 
 public class Restaurant {
 
-    /**
-     * Field
-     */
+    /** Field */
     private int id;
     private String name;
-    private SessionFactory factory;
 
-    /**
-     * Methods
-     */
+    /** Methods */
     public int getId() {
         return id;
     }
@@ -39,8 +33,9 @@ public class Restaurant {
 
 
     //TODO slette sessionfactory efter vi har fundet ud af det med static
+    /** Create a relation between an employeeID with a restaurantID with each other */
     public void employEmployee(Employee employee) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         Transaction transaction;
 
@@ -49,11 +44,13 @@ public class Restaurant {
             AssignedEmployeesController assignedEmployee = new AssignedEmployeesController();
             assignedEmployee.setRestaurantId(this.id);
             assignedEmployee.setEmployeeId(employee.getId());
+
+            // Save the employeeID and restaurantID in database
             session.save(assignedEmployee);
             transaction.commit();
 
         } catch (HibernateException e) {
-            System.out.println("No employee to assign");
+            System.out.println("Could not assign employee to the restaurant!");
             e.printStackTrace();
         } finally {
             session.close();
@@ -61,22 +58,24 @@ public class Restaurant {
     }
 
 
+    /** Delete the relation between an employee and restaurant */
     public void resignEmployee(Employee employee) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         Transaction transaction = null;
 
         try {
             List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController ").list();
+
             for (AssignedEmployeesController aec : employeeList) {
+
                 if (aec.getEmployeeId() == employee.getId()) {
                     transaction = session.beginTransaction();
                     session.delete(aec);
-                    if(employee.getRole().equals("Medarbejder")){
-                        session.delete(employee);
-                    }
                     transaction.commit();
+
                 }
+
             }
 
         } catch (HibernateException e) {
@@ -85,11 +84,20 @@ public class Restaurant {
         } finally {
             session.close();
         }
+
+        // If employee is not a manager, delete entirely from database
+        if(employee.getRole().equals("Medarbejder")){
+            employee.removeEmployee();
+        }
+
     }
 
-
+    /** Create a relation between an existing storage and existing restaurant*/
     public void addStorage(Storage storage) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        //TODO: Add storage in this method, instead of having it as an input parameter
+
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         Transaction transaction;
 
@@ -100,14 +108,17 @@ public class Restaurant {
             assignedStorage.setStorageId(storage.getId());
             session.save(assignedStorage);
             transaction.commit();
+
         } catch (HibernateException e) {
-            System.out.println("no storage to assign");
+            System.out.println("No storage to assign!");
             e.printStackTrace();
+
         } finally {
             session.close();
         }
     }
 
+    /** Delete relation between a storage and a restaurant */
     public void removeStorage(Storage storage) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
@@ -115,6 +126,7 @@ public class Restaurant {
 
         try {
             List<AssignedStorageController> storageList = session.createQuery("FROM AssignedStorageController ").list();
+
             for (AssignedStorageController assignedStorage : storageList) {
                 if (assignedStorage.getStorageId() == storage.getId()) {
                     transaction = session.beginTransaction();
@@ -122,12 +134,16 @@ public class Restaurant {
                     transaction.commit();
                 }
             }
+
         } catch (HibernateException e) {
             System.out.println("Can't find storage to remove");
             e.printStackTrace();
+
         } finally {
             session.close();
         }
+
+        //TODO: method in Storage-class, which removes the storage entirely from the database
     }
 }
 

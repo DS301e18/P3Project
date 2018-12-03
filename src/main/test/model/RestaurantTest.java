@@ -22,13 +22,20 @@ class RestaurantTest {
     @BeforeEach
     void before() {
 
+        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+
         // opretter nye objekter af Employee og Restaurant
         employee = new Employee();
         restaurant = new Restaurant();
         storage = new Storage();
 
         // hardcoder værdier af employee og restaurant
-        employee.setId(1);
+        employee.setUsername("Pommes");
+        employee.setPassword("wef7913d");
+        employee.setFirstname("Pommes");
+        employee.setLastname("Frites");
+        employee.addEmployee();
+
         restaurant.setId(1);
         storage.setId(1);
     }
@@ -43,7 +50,7 @@ class RestaurantTest {
         restaurant.employEmployee(employee);
 
         AssignedEmployeesController aecDB = new AssignedEmployeesController();
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
             List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController").list();
@@ -69,7 +76,7 @@ class RestaurantTest {
 
         restaurant.resignEmployee(employee);
         AssignedEmployeesController aecDB = null;
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
             List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController ").list();
@@ -84,7 +91,8 @@ class RestaurantTest {
         } finally {
             session.close();
         }
-        assertTrue(aecDB == null);
+
+        assertNull(aecDB);
     }
 
     @Test
@@ -96,7 +104,7 @@ class RestaurantTest {
         restaurant.addStorage(storage);
 
         AssignedStorageController ascDB = new AssignedStorageController();
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
             List<AssignedStorageController> storageList = session.createQuery("FROM AssignedStorageController ").list();
