@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class StorageTest {
     private ProductType product;
@@ -38,8 +39,8 @@ class StorageTest {
         try {
             List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
 
-            for (StorageProductController storageProducts : storageProductList){
-                if (storageProducts.getProductId() == product.getId()){
+            for (StorageProductController storageProducts : storageProductList) {
+                if (storageProducts.getProductId() == product.getId()) {
                     spcDB = storageProducts;
                 }
             }
@@ -54,5 +55,27 @@ class StorageTest {
 
     @Test
     void unrelateProductFromStorage() {
+        storage.unrelateProductFromStorage(product);
+        StorageProductController spcDB = null;
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        try {
+            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
+
+            for (StorageProductController storageProducts : storageProductList) {
+                if (storageProducts.getProductId() == product.getId()) {
+                    spcDB = storageProducts;
+                }
+            }
+
+        } catch (HibernateException e) {
+            System.out.println("Couldn't unrelate this product from storage");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        assertNull(spcDB);
+
     }
 }
