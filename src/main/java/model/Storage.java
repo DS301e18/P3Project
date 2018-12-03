@@ -78,7 +78,7 @@ public class Storage {
     }
 
     public void unrelateProductFromStorage(ProductType product) {
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         Transaction transaction = null;
 
         try {
@@ -117,11 +117,6 @@ public class Storage {
             session.close();
         }
     }
-
-    public void removeProduct(ProductType productType) {
-
-    }
-
 
     public void collectProducts() {
 
