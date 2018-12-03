@@ -11,6 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//TODO: Make such that data needed are created in the test itself
 class HistoryControllerTest {
 
     private SessionFactory sessionFactory;
@@ -39,9 +40,9 @@ class HistoryControllerTest {
     @Test
     void sortHistory(){
 
-        List<Transactions> sortedList = history.sortHistory("And");
+        List<Transactions> sortedList = history.sortHistory("Kaj");
 
-        assertEquals("Andrea", sortedList.get(0).getName());
+        assertEquals("Kaj", sortedList.get(0).getName());
 
     }
 

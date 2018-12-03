@@ -18,16 +18,16 @@ public class Batch {
     private Timestamp date;
     private int remainingInBox;
     private BigDecimal value;
-    private ProductType productType;
+    private Product product;
     private String typeName;
-    //private List<ProductType> batchList = new ArrayList<ProductType>();
+    //private List<Product> batchList = new ArrayList<Product>();
 
     /**
      * Methods
      **/
 
     //Constructor
-    public Batch(ProductType productType, String batchNumber) {
+    public Batch(Product product, String batchNumber) {
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
@@ -37,10 +37,10 @@ public class Batch {
 
             this.batchNumber = batchNumber;
             this.date = new Timestamp(System.currentTimeMillis());
-            this.remainingInBox = productType.getBatchSize();
-            this.value = productType.getPrice();
-            this.typeName = productType.getName();
-            this.productType = productType;
+            this.remainingInBox = product.getBatchSize();
+            this.value = product.getPrice();
+            this.typeName = product.getName();
+            this.product = product;
 
             session.save(this);
             transaction.commit();
@@ -71,10 +71,10 @@ public class Batch {
 
         MathContext mc = new MathContext(2);
 
-        BigDecimal batchsize = BigDecimal.valueOf(batch.productType.getBatchSize());
+        BigDecimal batchsize = BigDecimal.valueOf(batch.product.getBatchSize());
         BigDecimal bAmount = BigDecimal.valueOf(amount);
 
-        BigDecimal oneFracion = batch.productType.getPrice().divide(batchsize, mc);
+        BigDecimal oneFracion = batch.product.getPrice().divide(batchsize, mc);
         BigDecimal multiplySum = oneFracion.multiply(bAmount, mc);
 
 
@@ -86,12 +86,12 @@ public class Batch {
         this.value = value;
     }
 
-    public ProductType getProductType() {
-        return productType;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 

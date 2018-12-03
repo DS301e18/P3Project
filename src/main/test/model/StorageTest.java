@@ -6,19 +6,18 @@ import org.hibernate.Session;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class StorageTest {
-    private ProductType product;
+    private Product product;
     private Storage storage;
 
     @BeforeEach
     void before() {
-        product = new ProductType();
+        product = new Product();
         storage = new Storage();
 
         product.setId(1);

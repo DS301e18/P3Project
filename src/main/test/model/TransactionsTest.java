@@ -1,7 +1,6 @@
 package model;
 
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +18,7 @@ class TransactionsTest {
         //Instantiates the objects that are input-parameters to the method
         e = new Employee();
         b = new Batch();
-        ProductType p = new ProductType();
+        Product p = new Product();
 
         //Setting random values for the objects
         e.setFirstname("Kaj");
@@ -28,7 +27,7 @@ class TransactionsTest {
         p.setBatchSize(3);
 
         b.setBatchNumber("213123");
-        b.setProductType(p);
+        b.setProduct(p);
         b.setRemainingInBox(p.getBatchSize());
     }
 
@@ -80,7 +79,7 @@ class TransactionsTest {
 
     @Test
     void getProduct() {
-        ProductType product = new ProductType();
+        Product product = new Product();
         product.setName("Pepsi Max");
         assertEquals("Pepsi Max", product.getName());
     }

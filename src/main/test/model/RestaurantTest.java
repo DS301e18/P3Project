@@ -95,6 +95,7 @@ class RestaurantTest {
         assertNull(aecDB);
     }
 
+    //TODO: Use functions already made to add a storage/restaurant etc.
     @Test
     void addStorage() {
         AssignedStorageController ascTest = new AssignedStorageController();

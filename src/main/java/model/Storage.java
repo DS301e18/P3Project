@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class Storage {
@@ -53,7 +52,7 @@ public class Storage {
         this.restaurant = restaurant;
     }
 
-    public void relateProductToStorage(ProductType product) {
+    public void relateProductToStorage(Product product) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Transaction transaction;
@@ -77,7 +76,7 @@ public class Storage {
         }
     }
 
-    public void unrelateProductFromStorage(ProductType product) {
+    public void unrelateProductFromStorage(Product product) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         Transaction transaction = null;
 
@@ -106,8 +105,8 @@ public class Storage {
         try {
             transaction = session.beginTransaction();
 
-            ProductType productType = new ProductType(name, batchSize, price, getId());
-            session.save(productType);
+            Product product = new Product(name, batchSize, price, getId());
+            session.save(product);
             transaction.commit();
 
         } catch (HibernateException e) {
