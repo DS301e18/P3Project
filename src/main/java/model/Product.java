@@ -83,18 +83,22 @@ public class Product {
         this.storageID = storageID;
     }
 
-    //TODO Gør sådan at den tjekker hvilket lager en bestemt varetype/batch ligger. Ellers kommer denne kode til at tage alle batches pris i alle lagre.
-    public BigDecimal priceOfAllBatches() {
+    public BigDecimal priceOfAllBatches(Storage storage) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         BigDecimal totalPrice = new BigDecimal(0);
 
         try {
-            List<Batch> batchList = session.createQuery("FROM Batch").list();
-            for (Batch batch : batchList) {
-                totalPrice = totalPrice.add(batch.getValue());
+            List<Storage> storageList = session.createQuery("FROM Storage").list();
+            for (Storage storage1 : storageList) {
+                if (storage.getId() == storage1.getId()) {
+                    List<Batch> batchList = session.createQuery("FROM Batch").list();
+                    for (Batch batch : batchList) {
+                        totalPrice = totalPrice.add(batch.getValue());
+                    }
+                }
             }
-
-        } catch (HibernateException e) {
+        } catch (
+                HibernateException e) {
             System.out.println("Couldn't find any products");
             e.printStackTrace();
         } finally {
