@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 public class Storage {
@@ -119,8 +120,19 @@ public class Storage {
 
     }
 
+    //TODO Gør sådan at den tjekket hvilket lager produktet ligger i.
     public void sortProducts() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
+        try {
+            List<Product> productList = session.createQuery("FROM Product").list();
+            productList.sort(Comparator.comparing(Product::getName));
+        } catch (HibernateException e) {
+            System.out.println("Couldn't sort the products");
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
     //TODO Gør sådan at den tjekker hvilket lager en bestemt varetype/batch ligger. Ellers kommer denne kode til at tage alle  pris i alle lagre.
