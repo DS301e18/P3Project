@@ -1,12 +1,10 @@
 package model;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import Util.AddRemove;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-public class Product {
+public class Product extends AddRemove {
 
     /**
      * Field
@@ -16,14 +14,13 @@ public class Product {
     private String name;
     private int batchSize;
     private BigDecimal price;
-    //private final List<Batch> batches = new ArrayList<Batch>();
   
     public Product(String name, int batchSize, BigDecimal price){
         this.name = name;
-        //this.productNumber = productNumber;
         this.batchSize = batchSize;
         this.price = price;
 
+        addObject(this);
     }
 
     public Product() {
