@@ -52,10 +52,11 @@ public class SystemAdministratorController {
         Transaction transaction;
 
         try {
-            // Create list of the employees in the database
+            // Create list of the managers in the database
             List<Manager> managerList = session.createQuery("FROM Manager").list();
 
             for (Manager manager1 : managerList) {
+                //If the manager is found in the list, delete it
                 if(manager.getId() == manager1.getId()){
                     transaction = session.beginTransaction();
                     session.delete(manager1);
@@ -103,11 +104,12 @@ public class SystemAdministratorController {
         Transaction transaction;
 
         try {
-            // Create list of the employees in the database
+            // Create list of the restaurants in the database
             List<Restaurant> restaurantList = session.createQuery("FROM Restaurant ").list();
 
             for (Restaurant restaurant : restaurantList) {
                 if(restaurant.getName().equals(restaurantName)){
+                    //If the restaurant is found in the list, delete it
                     this.restaurant = restaurant;
                     transaction = session.beginTransaction();
                     session.delete(this.restaurant);
