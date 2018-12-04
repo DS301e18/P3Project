@@ -1,10 +1,18 @@
-package controller;
+package model;
 
-public class AssignedStorageController {
+import Util.AddRemove;
+
+public class AssignedStorage extends AddRemove {
     private int id;
     private int restaurantId;
     private int storageId;
 
+    public AssignedStorage(int restaurantId, int storageId) {
+        this.restaurantId = restaurantId;
+        this.storageId = storageId;
+
+        addObject(this);
+    }
 
     public int getId() {
         return id;
@@ -36,7 +44,7 @@ public class AssignedStorageController {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AssignedStorageController that = (AssignedStorageController) o;
+        AssignedStorage that = (AssignedStorage) o;
 
         if (restaurantId != that.restaurantId) return false;
         return storageId == that.storageId;
