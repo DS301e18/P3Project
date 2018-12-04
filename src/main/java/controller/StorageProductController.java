@@ -1,9 +1,21 @@
 package controller;
 
-public class StorageProductController {
+import Util.AddRemove;
+
+public class StorageProductController extends AddRemove {
     private int id;
     private int storageId;
     private int productId;
+
+    public StorageProductController(int storageId, int productId) {
+        this.storageId = storageId;
+        this.productId = productId;
+
+        addObject(this);
+    }
+
+    public StorageProductController() {
+    }
 
     public int getId() {
         return id;
