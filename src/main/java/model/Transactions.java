@@ -15,7 +15,7 @@ public class Transactions {
     private String name;
     private String batch;
     private String product;
-    private Timestamp date;
+    private Timestamp timestamp;
     private int amount;
     private String transtype;
 
@@ -23,7 +23,7 @@ public class Transactions {
 
     public void registerTransaction(Employee employee, Batch batch, int amount, String transtype) {
 
-        this.date = getDate();
+        this.timestamp = getTimestamp();
         this.name = employee.getFirstName();
         this.batch = batch.getBatchNumber();
         this.product = batch.getProduct().getName();
@@ -81,13 +81,9 @@ public class Transactions {
         this.id = id;
     }
 
-    public Timestamp getDate() {
-        return date;
-    }
+    public Timestamp getTimestamp() {return timestamp;}
 
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
+    public void setTimestamp(Timestamp timestamp) {this.timestamp = timestamp;}
 
     public int getAmount() {
         return amount;
@@ -126,7 +122,7 @@ public class Transactions {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (batch != null ? batch.hashCode() : 0);
         result = 31 * result + (product != null ? product.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
         result = 31 * result + amount;
         result = 31 * result + (transtype != null ? transtype.hashCode() : 0);
         return result;
@@ -139,7 +135,7 @@ public class Transactions {
                 ", name='" + name + '\'' +
                 ", batch='" + batch + '\'' +
                 ", product='" + product + '\'' +
-                ", date=" + date +
+                ", date=" + timestamp +
                 ", amount=" + amount +
                 ", transtype='" + transtype;
     }
