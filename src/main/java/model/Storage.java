@@ -1,5 +1,6 @@
 package model;
 
+import Util.AddRemove;
 import controller.StorageProductController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Storage {
+public class Storage extends AddRemove {
 
     /** Field */
     private int id;
@@ -21,6 +22,8 @@ public class Storage {
 
     public Storage(String name) {
         this.name = name;
+
+        addObject(this);
     }
 
     /** Methods */
