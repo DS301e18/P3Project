@@ -10,7 +10,6 @@ public class Product {
     private String name;
     private int batchSize;
     private BigDecimal price;
-    private Storage storage;
     private int storageID;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
@@ -26,13 +25,7 @@ public class Product {
     }
 
     /** Methods **/
-    public Storage getStorage() {
-        return storage;
-    }
 
-    public void setStorage(Storage storage) {
-        this.storage = storage;
-    }
 
     public BigDecimal getPrice() {
         return price;
