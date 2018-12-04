@@ -21,7 +21,7 @@ class TransactionsTest {
         Product p = new Product();
 
         //Setting random values for the objects
-        e.setFirstname("Kaj");
+        e.setFirstName("Kaj");
         p.setName("Pepsi Max");
         p.setPrice(BigDecimal.valueOf(23));
         p.setBatchSize(3);
@@ -66,8 +66,8 @@ class TransactionsTest {
     @Test
     void getName() {
         Employee employee = new Employee();
-        employee.setFirstname("Kaj");
-        assertEquals("Kaj", employee.getFirstname());
+        employee.setFirstName("Kaj");
+        assertEquals("Kaj", employee.getFirstName());
     }
 
     @Test

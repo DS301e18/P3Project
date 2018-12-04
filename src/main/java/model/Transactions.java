@@ -24,7 +24,7 @@ public class Transactions {
     public void registerTransaction(Employee employee, Batch batch, int amount, String transtype) {
 
         this.date = getDate();
-        this.name = employee.getFirstname();
+        this.name = employee.getFirstName();
         this.batch = batch.getBatchNumber();
         this.product = batch.getProduct().getName();
         this.amount = amount;

@@ -8,25 +8,27 @@ import org.hibernate.Transaction;
 
 public class AddRemove {
 
-    Object object;
-
     public <T> void addObject(T object){
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
 
         try {
             transaction = session.beginTransaction();
-            this.object = object;
+
             session.save(object);
+
             transaction.commit();
+
         } catch (HibernateException e){
             System.out.println("Could not save the object");
             e.printStackTrace();
+
         }finally {
             session.close();
+
         }
     }
 }

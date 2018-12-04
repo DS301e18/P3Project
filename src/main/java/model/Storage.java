@@ -12,24 +12,18 @@ import java.util.List;
 
 public class Storage {
 
-    /**
-     * Field
-     */
+    /** Field */
     private int id;
     private String name;
-    private Restaurant restaurant;
 
     public Storage() {
     }
 
-    public Storage(String name, Restaurant restaurant) {
+    public Storage(String name) {
         this.name = name;
-        this.restaurant = restaurant;
     }
 
-    /**
-     * Methods
-     */
+    /** Methods */
     public int getId() {
         return id;
     }
@@ -44,14 +38,6 @@ public class Storage {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
     }
 
     public void relateProductToStorage(Product product) {
@@ -105,8 +91,9 @@ public class Storage {
         try {
             transaction = session.beginTransaction();
 
-            Product product = new Product(name, batchSize, price, getId());
+            Product product = new Product(name, batchSize, price);
             session.save(product);
+
             transaction.commit();
 
         } catch (HibernateException e) {
@@ -117,14 +104,14 @@ public class Storage {
         }
     }
 
-    public List<StorageProductController> collectProducts(Storage storage) {
-        final List<StorageProductController> storageProducts = new ArrayList<>();
+    public List<StorageProductController> collectProducts() {
+        List<StorageProductController> storageProducts = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         try {
             List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController ").list();
             for (StorageProductController storageProduct : storageProductList) {
-                if (storage.getId() == storageProduct.getStorageId()) {
+                if (this.getId() == storageProduct.getStorageId()) {
                     storageProducts.add(storageProduct);
                 }
             }
@@ -140,7 +127,7 @@ public class Storage {
     public List<Product> sortProducts() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        List<StorageProductController> storageProducts = collectProducts(this);
+        List<StorageProductController> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();
         List<Product> totalStorageProducts = new ArrayList<>();
 
