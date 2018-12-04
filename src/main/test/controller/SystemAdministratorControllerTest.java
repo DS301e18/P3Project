@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SystemAdministratorControllerTest {
 
-    @Test
+ /*   @Test
     void addManager() {
         //Establishing a connection to the database
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
@@ -34,8 +34,8 @@ class SystemAdministratorControllerTest {
 
         session.close();
     }
-
-    @Test
+*/
+  /*  @Test
     void removeManager() {
         SystemAdministratorController admin = new SystemAdministratorController();
 
@@ -66,8 +66,9 @@ class SystemAdministratorControllerTest {
 
         assertNull(emptyManager);
     }
+*/
 
-    @Test
+/*    @Test
     void addRestaurant() {
         //Establishing a connection to the database
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
@@ -97,8 +98,11 @@ class SystemAdministratorControllerTest {
             ex.printStackTrace();
         } finally {
             session.close();
-        }*/
+        }
     }
+    */
+
+/*
 
     @Test
     void removeRestaurant() {
@@ -124,5 +128,5 @@ class SystemAdministratorControllerTest {
         assertNull(empty);
 
     }
-
+*/
 }
