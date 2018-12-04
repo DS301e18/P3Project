@@ -14,6 +14,9 @@ public class AssignedEmployees extends AddRemove {
         addObject(this);
     }
 
+    public AssignedEmployees() {
+    }
+
     public int getId() {
         return id;
     }
