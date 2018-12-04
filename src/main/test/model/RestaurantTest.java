@@ -76,7 +76,6 @@ class RestaurantTest {
 
     @Test
     void resignEmployeeTest() {
-
         restaurant.resignEmployee(employee);
         AssignedEmployeesController aecDB = null;
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
