@@ -24,7 +24,7 @@ public class SystemAdministratorController {
 
 
     /**Methods**/
-    public void addManager(Manager manager){
+    /*public void addManager(Manager manager){
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
         Session session = sessionFactory.openSession();
 
@@ -42,7 +42,7 @@ public class SystemAdministratorController {
         } finally {
             session.close();
         }
-    }
+    }*/
 
     public void removeManager(Manager manager){
 
@@ -72,7 +72,8 @@ public class SystemAdministratorController {
 
     }
 
-    public void addRestaurant(String restaurantName){
+
+    /*public void addRestaurant(String restaurantName){
 
         restaurant = new Restaurant();
         restaurant.setName(restaurantName);
@@ -94,7 +95,7 @@ public class SystemAdministratorController {
             session.close();
         }
 
-    }
+    }*/
 
     public void removeRestaurant(String restaurantName){
 
