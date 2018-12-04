@@ -1,5 +1,6 @@
 package model;
 
+import Util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
@@ -34,5 +35,12 @@ class BatchTest {
             session.close();
         }
 
+    }
+
+    @Test
+    void TestAddObjectOnBatch(){
+        Product product = new Product("TestProduct", 4, BigDecimal.valueOf(200), 1);
+        Batch batch = new Batch(product, "test1324");
+        batch.addObject(batch);
     }
 }

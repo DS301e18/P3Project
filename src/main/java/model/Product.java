@@ -1,17 +1,23 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product {
 
-    /** Field **/
+    /**
+     * Field
+     **/
 
     private int id;
     private String name;
     private int batchSize;
     private BigDecimal price;
     //private final List<Batch> batches = new ArrayList<Batch>();
-
+  
     public Product(String name, int batchSize, BigDecimal price){
         this.name = name;
         //this.productNumber = productNumber;
@@ -25,14 +31,14 @@ public class Product {
 
     /** Methods **/
 
-
     public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(BigDecimal price){
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
-  
+
     public int getId() {
         return id;
     }
@@ -52,9 +58,16 @@ public class Product {
     public int getBatchSize() {
         return batchSize;
     }
+
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
     public void setBatchSize(int factor) {
         this.batchSize += factor;
+    }
+
+    public BigDecimal priceOfAllBatches(Storage storage) {
+        BigDecimal totalPrice = new BigDecimal(0);
+
+        return totalPrice;
     }
 }
 
