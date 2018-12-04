@@ -14,6 +14,9 @@ public class AssignedStorage extends AddRemove {
         addObject(this);
     }
 
+    public AssignedStorage() {
+    }
+
     public int getId() {
         return id;
     }
