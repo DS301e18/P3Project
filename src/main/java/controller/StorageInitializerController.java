@@ -1,5 +1,7 @@
 package controller;
 
+import model.AssignedEmployees;
+import model.AssignedStorage;
 import model.SessionFactoryCfg;
 import model.Storage;
 import org.hibernate.HibernateException;
@@ -21,18 +23,18 @@ public class StorageInitializerController {
 
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
-            List<AssignedEmployeesController> aecList = hibSession.createQuery("From AssignedEmployeesController").list();
+            List<AssignedEmployees> aecList = hibSession.createQuery("From AssignedEmployees").list();
 
-            for(AssignedEmployeesController aec : aecList){
+            for(AssignedEmployees aec : aecList){
                 if(aec.getEmployeeId() == (int) session.getAttribute("employeeID")){
                     session.setAttribute("restaurantID", aec.getRestaurantId());
                 }
             }
 
             //Check which storages belongs to the restaurant
-            List<AssignedStorageController> ascList = hibSession.createQuery("From AssignedStorageController ").list();
+            List<AssignedStorage> ascList = hibSession.createQuery("From AssignedStorage ").list();
 
-            for(AssignedStorageController asc : ascList){
+            for(AssignedStorage asc : ascList){
                 if(asc.getRestaurantId() == (int) session.getAttribute("restaurantID")){
                     storagesIDs.add(asc.getStorageId());
                 }
