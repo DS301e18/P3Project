@@ -1,10 +1,16 @@
 package model;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Product {
 
-    /** Field **/
+    /**
+     * Field
+     **/
 
     private int id;
     private String name;
@@ -14,7 +20,7 @@ public class Product {
     private int storageID;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
-    public Product(String name, int batchSize, BigDecimal price, int storageID){
+    public Product(String name, int batchSize, BigDecimal price, int storageID) {
         this.name = name;
         //this.productNumber = productNumber;
         this.batchSize = batchSize;
@@ -25,7 +31,9 @@ public class Product {
     public Product() {
     }
 
-    /** Methods **/
+    /**
+     * Methods
+     **/
     public Storage getStorage() {
         return storage;
     }
@@ -37,10 +45,11 @@ public class Product {
     public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(BigDecimal price){
+
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
-  
+
     public int getId() {
         return id;
     }
@@ -60,6 +69,7 @@ public class Product {
     public int getBatchSize() {
         return batchSize;
     }
+
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
     public void setBatchSize(int factor) {
         this.batchSize += factor;
@@ -72,5 +82,12 @@ public class Product {
     public void setStorageID(int storageID) {
         this.storageID = storageID;
     }
+
+    public BigDecimal priceOfAllBatches(Storage storage) {
+        BigDecimal totalPrice = new BigDecimal(0);
+
+        return totalPrice;
+    }
+
 }
 

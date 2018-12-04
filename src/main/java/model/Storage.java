@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Storage {
@@ -54,9 +56,7 @@ public class Storage {
 
     public void relateProductToStorage(Product product) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
         Transaction transaction;
-
 
         try {
             transaction = session.beginTransaction();
@@ -97,7 +97,7 @@ public class Storage {
         }
     }
 
-
+    // Kode til Jonas
     public void createProduct(String name, int batchSize, BigDecimal price) {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         Transaction transaction;
@@ -117,16 +117,52 @@ public class Storage {
         }
     }
 
-    public void collectProducts() {
+    public List<StorageProductController> collectProducts(Storage storage) {
+        final List<StorageProductController> storageProducts = new ArrayList<>();
 
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        try {
+            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController ").list();
+            for (StorageProductController storageProduct : storageProductList) {
+                if (storage.getId() == storageProduct.getStorageId()) {
+                    storageProducts.add(storageProduct);
+                }
+            }
+        } catch (HibernateException e) {
+            System.out.println("Couldn't find any products in this storage");
+            e.printStackTrace();
+        } finally {
+            session.close();
+            return storageProducts;
+        }
     }
 
-    public void sortProducts() {
+    public List<Product> sortProducts() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
+        List<StorageProductController> storageProducts = collectProducts(this);
+        List<Product> productList = session.createQuery("FROM Product").list();
+        List<Product> totalStorageProducts = new ArrayList<>();
+
+        for (int i = 0; i < storageProducts.size(); i++) {
+            for (Product product : productList) {
+                if (product.getId() == storageProducts.get(i).getProductId()) {
+                    totalStorageProducts.add(product);
+                }
+            }
+        }
+        totalStorageProducts.sort(Comparator.comparing(Product::getName));
+        return totalStorageProducts;
     }
 
-    public void calculateTotalPrice() {
+    public BigDecimal calculateTotalPrice(Storage storage) {
+        List<Product> storageProducts = sortProducts();
+        BigDecimal totalPrice = new BigDecimal(0);
 
+        for (int i = 0; i < storageProducts.size(); i++) {
+            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches(this));
+        }
+        return totalPrice;
     }
 
     @Override
