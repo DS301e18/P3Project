@@ -1,10 +1,8 @@
 package model;
 
 import Util.AddRemove;
-import controller.StorageProductController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,7 +11,9 @@ import java.util.List;
 
 public class Storage extends AddRemove {
 
-    /** Field */
+    /**
+     * Field
+     */
     private int id;
     private String name;
 
@@ -26,7 +26,9 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
-    /** Methods */
+    /**
+     * Methods
+     */
     public int getId() {
         return id;
     }
@@ -44,94 +46,19 @@ public class Storage extends AddRemove {
     }
 
     /**
-     * Relates a product to this storage and adds it to the database.
-     */
-    //TODO change createSessionFactory to getSessionFactory
-    public void relateProductToStorage(Product product) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-
-            StorageProductController storageProduct = new StorageProductController();
-            storageProduct.setStorageId(this.id);
-            storageProduct.setProductId(product.getId());
-
-            session.save(storageProduct);
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            System.out.println("Couldn't create a relation");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /**
-     * Unrelates a product to this storage and removes it from the database.
-     */
-    //TODO change createSessionFactory to getSessionFactory
-    public void unrelateProductFromStorage(Product product) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction = null;
-
-        try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
-            for (StorageProductController storageProducts : storageProductList) {
-                if (storageProducts.getProductId() == product.getId()) {
-                    transaction = session.beginTransaction();
-                    session.delete(storageProducts);
-                    transaction.commit();
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("Couldn't unrelate any products");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /**
-     * Creates a Product and adds it to the database.
-     */
-    //TODO change createSessionFactory to getSessionFactory
-    public void createProduct(String name, int batchSize, BigDecimal price) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-
-            Product product = new Product(name, batchSize, price);
-            session.save(product);
-
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            System.out.println("Couldn't save");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    /**
      * Returns a list of all productIds in this storage.
      * Creates a list of StorageProductsControllers to get all ids of the products in this storage.
-     * The for each loop is looking for this storageId with all storageIds in the StorageProductController to ensure its this storage.
+     * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
      * If the ids are the same the productId is added to the list.
      */
     //TODO change createSessionFactory to getSessionFactory
-    private List<StorageProductController> collectProducts() {
-        List<StorageProductController> storageProducts = new ArrayList<>();
+    private List<StorageProduct> collectProducts() {
+        List<StorageProduct> storageProducts = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController ").list();
-            for (StorageProductController storageProduct : storageProductList) {
+            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProductController ").list();
+            for (StorageProduct storageProduct : storageProductList) {
                 if (this.getId() == storageProduct.getStorageId()) {
                     storageProducts.add(storageProduct);
                 }
@@ -157,7 +84,7 @@ public class Storage extends AddRemove {
     public List<Product> sortProducts() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        List<StorageProductController> storageProducts = collectProducts();
+        List<StorageProduct> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();
         List<Product> totalStorageProducts = new ArrayList<>();
 
