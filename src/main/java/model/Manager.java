@@ -12,7 +12,6 @@ public class Manager extends Employee {
     private String lastName;
     private String role = "Chef";
 
-
     @Override
     public int getId() {
         return id;
