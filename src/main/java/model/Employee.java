@@ -1,10 +1,12 @@
 package model;
 
+import Util.AddRemove;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class Employee {
+public class Employee extends AddRemove {
 
     private int id;
     private String username;
@@ -13,6 +15,14 @@ public class Employee {
     private String lastName;
     private String role = "Medarbejder";
 
+    public Employee(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+
+        addObject(this);
+    }
 
     public void addEmployee(){
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
