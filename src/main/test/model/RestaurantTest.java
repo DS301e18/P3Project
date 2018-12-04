@@ -1,8 +1,5 @@
 package model;
 
-import controller.AssignedEmployeesController;
-import controller.AssignedStorageController;
-import controller.SystemAdministratorController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,28 +33,28 @@ class RestaurantTest {
         employee.setLastName("Herlig");
         employee.setPassword("123");
 
-        employee.addEmployee();
+        //employee.addEmployee();
     }
 
     /*
     @Test
     void employEmployeeTest() {
-        SystemAdministratorController sac = new SystemAdministratorController();
+        SystemAdministrator sac = new SystemAdministrator();
         sac.addRestaurant("Aalborg");
 
         sac.getRestaurant().employEmployee(employee);
 
-        AssignedEmployeesController aecTest = new AssignedEmployeesController();
+        AssignedEmployees aecTest = new AssignedEmployees();
         aecTest.setRestaurantId(sac.getRestaurant().getId());
         aecTest.setEmployeeId(employee.getId());
 
-        AssignedEmployeesController aecDB = new AssignedEmployeesController();
+        AssignedEmployees aecDB = new AssignedEmployees();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
-            List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController").list();
-            for (AssignedEmployeesController aec : employeeList) {
+            List<AssignedEmployees> employeeList = session.createQuery("FROM AssignedEmployees").list();
+            for (AssignedEmployees aec : employeeList) {
                 if (aec.getEmployeeId() == employee.getId()) {
 
                     aecDB = aec;
@@ -78,13 +75,13 @@ class RestaurantTest {
     @Test
     void resignEmployeeTest() {
 
-        restaurant.resignEmployee(employee);
-        AssignedEmployeesController aecDB = null;
+       // restaurant.resignEmployee(employee);
+        AssignedEmployees aecDB = null;
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
-            List<AssignedEmployeesController> employeeList = session.createQuery("FROM AssignedEmployeesController ").list();
-            for (AssignedEmployeesController aec : employeeList) {
+            List<AssignedEmployees> employeeList = session.createQuery("FROM AssignedEmployees ").list();
+            for (AssignedEmployees aec : employeeList) {
                 if (aec.getEmployeeId() == employee.getId()) {
                     aecDB = aec;
                 }
@@ -102,18 +99,18 @@ class RestaurantTest {
     //TODO: Use functions already made to add a storage/restaurant etc.
     @Test
     void addStorage() {
-        AssignedStorageController ascTest = new AssignedStorageController();
+        AssignedStorage ascTest = new AssignedStorage();
         ascTest.setStorageId(storage.getId());
         ascTest.setRestaurantId(restaurant.getId());
 
-        restaurant.addStorage(storage);
+        //restaurant.addStorage(storage);
 
-        AssignedStorageController ascDB = new AssignedStorageController();
+        AssignedStorage ascDB = new AssignedStorage();
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
-            List<AssignedStorageController> storageList = session.createQuery("FROM AssignedStorageController ").list();
-            for (AssignedStorageController asc : storageList) {
+            List<AssignedStorage> storageList = session.createQuery("FROM AssignedStorage ").list();
+            for (AssignedStorage asc : storageList) {
                 if (asc.getStorageId() == storage.getId()) ;
                 ascDB = asc;
             }
@@ -129,13 +126,13 @@ class RestaurantTest {
 
     @Test
     void removeStorage() {
-        restaurant.removeStorage(storage);
-        AssignedStorageController assignedStorageDB = null;
+       // restaurant.removeStorage(storage);
+        AssignedStorage assignedStorageDB = null;
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
-            List<AssignedStorageController> storageList = session.createQuery("FROM AssignedStorageController ").list();
-            for (AssignedStorageController asc : storageList) {
+            List<AssignedStorage> storageList = session.createQuery("FROM AssignedStorage").list();
+            for (AssignedStorage asc : storageList) {
                 if (asc.getStorageId() == storage.getId()) {
                     assignedStorageDB = asc;
                 }
