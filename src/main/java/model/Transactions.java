@@ -38,7 +38,6 @@ public class Transactions {
 
         try {
             transaction = session.beginTransaction();
-
             session.save(this);
             transaction.commit();
 
