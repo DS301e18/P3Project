@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "controller.StorageProductController" table = "inventory_product">
+    <class name = "model.StorageProduct" table = "inventory_product">
 
         <meta attribute = "class-description">
             This class contains the storage product detail.
