@@ -8,6 +8,8 @@ import org.hibernate.Transaction;
 
 public class AddRemove {
 
+
+
     protected <T> void addObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
@@ -32,7 +34,8 @@ public class AddRemove {
         }
     }
 
-    private <T> void removeObject(T object) {
+
+    protected  <T> void removeObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
