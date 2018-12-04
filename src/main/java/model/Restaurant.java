@@ -1,5 +1,6 @@
 package model;
 
+import Util.AddRemove;
 import controller.AssignedEmployeesController;
 import controller.AssignedStorageController;
 import org.hibernate.HibernateException;
@@ -9,7 +10,7 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class Restaurant {
+public class Restaurant extends AddRemove {
 
     /**
      * Field
@@ -18,10 +19,21 @@ public class Restaurant {
     private String name;
     private SessionFactory factory;
 
+    public Restaurant(String name) {
+        this.name = name;
+
+        addObject(this);
+    }
+
+    public Restaurant() {
+    }
+
     /**
      * Methods
      */
     //Hacking.whatToHack().hackTheMemes("HackEverythingLOL");
+
+
 
     public int getId() {
         return id;

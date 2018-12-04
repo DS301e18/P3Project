@@ -39,6 +39,7 @@ class RestaurantTest {
         employee.addEmployee();
     }
 
+    /*
     @Test
     void employEmployeeTest() {
         SystemAdministratorController sac = new SystemAdministratorController();
@@ -72,7 +73,7 @@ class RestaurantTest {
 
         assertEquals(aecTest, aecDB);
     }
-
+*/
 
     @Test
     void resignEmployeeTest() {
