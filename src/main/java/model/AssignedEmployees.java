@@ -1,10 +1,18 @@
-package controller;
+package model;
 
-public class AssignedEmployeesController {
+import Util.AddRemove;
+
+public class AssignedEmployees extends AddRemove {
     private int id;
     private int restaurantId;
     private int employeeId;
 
+    public AssignedEmployees(int restaurantId, int employeeId) {
+        this.restaurantId = restaurantId;
+        this.employeeId = employeeId;
+
+        addObject(this);
+    }
 
     public int getId() {
         return id;
@@ -36,7 +44,7 @@ public class AssignedEmployeesController {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AssignedEmployeesController that = (AssignedEmployeesController) o;
+        AssignedEmployees that = (AssignedEmployees) o;
 
         if (restaurantId != that.restaurantId) return false;
         return employeeId == that.employeeId;
@@ -51,7 +59,7 @@ public class AssignedEmployeesController {
 
     @Override
     public String toString() {
-        return "AssignedEmployeesController{" +
+        return "AssignedEmployees{" +
                 "id=" + id +
                 ", restaurantId=" + restaurantId +
                 ", employeeId=" + employeeId +
