@@ -3,6 +3,7 @@ package model;
 import Util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.persistence.criteria.From;
@@ -39,8 +40,8 @@ class BatchTest {
 
     @Test
     void TestAddObjectOnBatch(){
-        Product product = new Product("TestProduct", 4, BigDecimal.valueOf(200), 1);
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Product product = new Product("TestProduct", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "test1324");
-        batch.addObject(batch);
     }
 }

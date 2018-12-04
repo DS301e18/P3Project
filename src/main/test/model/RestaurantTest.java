@@ -31,9 +31,9 @@ class RestaurantTest {
         restaurant = new Restaurant();
         storage = new Storage();
 
-        employee.setFirstname("Noah");
+        employee.setFirstName("Noah");
         employee.setUsername("Noah123");
-        employee.setLastname("Herlig");
+        employee.setLastName("Herlig");
         employee.setPassword("123");
 
         employee.addEmployee();

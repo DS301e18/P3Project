@@ -29,8 +29,8 @@ class LoginCheckTest {
         LoginCheck test2 = new LoginCheck();
         test2.check("admin", "admin123");
         Employee emp1 = new Employee();
-        emp1.setFirstname("Halleluja");
-        emp1.setLastname("My god");
+        emp1.setFirstName("Halleluja");
+        emp1.setLastName("My god");
         emp1.setPassword("admin123");
         emp1.setRole("Manager");
         emp1.setUsername("admin");

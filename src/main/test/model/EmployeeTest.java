@@ -21,8 +21,8 @@ class EmployeeTest {
 
         employee.setUsername("Pommes");
         employee.setPassword("wef7913d");
-        employee.setFirstname("Pommes");
-        employee.setLastname("Frites");
+        employee.setFirstName("Pommes");
+        employee.setLastName("Frites");
 
         employee.addEmployee();
     }

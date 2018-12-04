@@ -1,12 +1,9 @@
 package controller;
 
-import model.Employee;
 import model.Manager;
 import model.Restaurant;
 import model.SessionFactoryCfg;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -26,8 +23,8 @@ class SystemAdministratorControllerTest {
 
         manager.setUsername("Kajmanden");
         manager.setPassword("hejmeddig123");
-        manager.setFirstname("Kaj");
-        manager.setLastname("Kaj");
+        manager.setFirstName("Kaj");
+        manager.setLastName("Kaj");
 
         admin.addManager(manager);
 
@@ -46,8 +43,8 @@ class SystemAdministratorControllerTest {
 
         manager.setUsername("Kajmanden");
         manager.setPassword("hejmeddig123");
-        manager.setFirstname("Kaj");
-        manager.setLastname("Kaj");
+        manager.setFirstName("Kaj");
+        manager.setLastName("Kaj");
 
         admin.addManager(manager);
         admin.removeManager(manager);

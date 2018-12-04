@@ -4,15 +4,13 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
-
 public class Employee {
 
     private int id;
     private String username;
     private String password;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String role = "Medarbejder";
 
 
@@ -22,7 +20,7 @@ public class Employee {
 
         try{
             //If any attribute equals Null, throw exception
-            if(username != null && password != null && firstname != null && lastname != null){
+            if(username != null && password != null && firstName != null && lastName != null){
                 transaction = session.beginTransaction();
                 session.save(this);
                 transaction.commit();
@@ -83,20 +81,20 @@ public class Employee {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getRole() {
@@ -113,8 +111,8 @@ public class Employee {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstName + '\'' +
+                ", lastname='" + lastName + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
@@ -129,8 +127,8 @@ public class Employee {
         if (id != employee.id) return false;
         if (!username.equals(employee.username)) return false;
         if (!password.equals(employee.password)) return false;
-        if (!firstname.equals(employee.firstname)) return false;
-        if (!lastname.equals(employee.lastname)) return false;
+        if (!firstName.equals(employee.firstName)) return false;
+        if (!lastName.equals(employee.lastName)) return false;
         return role.equals(employee.role);
     }
 
@@ -139,8 +137,8 @@ public class Employee {
         int result = id;
         result = 31 * result + username.hashCode();
         result = 31 * result + password.hashCode();
-        result = 31 * result + firstname.hashCode();
-        result = 31 * result + lastname.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
         result = 31 * result + role.hashCode();
         return result;
     }

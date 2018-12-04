@@ -87,6 +87,11 @@ public class Restaurant {
         } finally {
             session.close();
         }
+
+        if(employee.getRole().equals("Medabejder")){
+            employee.removeEmployee();
+
+        }
     }
 
 
