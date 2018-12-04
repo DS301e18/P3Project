@@ -18,6 +18,9 @@ public class Manager extends Employee {
         addObject(this);
     }
 
+    public Manager() {
+    }
+
     @Override
     public int getId() {
         return id;

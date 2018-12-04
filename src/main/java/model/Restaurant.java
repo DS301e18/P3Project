@@ -25,6 +25,9 @@ public class Restaurant extends AddRemove {
         addObject(this);
     }
 
+    public Restaurant() {
+    }
+
     /**
      * Methods
      */

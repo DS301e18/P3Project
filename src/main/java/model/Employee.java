@@ -1,7 +1,6 @@
 package model;
 
 import Util.AddRemove;
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,6 +21,9 @@ public class Employee extends AddRemove {
         this.lastName = lastName;
 
         addObject(this);
+    }
+
+    public Employee() {
     }
 
     public void addEmployee(){
