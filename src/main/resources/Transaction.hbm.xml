@@ -14,7 +14,7 @@
             <generator class="native"/>
         </id>
 
-        <property name = "date" column = "date" type = "date"/>
+        <property name = "timestamp" column = "timestamp" type = "timestamp"/>
         <property name = "batch" column = "batch_number" type = "string"/>
         <property name = "transtype" column = "transtype" type = "string"/>
         <property name = "product" column = "product_type" type = "string"/>

@@ -40,8 +40,16 @@ class BatchTest {
 
     @Test
     void TestAddObjectOnBatch(){
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
         Product product = new Product("TestProduct", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "test1324");
+
+        Batch sessionBatch = session.get(Batch.class, batch.getId());
+
+        assertEquals(batch.getId(), sessionBatch.getId());
+
+        session.close();
     }
 }
