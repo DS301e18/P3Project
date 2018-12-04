@@ -1,5 +1,6 @@
 package model;
 
+import Util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.sql.Timestamp;
 
-public class Batch {
+public class Batch extends AddRemove {
 
     /**
      * Field
@@ -29,12 +30,6 @@ public class Batch {
     //Constructor
     public Batch(Product product, String batchNumber) {
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-        Transaction transaction = null;
-
-        try {
-            transaction = session.beginTransaction();
-
             this.batchNumber = batchNumber;
             this.date = new Timestamp(System.currentTimeMillis());
             this.remainingInBox = product.getBatchSize();
@@ -42,15 +37,8 @@ public class Batch {
             this.typeName = product.getName();
             this.product = product;
 
-            session.save(this);
-            transaction.commit();
-        }
-        catch (HibernateException e){
-            System.out.println("Could not save the transaction");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+            addObject(this);
+
     }
 
     public Batch(){}
