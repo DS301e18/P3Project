@@ -1,9 +1,21 @@
-package controller;
+package model;
 
-public class ProductBatchController {
+import Util.AddRemove;
+
+public class ProductBatch extends AddRemove {
     private int id;
     private int productId;
     private int batchId;
+
+    public ProductBatch(int productId, int batchId) {
+        this.productId = productId;
+        this.batchId = batchId;
+
+        addObject(this);
+    }
+
+    public ProductBatch() {
+    }
 
     public int getId() {
         return id;
@@ -34,7 +46,7 @@ public class ProductBatchController {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ProductBatchController that = (ProductBatchController) o;
+        ProductBatch that = (ProductBatch) o;
 
         if (productId != that.productId) return false;
         return batchId == that.batchId;
