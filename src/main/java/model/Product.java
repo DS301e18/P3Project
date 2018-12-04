@@ -10,15 +10,14 @@ public class Product {
     private String name;
     private int batchSize;
     private BigDecimal price;
-    private int storageID;
     //private final List<Batch> batches = new ArrayList<Batch>();
 
-    public Product(String name, int batchSize, BigDecimal price, int storageID){
+    public Product(String name, int batchSize, BigDecimal price){
         this.name = name;
         //this.productNumber = productNumber;
         this.batchSize = batchSize;
         this.price = price;
-        this.storageID = storageID;
+
     }
 
     public Product() {
@@ -56,14 +55,6 @@ public class Product {
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
     public void setBatchSize(int factor) {
         this.batchSize += factor;
-    }
-
-    public int getStorageID() {
-        return storageID;
-    }
-
-    public void setStorageID(int storageID) {
-        this.storageID = storageID;
     }
 }
 
