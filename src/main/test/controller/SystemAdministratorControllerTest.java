@@ -35,6 +35,7 @@ class SystemAdministratorControllerTest {
 
         assertEquals(manager.getId(), manager1.getId());
 
+        session.close();
     }
 
     @Test
