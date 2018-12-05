@@ -8,7 +8,9 @@ import org.hibernate.Transaction;
 
 public class AddRemove {
 
-    public <T> void addObject(T object){
+
+
+    protected <T> void addObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -22,13 +24,38 @@ public class AddRemove {
 
             transaction.commit();
 
-        } catch (HibernateException e){
+        } catch (HibernateException e) {
             System.out.println("Could not save the object");
             e.printStackTrace();
 
-        }finally {
+        } finally {
             session.close();
 
         }
+    }
+
+
+    protected  <T> void removeObject(T object) {
+
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction;
+
+        try {
+            transaction = session.beginTransaction();
+
+            session.delete(object);
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            System.out.println("Could not save the object");
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+
+        }
+
     }
 }

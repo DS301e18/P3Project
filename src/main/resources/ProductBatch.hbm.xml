@@ -4,19 +4,18 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "model.StorageProduct" table = "inventory_product">
+    <class name = "model.ProductBatch" table = "product_batch">
 
         <meta attribute = "class-description">
-            This class contains the storage product detail.
+            This class contains the batch detail.
         </meta>
 
-        <id name = "id" type = "int" column="id">
+        <id name = "id" type = "int" column = "id">
             <generator class="native"/>
         </id>
 
-
-        <property name = "storageId" column = "inventory_id" type = "int"/>
         <property name = "productId" column = "product_id" type = "int"/>
+        <property name = "batchId" column = "batch_id" type = "int"/>
 
     </class>
 </hibernate-mapping>

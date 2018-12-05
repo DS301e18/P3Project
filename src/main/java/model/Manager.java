@@ -12,6 +12,14 @@ public class Manager extends Employee {
     private String lastName;
     private String role = "Chef";
 
+    public Manager(String username, String password, String firstName, String lastName) {
+        super(username, password, firstName, lastName);
+
+        addObject(this);
+    }
+
+    public Manager() {
+    }
 
     @Override
     public int getId() {

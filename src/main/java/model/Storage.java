@@ -1,18 +1,19 @@
 package model;
 
-import controller.StorageProductController;
+import Util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Storage {
+public class Storage extends AddRemove {
 
-    /** Field */
+    /**
+     * Field
+     */
     private int id;
     private String name;
 
@@ -21,9 +22,13 @@ public class Storage {
 
     public Storage(String name) {
         this.name = name;
+
+        addObject(this);
     }
 
-    /** Methods */
+    /**
+     * Methods
+     */
     public int getId() {
         return id;
     }
@@ -40,77 +45,20 @@ public class Storage {
         this.name = name;
     }
 
-    public void relateProductToStorage(Product product) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-
-            StorageProductController storageProduct = new StorageProductController();
-            storageProduct.setStorageId(this.id);
-            storageProduct.setProductId(product.getId());
-
-            session.save(storageProduct);
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            System.out.println("Couldn't create a relation");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    public void unrelateProductFromStorage(Product product) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction = null;
-
-        try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
-            for (StorageProductController storageProducts : storageProductList) {
-                if (storageProducts.getProductId() == product.getId()) {
-                    transaction = session.beginTransaction();
-                    session.delete(storageProducts);
-                    transaction.commit();
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("Couldn't unrelate any products");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    // Kode til Jonas
-    public void createProduct(String name, int batchSize, BigDecimal price) {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-
-            Product product = new Product(name, batchSize, price);
-            session.save(product);
-
-            transaction.commit();
-
-        } catch (HibernateException e) {
-            System.out.println("Couldn't save");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }
-
-    public List<StorageProductController> collectProducts() {
-        List<StorageProductController> storageProducts = new ArrayList<>();
+    /**
+     * Returns a list of all productIds in this storage.
+     * Creates a list of StorageProductsControllers to get all ids of the products in this storage.
+     * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
+     * If the ids are the same the productId is added to the list.
+     */
+    //TODO change createSessionFactory to getSessionFactory
+    private List<StorageProduct> collectProducts() {
+        List<StorageProduct> storageProducts = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController ").list();
-            for (StorageProductController storageProduct : storageProductList) {
+            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProductController ").list();
+            for (StorageProduct storageProduct : storageProductList) {
                 if (this.getId() == storageProduct.getStorageId()) {
                     storageProducts.add(storageProduct);
                 }
@@ -124,10 +72,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a sorted by name list of all products in this storage. This list is called totalStorageProducts.
+     * A method call to collectProducts is made to get a list of all productIds in this storage.
+     * Creates a productList with all products in the database.
+     * Creates a totalStorageProduct list.
+     * The for loop and for each loop is made to compare all storageProductIds with all products in the database to add them
+     * in a the returned list called totalStorageProducts.
+     */
+    //TODO change createSessionFactory to getSessionFactory
     public List<Product> sortProducts() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        List<StorageProductController> storageProducts = collectProducts();
+        List<StorageProduct> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();
         List<Product> totalStorageProducts = new ArrayList<>();
 
@@ -142,7 +99,14 @@ public class Storage {
         return totalStorageProducts;
     }
 
-    public BigDecimal calculateTotalPrice(Storage storage) {
+    /**
+     * Returns a totalPrice of all products in a storage.
+     * Creates a list of all products in this storage with a method call to sortProducts.
+     * Ensures that totalPrice start at 0.
+     * The for loop goes through all products in this storage to get their prices and stores it in totalPrice.
+     * To ensure that we get the price of all batches of all products a method call of priceOfAllBatches in the product class is made.
+     */
+    public BigDecimal calculateTotalPrice() {
         List<Product> storageProducts = sortProducts();
         BigDecimal totalPrice = new BigDecimal(0);
 

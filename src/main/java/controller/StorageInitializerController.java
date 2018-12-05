@@ -1,5 +1,7 @@
 package controller;
 
+import model.AssignedEmployees;
+import model.AssignedStorage;
 import model.SessionFactoryCfg;
 import model.Storage;
 import org.hibernate.HibernateException;
@@ -23,17 +25,12 @@ public class StorageInitializerController {
 
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
-
-            //List<AssignedEmployeesController> aecList = hibSession.createQuery("From AssignedEmployeesController").list();
-            Query aecList = hibSession.createQuery("From AssignedEmployeesController where employeeId = :i");
+          
+            Query aecList = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
             aecList.setParameter("i", session.getAttribute("employeeID"));
-            List<AssignedEmployeesController> aeclist = aecList.list();
+            List<AssignedEmployees> aeclist = aecList.list();
             System.out.println(aeclist);
             System.out.println(session.getAttribute("employeeID"));
-
-            System.out.println(aeclist.get(0).getRestaurantId());
-            System.out.println(aeclist.get(0).getEmployeeId());
-            System.out.println(aeclist.get(0).getId());
 
             //Er i tvivl om dette if statement er nødvendigt
             if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){
@@ -41,12 +38,10 @@ public class StorageInitializerController {
             }
 
             //Check which storages belongs to the restaurant
-            List<AssignedStorageController> ascList = hibSession.createQuery("From AssignedStorageController ").list();
+            List<AssignedStorage> ascList = hibSession.createQuery("From AssignedStorage ").list();
 
-            //ascList.stream().map(AssignedStorageController::getStorageId).collect(Collectors.toList());
-            System.out.println(ascList.stream().map(AssignedStorageController::getStorageId).collect(Collectors.toList()));
-            for(AssignedStorageController asc : ascList){
-                if(asc.getRestaurantId() == (int) session.getAttribute("restaurantIDd")){
+            for(AssignedStorage asc : ascList){
+                if(asc.getRestaurantId() == (int) session.getAttribute("restaurantID")){
                     storagesIDs.add(asc.getStorageId());
                 }
             }

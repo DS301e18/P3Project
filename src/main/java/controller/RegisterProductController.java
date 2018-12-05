@@ -1,5 +1,6 @@
 package controller;
 
+import model.Product;
 import model.SessionFactoryCfg;
 import model.Storage;
 import org.hibernate.HibernateException;
@@ -40,7 +41,9 @@ public class RegisterProductController extends HttpServlet {
             session.close();
         }
 
-        currentStorage.createProduct(name, batchSize, batchCost);
+
+        // Sådan kunne den nye struktur bruges til fx at oprette et objekt + ligge den den i database + lave relation.
+        // new StorageProduct(storageID, new Product(name, batchSize,batchCost).getId());
 
     }
 }

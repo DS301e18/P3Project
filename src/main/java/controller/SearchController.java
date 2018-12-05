@@ -6,7 +6,7 @@ public class SearchController {
 
     public void searchProduct(Storage storage, String input){
 
-        storage.collectProducts();
+        //storage.collectProducts();
 
     }
 

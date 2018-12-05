@@ -1,9 +1,21 @@
-package controller;
+package model;
 
-public class StorageProductController {
+import Util.AddRemove;
+
+public class StorageProduct extends AddRemove {
     private int id;
     private int storageId;
     private int productId;
+
+    public StorageProduct(int storageId, int productId) {
+        this.storageId = storageId;
+        this.productId = productId;
+
+        addObject(this);
+    }
+
+    public StorageProduct() {
+    }
 
     public int getId() {
         return id;
@@ -34,7 +46,7 @@ public class StorageProductController {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StorageProductController that = (StorageProductController) o;
+        StorageProduct that = (StorageProduct) o;
 
         if (storageId != that.storageId) return false;
         return productId == that.productId;

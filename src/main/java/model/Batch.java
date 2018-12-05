@@ -21,7 +21,6 @@ public class Batch extends AddRemove {
     private BigDecimal value;
     private Product product;
     private String typeName;
-    //private List<Product> batchList = new ArrayList<Product>();
 
     /**
      * Methods

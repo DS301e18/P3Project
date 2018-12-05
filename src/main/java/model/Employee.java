@@ -1,10 +1,11 @@
 package model;
 
+import Util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class Employee {
+public class Employee extends AddRemove {
 
     private int id;
     private String username;
@@ -13,8 +14,19 @@ public class Employee {
     private String lastName;
     private String role = "Medarbejder";
 
+    public Employee(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
-    public void addEmployee(){
+        addObject(this);
+    }
+
+    public Employee() {
+    }
+
+/*   public void addEmployee(){
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
 
@@ -56,6 +68,7 @@ public class Employee {
         }
 
     }
+    */
 
     public int getId() {
         return id;
