@@ -13,31 +13,19 @@ class EmployeeTest {
 
     private Employee employee;
 
-    @BeforeEach
-    void before(){
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-
-        employee = new Employee();
-
-        employee.setUsername("Pommes");
-        employee.setPassword("wef7913d");
-        employee.setFirstName("Pommes");
-        employee.setLastName("Frites");
-
-        //employee.addEmployee();
-    }
-
     @Test
     void addEmployeeTest(){
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+            Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        assertEquals(employee, session.get(Employee.class, employee.getId()));
+            Employee employee = new Employee("Test","Test","Test","Test");
 
-        session.close();
+            Employee sessionEmployee = session.get(Employee.class, employee.getId());
 
-        //employee.removeEmployee();
-    }
+            assertEquals(employee.getId(), sessionEmployee.getId());
+
+            session.close();
+        }
 
     @Test
     void addEmployeeExceptionTest(){
@@ -46,6 +34,7 @@ class EmployeeTest {
 
         //assertThrows(IllegalEmployeeException.class, () -> employeeTest.addEmployee());
     }
+
 
     @Test
     void removeEmployeeTest(){
