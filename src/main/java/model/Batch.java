@@ -27,7 +27,7 @@ public class Batch extends AddRemove {
      * Methods
      **/
 
-    //Constructor
+    //Constructor with database connectivity included
     public Batch(Product product, String batchNumber) {
 
             this.batchNumber = batchNumber;
@@ -41,10 +41,13 @@ public class Batch extends AddRemove {
 
     }
 
+    //Empty constructor because of AddRemove idk why
     public Batch(){}
 
-
+    //Method that can take any amount from a batch of a product
+    /** If this methond is called with the amount 0 it will remove**/
     public void takeFromBatch(Batch batch, int amount) {
+        if (amount < 0){System.out.println("");}
         if (amount == 0){
             batch.setRemainingInBox(batch.remainingInBox - 1);
         }
