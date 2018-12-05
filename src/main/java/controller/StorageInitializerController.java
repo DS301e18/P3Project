@@ -6,10 +6,12 @@ import model.SessionFactoryCfg;
 import model.Storage;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StorageInitializerController {
 
@@ -23,12 +25,16 @@ public class StorageInitializerController {
 
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
-            List<AssignedEmployees> aecList = hibSession.createQuery("From AssignedEmployees").list();
+          
+            Query aecList = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
+            aecList.setParameter("i", session.getAttribute("employeeID"));
+            List<AssignedEmployees> aeclist = aecList.list();
+            System.out.println(aeclist);
+            System.out.println(session.getAttribute("employeeID"));
 
-            for(AssignedEmployees aec : aecList){
-                if(aec.getEmployeeId() == (int) session.getAttribute("employeeID")){
-                    session.setAttribute("restaurantID", aec.getRestaurantId());
-                }
+            //Er i tvivl om dette if statement er nødvendigt
+            if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){
+                session.setAttribute("restaurantIDd", aeclist.get(0).getRestaurantId());
             }
 
             //Check which storages belongs to the restaurant
