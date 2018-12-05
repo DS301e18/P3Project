@@ -135,6 +135,10 @@ input {
     margin-top: 20px;
 }
 
+input[type=sumbit]{
+    background-color: #f72645;
+}
+
 .tab{
     text-decoration: none;
     border-bottom-left-radius: 8px;
@@ -184,4 +188,7 @@ input {
 
 aside {
     height: 100%;
+    padding-left: 500px;
+    width: 30%;
+    text-align: center;
 }

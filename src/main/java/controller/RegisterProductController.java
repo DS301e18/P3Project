@@ -1,7 +1,9 @@
 package controller;
 
+import model.Product;
 import model.SessionFactoryCfg;
 import model.Storage;
+import model.StorageProduct;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
 
@@ -19,28 +22,17 @@ public class RegisterProductController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        /*int storageID = Integer.parseInt(request.getParameter("storageID"));
         String name = request.getParameter("name");
         int batchSize = Integer.parseInt(request.getParameter("batchSize"));
-        BigDecimal batchCost = BigDecimal.valueOf(Integer.parseInt(request.getParameter("cost")));
+        BigDecimal cost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        Transaction transaction;
-        Storage currentStorage = null;
+        HttpSession session = request.getSession();
 
-        try{
-            transaction = session.beginTransaction();
-            currentStorage = session.get(Storage.class, storageID);
-            transaction.commit();
+        Storage storage = (Storage) session.getAttribute("storageChosen");
 
-        } catch (HibernateException e){
-            System.out.println("Couldn't find the correct current storage!");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        Product product = new Product(name, batchSize, cost);
 
-        currentStorage.createProduct(name, batchSize, batchCost);*/
+        new StorageProduct(storage.getId(), product.getId());
 
         response.sendRedirect("webpanel.jsp");
 

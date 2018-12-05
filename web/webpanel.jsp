@@ -46,7 +46,7 @@
     <%
         if(session.getAttribute("storageChosen") != null){%>
 
-            <jsp:include page="StorageInventory.jsp"/>
+            <jsp:include page="storageInventory.jsp"/>
         <%}
 
     %>

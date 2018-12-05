@@ -17,33 +17,6 @@
     <link rel="stylesheet" type="text/css" href="style/storageMenu.css">
 </head>
 <body>
-<%
-    //Assures that the user can't go back after logout (removes cache)
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
-    response.setHeader("Pragma", "no-cache");// HTTP 1.0
-    response.setHeader("Expires", "0");// Proxies
-%>
-<!-- Top navigation (restaurant navigation/logout) -->
-<!--<div class="topNav">
-    <a><form action="Login" method="get">
-        <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
-    </form></a>
-    <!-- TODO: Make dynamic
-    <a1><label style="float:right; color: white">Employee</label></a1>
-</div>-->
-
-<!--<nav class="topNav">
-    <ul><li>
-        <form action="Login" method="get">
-            <button type="submit" value="Logout"><span style="font-size: 35px; color: white;"><i class="fas fa-sign-out-alt"></i></span></button>
-        </form>
-    </li>
-        <li>
-            <a style="float:right; color: white">Employee</a>
-        </li>
-    </ul>
-
-</nav>-->
 
 <div class="topnav">
     <a><%=session.getAttribute("restaurant")%></a>
