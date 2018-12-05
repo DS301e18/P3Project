@@ -1,11 +1,11 @@
 package model;
 
 import Util.AddRemove;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Product extends AddRemove {
@@ -76,9 +76,22 @@ public class Product extends AddRemove {
         return productBatches;
     }
 
-    //funktion til at tælle antal af vare op. negativt argument fjerner antal.
-    public void setBatchSize(int factor) {
-        this.batchSize += factor;
+    public List<Batch> sortBatches() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        List<ProductBatch> productBatches = collectBatches();
+        List<Batch> batchList = session.createQuery("FROM Batch").list();
+        List<Batch> totalProductBatches = new ArrayList<>();
+
+        for (int i = 0; i < productBatches.size(); i++) {
+            for (Batch batch : batchList) {
+                if (batch.getId() == productBatches.get(i).getProductId()) {
+                    totalProductBatches.add(batch);
+                }
+            }
+        }
+        totalProductBatches.sort(Comparator.comparing(Batch::getBatchNumber));
+        return totalProductBatches;
     }
 
     public BigDecimal priceOfAllBatches(Storage storage) {
@@ -86,6 +99,13 @@ public class Product extends AddRemove {
 
         return totalPrice;
     }
+
+    //funktion til at tælle antal af vare op. negativt argument fjerner antal.
+    public void setBatchSize(int factor) {
+        this.batchSize += factor;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
