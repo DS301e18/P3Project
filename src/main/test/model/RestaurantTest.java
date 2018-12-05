@@ -1,13 +1,12 @@
 package model;
 
-import org.hibernate.HibernateException;
+
+import Util.AddRemove;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RestaurantTest {
 
@@ -18,60 +17,47 @@ class RestaurantTest {
     private Storage storage;
 
 
-    @BeforeEach
-    void before() {
+    @Test
+    void addRestaurant() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Restaurant restaurant = new Restaurant("TestRestaurant");
 
-        // opretter nye objekter af Employee og Restaurant
-        employee = new Employee();
-        restaurant = new Restaurant();
-        storage = new Storage();
+        Restaurant sessionRestaurant = session.get(Restaurant.class, restaurant.getId());
 
-        employee.setFirstName("Noah");
-        employee.setUsername("Noah123");
-        employee.setLastName("Herlig");
-        employee.setPassword("123");
+        assertEquals(restaurant.getId(), sessionRestaurant.getId());
 
-        //employee.addEmployee();
+        session.close();
     }
+
+
+    @Test
+    void removeRestaurant() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Restaurant restaurant = new Restaurant("TestRestaurant");
+    }
+
+
+    @Test
+    void relateRestaurantEmployee() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Restaurant restaurant = new Restaurant("TestRestaurant");
+        Employee employee = new Employee("Test", "Test", "Test", "Test");
+
+        AssignedEmployees assignedEmployees = new AssignedEmployees(restaurant.getId(), employee.getId());
+
+        AssignedEmployees sessionAssignedEmployees = session.get(AssignedEmployees.class, assignedEmployees.getId());
+
+        assertEquals(assignedEmployees.getId(), sessionAssignedEmployees.getId());
+
+        session.close();
+    }
+
+
 
     /*
-    @Test
-    void employEmployeeTest() {
-        SystemAdministrator sac = new SystemAdministrator();
-        sac.addRestaurant("Aalborg");
-
-        sac.getRestaurant().employEmployee(employee);
-
-        AssignedEmployees aecTest = new AssignedEmployees();
-        aecTest.setRestaurantId(sac.getRestaurant().getId());
-        aecTest.setEmployeeId(employee.getId());
-
-        AssignedEmployees aecDB = new AssignedEmployees();
-
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        try {
-            List<AssignedEmployees> employeeList = session.createQuery("FROM AssignedEmployees").list();
-            for (AssignedEmployees aec : employeeList) {
-                if (aec.getEmployeeId() == employee.getId()) {
-
-                    aecDB = aec;
-                }
-            }
-
-        } catch (HibernateException e) {
-            System.out.println("nothing to assign");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        assertEquals(aecTest, aecDB);
-    }
-*/
-
     @Test
     void resignEmployeeTest() {
 
@@ -96,33 +82,6 @@ class RestaurantTest {
         assertNull(aecDB);
     }
 
-    //TODO: Use functions already made to add a storage/restaurant etc.
-    @Test
-    void addStorage() {
-        AssignedStorage ascTest = new AssignedStorage();
-        ascTest.setStorageId(storage.getId());
-        ascTest.setRestaurantId(restaurant.getId());
-
-        //restaurant.addStorage(storage);
-
-        AssignedStorage ascDB = new AssignedStorage();
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        try {
-            List<AssignedStorage> storageList = session.createQuery("FROM AssignedStorage ").list();
-            for (AssignedStorage asc : storageList) {
-                if (asc.getStorageId() == storage.getId()) ;
-                ascDB = asc;
-            }
-
-        } catch (HibernateException e) {
-            System.out.println("could not add storage");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        assertEquals(ascTest, ascDB);
-    }
 
     @Test
     void removeStorage() {
@@ -145,5 +104,5 @@ class RestaurantTest {
         }
 
         assertNull(assignedStorageDB);
-    }
+    }*/
 }
