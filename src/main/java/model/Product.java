@@ -66,7 +66,7 @@ public class Product extends AddRemove {
     private List<ProductBatch> collectBatches() {
         List<ProductBatch> productBatches = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<ProductBatch> ProductBatchList = session.createQuery("FROM ProductBatch").list();
         for (ProductBatch productBatch : ProductBatchList) {
@@ -78,7 +78,7 @@ public class Product extends AddRemove {
     }
 
     public List<Batch> sortBatches() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<ProductBatch> productBatches = collectBatches();
         List<Batch> batchList = session.createQuery("FROM Batch").list();

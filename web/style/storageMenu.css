@@ -52,7 +52,6 @@ body {
     margin-top: 50px;
     height: 100%;
     width: 100px;
-    padding-top: 15px;
     margin-bottom: 50px;
     position: fixed;
     background-color: #d7736f;
@@ -89,7 +88,6 @@ button:focus {
 
 .fa-plus-circle {
     font-size: 80px;
-    margin-top: 10px;
     display: inline-block;
     color:white;
     opacity: 0.5;
@@ -146,6 +144,7 @@ input {
     width: 120px;
     line-height: 40px;
     padding: 0 10px;
+    margin-left: 15px;
     background-color: #f7e8e8;
     font-size: 15px;
 }

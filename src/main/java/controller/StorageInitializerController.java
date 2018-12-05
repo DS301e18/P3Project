@@ -26,14 +26,20 @@ public class StorageInitializerController {
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
           
-            Query aecList = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
-            aecList.setParameter("i", session.getAttribute("employeeID"));
-            List<AssignedEmployees> aeclist = aecList.list();
+            Query aecQuery = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
+            aecQuery.setParameter("i", session.getAttribute("employeeID"));
+            List<AssignedEmployees> aeclist = aecQuery.list();
 
             //Er i tvivl om dette if statement er nødvendigt
             if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){
                 session.setAttribute("restaurantID", aeclist.get(0).getRestaurantId());
             }
+
+            //Instantiates which restaurant is chosen
+            Query restaurant = hibSession.createQuery("From Restaurant where id = :j");
+            restaurant.setParameter("j", session.getAttribute("restaurantID"));
+            session.setAttribute("restaurant", restaurant.list().get(0));
+
 
             //Check which storages belongs to the restaurant
             List<AssignedStorage> ascList = hibSession.createQuery("From AssignedStorage ").list();

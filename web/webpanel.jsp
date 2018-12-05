@@ -4,7 +4,8 @@
 <%@ page import="controller.SearchController" %>
 <%@ page import="org.hibernate.Session" %>
 <%@ page import="model.SessionFactoryCfg" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="controller.StorageInitializerController" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 26/11/2018
@@ -26,23 +27,26 @@
 </head>
 <body>
 
+<%
+    //Assures that the user can't go back after logout (removes cache)
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
+    response.setHeader("Pragma", "no-cache");// HTTP 1.0
+    response.setHeader("Expires", "0");// Proxies
+
+    StorageInitializerController storageList = new StorageInitializerController(session);
+
+    //Make so all storages are available in all .jsp files so they aren't needed to be reloaded in every file
+    List<Storage> storages = storageList.getStorageInfo();
+    session.setAttribute("storages", storages);
+%>
+
     <jsp:include page="navigation.jsp"/>
     <jsp:include page="sidebar.jsp"/>
 
     <%
         if(session.getAttribute("storageChosen") != null){%>
-        <!-- TODO: Make storage inventory dynamic -->
-        <!-- Storage inventory-->
-        <div class="container" id="storage">
 
             <jsp:include page="StorageInventory.jsp"/>
-
-            <!-- Product information -->
-            <aside>
-                Hello
-            </aside>
-
-        </div>
         <%}
 
     %>

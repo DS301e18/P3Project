@@ -21,11 +21,7 @@
     response.setHeader("Pragma", "no-cache");// HTTP 1.0
     response.setHeader("Expires", "0");// Proxies
 
-    StorageInitializerController storageList = new StorageInitializerController(session);
-
-    //Make so all storages are available in all .jsp files so they aren't needed to be reloaded in every file
-    List<Storage> storages = storageList.getStorageInfo();
-    session.setAttribute("storages", storages);
+    List<Storage> storages = (List) session.getAttribute("storages");
 %>
 
 <!-- Side navigation (storage navigation)-->
@@ -54,7 +50,12 @@
 
     //Parameter buttonChosen gets the same value as the storage clicked on
     function storageChoice(storageID) {
-        document.storageChooser.buttonChosen.value = document.getElementById(storageID).value;
+        var button = document.getElementById(storageID).value;
+        document.storageChooser.buttonChosen.value = button;
+
+        //TODO: Change the style later
+        button.style.borderRadius = "25px";
+
     }
 
 </script>

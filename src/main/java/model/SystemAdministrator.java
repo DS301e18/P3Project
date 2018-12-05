@@ -46,7 +46,7 @@ public class SystemAdministrator {
 
     public void removeManager(Manager manager){
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
@@ -99,7 +99,7 @@ public class SystemAdministrator {
 
     public void removeRestaurant(String restaurantName){
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
