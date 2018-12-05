@@ -1,4 +1,10 @@
-<%--
+<%@ page import="model.Storage" %>
+<%@ page import="model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="controller.SearchController" %>
+<%@ page import="org.hibernate.Session" %>
+<%@ page import="model.SessionFactoryCfg" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 26/11/2018
@@ -20,10 +26,21 @@
 </head>
 <body>
 
-
-
-    <jsp:include page="navigation.jsp" />
+    <jsp:include page="navigation.jsp"/>
     <jsp:include page="sidebar.jsp"/>
+
+
+    <%
+        //TODO: This is harcoding for testing, remove later
+        Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
+        List<Storage> storageList = hibSession.createQuery("FROM Storage ").list();
+        Storage storage = storageList.get(2);
+        hibSession.close();
+
+        session.setAttribute("storageChosen", storage);
+
+        //Storage storage = (Storage) session.getAttribute("storageChosen");
+    %>
 
     <!-- TODO: Make storage inventory dynamic -->
     <!-- Storage inventory-->
@@ -31,24 +48,27 @@
         <section>
             <!-- Inventory header -->
             <div class="contentBox">
-                <label>Storage Name</label>
+                <label><%=storage.getName()%></label>
                 <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
             </div>
+
+
             <div class="contentBox">
-                <input type="text" placeholder="Søg" name="search">
+                <input type="text" id="search" onkeyup="" placeholder="Søg...">
             </div>
-            <button class="test"><div class="tab">Registrer Vare</div></button>
+
+            <a><div class="tab">Registrer Vare</div></a>
             <button class="test"><div class="tab">Historik</div></button><br>
 
-            <!-- Inventory products -->
-            <div class="productTab">
-                <label>Carlsberg Sport</label>
-                <label style="float: right">4</label>
-            </div>
-            <div class="productTab">
-                <label>Pepsi Max</label>
-                <label style="float: right">10</label>
-            </div>
+            <ol id="productInventory">
+                <%
+                List<Product> productList = storage.sortProducts();
+
+                for(Product product : productList){%>
+                <li><%=product.getName()%></li>
+                <!--<label style="float: right">4</label>-->
+                <%}%>
+            </ol>
 
             <!-- Price-box -->
             <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
@@ -58,6 +78,7 @@
         <aside>
             Hello
         </aside>
+
     </div>
 
 </body>

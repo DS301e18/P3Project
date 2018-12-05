@@ -1,6 +1,5 @@
 package controller;
 
-import model.Product;
 import model.SessionFactoryCfg;
 import model.Storage;
 import org.hibernate.HibernateException;
@@ -20,7 +19,7 @@ public class RegisterProductController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        int storageID = Integer.parseInt(request.getParameter("storageID"));
+        /*int storageID = Integer.parseInt(request.getParameter("storageID"));
         String name = request.getParameter("name");
         int batchSize = Integer.parseInt(request.getParameter("batchSize"));
         BigDecimal batchCost = BigDecimal.valueOf(Integer.parseInt(request.getParameter("cost")));
@@ -41,9 +40,9 @@ public class RegisterProductController extends HttpServlet {
             session.close();
         }
 
+        currentStorage.createProduct(name, batchSize, batchCost);*/
 
-        // Sådan kunne den nye struktur bruges til fx at oprette et objekt + ligge den den i database + lave relation.
-        // new StorageProduct(storageID, new Product(name, batchSize,batchCost).getId());
+        response.sendRedirect("webpanel.jsp");
 
     }
 }

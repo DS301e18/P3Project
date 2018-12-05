@@ -25,12 +25,22 @@
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav">
 
-    <%for (Storage storage : storageList.getStorageInfo()) {%>
-        <button><div class="menuDot"><a><%=storage.getName()%></a></div></button>
+    <%
+        for (Storage storage : storageList.getStorageInfo()) {%>
+        <button class="menuDot" onclick="storageChoice(id)" value="<%=storage%>" id="storage<%=storage.getId()%>">
+            <%=storage.getName()%>
+        </button>
     <%}%>
     <button><i class="fas fa-plus-circle"></i></button>
 
 </div>
+
+<script>
+    function storageChoice(storageID) {
+        var x = document.getElementById(storageID).value;
+        alert(x);
+    }
+</script>
 
 
 </body>
