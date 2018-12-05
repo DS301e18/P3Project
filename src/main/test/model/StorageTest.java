@@ -42,6 +42,11 @@ class StorageTest {
     }
 
     @Test
+    void removeStorage(){
+
+    }
+
+    @Test
     void sortProducts() {
     }
 
