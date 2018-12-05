@@ -1,7 +1,6 @@
 package model;
 
 import Util.AddRemove;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import java.math.BigDecimal;
