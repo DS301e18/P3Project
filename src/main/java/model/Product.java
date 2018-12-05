@@ -95,8 +95,13 @@ public class Product extends AddRemove {
     }
 
     public BigDecimal priceOfAllBatches(Storage storage) {
+        List<Batch> productBatches = sortBatches();
+
         BigDecimal totalPrice = new BigDecimal(0);
 
+        for (int i = 0; i < productBatches.size(); i++) {
+            totalPrice = totalPrice.add(productBatches.get(i).getValue());
+        }
         return totalPrice;
     }
 
@@ -104,7 +109,6 @@ public class Product extends AddRemove {
     public void setBatchSize(int factor) {
         this.batchSize += factor;
     }
-
 
 
     @Override
