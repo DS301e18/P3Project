@@ -35,45 +35,17 @@
         List<Storage> storageList = hibSession.createQuery("FROM Storage ").list();
         hibSession.close();
 
-        Storage storage;
 
-        if(session.getAttribute("storageChosen") != null){
-            storage = (Storage) session.getAttribute("storageChosen");
-        }else{storage = storageList.get(2);}
+        if(session.getAttribute("storageChosen") != null){%>
+            <jsp:include page="StorageInventory.jsp"/>
+        <%}
 
     %>
 
     <!-- TODO: Make storage inventory dynamic -->
     <!-- Storage inventory-->
     <div class="container" id="storage">
-        <section>
-            <!-- Inventory header -->
-            <div class="contentBox">
-                <label><%=storage.getName()%></label>
-                <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
-            </div>
 
-
-            <div class="contentBox">
-                <input type="text" id="search" onkeyup="" placeholder="Søg...">
-            </div>
-
-            <a><div class="tab">Registrer Vare</div></a>
-            <button class="test"><div class="tab">Historik</div></button><br>
-
-            <ol id="productInventory">
-                <%
-                List<Product> productList = storage.sortProducts();
-
-                for(Product product : productList){%>
-                <li><%=product.getName()%></li>
-                <!--<label style="float: right">4</label>-->
-                <%}%>
-            </ol>
-
-            <!-- Price-box -->
-            <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
-        </section>
 
         <!-- Product information -->
         <aside>

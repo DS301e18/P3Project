@@ -16,7 +16,7 @@ public class StorageController extends HttpServlet{
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int storageID = Integer.parseInt(request.getParameter("buttonChosen"))-1;
+        int storageID = Integer.parseInt(request.getParameter("buttonChosen"));
 
         HttpSession session = request.getSession();
 

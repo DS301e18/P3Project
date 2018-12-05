@@ -23,34 +23,40 @@
 
     StorageInitializerController storageList = new StorageInitializerController(session);
 
+    //Make so all storages are available in all .jsp files so they aren't needed to be reloaded in every file
     List<Storage> storages = storageList.getStorageInfo();
-
     session.setAttribute("storages", storages);
 %>
 
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav">
 
-    <form name="storageChoser" action="Storage" method="post">
+    <!-- Generate storage buttons -->
+    <form name="storageChooser" action="Storage" method="post">
         <input type="hidden" name="buttonChosen">
-    <%
-        for (Storage storage : storages) {%>
-            <button class="menuDot" onclick="storageChoice(id)" value="<%=storage.getId()%>" id="<%=storage.getId()%>">
-                <%=storage.getName()%>
-            </button>
-
-    <%}%>
+        <%
+            int i = 0;
+            for (Storage storage : storages) {%>
+                <button class="menuDot" onclick="storageChoice(id)" value="<%=i%>" id="<%=storage.getId()%>">
+                    <%=storage.getName()%>
+                </button><%
+                i++;
+            }%>
     </form>
+
+    <!-- Add a new storage to the restaurant-->
     <button><i class="fas fa-plus-circle"></i></button>
 
 </div>
 
 
 <script>
+
+    //Parameter buttonChosen gets the same value as the storage clicked on
     function storageChoice(storageID) {
-        document.storageChoser.buttonChosen.value = document.getElementById(storageID).value;
-        x = document.storageChoser.buttonChosen.value;
+        document.storageChooser.buttonChosen.value = document.getElementById(storageID).value;
     }
+
 </script>
 
 
