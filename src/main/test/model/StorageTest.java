@@ -1,79 +1,51 @@
 package model;
 
-import org.hibernate.HibernateException;
+import Util.AddRemove;
 import org.hibernate.Session;
-import org.junit.jupiter.api.BeforeEach;
+import org.hibernate.SessionFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StorageTest {
-    private Product product;
-    private Storage storage;
 
-    @BeforeEach
-    void before() {
-        product = new Product();
-        storage = new Storage();
+    @Test
+    void addStorage() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        product.setId(1);
-        storage.setId(1);
+        Storage storage = new Storage("Test Lager");
+
+        Storage sessionStorage = session.get(Storage.class, storage.getId());
+
+        assertEquals(storage.getId(), sessionStorage.getId());
+
+        session.close();
     }
 
     @Test
-    void relateProductToStorage() {
-        StorageProduct spcTest = new StorageProduct();
-        spcTest.setStorageId(storage.getId());
-        spcTest.setProductId(product.getId());
-
-        //storage.relateProductToStorage(product);
-
-        StorageProduct spcDB = new StorageProduct();
+    void addStorageProductRelation() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-        try {
-            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
+        Storage storage = new Storage("Test Lager");
+        Product product = new Product("Test Product", 0, BigDecimal.valueOf(0));
 
-            for (StorageProduct storageProducts : storageProductList) {
-                if (storageProducts.getProductId() == product.getId()) {
-                    spcDB = storageProducts;
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("Couldn't create a relation");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-        assertEquals(spcTest, spcDB);
+        StorageProduct storageProduct = new StorageProduct(storage.getId(), product.getId());
+
+        StorageProduct sessionStorageProduct = session.get(StorageProduct.class, storageProduct.getId());
+
+        assertEquals(storageProduct.getId(), sessionStorageProduct.getId());
+
+        session.close();
     }
 
     @Test
-    void unrelateProductFromStorage() {
-       // storage.unrelateProductFromStorage(product);
-        StorageProduct spcDB = null;
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+    void sortProducts() {
+    }
 
-        try {
-            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
-
-            for (StorageProduct storageProducts : storageProductList) {
-                if (storageProducts.getProductId() == product.getId()) {
-                    spcDB = storageProducts;
-                }
-            }
-
-        } catch (HibernateException e) {
-            System.out.println("Couldn't unrelate this product from storage");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        assertNull(spcDB);
-
+    @Test
+    void calculateTotalPrice() {
     }
 }
