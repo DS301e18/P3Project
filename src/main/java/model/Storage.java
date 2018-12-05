@@ -26,6 +26,12 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
+    public void sletMig() {
+        if ((collectProducts() == null))
+            removeObject(this);
+        else System.out.println("Slet alle dine produkter!");
+    }
+
     /**
      * Methods
      */
@@ -57,7 +63,7 @@ public class Storage extends AddRemove {
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
         try {
-            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProductController ").list();
+            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
             for (StorageProduct storageProduct : storageProductList) {
                 if (this.getId() == storageProduct.getStorageId()) {
                     storageProducts.add(storageProduct);
