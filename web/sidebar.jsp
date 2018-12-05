@@ -35,9 +35,10 @@
             }%>
     </form>
 
+    <%if(session.getAttribute("role").equals("Chef")){%>
     <!-- Add a new storage to the restaurant-->
     <button><i class="fas fa-plus-circle"></i></button>
-
+    <%}%>
 </div>
 
 

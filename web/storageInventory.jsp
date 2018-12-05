@@ -30,11 +30,14 @@
             </form>
         </div>
 
-        <button class="tab" id="registerProductButton" onclick="show('registerProductPage', 'historyPage')">Registrer Vare</button>
-        <button class="tab" id="historyButton" onclick="show('historyPage', 'registerProductPage')">Historik</button>
+        <!-- Tabs only available for a manager-->
+        <%if(session.getAttribute("role").equals("Chef")){%>
+            <button class="tab" id="registerProductButton" onclick="show('registerProductPage', 'historyPage')">Registrer Vare</button>
+            <button class="tab" id="historyButton" onclick="show('historyPage', 'registerProductPage')">Historik</button>
 
-        <!-- Breaklines TODO: should probably be done with css-->
-        <br><br><br>
+            <!-- Breaklines TODO: should probably be done with css-->
+            <br><br><br>
+        <%}%>
 
         <div id="inventory"><%
             List<Product> productList;
@@ -52,24 +55,23 @@
             }%>
         </div>
 
-        <%//TODO: This algorithm is very, very heavy. Maybe revise%>
         <!-- Price-box -->
         <div class="priceBox"><a>Total pris: <%=storage.calculateTotalPrice()%> kr.</a></div>
         <!-- Product information -->
     </section>
 
-    <aside id="registerProductPage" hidden>
-        <form action="RegisterProduct" method="post">
-            <input type="text" placeholder="Indtast navnet på produktet" name="name">
-            <input type="text" placeholder="Indtast antal per batch" name="batchSize">
-            <input type="text" placeholder="Indtast prisen for en batch" name="cost">
-            <input type="submit" value="Registrer">
-        </form>
-    </aside>
+        <aside id="registerProductPage" hidden>
+            <form action="RegisterProduct" method="post">
+                <input type="text" placeholder="Indtast navnet på produktet" name="name">
+                <input type="text" placeholder="Indtast antal per batch" name="batchSize">
+                <input type="text" placeholder="Indtast prisen for en batch" name="cost">
+                <input type="submit" value="Registrer">
+            </form>
+        </aside>
 
-    <aside id="historyPage" hidden>
-        History
-    </aside>
+        <aside id="historyPage" hidden>
+            History
+        </aside>
 </div>
 
 <script>
