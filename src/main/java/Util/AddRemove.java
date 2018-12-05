@@ -10,7 +10,7 @@ public class AddRemove {
 
 
 
-    protected <T> void addObject(T object) {
+    protected  <T> void addObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -35,7 +35,7 @@ public class AddRemove {
     }
 
 
-    protected  <T> void removeObject(T object) {
+    public  <T> void removeObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
