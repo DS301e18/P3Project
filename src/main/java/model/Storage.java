@@ -1,7 +1,6 @@
 package model;
 
 import Util.AddRemove;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import java.math.BigDecimal;
@@ -24,6 +23,15 @@ public class Storage extends AddRemove {
         this.name = name;
 
         addObject(this);
+    }
+
+    public void remove() {
+        if ((sortProducts() == null))
+            removeObject(this);
+        else
+            for (int i = 0; i < sortProducts().size(); i++) {
+                removeObject(sortProducts().get(i));
+            }
     }
 
     /**
@@ -56,20 +64,16 @@ public class Storage extends AddRemove {
         List<StorageProduct> storageProducts = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        try {
-            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProductController ").list();
-            for (StorageProduct storageProduct : storageProductList) {
-                if (this.getId() == storageProduct.getStorageId()) {
-                    storageProducts.add(storageProduct);
-                }
+
+        List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
+        for (StorageProduct storageProduct : storageProductList) {
+            if (this.getId() == storageProduct.getStorageId()) {
+                storageProducts.add(storageProduct);
             }
-        } catch (HibernateException e) {
-            System.out.println("Couldn't find any products in this storage");
-            e.printStackTrace();
-        } finally {
-            session.close();
-            return storageProducts;
         }
+
+        session.close();
+        return storageProducts;
     }
 
     /**

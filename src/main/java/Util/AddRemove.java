@@ -13,7 +13,7 @@ import java.util.List;
 public class AddRemove {
 
 
-    protected <T> void addObject(T object) {
+    protected  <T> void addObject(T object) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
