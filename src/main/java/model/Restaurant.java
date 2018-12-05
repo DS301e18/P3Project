@@ -2,7 +2,11 @@ package model;
 
 import Util.AddRemove;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Restaurant extends AddRemove {
 
@@ -41,6 +45,37 @@ public class Restaurant extends AddRemove {
         this.name = name;
     }
 
+    private List<AssignedEmployees> collectEmployees() {
+        List<AssignedEmployees> restaurantEmployees = new ArrayList<>();
+
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        List<AssignedEmployees> restaurantEmployeesList = session.createQuery("FROM AssignedEmployees").list();
+        for (AssignedEmployees restaurantEmployee : restaurantEmployeesList) {
+            if (this.getId() == restaurantEmployee.getRestaurantId()) {
+                restaurantEmployees.add(restaurantEmployee);
+            }
+        }
+
+        session.close();
+        return restaurantEmployees;
+    }
+
+    private List<AssignedStorage> collectStorages() {
+        List<AssignedStorage> restaurantStorages = new ArrayList<>();
+
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        List<AssignedStorage> restaurantStorageList = session.createQuery("FROM AssignedStorage").list();
+        for (AssignedStorage restaurantStorage : restaurantStorageList) {
+            if (this.getId() == restaurantStorage.getRestaurantId()) {
+                restaurantStorages.add(restaurantStorage);
+            }
+        }
+
+        session.close();
+        return restaurantStorages;
+    }
 
 }
 
