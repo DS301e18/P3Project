@@ -18,6 +18,7 @@ public class Product extends AddRemove {
     private String name;
     private int batchSize;
     private BigDecimal price;
+    private int totalAmountOfBatches;
 
     public Product(String name, int batchSize, BigDecimal price) {
         this.name = name;
@@ -87,6 +88,7 @@ public class Product extends AddRemove {
             for (Batch batch : batchList) {
                 if (batch.getId() == productBatches.get(i).getBatchId()) {
                     totalProductBatches.add(batch);
+                    totalAmountOfBatches += batch.getRemainingInBox();
                 }
             }
         }
@@ -110,6 +112,9 @@ public class Product extends AddRemove {
         this.batchSize += factor;
     }
 
+    public int getTotalAmountOfBatches() {
+        return totalAmountOfBatches;
+    }
 
     @Override
     public boolean equals(Object o) {

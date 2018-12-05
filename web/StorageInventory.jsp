@@ -19,11 +19,9 @@
     <div class="contentBox">
         <label><%=storage.getName()%></label>
         <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
-    </div>
-
-
-    <div class="contentBox">
-        <input type="text" id="search" placeholder="Søg...">
+        <form action="search" method="post">
+            <input type="text" placeholder="Søg..." name="search">
+        </form>
     </div>
 
     <a><div class="tab">Registrer Vare</div></a>
@@ -31,16 +29,24 @@
 
     <div id="productInventory">
         <%
-            List<Product> productList = storage.sortProducts();
-
-            for(Product product : productList){%>
-        <button class="productTab"><%=product.getName()%></button>
-        <!--<label style="float: right">4</label>-->
+            List<Product> productList;
+            if(session.getAttribute("productList")==null){
+                productList = storage.sortProducts();
+            } else {
+                productList = (List<Product>) session.getAttribute("productList");
+            }
+            for(Product product : productList){
+        product.sortBatches();%>
+        <div class="productTab">
+            <label><%=product.getName()%></label>
+            <label style="float: right; padding-right: 10px"><%=product.getTotalAmountOfBatches()%></label>
+        </div>
         <%}%>
     </div>
 
+    <%//TODO: This algorithm is very, very heavy. Maybe revise%>
     <!-- Price-box -->
-    <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
+    <!--<div class="priceBox"><a>Total pris: <%//=storage.calculateTotalPrice()%> kr.</a></div>-->
 </section>
 </body>
 </html>

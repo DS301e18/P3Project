@@ -30,29 +30,22 @@
     <jsp:include page="sidebar.jsp"/>
 
     <%
-        //TODO: This is harcoding for testing, remove later
-        Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
-        List<Storage> storageList = hibSession.createQuery("FROM Storage ").list();
-        hibSession.close();
-
-
         if(session.getAttribute("storageChosen") != null){%>
+        <!-- TODO: Make storage inventory dynamic -->
+        <!-- Storage inventory-->
+        <div class="container" id="storage">
+
             <jsp:include page="StorageInventory.jsp"/>
+
+            <!-- Product information -->
+            <aside>
+                Hello
+            </aside>
+
+        </div>
         <%}
 
     %>
-
-    <!-- TODO: Make storage inventory dynamic -->
-    <!-- Storage inventory-->
-    <div class="container" id="storage">
-
-
-        <!-- Product information -->
-        <aside>
-            Hello
-        </aside>
-
-    </div>
 
 </body>
 </html>
