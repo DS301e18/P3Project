@@ -26,10 +26,13 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
-    public void sletMig() {
-        if ((collectProducts() == null))
+    public void remove() {
+        if ((sortProducts() == null))
             removeObject(this);
-        else System.out.println("Slet alle dine produkter!");
+        else
+            for (int i = 0; i < sortProducts().size(); i++) {
+                removeObject(sortProducts().get(i));
+            }
     }
 
     /**
@@ -62,20 +65,16 @@ public class Storage extends AddRemove {
         List<StorageProduct> storageProducts = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-        try {
-            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
-            for (StorageProduct storageProduct : storageProductList) {
-                if (this.getId() == storageProduct.getStorageId()) {
-                    storageProducts.add(storageProduct);
-                }
+
+        List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
+        for (StorageProduct storageProduct : storageProductList) {
+            if (this.getId() == storageProduct.getStorageId()) {
+                storageProducts.add(storageProduct);
             }
-        } catch (HibernateException e) {
-            System.out.println("Couldn't find any products in this storage");
-            e.printStackTrace();
-        } finally {
-            session.close();
-            return storageProducts;
         }
+
+        session.close();
+        return storageProducts;
     }
 
     /**
