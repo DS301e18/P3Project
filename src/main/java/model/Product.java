@@ -1,8 +1,12 @@
 package model;
 
 import Util.AddRemove;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product extends AddRemove {
 
@@ -14,8 +18,8 @@ public class Product extends AddRemove {
     private String name;
     private int batchSize;
     private BigDecimal price;
-  
-    public Product(String name, int batchSize, BigDecimal price){
+
+    public Product(String name, int batchSize, BigDecimal price) {
         this.name = name;
         this.batchSize = batchSize;
         this.price = price;
@@ -26,7 +30,9 @@ public class Product extends AddRemove {
     public Product() {
     }
 
-    /** Methods **/
+    /**
+     * Methods
+     **/
 
     public BigDecimal getPrice() {
         return price;
@@ -54,6 +60,20 @@ public class Product extends AddRemove {
 
     public int getBatchSize() {
         return batchSize;
+    }
+
+    private List<ProductBatch> collectBatches() {
+        List<ProductBatch> productBatches = new ArrayList<>();
+
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        List<ProductBatch> ProductBatchList = session.createQuery("FROM ProductBatch").list();
+        for (ProductBatch productBatch : ProductBatchList) {
+            if (this.getId() == productBatch.getBatchId()) {
+                productBatches.add(productBatch);
+            }
+        }
+        return productBatches;
     }
 
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
