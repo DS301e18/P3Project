@@ -53,7 +53,6 @@ class RestaurantTest {
         assertEquals(assignedEmployees.getId(), sessionAssignedEmployees.getId());
 
         session.close();
-
     }
 
 
