@@ -69,7 +69,7 @@ public class Product extends AddRemove {
 
         List<ProductBatch> ProductBatchList = session.createQuery("FROM ProductBatch").list();
         for (ProductBatch productBatch : ProductBatchList) {
-            if (this.getId() == productBatch.getBatchId()) {
+            if (this.getId() == productBatch.getProductId()) {
                 productBatches.add(productBatch);
             }
         }
@@ -85,7 +85,7 @@ public class Product extends AddRemove {
 
         for (int i = 0; i < productBatches.size(); i++) {
             for (Batch batch : batchList) {
-                if (batch.getId() == productBatches.get(i).getProductId()) {
+                if (batch.getId() == productBatches.get(i).getBatchId()) {
                     totalProductBatches.add(batch);
                 }
             }
