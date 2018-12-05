@@ -26,7 +26,7 @@ public class Employee extends AddRemove {
     public Employee() {
     }
 
-    public void addEmployee(){
+/*   public void addEmployee(){
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         Transaction transaction = null;
 
@@ -68,6 +68,7 @@ public class Employee extends AddRemove {
         }
 
     }
+    */
 
     public int getId() {
         return id;

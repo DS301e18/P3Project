@@ -1,6 +1,5 @@
 package model;
 
-import controller.StorageProductController;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,19 +25,19 @@ class StorageTest {
 
     @Test
     void relateProductToStorage() {
-        StorageProductController spcTest = new StorageProductController();
+        StorageProduct spcTest = new StorageProduct();
         spcTest.setStorageId(storage.getId());
         spcTest.setProductId(product.getId());
 
-        storage.relateProductToStorage(product);
+        //storage.relateProductToStorage(product);
 
-        StorageProductController spcDB = new StorageProductController();
+        StorageProduct spcDB = new StorageProduct();
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
+            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
 
-            for (StorageProductController storageProducts : storageProductList) {
+            for (StorageProduct storageProducts : storageProductList) {
                 if (storageProducts.getProductId() == product.getId()) {
                     spcDB = storageProducts;
                 }
@@ -54,14 +53,14 @@ class StorageTest {
 
     @Test
     void unrelateProductFromStorage() {
-        storage.unrelateProductFromStorage(product);
-        StorageProductController spcDB = null;
+       // storage.unrelateProductFromStorage(product);
+        StorageProduct spcDB = null;
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
-            List<StorageProductController> storageProductList = session.createQuery("FROM StorageProductController").list();
+            List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
 
-            for (StorageProductController storageProducts : storageProductList) {
+            for (StorageProduct storageProducts : storageProductList) {
                 if (storageProducts.getProductId() == product.getId()) {
                     spcDB = storageProducts;
                 }

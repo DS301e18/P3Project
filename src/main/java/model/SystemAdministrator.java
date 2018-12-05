@@ -1,4 +1,4 @@
-package controller;
+package model;
 
 import model.Employee;
 import model.Manager;
@@ -11,7 +11,7 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class SystemAdministratorController {
+public class SystemAdministrator {
 
     /**Fields**/
 

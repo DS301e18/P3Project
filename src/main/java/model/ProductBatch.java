@@ -1,20 +1,20 @@
-package controller;
+package model;
 
 import Util.AddRemove;
 
-public class StorageProductController extends AddRemove {
+public class ProductBatch extends AddRemove {
     private int id;
-    private int storageId;
     private int productId;
+    private int batchId;
 
-    public StorageProductController(int storageId, int productId) {
-        this.storageId = storageId;
+    public ProductBatch(int productId, int batchId) {
         this.productId = productId;
+        this.batchId = batchId;
 
         addObject(this);
     }
 
-    public StorageProductController() {
+    public ProductBatch() {
     }
 
     public int getId() {
@@ -25,14 +25,6 @@ public class StorageProductController extends AddRemove {
         this.id = id;
     }
 
-    public int getStorageId() {
-        return storageId;
-    }
-
-    public void setStorageId(int storageId) {
-        this.storageId = storageId;
-    }
-
     public int getProductId() {
         return productId;
     }
@@ -41,21 +33,29 @@ public class StorageProductController extends AddRemove {
         this.productId = productId;
     }
 
+    public int getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(int batchId) {
+        this.batchId = batchId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StorageProductController that = (StorageProductController) o;
+        ProductBatch that = (ProductBatch) o;
 
-        if (storageId != that.storageId) return false;
-        return productId == that.productId;
+        if (productId != that.productId) return false;
+        return batchId == that.batchId;
     }
 
     @Override
     public int hashCode() {
-        int result = storageId;
-        result = 31 * result + productId;
+        int result = productId;
+        result = 31 * result + batchId;
         return result;
     }
 }

@@ -1,10 +1,21 @@
-package controller;
+package model;
 
-public class AssignedEmployeesController {
+import Util.AddRemove;
+
+public class AssignedStorage extends AddRemove {
     private int id;
     private int restaurantId;
-    private int employeeId;
+    private int storageId;
 
+    public AssignedStorage(int restaurantId, int storageId) {
+        this.restaurantId = restaurantId;
+        this.storageId = storageId;
+
+        addObject(this);
+    }
+
+    public AssignedStorage() {
+    }
 
     public int getId() {
         return id;
@@ -22,12 +33,12 @@ public class AssignedEmployeesController {
         this.restaurantId = restaurantId;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public int getStorageId() {
+        return storageId;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setStorageId(int storageId) {
+        this.storageId = storageId;
     }
 
 
@@ -36,25 +47,18 @@ public class AssignedEmployeesController {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AssignedEmployeesController that = (AssignedEmployeesController) o;
+        AssignedStorage that = (AssignedStorage) o;
 
         if (restaurantId != that.restaurantId) return false;
-        return employeeId == that.employeeId;
+        return storageId == that.storageId;
     }
+
 
     @Override
     public int hashCode() {
         int result = restaurantId;
-        result = 31 * result + employeeId;
+        result = 31 * result + storageId;
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "AssignedEmployeesController{" +
-                "id=" + id +
-                ", restaurantId=" + restaurantId +
-                ", employeeId=" + employeeId +
-                '}';
-    }
 }
