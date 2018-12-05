@@ -1,5 +1,7 @@
 <%@ page import="model.Storage" %>
 <%@ page import="controller.StorageInitializerController" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kristoffer
@@ -20,25 +22,34 @@
     response.setHeader("Expires", "0");// Proxies
 
     StorageInitializerController storageList = new StorageInitializerController(session);
+
+    List<Storage> storages = storageList.getStorageInfo();
+
+    session.setAttribute("storages", storages);
 %>
 
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav">
 
+    <form name="storageChoser" action="Storage" method="post">
+        <input type="hidden" name="buttonChosen">
     <%
-        for (Storage storage : storageList.getStorageInfo()) {%>
-        <button class="menuDot" onclick="storageChoice(id)" value="<%=storage%>" id="storage<%=storage.getId()%>">
-            <%=storage.getName()%>
-        </button>
+        for (Storage storage : storages) {%>
+            <button class="menuDot" onclick="storageChoice(id)" value="<%=storage.getId()%>" id="<%=storage.getId()%>">
+                <%=storage.getName()%>
+            </button>
+
     <%}%>
+    </form>
     <button><i class="fas fa-plus-circle"></i></button>
 
 </div>
 
+
 <script>
     function storageChoice(storageID) {
-        var x = document.getElementById(storageID).value;
-        alert(x);
+        document.storageChoser.buttonChosen.value = document.getElementById(storageID).value;
+        x = document.storageChoser.buttonChosen.value;
     }
 </script>
 

@@ -29,17 +29,18 @@
     <jsp:include page="navigation.jsp"/>
     <jsp:include page="sidebar.jsp"/>
 
-
     <%
         //TODO: This is harcoding for testing, remove later
         Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
         List<Storage> storageList = hibSession.createQuery("FROM Storage ").list();
-        Storage storage = storageList.get(2);
         hibSession.close();
 
-        session.setAttribute("storageChosen", storage);
+        Storage storage;
 
-        //Storage storage = (Storage) session.getAttribute("storageChosen");
+        if(session.getAttribute("storageChosen") != null){
+            storage = (Storage) session.getAttribute("storageChosen");
+        }else{storage = storageList.get(2);}
+
     %>
 
     <!-- TODO: Make storage inventory dynamic -->
