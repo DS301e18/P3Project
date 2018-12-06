@@ -23,13 +23,20 @@
             <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
         </div>
 
+        <div>
+            <button class="tab" style="border-radius: 8px 8px 0 0;">Tag Vare</button>
+            <button class="tab" style="border-radius: 8px 8px 0 0;">Tilføj Vare</button>
+            <br>
+            <br>
+            <br>
+        </div>
+
         <table class="productTable">
             <tr>
                 <th>Dato</th>
                 <th>Batch Nummer</th>
                 <th>Antal</th>
             </tr>
-
                 <% List<Batch> batchList = (List) session.getAttribute("batchList");
                 int i = 0;
                 for(Batch batch : batchList){%>

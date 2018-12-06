@@ -142,8 +142,6 @@ input[type=sumbit]{
 
 .tab{
     text-decoration: none;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
     float: left;
     height: 40px;
     width: 120px;
@@ -152,6 +150,11 @@ input[type=sumbit]{
     margin-left: 15px;
     background-color: #f7e8e8;
     font-size: 15px;
+}
+
+.tab {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 .tab:hover, .tab:focus{
@@ -216,5 +219,6 @@ aside {
 }
 
 .productTable tr:nth-child(even){background-color: #f2f2f2;}
+
 
 

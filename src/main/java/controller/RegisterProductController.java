@@ -23,6 +23,7 @@ public class RegisterProductController extends HttpServlet {
         String cost = request.getParameter("cost");
         BigDecimal bigCost;
 
+        //Ensure that if the user doesn't write a dot, it's made for them
         if(cost.contains(".") || cost.contains(",")){
 
             if(cost.contains(",")){

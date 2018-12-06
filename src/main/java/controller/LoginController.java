@@ -30,8 +30,8 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role", loginCheck.getEmployee().getRole());
-            session.setAttribute("employeeName", loginCheck.getEmployee().getFirstName() + " " + loginCheck.getEmployee().getLastName());
             session.setAttribute("employeeID", loginCheck.getEmployee().getId());
+            session.setAttribute("employee", loginCheck.getEmployee());
             response.sendRedirect("webpanel.jsp");
 
         } else {

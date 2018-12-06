@@ -33,16 +33,13 @@ public class Transactions {
 
         this.storage_id = storage.getId();
         this.timestamp = sdf.format(timestamp);
-        this.name = employee.getFirstName();
+        this.name = employee.getFirstName() + " " + employee.getLastName();
         this.batch = batch.getBatchNumber();
-        this.product = batch.getProduct().getName();
+        this.product = batch.getTypeName();
         this.amount = amount;
         this.transtype = transtype;
 
-
-        //TODO: Delete sessionFactory later
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         Transaction transaction;
 
