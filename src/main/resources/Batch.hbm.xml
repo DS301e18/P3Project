@@ -19,6 +19,10 @@
         <property name = "remainingInBox" column = "amount" type = "int"/>
         <property name = "value" column = "batch_value" type = "big_decimal"/>
         <property name = "typeName" column = "type_name" type = "string"/>
+        <property name = "originalValue" column = "original_value" type = "big_decimal"/>
+        <property name = "originalBatchSize" column = "original_batch_size" type = "int"/>
+
+
 
     </class>
 </hibernate-mapping>

@@ -14,12 +14,13 @@
             <generator class="native"/>
         </id>
 
-        <property name = "timestamp" column = "timestamp" type = "timestamp"/>
+        <property name = "timestamp" column = "timestamp" type = "string"/>
         <property name = "batch" column = "batch_number" type = "string"/>
         <property name = "transtype" column = "transtype" type = "string"/>
         <property name = "product" column = "product_type" type = "string"/>
         <property name = "amount" column = "amount" type = "int"/>
         <property name = "name" column = "employee" type = "string"/>
+        <property name = "storage_id" column="storage_id" type="int"/>
 
     </class>
 </hibernate-mapping>
