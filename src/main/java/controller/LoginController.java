@@ -1,6 +1,8 @@
 package controller;
 
 import model.LoginCheck;
+import model.SessionFactoryCfg;
+import org.hibernate.SessionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,8 @@ import java.io.IOException;
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
 
+    private SessionFactory sessionFactory;
+
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,17 +24,19 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
 
         LoginCheck loginCheck = new LoginCheck();
+        sessionFactory = loginCheck.getSessionFactory();
 
         if(loginCheck.check(username, password)){
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role", loginCheck.getEmployee().getRole());
+            session.setAttribute("employeeName", loginCheck.getEmployee().getFirstName() + " " + loginCheck.getEmployee().getLastName());
             session.setAttribute("employeeID", loginCheck.getEmployee().getId());
             response.sendRedirect("webpanel.jsp");
 
         } else {
             response.sendRedirect("index.jsp");
-
+            loginCheck.getSessionFactory().close();
         }
 
     }
@@ -43,6 +49,9 @@ public class LoginController extends HttpServlet {
         session.removeAttribute("role");
         session.invalidate();
         response.sendRedirect("index.jsp");
+
+        //TODO: Don't know if it should be closed
+        sessionFactory.close();
 
     }
 

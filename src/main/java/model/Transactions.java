@@ -31,7 +31,7 @@ public class Transactions {
         this.transtype = transtype;
 
         //TODO: Delete sessionFactory later
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;

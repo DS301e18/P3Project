@@ -63,7 +63,7 @@ public class Storage extends AddRemove {
     private List<StorageProduct> collectProducts() {
         List<StorageProduct> storageProducts = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
         for (StorageProduct storageProduct : storageProductList) {
@@ -86,7 +86,7 @@ public class Storage extends AddRemove {
      */
     //TODO change createSessionFactory to getSessionFactory
     public List<Product> sortProducts() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<StorageProduct> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();

@@ -52,7 +52,6 @@ body {
     margin-top: 50px;
     height: 100%;
     width: 100px;
-    padding-top: 15px;
     margin-bottom: 50px;
     position: fixed;
     background-color: #d7736f;
@@ -89,7 +88,6 @@ button:focus {
 
 .fa-plus-circle {
     font-size: 80px;
-    margin-top: 10px;
     display: inline-block;
     color:white;
     opacity: 0.5;
@@ -119,7 +117,7 @@ section{
 }
 
 .contentBox{
-    padding: 15px 15px 10px;
+    padding: 15px 15px 1px;
     background-color: #f2b8b6;
     border: #f2b8b6;
     font-size: 25px;
@@ -134,6 +132,11 @@ input {
     height: 30px;
     font-size: 15px;
     border-color: transparent;
+    margin-top: 20px;
+}
+
+input[type=sumbit]{
+    background-color: #f72645;
 }
 
 .tab{
@@ -145,6 +148,7 @@ input {
     width: 120px;
     line-height: 40px;
     padding: 0 10px;
+    margin-left: 15px;
     background-color: #f7e8e8;
     font-size: 15px;
 }
@@ -154,8 +158,12 @@ input {
 }
 
 .productTab {
-    padding: 15px 25px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: 15px;
+    width: 100%;
+    text-align: left;
+    text-indent: 20px;
 }
 
 .productTab:hover, .productTab:focus{
@@ -180,4 +188,7 @@ input {
 
 aside {
     height: 100%;
+    padding-left: 500px;
+    width: 30%;
+    text-align: center;
 }
