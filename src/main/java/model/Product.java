@@ -2,6 +2,7 @@ package model;
 
 import Util.AddRemove;
 import org.hibernate.Session;
+import relationClasses.ProductBatch;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

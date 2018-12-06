@@ -1,10 +1,8 @@
 package model;
 
-import Util.AddRemove;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import relationClasses.StorageProduct;
 
 import java.math.BigDecimal;
 

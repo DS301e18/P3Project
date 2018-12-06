@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "model.AssignedEmployees" table = "restaurant_employees">
+    <class name = "relationClasses.RestaurantEmployee" table = "restaurant_employees">
 
         <meta attribute = "class-description">
             This class contains the AssignedEmployees detail.

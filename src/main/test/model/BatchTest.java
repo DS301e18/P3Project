@@ -16,8 +16,6 @@ class BatchTest {
     void takeFromBatch() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-
-
         try {
             Product product = new Product("plzvirk", 2, BigDecimal.valueOf(1000));
             Batch batch = new Batch(product, "ass123");

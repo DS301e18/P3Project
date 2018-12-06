@@ -1,4 +1,4 @@
-package model;
+package relationClasses;
 
 import Util.AddRemove;
 

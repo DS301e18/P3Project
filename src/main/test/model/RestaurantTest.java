@@ -1,10 +1,10 @@
 package model;
 
 
-import Util.AddRemove;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
+import relationClasses.RestaurantEmployee;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -46,11 +46,11 @@ class RestaurantTest {
         Restaurant restaurant = new Restaurant("TestRestaurant");
         Employee employee = new Employee("Test", "Test", "Test", "Test");
 
-        AssignedEmployees assignedEmployees = new AssignedEmployees(restaurant.getId(), employee.getId());
+        RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
 
-        AssignedEmployees sessionAssignedEmployees = session.get(AssignedEmployees.class, assignedEmployees.getId());
+        RestaurantEmployee sessionRestaurantEmployee = session.get(RestaurantEmployee.class, restaurantEmployee.getId());
 
-        assertEquals(assignedEmployees.getId(), sessionAssignedEmployees.getId());
+        assertEquals(restaurantEmployee.getId(), sessionRestaurantEmployee.getId());
 
         session.close();
     }
@@ -62,12 +62,12 @@ class RestaurantTest {
     void resignEmployeeTest() {
 
        // restaurant.resignEmployee(employee);
-        AssignedEmployees aecDB = null;
+        RestaurantEmployee aecDB = null;
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         try {
-            List<AssignedEmployees> employeeList = session.createQuery("FROM AssignedEmployees ").list();
-            for (AssignedEmployees aec : employeeList) {
+            List<RestaurantEmployee> employeeList = session.createQuery("FROM RestaurantEmployee ").list();
+            for (RestaurantEmployee aec : employeeList) {
                 if (aec.getEmployeeId() == employee.getId()) {
                     aecDB = aec;
                 }
@@ -86,12 +86,12 @@ class RestaurantTest {
     @Test
     void removeStorage() {
        // restaurant.removeStorage(storage);
-        AssignedStorage assignedStorageDB = null;
+        RestaurantStorage assignedStorageDB = null;
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
-            List<AssignedStorage> storageList = session.createQuery("FROM AssignedStorage").list();
-            for (AssignedStorage asc : storageList) {
+            List<RestaurantStorage> storageList = session.createQuery("FROM RestaurantStorage").list();
+            for (RestaurantStorage asc : storageList) {
                 if (asc.getStorageId() == storage.getId()) {
                     assignedStorageDB = asc;
                 }

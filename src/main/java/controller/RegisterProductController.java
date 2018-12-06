@@ -1,12 +1,8 @@
 package controller;
 
 import model.Product;
-import model.SessionFactoryCfg;
 import model.Storage;
-import model.StorageProduct;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import relationClasses.StorageProduct;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

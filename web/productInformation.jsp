@@ -31,16 +31,21 @@
             </tr>
 
                 <% List<Batch> batchList = (List) session.getAttribute("batchList");
+                int i = 0;
                 for(Batch batch : batchList){%>
                     <tr>
                         <td><%=batch.getDate()%></td>
                         <td><%=batch.getBatchNumber()%></td>
                         <td><%=batch.getRemainingInBox()%>
-                            <input type="text" name="takeFromBatch">
-                            <input type="submit" value="Tag Vare">
+                            <form action="Batch" method="post">
+                                <input type="hidden" name="batchChosen" value="<%=i%>">
+                                <input type="text" name="takeFromBatch">
+                                <input type="submit" value="Tag Vare">
+                            </form>
                         </td>
                     </tr>
-                <%}%>
+                <%i++;
+                }%>
 
         </table>
     </aside>

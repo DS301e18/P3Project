@@ -1,20 +1,20 @@
-package model;
+package relationClasses;
 
 import Util.AddRemove;
 
-public class AssignedStorage extends AddRemove {
+public class RestaurantEmployee extends AddRemove {
     private int id;
     private int restaurantId;
-    private int storageId;
+    private int employeeId;
 
-    public AssignedStorage(int restaurantId, int storageId) {
+    public RestaurantEmployee(int restaurantId, int employeeId) {
         this.restaurantId = restaurantId;
-        this.storageId = storageId;
+        this.employeeId = employeeId;
 
         addObject(this);
     }
 
-    public AssignedStorage() {
+    public RestaurantEmployee() {
     }
 
     public int getId() {
@@ -33,12 +33,12 @@ public class AssignedStorage extends AddRemove {
         this.restaurantId = restaurantId;
     }
 
-    public int getStorageId() {
-        return storageId;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setStorageId(int storageId) {
-        this.storageId = storageId;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
 
@@ -47,18 +47,25 @@ public class AssignedStorage extends AddRemove {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AssignedStorage that = (AssignedStorage) o;
+        RestaurantEmployee that = (RestaurantEmployee) o;
 
         if (restaurantId != that.restaurantId) return false;
-        return storageId == that.storageId;
+        return employeeId == that.employeeId;
     }
-
 
     @Override
     public int hashCode() {
         int result = restaurantId;
-        result = 31 * result + storageId;
+        result = 31 * result + employeeId;
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "RestaurantEmployee{" +
+                "id=" + id +
+                ", restaurantId=" + restaurantId +
+                ", employeeId=" + employeeId +
+                '}';
+    }
 }
