@@ -24,13 +24,26 @@ public class RegisterProductController extends HttpServlet {
 
         String name = request.getParameter("name");
         int batchSize = Integer.parseInt(request.getParameter("batchSize"));
-        BigDecimal cost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+        String cost = request.getParameter("cost");
+        BigDecimal bigCost;
+
+        if(cost.contains(".") || cost.contains(",")){
+
+            if(cost.contains(",")){
+                bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost").replace(",", ".")));
+            }else {
+                bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+            }
+
+        }else{
+            bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost") + ".00"));
+        }
 
         HttpSession session = request.getSession();
 
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
-        Product product = new Product(name, batchSize, cost);
+        Product product = new Product(name, batchSize, bigCost);
 
         new StorageProduct(storage.getId(), product.getId());
 

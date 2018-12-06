@@ -21,7 +21,7 @@
 <div class="topnav">
     <a><%=session.getAttribute("restaurant")%></a>
     <div class="topnav-right">
-        <a><%=session.getAttribute("username")%></a>
+        <a><%=session.getAttribute("employeeName")%></a>
         <div class="formbutton">
             <form action="Login" method="get">
                 <button type="submit" value="Logout"><a>Log ud</a></button>

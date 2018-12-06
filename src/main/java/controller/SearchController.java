@@ -1,5 +1,6 @@
 package controller;
 
+import model.Product;
 import model.Search;
 import model.Storage;
 
@@ -23,7 +24,7 @@ public class SearchController extends HttpServlet {
         String input = req.getParameter("search");
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
-        List productList = new Search().searchProduct(storage, input);
+        List<Product> productList = new Search().searchProduct(storage, input);
 
         session.setAttribute("productList", productList);
 

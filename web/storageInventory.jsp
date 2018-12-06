@@ -13,7 +13,7 @@
     <title>Lager Inventar</title>
 </head>
 <body>
-<% Storage storage = (Storage) session.getAttribute("storageChosen"); %>
+<% Storage storage = (Storage) session.getAttribute("storageChosen");%>
 
 <!-- TODO: Make storage inventory dynamic -->
 <!-- Storage inventory-->
@@ -40,19 +40,22 @@
         <%}%>
 
         <div id="inventory"><%
-            List<Product> productList;
-            if(session.getAttribute("productList")==null){
+            List<Product> productList = (List) session.getAttribute("productList");
+
+            if(productList == null){
                 productList = storage.sortProducts();
-            } else {
-                productList = (List<Product>) session.getAttribute("productList");
             }
+
             for(Product product : productList){
                 product.sortBatches();%>
                 <button class="productTab">
                     <label><%=product.getName()%></label>
                     <label style="float: right; padding-right: 15px"><%=product.getTotalAmountOfBatches()%></label>
                 </button><%
-            }%>
+            }
+
+            session.setAttribute("productList", null);
+            %>
         </div>
 
         <!-- Price-box -->

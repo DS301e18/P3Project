@@ -15,7 +15,7 @@ import java.io.IOException;
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
 
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
             session.setAttribute("role", loginCheck.getEmployee().getRole());
+            session.setAttribute("employeeName", loginCheck.getEmployee().getFirstName() + " " + loginCheck.getEmployee().getLastName());
             session.setAttribute("employeeID", loginCheck.getEmployee().getId());
             response.sendRedirect("webpanel.jsp");
 
@@ -48,6 +49,8 @@ public class LoginController extends HttpServlet {
         session.removeAttribute("role");
         session.invalidate();
         response.sendRedirect("index.jsp");
+
+        //TODO: Don't know if it should be closed
         sessionFactory.close();
 
     }
