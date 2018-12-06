@@ -44,5 +44,12 @@
     <!-- Reset productList, so the other storages doesn't get the same product inventory -->
     <%session.setAttribute("productList", null);%>
 </div>
+
+<script>
+    function productChoice(productID) {
+        var button = document.getElementById(productID).value;
+        document.productChosenEvent.productChosenButton.value = button;
+    }
+</script>
 </body>
 </html>

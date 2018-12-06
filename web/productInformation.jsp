@@ -1,6 +1,7 @@
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Batch" %><%--
+<%@ page import="model.Batch" %>
+<%@ page import="java.math.BigDecimal" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 06/12/2018
@@ -42,6 +43,7 @@
             </tr>
                 <% List<Batch> batchList = (List) session.getAttribute("batchList");
                 int i = 0;
+                BigDecimal totalPrice = BigDecimal.valueOf(0);
                 for(Batch batch : batchList){%>
                     <tr>
                         <td><%=batch.getDate()%></td>
@@ -55,6 +57,7 @@
                         </td>
                     </tr>
                 <%i++;
+                totalPrice = totalPrice.add(batch.getValue());
                 }%>
         </table>
 
@@ -76,7 +79,7 @@
             </tr>
         </table>
 
-
+        <div class="priceBox" style="width: 100%"><a>Total pris: <%=totalPrice%> kr.</a></div>
     </aside>
 
     <script>

@@ -126,11 +126,6 @@
             show1.style.display = "none";
         }
     }
-
-    function productChoice(productID) {
-        var button = document.getElementById(productID).value;
-        document.productChosenEvent.productChosenButton.value = button;
-    }
 </script>
 
 </body>

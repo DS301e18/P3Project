@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.MathContext;
 import java.sql.Timestamp;
 
@@ -47,14 +48,16 @@ public class Batch extends AddRemove {
 
     public Batch(Product product, String batchNumber, int numberAdded) {
 
+        this.product = product;
+        this.typeName = product.getName();
         this.batchNumber = batchNumber;
         this.date = new Timestamp(System.currentTimeMillis());
+
         this.remainingInBox = numberAdded;
-        this.value = product.getPrice();
-        this.typeName = product.getName();
+        this.value = product.getPrice().multiply(BigDecimal.valueOf(numberAdded));
+
         this.originalValue = product.getPrice();
-        this.originalBatchSize = product.getBatchSize();
-        this.product = product;
+        this.originalBatchSize = numberAdded;
 
         addObject(this);
 
@@ -78,11 +81,8 @@ public class Batch extends AddRemove {
 
             transaction = session.beginTransaction();
 
-            if (amount == 0) {
-                this.setRemainingInBox(this.remainingInBox - 1);
-            } else if (amount > 0) {
-                this.setRemainingInBox(this.remainingInBox - amount);
-            }
+            this.setRemainingInBox(this.remainingInBox - amount);
+
             this.calcBatchValue(amount);
 
             session.update(this);
@@ -112,14 +112,9 @@ public class Batch extends AddRemove {
         try{
             transaction = session.beginTransaction();
 
-            if (amount == 0) {
-                amount = 1;
-            }
-
             MathContext mc = new MathContext(4);
 
-            BigDecimal oneFracion = this.originalValue.divide(BigDecimal.valueOf(this.originalBatchSize), mc);
-            BigDecimal multiplySum = oneFracion.multiply(BigDecimal.valueOf(amount), mc);
+            BigDecimal multiplySum = originalValue.multiply(BigDecimal.valueOf(amount), mc);
 
             this.setValue(multiplySum);
 

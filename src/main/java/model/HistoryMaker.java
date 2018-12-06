@@ -4,8 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class HistoryMaker {
@@ -27,7 +25,7 @@ public class HistoryMaker {
 
         session.close();
 
-        Collections.sort(storageHistory, new SortHistory());
+        storageHistory.sort(new SortHistory());
 
         if(numberOfEntries > storageHistory.size()){
             numberOfEntries = storageHistory.size();
