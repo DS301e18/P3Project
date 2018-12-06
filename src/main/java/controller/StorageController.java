@@ -24,6 +24,9 @@ public class StorageController extends HttpServlet{
 
         session.setAttribute("storageChosen", storages.get(storageID));
 
+        //If product information is open, close it
+        session.setAttribute("productChosen", null);
+
         response.sendRedirect("webpanel.jsp");
 
 

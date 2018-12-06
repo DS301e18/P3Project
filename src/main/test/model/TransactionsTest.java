@@ -37,10 +37,12 @@ class TransactionsTest {
         Transactions transactions = new Transactions();
         Transaction transaction;
 
+        new SessionFactoryCfg().createSessionFactory();
+
         transactions.registerTransaction(e, b, 2, "tilføj");
 
         //Establishing a connection to the database
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         //Assuring that the transaction also is stored in the database
         assertEquals(transactions, session.get(model.Transactions.class, transactions.getId()));
