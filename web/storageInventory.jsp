@@ -1,7 +1,8 @@
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Storage" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Transactions" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 05/12/2018
@@ -45,7 +46,7 @@
             </form>
 
             <!-- Breaklines TODO: should probably be done with css-->
-            <br><br><br>
+            <br><br>
         <%}%>
 
         <jsp:include page="inventory.jsp"/>
@@ -76,6 +77,31 @@
         <div class="productHeader">
             <label style="font-size: 40px">Historik</label>
         </div>
+        <form action="History" method="post">
+            <input type="text" placeholder="Indtast Historik Størrelse..." name="historyInput">
+        </form>
+        <table class="productTable">
+            <tr>
+                <th>Dato</th>
+                <th>Vare</th>
+                <th>Batch Nr.</th>
+                <th>Type</th>
+                <th>Antal</th>
+                <th>Medarbejder</th>
+            </tr><%
+        List<Transactions> history = (List) session.getAttribute("history");
+        for (Transactions transaction : history){%>
+            <tr>
+                <td><%=transaction.getTimestamp()%></td>
+                <td><%=transaction.getProduct()%></td>
+                <td><%=transaction.getBatch()%></td>
+                <td><%=transaction.getTranstype()%></td>
+                <td><%=transaction.getAmount()%></td>
+                <td><%=transaction.getName()%></td>
+            </tr>
+        <%}%>
+
+        </table>
     </aside>
 
     <!-- Product information -->

@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class HistoryMaker {
@@ -15,18 +17,26 @@ public class HistoryMaker {
         return history;
     }
 
-    public void readHistory(int numberOfEntries){
+    public void readHistory(int numberOfEntries, Storage storage){
 
         session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        Query query = session.createQuery("FROM Transactions");
-        query.setMaxResults(numberOfEntries);
-        history = query.list();
+        Query query = session.createQuery("FROM Transactions where storage_id = :i");
+        query.setParameter("i", storage.getId());
+        List<Transactions> storageHistory = query.list();
 
         session.close();
+
+        Collections.sort(storageHistory, new SortHistory());
+
+        if(numberOfEntries > storageHistory.size()){
+            numberOfEntries = storageHistory.size();
+        }
+
+        history = storageHistory.subList(0, numberOfEntries);
     }
 
-    public List<Transactions> sortHistory(String input){
+    public List<Transactions> searchHistory(String input){
         session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<Transactions> transactionsList = getHistory();

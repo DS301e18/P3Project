@@ -1,6 +1,7 @@
 package controller;
 
 import model.HistoryMaker;
+import model.Storage;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,13 +17,20 @@ public class HistoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //TODO: make dynamic
-        int numEntries = 2;
-
-        HistoryMaker historyMaker = new HistoryMaker();
-        historyMaker.readHistory(numEntries);
+        String input = req.getParameter("historyInput");
+        int numEntries = 10;
+        if(input != null){
+            if(!input.equals("")){
+                numEntries = Integer.parseInt(req.getParameter("historyInput"));
+            }
+        }
 
         HttpSession session = req.getSession();
+        Storage storage = (Storage) session.getAttribute("storageChosen");
+
+        HistoryMaker historyMaker = new HistoryMaker();
+        historyMaker.readHistory(numEntries, storage);
+
         session.setAttribute("history", historyMaker.getHistory());
         session.setAttribute("historyPage", true);
 
