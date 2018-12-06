@@ -13,25 +13,28 @@
     <title>Produkt Information</title>
 </head>
 <body>
-
-</body>
     <aside><%
         //Product information header
         Product product = (Product) session.getAttribute("productChosen");%>
         <div class="productHeader">
             <label style="font-size: 40px"><%=product.getName()%></label>
-            <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
+
+            <!-- Should only be seen by a manager -->
+            <%if(session.getAttribute("role").equals("Chef")){%>
+                <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
+            <%}%>
         </div>
 
         <div>
-            <button class="tab" style="border-radius: 8px 8px 0 0;">Tag Vare</button>
-            <button class="tab" style="border-radius: 8px 8px 0 0;">Tilføj Vare</button>
+            <!-- TODO: Hide style -->
+            <button class="tab" style="border-radius: 8px 8px 0 0;" onclick="show('takeBatch', 'addBatch')">Tag Vare</button>
+            <button class="tab" style="border-radius: 8px 8px 0 0;" onclick="show('addBatch', 'takeBatch')">Tilføj Vare</button>
             <br>
             <br>
             <br>
         </div>
 
-        <table class="productTable">
+        <table class="productTable" id="takeBatch">
             <tr>
                 <th>Dato</th>
                 <th>Batch Nummer</th>
@@ -44,16 +47,53 @@
                         <td><%=batch.getDate()%></td>
                         <td><%=batch.getBatchNumber()%></td>
                         <td><%=batch.getRemainingInBox()%>
-                            <form action="Batch" method="post">
+                            <form action="TakeBatch" method="post">
                                 <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input type="text" name="takeFromBatch">
+                                <input type="text" name="takeFromBatch" value="1">
                                 <input type="submit" value="Tag Vare">
                             </form>
                         </td>
                     </tr>
                 <%i++;
                 }%>
-
         </table>
+
+        <table class="productTable" id="addBatch" hidden>
+            <tr>
+                <th>Dato</th>
+                <th>Batch Nummer</th>
+                <th>Antal</th>
+            </tr>
+            <tr>
+                <form action="AddBatch" method="post">
+                <td id="date"></td>
+                <td><input type="text" name="batchNumber"></td>
+                <td>
+                    <input type="text" name="addBatch" value="<%=product.getBatchSize()%>">
+                    <input type="submit" value="Tilføj Batch">
+                </td>
+                </form>
+            </tr>
+        </table>
+
+
     </aside>
+
+    <script>
+        function show(ID1, ID2) {
+            var show = document.getElementById(ID1);
+            var hide = document.getElementById(ID2);
+
+            if(show.style.display === "none"){
+                show.style.display = "block";
+                if(hide !== "none"){
+                    hide.style.display = "none";
+                }
+            }
+        }
+
+        var today = new Date();
+        document.getElementById('date').innerHTML = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
+    </script>
+</body>
 </html>

@@ -39,40 +39,16 @@
         <!-- Tabs only available for a manager-->
         <%if(session.getAttribute("role").equals("Chef")){%>
             <button class="tab" id="registerProductButton" onclick="show('registerProductPage', 'historyPage')">Registrer Vare</button>
-            <button class="tab" id="historyButton" onclick="show('historyPage', 'registerProductPage')">Historik</button>
+
+            <form action="History" method="post">
+                <button class="tab" id="historyButton" onclick="show('historyPage', 'registerProductPage')">Historik</button>
+            </form>
 
             <!-- Breaklines TODO: should probably be done with css-->
             <br><br><br>
         <%}%>
 
-        <div id="inventory"><%
-            //When the program runs for the first time, productList will have the value null
-            List<Product> productList = (List) session.getAttribute("productList");
-
-            List<Product> productShownList = new ArrayList<>();
-
-            if(productList == null){
-                productList = storage.sortProducts();
-                session.setAttribute("productList", productList);
-            }%>
-            <form name="productChosenEvent" action="Product" method="post">
-                <input type="hidden" name="productChosenButton"><%
-                int i = 0;
-                for(Product product : productList){
-                    productShownList.add(product);
-                    product.sortBatches();%>
-                    <button class="productButton" onclick="productChoice(id)" value="<%=i%>" id="<%=product.getId()%>">
-                        <label><%=product.getName()%></label>
-                        <label style="float: right; padding-right: 15px"><%=product.getTotalAmountOfBatches()%></label>
-                    </button><%
-                    i++;
-                }
-                session.setAttribute("productListForChoosing", productShownList);%>
-            </form>
-
-            <!-- Reset productList, so the other storages doesn't get the same product inventory -->
-            <%session.setAttribute("productList", null);%>
-        </div>
+        <jsp:include page="inventory.jsp"/>
 
         <!-- Price-box -->
         <div class="priceBox"><a>Total pris: <%=storage.calculateTotalPrice()%> kr.</a></div>
@@ -81,18 +57,25 @@
     <!-- Register new product in the storage -->
     <!-- Will be hidden every time page is reloaded-->
     <aside id="registerProductPage" hidden>
-        <form action="RegisterProduct" method="post">
-            <input type="text" placeholder="Indtast navnet på produktet" name="name">
-            <input type="text" placeholder="Indtast antal per batch" name="batchSize">
-            <input type="text" placeholder="Indtast prisen for en batch" name="cost">
-            <input type="submit" value="Registrer">
-        </form>
+        <div class="productHeader">
+            <label style="font-size: 40px">Registrer Vare</label>
+        </div>
+        <div>
+            <form action="RegisterProduct" method="post">
+                <input type="text" placeholder="Indtast navnet på produktet" name="name">
+                <input type="text" placeholder="Indtast antal per batch" name="batchSize">
+                <input type="text" placeholder="Indtast prisen for en batch" name="cost">
+                <input type="submit" value="Registrer">
+            </form>
+        </div>
     </aside>
 
     <!-- History page -->
     <!-- Will be hidden every time page is reloaded-->
-    <aside id="historyPage" hidden>
-        History
+    <aside id="historyPage" <%if(!(boolean)session.getAttribute("historyPage")){%>hidden<%}%>>
+        <div class="productHeader">
+            <label style="font-size: 40px">Historik</label>
+        </div>
     </aside>
 
     <!-- Product information -->

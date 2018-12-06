@@ -32,5 +32,9 @@
                 <input type="submit" value="Login">
             </form>
         </div>
+
+
+        <!-- Workaround to show history -->
+        <%session.setAttribute("historyPage", false);%>
     </body>
 </html>

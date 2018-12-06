@@ -192,12 +192,13 @@ input[type=sumbit]{
 }
 
 aside {
-    height: 100%;
-    padding-left: 30%;
+    height: 90%;
+    overflow: scroll;
 }
 
 .productHeader {
     padding: 40px;
+    font-size: 40px;
 }
 
 .productTable{

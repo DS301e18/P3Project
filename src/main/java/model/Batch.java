@@ -45,6 +45,21 @@ public class Batch extends AddRemove {
 
     }
 
+    public Batch(Product product, String batchNumber, int numberAdded) {
+
+        this.batchNumber = batchNumber;
+        this.date = new Timestamp(System.currentTimeMillis());
+        this.remainingInBox = numberAdded;
+        this.value = product.getPrice();
+        this.typeName = product.getName();
+        this.originalValue = product.getPrice();
+        this.originalBatchSize = product.getBatchSize();
+        this.product = product;
+
+        addObject(this);
+
+    }
+
     //Empty constructor because of AddRemove idk why
     public Batch() {
     }
