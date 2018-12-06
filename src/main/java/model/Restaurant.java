@@ -49,7 +49,7 @@ public class Restaurant extends AddRemove {
     private List<AssignedEmployees> collectEmployees() {
         List<AssignedEmployees> restaurantEmployees = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<AssignedEmployees> restaurantEmployeesList = session.createQuery("FROM AssignedEmployees").list();
         for (AssignedEmployees restaurantEmployee : restaurantEmployeesList) {
@@ -65,7 +65,7 @@ public class Restaurant extends AddRemove {
     private List<AssignedStorage> collectStorages() {
         List<AssignedStorage> restaurantStorages = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<AssignedStorage> restaurantStorageList = session.createQuery("FROM AssignedStorage").list();
         for (AssignedStorage restaurantStorage : restaurantStorageList) {
@@ -79,7 +79,7 @@ public class Restaurant extends AddRemove {
     }
 
     public List<Employee> sortEmployees() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<AssignedEmployees> restaurantEmployee = collectEmployees();
         List<Employee> employeeList = session.createQuery("FROM Employee").list();
@@ -97,7 +97,7 @@ public class Restaurant extends AddRemove {
     }
 
     public List<Storage> allStorages() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         List<AssignedStorage> restaurantStorage = collectStorages();
         List<Storage> storageList = session.createQuery("FROM Storage").list();
@@ -111,6 +111,11 @@ public class Restaurant extends AddRemove {
             }
         }
         return allRestaurantStorages;
+    }
+
+    @Override
+    public String toString() {
+        return  name;
     }
 }
 

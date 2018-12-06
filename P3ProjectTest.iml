@@ -16,7 +16,7 @@
     <facet type="hibernate" name="Hibernate">
       <configuration>
         <datasource-map>
-          <unit-entry name="hibernate.cfg.xml" value="f63e93a7-8e0f-4d6e-ace0-281025ed204f" />
+          <unit-entry name="hibernate.cfg.xml" />
           <unit-entry name="out:artifacts:P3ProjectTest_war_exploded:WEB-INF:classes:hibernate.cfg.xml" />
         </datasource-map>
         <naming-strategy-map />

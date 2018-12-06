@@ -1,5 +1,7 @@
 <%@ page import="model.Storage" %>
 <%@ page import="controller.StorageInitializerController" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kristoffer
@@ -14,23 +16,45 @@
 </head>
 <body>
 <%
-    //Assures that the user can't go back after logout (removes cache)
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
-    response.setHeader("Pragma", "no-cache");// HTTP 1.0
-    response.setHeader("Expires", "0");// Proxies
-
-    StorageInitializerController storageList = new StorageInitializerController(session);
+    List<Storage> storages = (List) session.getAttribute("storages");
 %>
 
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav">
 
-    <%for (Storage storage : storageList.getStorageInfo()) {%>
-        <button><div class="menuDot"><a><%=storage.getName()%></a></div></button>
-    <%}%>
-    <button><i class="fas fa-plus-circle"></i></button>
+    <!-- Generate storage buttons -->
+    <form name="storageChooser" action="Storage" method="post">
+        <input type="hidden" name="buttonChosen">
+        <%
+            int i = 0;
+            for (Storage storage : storages) {%>
+                <button class="menuDot" onclick="storageChoice(id)" value="<%=i%>" id="<%=storage.getId()%>">
+                    <%=storage.getName()%>
+                </button><%
+                i++;
+            }%>
+    </form>
 
+    <%if(session.getAttribute("role").equals("Chef")){%>
+    <!-- Add a new storage to the restaurant-->
+    <button><i class="fas fa-plus-circle"></i></button>
+    <%}%>
 </div>
+
+
+<script>
+
+    //Parameter buttonChosen gets the same value as the storage clicked on
+    function storageChoice(storageID) {
+        var button = document.getElementById(storageID).value;
+        document.storageChooser.buttonChosen.value = button;
+
+        //TODO: Change the style later
+        button.style.borderRadius = "25px";
+
+    }
+
+</script>
 
 
 </body>

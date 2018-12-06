@@ -41,7 +41,7 @@ public class Transactions {
 
 
         //TODO: Delete sessionFactory later
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;

@@ -55,4 +55,8 @@ public class LoginCheck {
     public Employee getEmployee() {
         return employee;
     }
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 }

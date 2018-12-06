@@ -1,4 +1,11 @@
-<%--
+<%@ page import="model.Storage" %>
+<%@ page import="model.Product" %>
+<%@ page import="java.util.List" %>
+<%@ page import="controller.SearchController" %>
+<%@ page import="org.hibernate.Session" %>
+<%@ page import="model.SessionFactoryCfg" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="controller.StorageInitializerController" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 26/11/2018
@@ -20,45 +27,29 @@
 </head>
 <body>
 
+<%
+    //Assures that the user can't go back after logout (removes cache)
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");// HTTP 1.1
+    response.setHeader("Pragma", "no-cache");// HTTP 1.0
+    response.setHeader("Expires", "0");// Proxies
 
+    StorageInitializerController storageList = new StorageInitializerController(session);
 
-    <jsp:include page="navigation.jsp" />
+    //Make so all storages are available in all .jsp files so they aren't needed to be reloaded in every file
+    List<Storage> storages = storageList.getStorageInfo();
+    session.setAttribute("storages", storages);
+%>
+
+    <jsp:include page="navigation.jsp"/>
     <jsp:include page="sidebar.jsp"/>
 
-    <!-- TODO: Make storage inventory dynamic -->
-    <!-- Storage inventory-->
-    <div class="container" id="storage">
-        <section>
-            <!-- Inventory header -->
-            <div class="contentBox">
-                <label>Storage Name</label>
-                <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
-            </div>
-            <div class="contentBox">
-                <input type="text" placeholder="Søg" name="search">
-            </div>
-            <button class="test"><div class="tab">Registrer Vare</div></button>
-            <button class="test"><div class="tab">Historik</div></button><br>
+    <%
+        if(session.getAttribute("storageChosen") != null){%>
 
-            <!-- Inventory products -->
-            <div class="productTab">
-                <label>Carlsberg Sport</label>
-                <label style="float: right">4</label>
-            </div>
-            <div class="productTab">
-                <label>Pepsi Max</label>
-                <label style="float: right">10</label>
-            </div>
+            <jsp:include page="storageInventory.jsp"/>
+        <%}
 
-            <!-- Price-box -->
-            <div class="priceBox"><a>Total pris: "Actual price" kr.</a></div>
-        </section>
-
-        <!-- Product information -->
-        <aside>
-            Hello
-        </aside>
-    </div>
+    %>
 
 </body>
 </html>

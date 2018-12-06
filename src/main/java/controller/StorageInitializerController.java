@@ -1,9 +1,6 @@
 package controller;
 
-import model.AssignedEmployees;
-import model.AssignedStorage;
-import model.SessionFactoryCfg;
-import model.Storage;
+import model.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +12,6 @@ import java.util.stream.Collectors;
 
 public class StorageInitializerController {
 
-    List<Integer> storagesIDs = new ArrayList<>();
     List<Storage> storageInfo = new ArrayList<>();
 
     public StorageInitializerController(HttpSession session) {
@@ -26,36 +22,21 @@ public class StorageInitializerController {
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
           
-            Query aecList = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
-            aecList.setParameter("i", session.getAttribute("employeeID"));
-            List<AssignedEmployees> aeclist = aecList.list();
-            System.out.println(aeclist);
-            System.out.println(session.getAttribute("employeeID"));
+            Query aecQuery = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
+            aecQuery.setParameter("i", session.getAttribute("employeeID"));
+            List<AssignedEmployees> aeclist = aecQuery.list();
 
             //Er i tvivl om dette if statement er nødvendigt
             if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){
                 session.setAttribute("restaurantID", aeclist.get(0).getRestaurantId());
             }
 
-            //Check which storages belongs to the restaurant
-            List<AssignedStorage> ascList = hibSession.createQuery("From AssignedStorage ").list();
-
-            for(AssignedStorage asc : ascList){
-                if(asc.getRestaurantId() == (int) session.getAttribute("restaurantID")){
-                    storagesIDs.add(asc.getStorageId());
-                }
-            }
-
-            //Get the information of all relevant storages
-            List<Storage> storageList = hibSession.createQuery("From Storage ").list();
-
-            for (Storage storage : storageList){
-                for(int i = 0; i <= storagesIDs.size()-1; i++){
-                    if(storage.getId() == storagesIDs.get(i)){
-                        storageInfo.add(storage);
-                    }
-                }
-            }
+            //Instantiates which restaurant is chosen
+            Query restaurantQuery = hibSession.createQuery("From Restaurant where id = :j");
+            restaurantQuery.setParameter("j", session.getAttribute("restaurantID"));
+            session.setAttribute("restaurant", restaurantQuery.list().get(0));
+            Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+            storageInfo = restaurant.allStorages();
 
         } catch (HibernateException e){
             System.out.println("Couldn't get the list.");
@@ -64,14 +45,6 @@ public class StorageInitializerController {
         } finally {
             hibSession.close();
         }
-    }
-
-    public List<Integer> getStoragesIDs() {
-        return storagesIDs;
-    }
-
-    public void setStoragesIDs(List<Integer> storagesIDs) {
-        this.storagesIDs = storagesIDs;
     }
 
     public List<Storage> getStorageInfo() {
