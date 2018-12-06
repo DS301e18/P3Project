@@ -1,6 +1,6 @@
 package relationClasses;
 
-import Util.AddRemove;
+import util.AddRemove;
 
 public class RestaurantEmployee extends AddRemove {
     private int id;

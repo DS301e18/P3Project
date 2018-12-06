@@ -4,6 +4,7 @@ import org.hibernate.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import relationClasses.RestaurantStorage;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 

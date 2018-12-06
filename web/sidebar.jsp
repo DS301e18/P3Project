@@ -1,7 +1,5 @@
 <%@ page import="model.Storage" %>
-<%@ page import="controller.StorageInitializerController" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: Kristoffer

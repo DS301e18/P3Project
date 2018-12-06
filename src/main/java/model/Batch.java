@@ -1,13 +1,13 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.MathContext;
 import java.sql.Timestamp;
 
@@ -16,7 +16,7 @@ public class Batch extends AddRemove {
     /**
      * Field
      **/
-    int id;
+    private int id;
     private String batchNumber;
     private Timestamp date;
     private int remainingInBox;
@@ -83,7 +83,7 @@ public class Batch extends AddRemove {
 
             this.setRemainingInBox(this.remainingInBox - amount);
 
-            this.calcBatchValue(amount);
+            this.calcBatchValue(remainingInBox);
 
             session.update(this);
 
@@ -151,7 +151,6 @@ public class Batch extends AddRemove {
     public void setDate(Timestamp date) {
         this.date = date;
     }
-
 
     public BigDecimal getValue() {
         return value;

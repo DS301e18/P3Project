@@ -1,4 +1,6 @@
-package model;
+package util;
+
+import model.Transactions;
 
 import java.util.Comparator;
 

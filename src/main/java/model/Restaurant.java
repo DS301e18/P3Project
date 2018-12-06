@@ -1,11 +1,12 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
+import util.SessionFactoryCfg;
 
 import java.util.ArrayList;
 import java.util.Comparator;

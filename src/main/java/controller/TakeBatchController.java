@@ -20,22 +20,26 @@ public class TakeBatchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //Taken from the input parameters
+        //Input parameters
         int numTaken = Integer.parseInt(req.getParameter("takeFromBatch"));
         int batchChosenI = Integer.parseInt(req.getParameter("batchChosen"));
 
         HttpSession session = req.getSession();
 
+        //Initialise necessary variables
+        List<Batch> batchList = (List) session.getAttribute("batchList");
         Employee employee = (Employee) session.getAttribute("employee");
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
-        List<Batch> batchList = (List) session.getAttribute("batchList");
+        //Get chosen batch
         Batch batch = batchList.get(batchChosenI);
         batch.takeFromBatch(numTaken);
 
+        //Transaction
         Transactions transactions = new Transactions();
         transactions.registerTransaction(storage, employee, batch, numTaken, "Fjernet");
 
+        //Redirect
         resp.sendRedirect("webpanel.jsp");
 
     }

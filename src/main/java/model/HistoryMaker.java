@@ -2,6 +2,8 @@ package model;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import util.SessionFactoryCfg;
+import util.SortHistory;
 
 import java.util.ArrayList;
 import java.util.List;

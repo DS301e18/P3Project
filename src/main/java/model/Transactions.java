@@ -3,8 +3,9 @@ package model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import java.text.SimpleDateFormat;
-import org.hibernate.SessionFactory;
+
 import org.hibernate.Transaction;
+import util.SessionFactoryCfg;
 
 
 import java.sql.Timestamp;

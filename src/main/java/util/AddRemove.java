@@ -1,6 +1,5 @@
-package Util;
+package util;
 
-import model.SessionFactoryCfg;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

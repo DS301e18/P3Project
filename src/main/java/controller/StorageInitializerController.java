@@ -5,6 +5,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import relationClasses.RestaurantEmployee;
+import util.SessionFactoryCfg;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;

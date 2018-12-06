@@ -1,10 +1,5 @@
 <%@ page import="model.Storage" %>
-<%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="controller.SearchController" %>
-<%@ page import="org.hibernate.Session" %>
-<%@ page import="model.SessionFactoryCfg" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="controller.StorageInitializerController" %><%--
   Created by IntelliJ IDEA.
   User: Maria

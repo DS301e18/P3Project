@@ -1,7 +1,7 @@
 package controller;
 
 import model.HistoryMaker;
-import model.SessionFactoryCfg;
+import util.SessionFactoryCfg;
 import model.Transactions;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.BeforeEach;

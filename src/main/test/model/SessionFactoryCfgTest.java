@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.jdbc.Work;
 import org.junit.jupiter.api.Test;
+import util.SessionFactoryCfg;
 
 import java.sql.Connection;
 import java.sql.SQLException;

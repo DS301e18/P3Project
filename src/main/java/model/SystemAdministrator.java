@@ -1,9 +1,6 @@
 package model;
 
-import model.Employee;
-import model.Manager;
-import model.Restaurant;
-import model.SessionFactoryCfg;
+import util.SessionFactoryCfg;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
