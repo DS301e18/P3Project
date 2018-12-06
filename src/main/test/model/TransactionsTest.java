@@ -16,12 +16,10 @@ class TransactionsTest {
     @BeforeEach
     void before(){
         //Instantiates the objects that are input-parameters to the method
-        e = new Employee();
         b = new Batch();
         Product p = new Product();
 
         //Setting random values for the objects
-        e.setFirstName("Kaj");
         p.setName("Pepsi Max");
         p.setPrice(BigDecimal.valueOf(23));
         p.setBatchSize(3);
@@ -29,15 +27,28 @@ class TransactionsTest {
         b.setBatchNumber("213123");
         b.setProduct(p);
         b.setRemainingInBox(p.getBatchSize());
+
     }
 
     @Test
     void registerTransactionTest() {
 
+        new SessionFactoryCfg().createSessionFactory();
+
         Transactions transactions = new Transactions();
         Transaction transaction;
 
-        transactions.registerTransaction(e, b, 2, "tilføj");
+        e = new Employee("Kaj", "Kajesen", "KajKajKaj", "1234kaj");
+
+        Restaurant restaurant = new Restaurant("ålleren");
+
+        Storage s = new Storage("Mas");
+
+
+        new AssignedStorage(restaurant.getId(), s.getId());
+
+
+        transactions.registerTransaction(s, e, b, 2, "tilføj");
 
         //Establishing a connection to the database
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
