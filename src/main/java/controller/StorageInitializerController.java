@@ -34,7 +34,7 @@ public class StorageInitializerController {
 
             //Er i tvivl om dette if statement er nødvendigt
             if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){
-                session.setAttribute("restaurantIDd", aeclist.get(0).getRestaurantId());
+                session.setAttribute("restaurantID", aeclist.get(0).getRestaurantId());
             }
 
             //Check which storages belongs to the restaurant
