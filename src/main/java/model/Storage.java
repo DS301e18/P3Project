@@ -28,12 +28,24 @@ public class Storage extends AddRemove {
     }
 
     public void remove() {
-        if ((sortProducts() == null))
-            removeObject(this);
-        else
+        if ((sortProducts() != null)){
             for (int i = 0; i < sortProducts().size(); i++) {
                 removeObject(sortProducts().get(i));
             }
+        }
+
+        if ((collectProducts() != null)){
+            for (int i = 0; i < collectProducts().size(); i++) {
+                removeObject(collectProducts().get(i));
+            }
+        }
+
+        removeObject(this);
+
+    }
+
+    public void update(){
+        updateObject(this);
     }
 
     /**

@@ -36,7 +36,7 @@ public class AddBatchController extends HttpServlet {
 
         //Transaction
         Transactions transactions = new Transactions();
-        transactions.registerTransaction(storage, employee, batch, numAdd, "Tilføjet");
+        transactions.registerTransaction(storage, employee, batch, batch.getOriginalBatchSize()*numAdd, "Tilføjet");
 
         //Update batch list for the product
         batchList.add(batch);

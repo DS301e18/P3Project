@@ -21,8 +21,12 @@ public class EditStorageController extends HttpServlet {
         HttpSession session = req.getSession();
 
         Storage storage = (Storage) session.getAttribute("storageChosen");
+        storage.setName(storageName);
+        storage.update();
 
         session.setAttribute("showEditSPopUp", false);
+
+        resp.sendRedirect("webpanel.jsp");
     }
 
     @Override

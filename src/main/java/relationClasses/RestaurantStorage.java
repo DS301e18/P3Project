@@ -17,6 +17,10 @@ public class RestaurantStorage extends AddRemove {
     public RestaurantStorage() {
     }
 
+    public void remove(){
+        removeObject(this);
+    }
+
     public int getId() {
         return id;
     }
