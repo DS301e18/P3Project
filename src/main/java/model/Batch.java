@@ -68,40 +68,26 @@ public class Batch extends AddRemove {
     }
 
     //Method that can take any amount from a batch of a product
-
-    /**
-     * If this methond is called with the amount 0 it will remove
-     **/
-    public void takeFromBatch(int amount) {
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction;
-        try {
-
-            transaction = session.beginTransaction();
-
-            this.setRemainingInBox(this.remainingInBox - amount);
-
-            this.calcBatchValue(remainingInBox);
-
-            session.update(this);
-
-            transaction.commit();
-
-            if (amount < 0) System.out.println("Wrong input");
-
-        } catch (HibernateException e) {
-            System.out.println("Could not save the object");
-            e.printStackTrace();
-
-        } finally {
-            session.close();
+    /** If this methond is called with the amount 0 it will remove**/
+    public void takeFromBatch(Batch batch,ProductBatch productBatch, int amount) {
+        if (amount < 0){System.out.println("");}
+        if (amount == 0){
+            batch.setRemainingInBox(batch.remainingInBox - 1);
         }
-
-
+        else{
+            batch.setRemainingInBox(batch.remainingInBox - amount);
+        }
+        calcBatchValue(batch, remainingInBox);
+        removeIfZero(batch, productBatch);
     }
 
+    private void removeIfZero (Batch batch, ProductBatch productBatch){
+        if(batch.getRemainingInBox() < 1){
+            removeObject(batch);
+            removeObject(productBatch);
+        }
+    }
+  
     private void calcBatchValue(int amount) {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
