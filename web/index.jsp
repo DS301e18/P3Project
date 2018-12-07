@@ -37,6 +37,7 @@
         <%session.setAttribute("history", new ArrayList<>());
         session.setAttribute("historyPage", false);
         session.setAttribute("showSPopUp", false);
-        session.setAttribute("showEditSPopUp", false);%>
+        session.setAttribute("showEditSPopUp", false);
+        session.setAttribute("showEditProPopUp", false);%>
     </body>
 </html>

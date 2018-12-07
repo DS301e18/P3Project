@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet("/SPopUp")
 public class StoragePopUpController extends HttpServlet {
 
+    /** Add Storage */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String storageName = req.getParameter("newStorage");
@@ -29,6 +30,7 @@ public class StoragePopUpController extends HttpServlet {
         resp.sendRedirect("webpanel.jsp");
     }
 
+    /** Open pop up*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

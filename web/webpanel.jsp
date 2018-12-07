@@ -47,13 +47,13 @@
     <jsp:include page="editStoragePopUp.jsp"/>
     <%}%>
 
-    <%
-        if(session.getAttribute("storageChosen") != null){%>
+    <%if((boolean) session.getAttribute("showEditProPopUp")){%>
+    <jsp:include page="editProductPopUp.jsp"/>
+    <%}%>
 
-            <jsp:include page="storageInventory.jsp"/>
-        <%}
-
-    %>
+    <%if(session.getAttribute("storageChosen") != null){%>
+        <jsp:include page="storageInventory.jsp"/>
+    <%}%>
 
 </body>
 </html>

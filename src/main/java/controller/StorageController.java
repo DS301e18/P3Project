@@ -20,7 +20,7 @@ import java.util.List;
 @WebServlet("/Storage")
 public class StorageController extends HttpServlet{
 
-    //Add Storage
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int storageID = Integer.parseInt(request.getParameter("buttonChosen"));

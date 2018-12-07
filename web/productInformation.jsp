@@ -24,7 +24,9 @@
 
             <!-- Should only be seen by a manager -->
             <%if(session.getAttribute("role").equals("Chef")){%>
-                <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
+                <form action="EditProductController" method="get">
+                    <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
+                </form>
             <%}%>
         </div>
 
