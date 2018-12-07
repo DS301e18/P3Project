@@ -78,7 +78,6 @@
         <form action="History" method="post">
             <input type="text" placeholder="Indtast Historik Størrelse..." name="historyInput">
         </form>
-        <form
         <table class="productTable">
             <tr>
                 <th>Dato</th>
