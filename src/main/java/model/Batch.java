@@ -45,7 +45,7 @@ public class Batch extends AddRemove {
 
     //Method that can take any amount from a batch of a product
     /** If this methond is called with the amount 0 it will remove**/
-    public void takeFromBatch(Batch batch, int amount) {
+    public void takeFromBatch(Batch batch,ProductBatch productBatch, int amount) {
         if (amount < 0){System.out.println("");}
         if (amount == 0){
             batch.setRemainingInBox(batch.remainingInBox - 1);
@@ -54,6 +54,7 @@ public class Batch extends AddRemove {
             batch.setRemainingInBox(batch.remainingInBox - amount);
         }
         calcBatchValue(batch, amount);
+        removeIfZero(batch, productBatch);
     }
 
     private void calcBatchValue(Batch batch, int amount){
@@ -69,6 +70,13 @@ public class Batch extends AddRemove {
 
 
         batch.setValue(multiplySum);
+    }
+
+    private void removeIfZero (Batch batch, ProductBatch productBatch){
+        if(batch.getRemainingInBox() < 1){
+            removeObject(batch);
+            removeObject(productBatch);
+        }
     }
 
 
