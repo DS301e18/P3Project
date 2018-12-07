@@ -51,7 +51,31 @@ public class AddRemove {
 
             transaction.commit();
         } catch (HibernateException e) {
-            System.out.println("Could not save the object");
+            System.out.println("Could not delete the object");
+            e.printStackTrace();
+
+        } finally {
+            session.close();
+
+        }
+
+    }
+
+    protected <T> void updateObject(T object) {
+
+        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction;
+
+        try {
+            transaction = session.beginTransaction();
+
+            session.update(object);
+
+            transaction.commit();
+        } catch (HibernateException e) {
+            System.out.println("Could not update the object");
             e.printStackTrace();
 
         } finally {
