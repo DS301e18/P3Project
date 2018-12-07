@@ -12,6 +12,7 @@ class LoginCheckTest {
     void check() {
         try{
             LoginCheck test1 = new LoginCheck();
+            test1.getSessionFactory();
             boolean result1 = test1.check("admin", "admin123");
             assertEquals(true, result1);
         }

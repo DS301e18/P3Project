@@ -4,11 +4,12 @@ import model.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import relationClasses.RestaurantEmployee;
+import util.SessionFactoryCfg;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StorageInitializerController {
 
@@ -22,9 +23,9 @@ public class StorageInitializerController {
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
           
-            Query aecQuery = hibSession.createQuery("From AssignedEmployees where employeeId = :i");
+            Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :i");
             aecQuery.setParameter("i", session.getAttribute("employeeID"));
-            List<AssignedEmployees> aeclist = aecQuery.list();
+            List<RestaurantEmployee> aeclist = aecQuery.list();
 
             //Er i tvivl om dette if statement er nødvendigt
             if(aeclist.get(0).getEmployeeId() == (int) session.getAttribute("employeeID")){

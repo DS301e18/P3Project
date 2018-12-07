@@ -2,6 +2,8 @@ package model;
 
 import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
+import relationClasses.StorageProduct;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 

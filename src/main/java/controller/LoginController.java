@@ -1,7 +1,6 @@
 package controller;
 
 import model.LoginCheck;
-import model.SessionFactoryCfg;
 import org.hibernate.SessionFactory;
 
 import javax.servlet.ServletException;
@@ -26,17 +25,22 @@ public class LoginController extends HttpServlet {
         LoginCheck loginCheck = new LoginCheck();
         sessionFactory = loginCheck.getSessionFactory();
 
+        //Check if login succeeded
         if(loginCheck.check(username, password)){
             HttpSession session = request.getSession();
+
+            //Set global attributes
             session.setAttribute("username", username);
             session.setAttribute("role", loginCheck.getEmployee().getRole());
-            session.setAttribute("employeeName", loginCheck.getEmployee().getFirstName() + " " + loginCheck.getEmployee().getLastName());
             session.setAttribute("employeeID", loginCheck.getEmployee().getId());
+            session.setAttribute("employee", loginCheck.getEmployee());
+
+            //Redirect
             response.sendRedirect("webpanel.jsp");
 
         } else {
             response.sendRedirect("index.jsp");
-            loginCheck.getSessionFactory().close();
+            sessionFactory.close();
         }
 
     }
@@ -50,7 +54,6 @@ public class LoginController extends HttpServlet {
         session.invalidate();
         response.sendRedirect("index.jsp");
 
-        //TODO: Don't know if it should be closed
         sessionFactory.close();
 
     }

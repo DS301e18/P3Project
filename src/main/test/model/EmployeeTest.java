@@ -1,9 +1,8 @@
 package model;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import util.SessionFactoryCfg;
 
 import java.util.List;
 

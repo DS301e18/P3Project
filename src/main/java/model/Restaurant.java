@@ -1,9 +1,12 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import relationClasses.RestaurantEmployee;
+import relationClasses.RestaurantStorage;
+import util.SessionFactoryCfg;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -46,13 +49,13 @@ public class Restaurant extends AddRemove {
         this.name = name;
     }
 
-    private List<AssignedEmployees> collectEmployees() {
-        List<AssignedEmployees> restaurantEmployees = new ArrayList<>();
+    private List<RestaurantEmployee> collectEmployees() {
+        List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        List<AssignedEmployees> restaurantEmployeesList = session.createQuery("FROM AssignedEmployees").list();
-        for (AssignedEmployees restaurantEmployee : restaurantEmployeesList) {
+        List<RestaurantEmployee> restaurantEmployeesList = session.createQuery("FROM RestaurantEmployee ").list();
+        for (RestaurantEmployee restaurantEmployee : restaurantEmployeesList) {
             if (this.getId() == restaurantEmployee.getRestaurantId()) {
                 restaurantEmployees.add(restaurantEmployee);
             }
@@ -62,13 +65,13 @@ public class Restaurant extends AddRemove {
         return restaurantEmployees;
     }
 
-    private List<AssignedStorage> collectStorages() {
-        List<AssignedStorage> restaurantStorages = new ArrayList<>();
+    private List<RestaurantStorage> collectStorages() {
+        List<RestaurantStorage> restaurantStorages = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        List<AssignedStorage> restaurantStorageList = session.createQuery("FROM AssignedStorage").list();
-        for (AssignedStorage restaurantStorage : restaurantStorageList) {
+        List<RestaurantStorage> restaurantStorageList = session.createQuery("FROM RestaurantStorage ").list();
+        for (RestaurantStorage restaurantStorage : restaurantStorageList) {
             if (this.getId() == restaurantStorage.getRestaurantId()) {
                 restaurantStorages.add(restaurantStorage);
             }
@@ -81,7 +84,7 @@ public class Restaurant extends AddRemove {
     public List<Employee> sortEmployees() {
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        List<AssignedEmployees> restaurantEmployee = collectEmployees();
+        List<RestaurantEmployee> restaurantEmployee = collectEmployees();
         List<Employee> employeeList = session.createQuery("FROM Employee").list();
         List<Employee> allRestaurantEmployees = new ArrayList<>();
 
@@ -99,7 +102,7 @@ public class Restaurant extends AddRemove {
     public List<Storage> allStorages() {
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        List<AssignedStorage> restaurantStorage = collectStorages();
+        List<RestaurantStorage> restaurantStorage = collectStorages();
         List<Storage> storageList = session.createQuery("FROM Storage").list();
         List<Storage> allRestaurantStorages = new ArrayList<>();
 

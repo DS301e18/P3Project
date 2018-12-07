@@ -3,6 +3,7 @@ package model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import util.SessionFactoryCfg;
 
 import java.util.List;
 
@@ -13,40 +14,28 @@ public class LoginCheck {
 
 
     public LoginCheck() {
-        sessionFactory = new SessionFactoryCfg().createSessionFactory();
 
+        sessionFactory = new SessionFactoryCfg().createSessionFactory();
     }
 
     /** Check if the username equals the corresponding password **/
     public boolean check(String username, String password){
 
-        Session session = sessionFactory.openSession();
-
-        try {
+        try (Session session = sessionFactory.openSession()) {
             // Create list of the employees in the database
             List<Employee> employeeList = session.createQuery("FROM Employee ").list();
 
             for (Employee employee : employeeList) {
-                if(employee.getUsername().equals(username) && employee.getPassword().equals(password)){
+                if (employee.getUsername().equals(username) && employee.getPassword().equals(password)) {
                     this.employee = employee;
                     return true;
                 }
             }
 
-            //TODO: Check if this exception is the correct one
-        } catch (NullPointerException e){
+        } catch (HibernateException e) {
             System.out.println("Something went wrong");
             e.printStackTrace();
             sessionFactory.close();
-
-        } catch (HibernateException e){
-            System.out.println("Something went wrong");
-            e.printStackTrace();
-            sessionFactory.close();
-        }
-            finally {
-            session.close();
-
         }
 
         return false;

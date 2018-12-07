@@ -1,55 +1,40 @@
 package controller;
 
-import model.SessionFactoryCfg;
-import model.Transactions;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+import model.HistoryMaker;
+import model.Storage;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
-public class HistoryController {
+@WebServlet("/History")
+public class HistoryController extends HttpServlet {
 
-    private Session session;
-    private List history;
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    public List getHistory() {
-        return history;
-    }
-
-    public void readHistory(int numberOfEntries){
-
-        session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        Query query = session.createQuery("FROM Transactions");
-        query.setMaxResults(numberOfEntries);
-        history = query.list();
-
-        session.close();
-    }
-
-    public List<Transactions> sortHistory(String input){
-        session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        List<Transactions> transactionsList = getHistory();
-        List<Transactions> sortedList = new ArrayList<>();
-
-        //TODO: find a method without this many if statements
-        for(Transactions transactions : transactionsList){
-            if(transactions.getProduct().toLowerCase().contains(input.toLowerCase())){
-                sortedList.add(transactions);
-
-            } else if(transactions.getName().toLowerCase().contains(input.toLowerCase())){
-                sortedList.add(transactions);
-
-            } else if(transactions.getBatch().toLowerCase().contains(input.toLowerCase())){
-                sortedList.add(transactions);
+        String input = req.getParameter("historyInput");
+        int numEntries = 10;
+        if(input != null){
+            if(!input.equals("")){
+                numEntries = Integer.parseInt(req.getParameter("historyInput"));
             }
-
         }
 
-        session.close();
+        HttpSession session = req.getSession();
+        Storage storage = (Storage) session.getAttribute("storageChosen");
 
-        return sortedList;
+        HistoryMaker historyMaker = new HistoryMaker();
+        historyMaker.readHistory(numEntries, storage);
+
+        session.setAttribute("history", historyMaker.getHistory());
+        session.setAttribute("historyPage", true);
+
+        resp.sendRedirect("webpanel.jsp");
+
     }
 }

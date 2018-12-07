@@ -22,6 +22,8 @@ public class ProductController extends HttpServlet {
 
         HttpSession session = req.getSession();
 
+        session.setAttribute("historyPage", false);
+
         List<Product> productList = (List) session.getAttribute("productListForChoosing");
 
         Product product = productList.get(productChosen);

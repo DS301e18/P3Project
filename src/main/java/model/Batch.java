@@ -1,10 +1,11 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -15,7 +16,7 @@ public class Batch extends AddRemove {
     /**
      * Field
      **/
-    int id;
+    private int id;
     private String batchNumber;
     private Timestamp date;
     private int remainingInBox;
@@ -45,6 +46,23 @@ public class Batch extends AddRemove {
 
     }
 
+    public Batch(Product product, String batchNumber, int numberAdded) {
+
+        this.product = product;
+        this.typeName = product.getName();
+        this.batchNumber = batchNumber;
+        this.date = new Timestamp(System.currentTimeMillis());
+
+        this.remainingInBox = numberAdded;
+        this.value = product.getPrice().multiply(BigDecimal.valueOf(numberAdded));
+
+        this.originalValue = product.getPrice();
+        this.originalBatchSize = numberAdded;
+
+        addObject(this);
+
+    }
+
     //Empty constructor because of AddRemove idk why
     public Batch() {
     }
@@ -59,7 +77,7 @@ public class Batch extends AddRemove {
         else{
             batch.setRemainingInBox(batch.remainingInBox - amount);
         }
-        calcBatchValue(batch, amount);
+        calcBatchValue(batch, remainingInBox);
         removeIfZero(batch, productBatch);
     }
 
@@ -80,14 +98,9 @@ public class Batch extends AddRemove {
         try{
             transaction = session.beginTransaction();
 
-            if (amount == 0) {
-                amount = 1;
-            }
-
             MathContext mc = new MathContext(4);
 
-            BigDecimal oneFracion = this.originalValue.divide(BigDecimal.valueOf(this.originalBatchSize), mc);
-            BigDecimal multiplySum = oneFracion.multiply(BigDecimal.valueOf(amount), mc);
+            BigDecimal multiplySum = originalValue.multiply(BigDecimal.valueOf(amount), mc);
 
             this.setValue(multiplySum);
 
@@ -124,7 +137,6 @@ public class Batch extends AddRemove {
     public void setDate(Timestamp date) {
         this.date = date;
     }
-
 
     public BigDecimal getValue() {
         return value;
@@ -176,5 +188,11 @@ public class Batch extends AddRemove {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return  "batchNumber='" + batchNumber + '\'' +
+                "product='" + product + '\'';
     }
 }

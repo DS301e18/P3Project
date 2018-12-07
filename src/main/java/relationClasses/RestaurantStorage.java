@@ -1,20 +1,20 @@
-package model;
+package relationClasses;
 
-import Util.AddRemove;
+import util.AddRemove;
 
-public class AssignedStorage extends AddRemove {
+public class RestaurantStorage extends AddRemove {
     private int id;
     private int restaurantId;
     private int storageId;
 
-    public AssignedStorage(int restaurantId, int storageId) {
+    public RestaurantStorage(int restaurantId, int storageId) {
         this.restaurantId = restaurantId;
         this.storageId = storageId;
 
         addObject(this);
     }
 
-    public AssignedStorage() {
+    public RestaurantStorage() {
     }
 
     public int getId() {
@@ -47,7 +47,7 @@ public class AssignedStorage extends AddRemove {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AssignedStorage that = (AssignedStorage) o;
+        RestaurantStorage that = (RestaurantStorage) o;
 
         if (restaurantId != that.restaurantId) return false;
         return storageId == that.storageId;

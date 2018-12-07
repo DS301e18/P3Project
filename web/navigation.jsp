@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Employee" %><%--
   Created by IntelliJ IDEA.
   User: Kristoffer
   Date: 30/11/2018
@@ -18,10 +18,11 @@
 </head>
 <body>
 
+<%Employee employee = (Employee) session.getAttribute("employee");%>
 <div class="topnav">
     <a><%=session.getAttribute("restaurant")%></a>
     <div class="topnav-right">
-        <a><%=session.getAttribute("employeeName")%></a>
+        <a><%=employee.getFirstName() + " " + employee.getLastName()%></a>
         <div class="formbutton">
             <form action="Login" method="get">
                 <button type="submit" value="Logout"><a>Log ud</a></button>

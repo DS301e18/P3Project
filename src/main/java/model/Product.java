@@ -1,9 +1,12 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 import org.hibernate.Session;
+import relationClasses.ProductBatch;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -21,9 +24,11 @@ public class Product extends AddRemove {
     private int totalAmountOfBatches;
 
     public Product(String name, int batchSize, BigDecimal price) {
+
+        MathContext mc = new MathContext(4);
         this.name = name;
         this.batchSize = batchSize;
-        this.price = price;
+        this.price = price.divide(BigDecimal.valueOf(batchSize), mc);
 
         addObject(this);
     }

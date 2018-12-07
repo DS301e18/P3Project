@@ -4,9 +4,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,8 +15,6 @@ class BatchTest {
     @Test
     void takeFromBatch() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
-
 
         try {
             Product product = new Product("plzvirk", 2, BigDecimal.valueOf(1000));

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 23/11/2018
@@ -32,5 +32,10 @@
                 <input type="submit" value="Login">
             </form>
         </div>
+
+
+        <!-- Workaround to show history -->
+        <%session.setAttribute("history", new ArrayList<>());
+        session.setAttribute("historyPage", false);%>
     </body>
 </html>

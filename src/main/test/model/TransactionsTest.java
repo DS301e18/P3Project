@@ -3,6 +3,8 @@ package model;
 import org.hibernate.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import relationClasses.RestaurantStorage;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 
@@ -45,7 +47,7 @@ class TransactionsTest {
         Storage s = new Storage("Mas");
 
 
-        new AssignedStorage(restaurant.getId(), s.getId());
+        new RestaurantStorage(restaurant.getId(), s.getId());
 
 
         transactions.registerTransaction(s, e, b, 2, "tilføj");

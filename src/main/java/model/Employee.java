@@ -1,9 +1,6 @@
 package model;
 
-import Util.AddRemove;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import util.AddRemove;
 
 public class Employee extends AddRemove {
 

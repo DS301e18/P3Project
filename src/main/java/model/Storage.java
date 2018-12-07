@@ -1,7 +1,9 @@
 package model;
 
-import Util.AddRemove;
+import util.AddRemove;
 import org.hibernate.Session;
+import relationClasses.StorageProduct;
+import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
