@@ -17,16 +17,12 @@ class BatchTest {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
 
-        Batch batchTest = new Batch();
-        batchTest.setBatchNumber("qw12");
 
         try {
+            Product product = new Product("plzvirk", 2, BigDecimal.valueOf(1000));
+            Batch batch = new Batch(product, "ass123");
 
-            List<Batch> batchList = session.createQuery("FROM Batch").list();
-
-            for(Batch batch : batchList){
-                if (batch.getBatchNumber().equals("qw12")){ assert true;}
-            }
+            batch.takeFromBatch(1);
 
         } catch (HibernateException e){
             System.out.println("PIS");

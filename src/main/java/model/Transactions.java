@@ -2,6 +2,7 @@ package model;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import java.text.SimpleDateFormat;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
@@ -15,20 +16,29 @@ public class Transactions {
     private String name;
     private String batch;
     private String product;
-    private Timestamp timestamp;
+    private String timestamp;
     private int amount;
     private String transtype;
+    private Storage storage;
+    private int storage_id;
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+
 
     /** Methods **/
 
-    public void registerTransaction(Employee employee, Batch batch, int amount, String transtype) {
+    public void registerTransaction(Storage storage, Employee employee, Batch batch, int amount, String transtype) {
 
-        this.timestamp = getTimestamp();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        this.storage_id = storage.getId();
+        this.timestamp = sdf.format(timestamp);
         this.name = employee.getFirstName();
         this.batch = batch.getBatchNumber();
         this.product = batch.getProduct().getName();
         this.amount = amount;
         this.transtype = transtype;
+
 
         //TODO: Delete sessionFactory later
         SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
@@ -47,6 +57,14 @@ public class Transactions {
         } finally {
             session.close();
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -73,17 +91,13 @@ public class Transactions {
         this.product = product;
     }
 
-    public int getId() {
-        return id;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
-
-    public Timestamp getTimestamp() {return timestamp;}
-
-    public void setTimestamp(Timestamp timestamp) {this.timestamp = timestamp;}
 
     public int getAmount() {
         return amount;
@@ -101,6 +115,26 @@ public class Transactions {
         this.transtype = transtype;
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public void setStorage(Storage storage) {
+        this.storage = storage;
+    }
+
+    public int getStorage_id() {
+        return storage_id;
+    }
+
+    public void setStorage_id(int storage_id) {
+        this.storage_id = storage_id;
+    }
+
+    public static SimpleDateFormat getSdf() {
+        return sdf;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,33 +144,38 @@ public class Transactions {
 
         if (id != that.id) return false;
         if (amount != that.amount) return false;
-        if (!name.equals(that.name)) return false;
-        if (!batch.equals(that.batch)) return false;
-        if (!product.equals(that.product)) return false;
-        return transtype.equals(that.transtype);
+        if (storage_id != that.storage_id) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (batch != null ? !batch.equals(that.batch) : that.batch != null) return false;
+        if (product != null ? !product.equals(that.product) : that.product != null) return false;
+        if (timestamp != null ? !timestamp.equals(that.timestamp) : that.timestamp != null) return false;
+        return transtype != null ? transtype.equals(that.transtype) : that.transtype == null;
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (batch != null ? batch.hashCode() : 0);
-        result = 31 * result + (product != null ? product.hashCode() : 0);
-        result = 31 * result + (timestamp != null ? timestamp.hashCode() : 0);
+        result = 31 * result + name.hashCode();
+        result = 31 * result + batch.hashCode();
+        result = 31 * result + product.hashCode();
+        result = 31 * result + timestamp.hashCode();
         result = 31 * result + amount;
-        result = 31 * result + (transtype != null ? transtype.hashCode() : 0);
+        result = 31 * result + transtype.hashCode();
+        result = 31 * result + storage_id;
         return result;
     }
 
     @Override
     public String toString() {
-        return '\n'+"Transactions:" +
+        return "Transactions{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", batch='" + batch + '\'' +
                 ", product='" + product + '\'' +
-                ", date=" + timestamp +
+                ", timestamp='" + timestamp + '\'' +
                 ", amount=" + amount +
-                ", transtype='" + transtype;
+                ", transtype='" + transtype + '\'' +
+                ", storage_id=" + storage_id +
+                '}';
     }
 }

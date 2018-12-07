@@ -1,6 +1,7 @@
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Storage" %><%--
+<%@ page import="model.Storage" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 05/12/2018
@@ -19,12 +20,17 @@
 <!-- Storage inventory-->
 <div class="container" id="storage">
     <section>
+
         <!-- Inventory header -->
         <div class="contentBox" id="inventoryHeader">
+
             <!--Storage name-->
             <label><%=storage.getName()%></label>
-            <!--Search Bar-->
+
+            <!-- Edit button -->
             <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
+
+            <!--Search Bar-->
             <form action="search" method="post">
                 <input type="text" placeholder="Søg..." name="search">
             </form>
@@ -40,44 +46,64 @@
         <%}%>
 
         <div id="inventory"><%
+            //When the program runs for the first time, productList will have the value null
             List<Product> productList = (List) session.getAttribute("productList");
+
+            List<Product> productShownList = new ArrayList<>();
 
             if(productList == null){
                 productList = storage.sortProducts();
-            }
+                session.setAttribute("productList", productList);
+            }%>
+            <form name="productChosenEvent" action="Product" method="post">
+                <input type="hidden" name="productChosenButton"><%
+                int i = 0;
+                for(Product product : productList){
+                    productShownList.add(product);
+                    product.sortBatches();%>
+                    <button class="productButton" onclick="productChoice(id)" value="<%=i%>" id="<%=product.getId()%>">
+                        <label><%=product.getName()%></label>
+                        <label style="float: right; padding-right: 15px"><%=product.getTotalAmountOfBatches()%></label>
+                    </button><%
+                    i++;
+                }
+                session.setAttribute("productListForChoosing", productShownList);%>
+            </form>
 
-            for(Product product : productList){
-                product.sortBatches();%>
-                <button class="productTab">
-                    <label><%=product.getName()%></label>
-                    <label style="float: right; padding-right: 15px"><%=product.getTotalAmountOfBatches()%></label>
-                </button><%
-            }
-
-            session.setAttribute("productList", null);
-            %>
+            <!-- Reset productList, so the other storages doesn't get the same product inventory -->
+            <%session.setAttribute("productList", null);%>
         </div>
 
         <!-- Price-box -->
         <div class="priceBox"><a>Total pris: <%=storage.calculateTotalPrice()%> kr.</a></div>
-        <!-- Product information -->
     </section>
 
-        <aside id="registerProductPage" hidden>
-            <form action="RegisterProduct" method="post">
-                <input type="text" placeholder="Indtast navnet på produktet" name="name">
-                <input type="text" placeholder="Indtast antal per batch" name="batchSize">
-                <input type="text" placeholder="Indtast prisen for en batch" name="cost">
-                <input type="submit" value="Registrer">
-            </form>
-        </aside>
+    <!-- Register new product in the storage -->
+    <!-- Will be hidden every time page is reloaded-->
+    <aside id="registerProductPage" hidden>
+        <form action="RegisterProduct" method="post">
+            <input type="text" placeholder="Indtast navnet på produktet" name="name">
+            <input type="text" placeholder="Indtast antal per batch" name="batchSize">
+            <input type="text" placeholder="Indtast prisen for en batch" name="cost">
+            <input type="submit" value="Registrer">
+        </form>
+    </aside>
 
-        <aside id="historyPage" hidden>
-            History
-        </aside>
+    <!-- History page -->
+    <!-- Will be hidden every time page is reloaded-->
+    <aside id="historyPage" hidden>
+        History
+    </aside>
+
+    <!-- Product information -->
+    <!-- If a product has been chosen, attribute won't be null -->
+    <%if(session.getAttribute("productChosen") != null){%>
+        <jsp:include page="productInformation.jsp"/>
+    <%}%>
 </div>
 
 <script>
+    //Show history and register product, and close the other tab if open
     function show(ID1, ID2) {
         var show1 = document.getElementById(ID1);
         var show2 = document.getElementById(ID2);
@@ -90,6 +116,11 @@
         } else{
             show1.style.display = "none";
         }
+    }
+
+    function productChoice(productID) {
+        var button = document.getElementById(productID).value;
+        document.productChosenEvent.productChosenButton.value = button;
     }
 </script>
 
