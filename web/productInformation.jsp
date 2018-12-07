@@ -17,17 +17,16 @@
 </head>
 <body>
     <aside><%
-        //Product information header
         Product product = (Product) session.getAttribute("productChosen");%>
+        <!-- Product information header -->
         <div class="productHeader">
-            <label style="font-size: 40px"><%=product.getName()%></label>
-
-            <!-- Should only be seen by a manager -->
-            <%if(session.getAttribute("role").equals("Chef")){%>
-                <form action="EditProductController" method="get">
+            <form action="EditProductController" method="get">
+                <label style="font-size: 40px"><%=product.getName()%></label>
+                <!-- Should only be seen by a manager -->
+                <%if(session.getAttribute("role").equals("Chef")){%>
                     <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
-                </form>
-            <%}%>
+                <%}%>
+            </form>
         </div>
 
         <div>

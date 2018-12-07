@@ -1,4 +1,4 @@
-<%--
+<%@ page import="model.Product" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 07/12/2018
@@ -11,23 +11,28 @@
     <title>Title</title>
 </head>
 <body>
+    <%Product product = (Product) session.getAttribute("productChosen");%>
     <div class="popUp">
-        <label>Rediger Lager</label>
+        <header id="popUpHeader">
+            <label>Rediger Produkt</label>
+        </header>
 
-        <form action="EditProductController" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv navnet på produktet..." name="editProductName" value="">
-            <input type="text" placeholder="Angiv antal varer i én kasse..." name="editSize" value="">
-            <input type="text" placeholder="Angiv pris for én kasse..." name="editPrice" value="">
-            <input type="submit" value="Rediger">
-        </form>
+        <div id="popUpBody">
+            <form action="EditProductController" accept-charset="ISO-8859-1" method="post">
+                <input type="text" placeholder="Angiv navnet på produktet..." name="editProductName" value="<%=product.getName()%>">
+                <input type="text" placeholder="Angiv antal varer i én kasse..." name="editSize" value="<%=product.getBatchSize()%>">
+                <input type="text" placeholder="Angiv pris for én kasse..." name="editPrice" value="<%=product.getPrice()%>">
+                <input type="submit" value="Rediger">
+            </form>
 
-        <form action="Product" method="get">
-            <input type="submit" value="Slet">
-        </form>
+            <form action="Product" method="get">
+                <input type="submit" value="Slet">
+            </form>
 
-        <form action="ClosePopUp" method="get">
-            <input type="submit" value="Annuller">
-        </form>
+            <form action="ClosePopUp" method="get">
+                <input type="submit" value="Annuller">
+            </form>
+        </div>
     </div>
 </body>
 </html>

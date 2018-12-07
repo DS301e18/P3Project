@@ -13,20 +13,25 @@
 <body>
     <%Storage storage = (Storage) session.getAttribute("storageChosen");%>
     <div class="popUp">
-        <label>Rediger Lager</label>
+        <header id="popUpHeader">
+            <label>Rediger Lager</label>
+        </header>
 
-        <form action="EditStorageController" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv navnet på lageret..." name="editStorageName" value="<%=storage.getName()%>">
-            <input type="submit" value="Rediger">
-        </form>
+        <div id="popUpBody">
+            <form action="EditStorageController" accept-charset="ISO-8859-1" method="post">
+                <input type="text" placeholder="Angiv navnet på lageret..." name="editStorageName" value="<%=storage.getName()%>">
+                <input type="submit" value="Rediger">
+            </form>
 
-        <form action="Storage" method="get">
-            <input type="submit" value="Slet">
-        </form>
+            <form action="Storage" method="get">
+                <input type="submit" value="Slet">
+            </form>
 
-        <form action="ClosePopUp" method="get">
-            <input type="submit" value="Annuller">
-        </form>
+            <form action="ClosePopUp" method="get">
+                <input type="submit" value="Annuller">
+            </form>
+        </div>
+
     </div>
 </body>
 </html>

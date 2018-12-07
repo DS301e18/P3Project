@@ -25,18 +25,18 @@
         <!-- Inventory header -->
         <div class="contentBox" id="inventoryHeader">
 
-            <!--Storage name-->
-            <label><%=storage.getName()%></label>
+            <form action="EditStorageController" method="get">
+                <!--Storage name-->
+                <label><%=storage.getName()%></label>
 
-            <!-- Edit button -->
-            <%if(session.getAttribute("role").equals("Chef")){%>
-                <form action="EditStorageController" method="get">
+                <!-- Edit button -->
+                <%if(session.getAttribute("role").equals("Chef")){%>
                     <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
-                </form>
-            <%}%>
+                <%}%>
+            </form>
             <!--Search Bar-->
             <form action="search" accept-charset="ISO-8859-1" method="post">
-                <input type="text" placeholder="Søg..." name="search">
+                <input id="search" type="text" placeholder="Søg..." name="search">
             </form>
         </div>
 
@@ -110,7 +110,7 @@
     <!-- Product information -->
     <!-- If a product has been chosen, attribute won't be null -->
     <%if(session.getAttribute("productChosen") != null){%>
-        <jsp:include page="productInformation.jsp"/>
+    <jsp:include page="productInformation.jsp"/>
     <%}%>
 </div>
 

@@ -14,16 +14,18 @@
 </head>
 <body>
     <div class="popUp">
-        <label>Restaurant</label>
+        <header id="popUpHeader">Tilføj Lager</header>
 
-        <form action="SPopUp" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv navnet på lageret..." name="newStorage">
-            <input type="submit" value="Registrer">
-        </form>
+        <div id="popUpBody">
+            <form action="SPopUp" accept-charset="ISO-8859-1" method="post">
+                <input type="text" placeholder="Angiv navnet på lageret..." name="newStorage"><br>
+                <input style="float: right; margin-right: 150px;" type="submit" value="Registrer">
+            </form>
 
-        <form action="ClosePopUp" method="get">
-            <input type="submit" value="Annuller">Annuller</input>
-        </form>
+            <form action="ClosePopUp" method="get">
+                <input style="float: left; margin-left: 150px;" type="submit" value="Annuller">
+            </form>
+        </div>
     </div>
 </body>
 </html>
