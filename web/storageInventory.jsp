@@ -1,7 +1,5 @@
-<%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Storage" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Transactions" %><%--
   Created by IntelliJ IDEA.
   User: Maria
@@ -80,6 +78,7 @@
         <form action="History" method="post">
             <input type="text" placeholder="Indtast Historik Størrelse..." name="historyInput">
         </form>
+        <form
         <table class="productTable">
             <tr>
                 <th>Dato</th>
