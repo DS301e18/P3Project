@@ -17,10 +17,16 @@ public class HistoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String input = req.getParameter("historyInput");
+        String numInput = req.getParameter("historyInput");
+        String searchInput = req.getParameter("historySearch");
+
+        if(searchInput == null){
+            searchInput = "";
+        }
+
         int numEntries = 10;
-        if(input != null){
-            if(!input.equals("")){
+        if(numInput != null){
+            if(!numInput.equals("")){
                 numEntries = Integer.parseInt(req.getParameter("historyInput"));
             }
         }
@@ -29,7 +35,7 @@ public class HistoryController extends HttpServlet {
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
         HistoryMaker historyMaker = new HistoryMaker();
-        historyMaker.readHistory(numEntries, storage);
+        historyMaker.readHistory(numEntries, searchInput, storage);
 
         session.setAttribute("history", historyMaker.getHistory());
         session.setAttribute("historyPage", true);
@@ -37,4 +43,5 @@ public class HistoryController extends HttpServlet {
         resp.sendRedirect("webpanel.jsp");
 
     }
+
 }
