@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <%
@@ -34,8 +35,10 @@
     </form>
 
     <%if(session.getAttribute("role").equals("Chef")){%>
-    <!-- Add a new storage to the restaurant-->
-    <button><i class="fas fa-plus-circle"></i></button>
+        <!-- Add a new storage to the restaurant-->
+        <form action="SPopUp" method="get">
+            <button><i class="fas fa-plus-circle"></i></button>
+        </form>
     <%}%>
 </div>
 
