@@ -17,13 +17,13 @@ class BatchTest {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         try {
-            Product product = new Product("plzvirk", 2, BigDecimal.valueOf(1000));
-            Batch batch = new Batch(product, "ass123");
+            Product product = new Product("testProduct", 2, BigDecimal.valueOf(1000));
+            Batch batch = new Batch(product, "test1234");
 
             //batch.takeFromBatch(1);
 
         } catch (HibernateException e){
-            System.out.println("PIS");
+            System.out.println("Something went wrong");
         }finally {
             session.close();
         }
@@ -35,7 +35,7 @@ class BatchTest {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-        Product product = new Product("TestProduct", 4, BigDecimal.valueOf(200));
+        Product product = new Product("testProduct", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "test1324");
 
         Batch sessionBatch = session.get(Batch.class, batch.getId());
