@@ -132,7 +132,7 @@ public class Product extends AddRemove {
 
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
     public void setBatchSize(int factor) {
-        this.batchSize += factor;
+        this.batchSize = factor;
     }
 
     public int getTotalAmountOfBatches() {

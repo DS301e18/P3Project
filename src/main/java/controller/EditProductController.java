@@ -41,6 +41,11 @@ public class EditProductController extends HttpServlet {
         product.setBatchSize(batchSize);
         product.setPrice(price);
 
+        product.update();
+
+        session.setAttribute("showEditProPopUp", false);
+        resp.sendRedirect("webpanel.jsp");
+
     }
 
     @Override

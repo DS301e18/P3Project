@@ -17,6 +17,7 @@ public class ClosePopUpController extends HttpServlet {
 
         session.setAttribute("showSPopUp", false);
         session.setAttribute("showEditSPopUp", false);
+        session.setAttribute("showEditProPopUp", false);
 
         resp.sendRedirect("webpanel.jsp");
     }

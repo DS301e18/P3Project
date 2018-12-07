@@ -2,6 +2,11 @@ package controller;
 
 import model.Batch;
 import model.Product;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import relationClasses.RestaurantStorage;
+import relationClasses.StorageProduct;
+import util.SessionFactoryCfg;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,5 +41,27 @@ public class ProductController extends HttpServlet {
 
         resp.sendRedirect("webpanel.jsp");
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+        Product product = (Product) session.getAttribute("productChosen");
+        product.remove();
+
+        Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
+
+        Query relation = hibSession.createQuery("From StorageProduct where productId = :i");
+        relation.setParameter("i", product.getId());
+        List<StorageProduct> relationElement = relation.list();
+
+        relationElement.get(0).remove();
+
+        hibSession.close();
+
+        session.setAttribute("showEditProPopUp", false);
+        session.setAttribute("productChosen", null);
+        resp.sendRedirect("webpanel.jsp");
     }
 }

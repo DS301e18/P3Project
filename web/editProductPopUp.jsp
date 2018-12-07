@@ -21,7 +21,7 @@
             <input type="submit" value="Rediger">
         </form>
 
-        <form action="" method="get">
+        <form action="Product" method="get">
             <input type="submit" value="Slet">
         </form>
 
