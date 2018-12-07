@@ -67,6 +67,22 @@ public class Product extends AddRemove {
         return batchSize;
     }
 
+    public void remove() {
+        if ((sortBatches() != null)){
+            for (int i = 0; i < sortBatches().size(); i++) {
+                removeObject(sortBatches().get(i));
+            }
+        }
+
+        if ((collectBatches() != null)){
+            for (int i = 0; i < collectBatches().size(); i++) {
+                removeObject(collectBatches().get(i));
+            }
+        }
+
+        removeObject(this);
+    }
+
     private List<ProductBatch> collectBatches() {
         List<ProductBatch> productBatches = new ArrayList<>();
 
