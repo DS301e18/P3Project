@@ -1,5 +1,6 @@
 package model;
 
+import relationClasses.ProductBatch;
 import util.AddRemove;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -69,24 +70,19 @@ public class Batch extends AddRemove {
 
     //Method that can take any amount from a batch of a product
     /** If this methond is called with the amount 0 it will remove**/
-    public void takeFromBatch(Batch batch,ProductBatch productBatch, int amount) {
-        if (amount < 0){System.out.println("");}
-        if (amount == 0){
-            batch.setRemainingInBox(batch.remainingInBox - 1);
+    public void takeFromBatch(ProductBatch productBatch, int amount) {
+
+        this.setRemainingInBox(this.remainingInBox - amount);
+
+        if(this.getRemainingInBox() < 1){
+            removeObject(this);
+            removeObject(productBatch);
+
+        }else{
+            calcBatchValue(remainingInBox);
         }
-        else{
-            batch.setRemainingInBox(batch.remainingInBox - amount);
-        }
-        calcBatchValue(batch, remainingInBox);
-        removeIfZero(batch, productBatch);
     }
 
-    private void removeIfZero (Batch batch, ProductBatch productBatch){
-        if(batch.getRemainingInBox() < 1){
-            removeObject(batch);
-            removeObject(productBatch);
-        }
-    }
   
     private void calcBatchValue(int amount) {
 

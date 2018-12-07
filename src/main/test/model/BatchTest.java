@@ -20,7 +20,7 @@ class BatchTest {
             Product product = new Product("plzvirk", 2, BigDecimal.valueOf(1000));
             Batch batch = new Batch(product, "ass123");
 
-            batch.takeFromBatch(1);
+            //batch.takeFromBatch(1);
 
         } catch (HibernateException e){
             System.out.println("PIS");
