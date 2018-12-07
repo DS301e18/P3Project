@@ -20,7 +20,7 @@
             <input type="submit" value="Rediger">
         </form>
 
-        <form action="">
+        <form action="Storage" method="get">
             <input type="submit" value="Slet">
         </form>
 
