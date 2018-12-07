@@ -28,8 +28,8 @@ class EmployeeTest {
 
     @Test
     void addEmployeeExceptionTest(){
-        Employee employeeTest = new Employee();
-        employeeTest.setUsername("Kaj");
+        new SessionFactoryCfg().createSessionFactory().openSession();
+        new Employee("Test", "test", "Jørgen", "Åge");
 
         //assertThrows(IllegalEmployeeException.class, () -> employeeTest.addEmployee());
     }

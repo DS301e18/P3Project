@@ -26,6 +26,7 @@ public class Batch extends AddRemove {
     private BigDecimal originalValue;
     private String typeName;
     private Product product;
+    private int numberAdded;
 
     /**
      * Methods
@@ -53,12 +54,13 @@ public class Batch extends AddRemove {
         this.typeName = product.getName();
         this.batchNumber = batchNumber;
         this.date = new Timestamp(System.currentTimeMillis());
+        this.numberAdded = numberAdded;
 
-        this.remainingInBox = numberAdded;
+        this.remainingInBox = product.getBatchSize() * numberAdded;
         this.value = product.getPrice().multiply(BigDecimal.valueOf(numberAdded));
 
         this.originalValue = product.getPrice();
-        this.originalBatchSize = numberAdded;
+        this.originalBatchSize = product.getBatchSize();
 
         addObject(this);
 
@@ -96,7 +98,8 @@ public class Batch extends AddRemove {
 
             MathContext mc = new MathContext(4);
 
-            BigDecimal multiplySum = originalValue.multiply(BigDecimal.valueOf(amount), mc);
+            BigDecimal oneFraction = originalValue.divide(BigDecimal.valueOf(originalBatchSize), mc);
+            BigDecimal multiplySum = oneFraction.multiply(BigDecimal.valueOf(amount), mc);
 
             this.setValue(multiplySum);
 

@@ -11,6 +11,8 @@
 <html>
 <head>
     <title>Lager Inventar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+          charset="UTF-8">
 </head>
 <body>
 <% Storage storage = (Storage) session.getAttribute("storageChosen");%>
@@ -27,10 +29,13 @@
             <label><%=storage.getName()%></label>
 
             <!-- Edit button -->
-            <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
-
+            <%if(session.getAttribute("role").equals("Chef")){%>
+                <form action="EditStorageController" method="get">
+                    <button><span style="font-size: 20px"><i class="fas fa-hammer"></i></span></button>
+                </form>
+            <%}%>
             <!--Search Bar-->
-            <form action="search" method="post">
+            <form action="search" accept-charset="ISO-8859-1" method="post">
                 <input type="text" placeholder="Søg..." name="search">
             </form>
         </div>
@@ -60,7 +65,7 @@
             <label style="font-size: 40px">Registrer Vare</label>
         </div>
         <div>
-            <form action="RegisterProduct" method="post">
+            <form action="RegisterProduct" accept-charset="ISO-8859-1" method="post">
                 <input type="text" placeholder="Indtast navnet på produktet" name="name">
                 <input type="text" placeholder="Indtast antal per batch" name="batchSize">
                 <input type="text" placeholder="Indtast prisen for en batch" name="cost">

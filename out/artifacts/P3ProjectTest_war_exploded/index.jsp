@@ -33,9 +33,10 @@
             </form>
         </div>
 
-
         <!-- Workaround to show history -->
         <%session.setAttribute("history", new ArrayList<>());
-        session.setAttribute("historyPage", false);%>
+        session.setAttribute("historyPage", false);
+        session.setAttribute("showSPopUp", false);
+        session.setAttribute("showEditSPopUp", false);%>
     </body>
 </html>

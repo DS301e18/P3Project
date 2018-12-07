@@ -61,4 +61,42 @@ public class TakeBatchController extends HttpServlet {
         resp.sendRedirect("webpanel.jsp");
 
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        int batchChosenI = Integer.parseInt(req.getParameter("batchChosen"));
+
+        HttpSession session = req.getSession();
+
+        //Initialise necessary variables
+        List<Batch> batchList = (List) session.getAttribute("batchList");
+        Employee employee = (Employee) session.getAttribute("employee");
+        Storage storage = (Storage) session.getAttribute("storageChosen");
+
+        //Get chosen batch
+        Batch batch = batchList.get(batchChosenI);
+
+        Session hibSession = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Query batchQue = hibSession.createQuery("From ProductBatch where batchId = :i");
+        batchQue.setParameter("i", batch.getId());
+        List<ProductBatch> relationPB = batchQue.list();
+
+        batch.takeFromBatch(relationPB.get(0), batch.getOriginalBatchSize());
+
+        hibSession.close();
+
+        //Transaction
+        Transactions transactions = new Transactions();
+        transactions.registerTransaction(storage, employee, batch, batch.getOriginalBatchSize(), "Fjernet");
+
+        if(batch.getRemainingInBox() < 1){
+            batchList.remove(batchChosenI);
+            session.setAttribute("batchList", batchList);
+        }
+        //Redirect
+        resp.sendRedirect("webpanel.jsp");
+
+    }
 }

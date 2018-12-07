@@ -25,10 +25,9 @@ public class Product extends AddRemove {
 
     public Product(String name, int batchSize, BigDecimal price) {
 
-        MathContext mc = new MathContext(4);
         this.name = name;
         this.batchSize = batchSize;
-        this.price = price.divide(BigDecimal.valueOf(batchSize), mc);
+        this.price = price;
 
         addObject(this);
     }

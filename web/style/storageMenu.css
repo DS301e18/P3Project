@@ -222,4 +222,12 @@ aside {
 .productTable tr:nth-child(even){background-color: #f2f2f2;}
 
 
-
+.popUp{
+    background-color: #ba2924;
+    height: 50%;
+    width: 50%;
+    border-radius: 2%;
+    margin: 50px auto auto;
+    max-width: 800px;
+    max-height: 500px;
+}

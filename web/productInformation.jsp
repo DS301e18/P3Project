@@ -12,6 +12,8 @@
 <html>
 <head>
     <title>Produkt Information</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+          charset="UTF-8">
 </head>
 <body>
     <aside><%
@@ -51,8 +53,12 @@
                         <td><%=batch.getRemainingInBox()%>
                             <form action="TakeBatch" method="post">
                                 <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input type="text" name="takeFromBatch" value="1">
+                                <input type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
                                 <input type="submit" value="Tag Vare">
+                            </form>
+                            <form action="TakeBatch" method="get">
+                                <input type="hidden" name="batchChosen" value="<%=i%>">
+                                <input type="submit" value="Tag én Kasse">
                             </form>
                         </td>
                     </tr>
@@ -72,7 +78,7 @@
                 <td id="date"></td>
                 <td><input type="text" name="batchNumber"></td>
                 <td>
-                    <input type="text" name="addBatch" value="<%=product.getBatchSize()%>">
+                    <input type="text" name="addBatch" placeholder="Antal kasser...">
                     <input type="submit" value="Tilføj Batch">
                 </td>
                 </form>
