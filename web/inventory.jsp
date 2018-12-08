@@ -33,7 +33,7 @@
         for(Product product : productList){
             productShownList.add(product);
             product.sortBatches();%>
-        <button class="productButton" onclick="productChoice(id)" value="<%=i%>" id="<%=product.getId()%>">
+        <button class="productButton" onclick="productChoice(id);" value="<%=i%>" id="<%=product.getId()%>">
             <label><%=product.getName()%></label>
             <label style="float: right; padding-right: 15px"><%=product.getTotalAmountOfBatches()%></label>
         </button><%

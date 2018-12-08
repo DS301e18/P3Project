@@ -21,6 +21,7 @@ import java.util.List;
 public class StorageController extends HttpServlet{
 
 
+    /** When a storage has been chosen through the GUI*/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         int storageID = Integer.parseInt(request.getParameter("buttonChosen"));
@@ -40,7 +41,7 @@ public class StorageController extends HttpServlet{
     }
 
 
-    //Delete Storage
+    /** Delete Storage **/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

@@ -19,11 +19,11 @@
         <div id="popUpBody">
             <form action="SPopUp" accept-charset="ISO-8859-1" method="post">
                 <input type="text" placeholder="Angiv navnet på lageret..." name="newStorage"><br>
-                <input style="float: right; margin-right: 150px;" type="submit" value="Registrer">
+                <input id="addStorageSubmit" type="submit" value="Registrer">
             </form>
 
             <form action="ClosePopUp" method="get">
-                <input style="float: left; margin-left: 150px;" type="submit" value="Annuller">
+                <input id="addStorageClose" type="submit" value="Annuller">
             </form>
         </div>
     </div>

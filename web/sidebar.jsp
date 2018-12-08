@@ -19,7 +19,7 @@
 %>
 
 <!-- Side navigation (storage navigation)-->
-<div class="sideNav">
+<div class="sideNav" id="sideNavID">
 
     <!-- Generate storage buttons -->
     <form name="storageChooser" action="Storage" method="post">

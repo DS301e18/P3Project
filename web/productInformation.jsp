@@ -14,10 +14,11 @@
     <title>Produkt Information</title>
 </head>
 <body>
-    <aside><%
+    <aside id="productInformation"><%
         Product product = (Product) session.getAttribute("productChosen");%>
         <!-- Product information header -->
         <div class="productHeader">
+            <button style="float: right;" onclick="hide('productInformation')"><i class="fas fa-times"></i></button>
             <form action="EditProductController" method="get">
                 <label style="font-size: 40px"><%=product.getName()%></label>
                 <!-- Should only be seen by a manager -->

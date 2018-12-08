@@ -22,9 +22,12 @@
 
 <%Employee employee = (Employee) session.getAttribute("employee");%>
 <div class="topnav">
-    <a><%=session.getAttribute("restaurant")%></a>
+    <div id="topNavID">
+        <button onclick="openNav()"><span style="font-size: 20px; color: white"><i class="fas fa-bars"></i></span></button>
+        <a><%=session.getAttribute("restaurant")%></a>
+    </div>
     <div class="topnav-right">
-        <a><%=employee.getFirstName() + " " + employee.getLastName()%></a>
+        <a id="account"><%=employee.getFirstName() + " " + employee.getLastName()%></a>
         <div class="formbutton">
             <form action="Login" method="get">
                 <button type="submit" value="Logout"><a>Log ud</a></button>
@@ -33,6 +36,14 @@
     </div>
 </div>
 
-
+<script>
+    function openNav() {
+        if(document.getElementById("sideNavID").style.width === "100px"){
+            document.getElementById("sideNavID").style.width = "0";
+        }else{
+            document.getElementById("sideNavID").style.width = "100px";
+        }
+    }
+</script>
 </body>
 </html>

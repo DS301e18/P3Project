@@ -19,8 +19,7 @@
 <!-- TODO: Make storage inventory dynamic -->
 <!-- Storage inventory-->
 <div class="container" id="storage">
-    <section>
-
+    <section id="storageInventory">
         <!-- Inventory header -->
         <div class="contentBox" id="inventoryHeader">
 
@@ -88,6 +87,11 @@
     <%if(session.getAttribute("productChosen") != null){%>
     <jsp:include page="productInformation.jsp"/>
     <%}%>
+
+    <!-- Default aside-->
+    <aside id="defaultAside">
+        <label>Vælg Produkt</label>
+    </aside>
 </div>
 
 <script>
@@ -105,17 +109,6 @@
             show1.style.display = "none";
         }
     }
-
-    function openNav() {
-        if(document.getElementById("mySidenav").style.width == 0 || document.getElementById("mySidenav").style.width == "0"){
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft= "250px";
-        }else{
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft= "0";
-        }
-    }
-
 </script>
 
 </body>

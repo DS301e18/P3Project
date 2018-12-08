@@ -38,6 +38,6 @@
         session.setAttribute("historyPage", false);
         session.setAttribute("showSPopUp", false);
         session.setAttribute("showEditSPopUp", false);
-        session.setAttribute("showEditProPopUp", false);%>
+        session.setAttribute("showEditProPopUp", false);;%>
     </body>
 </html>

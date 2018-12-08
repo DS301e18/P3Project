@@ -20,15 +20,15 @@
         <div id="popUpBody">
             <form action="EditStorageController" accept-charset="ISO-8859-1" method="post">
                 <input type="text" placeholder="Angiv navnet på lageret..." name="editStorageName" value="<%=storage.getName()%>"><br>
-                <input style="float: right; margin-right: 70px; margin-left: 10px;" type="submit" value="Rediger">
+                <input id="edit" type="submit" value="Rediger">
             </form>
 
             <form action="Storage" method="get">
-                <input style="float: left;margin-left: 100px;" type="submit" value="Slet">
+                <input id="delete" type="submit" value="Slet">
             </form>
 
             <form action="ClosePopUp" method="get">
-                <input style="float: right;" type="submit" value="Annuller">
+                <input id="annul" type="submit" value="Annuller">
             </form>
         </div>
 
