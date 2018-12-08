@@ -56,14 +56,11 @@
                     <td><%=batch.getDate()%></td>
                     <td><%=batch.getBatchNumber()%></td>
                     <td><b><%=batch.getRemainingInBox()%></b>
-                        <form action="TakeBatch" method="post">
+                        <form action="TakeBatch" accept-charset="ISO-8859-1" method="post">
                             <input type="hidden" name="batchChosen" value="<%=i%>">
                             <input style="margin: 5px 5px 15px;" type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
-                            <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="tagProductID">
-                        </form>
-                        <form action="TakeBatch" method="get">
-                            <input type="hidden" name="batchChosen" value="<%=i%>">
-                            <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="tagBoxID">
+                            <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="<%=i%>">
+                            <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="<%="t"+i%>" name="oneBox">
                         </form>
                     </td>
                 </tr>
