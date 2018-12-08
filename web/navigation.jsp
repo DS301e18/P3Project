@@ -9,25 +9,21 @@
 <html>
 <head>
     <title>Navigation</title>
-    <!-- Adjust after the size of the device -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"
-          charset="UTF-8">
-
-
-    <!-- Import Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="style/storageMenu.css">
 </head>
 <body>
 
-<%Employee employee = (Employee) session.getAttribute("employee");%>
+<%//Get current user
+    Employee employee = (Employee) session.getAttribute("employee");%>
+
 <div class="topnav">
     <div id="topNavID">
+        <!-- Button only shown in mobile form in order to hide sidebar/storage list-->
         <button onclick="openNav()"><span style="font-size: 20px; color: white"><i class="fas fa-bars"></i></span></button>
         <a><%=session.getAttribute("restaurant")%></a>
     </div>
     <div class="topnav-right">
         <a id="account"><%=employee.getFirstName() + " " + employee.getLastName()%></a>
+        <!-- Logout button -->
         <div class="formbutton">
             <form action="Login" method="get">
                 <button type="submit" value="Logout"><a>Log ud</a></button>

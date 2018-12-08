@@ -22,6 +22,7 @@ import java.util.List;
 @WebServlet("/TakeBatch")
 public class TakeBatchController extends HttpServlet {
 
+    //Items are taken
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -39,12 +40,13 @@ public class TakeBatchController extends HttpServlet {
         //Get chosen batch
         Batch batch = batchList.get(batchChosenI);
 
+        //Get relation, so relation can be removed if batch is empty
         Session hibSession = new SessionFactoryCfg().createSessionFactory().openSession();
-
         Query batchQue = hibSession.createQuery("From ProductBatch where batchId = :i");
         batchQue.setParameter("i", batch.getId());
         List<ProductBatch> relationPB = batchQue.list();
 
+        //Take from batch
         batch.takeFromBatch(relationPB.get(0), numTaken);
 
         hibSession.close();
@@ -53,15 +55,18 @@ public class TakeBatchController extends HttpServlet {
         Transactions transactions = new Transactions();
         transactions.registerTransaction(storage, employee, batch, numTaken, "Fjernet");
 
+        //If box is empty, delete from current batch list
         if(batch.getRemainingInBox() < 1){
             batchList.remove(batchChosenI);
             session.setAttribute("batchList", batchList);
         }
+
         //Redirect
         resp.sendRedirect("webpanel.jsp");
 
     }
 
+    //A whole box is taken
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

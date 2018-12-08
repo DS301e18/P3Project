@@ -20,48 +20,61 @@ import java.util.List;
 @WebServlet("/Product")
 public class ProductController extends HttpServlet {
 
+    /** Show chosen product on the side page*/
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Input parameter
         int productChosen = Integer.parseInt(req.getParameter("productChosenButton"));
 
         HttpSession session = req.getSession();
 
+        //If history page is shown, close it
         session.setAttribute("historyPage", false);
 
+        //Current product list for storage
         List<Product> productList = (List) session.getAttribute("productListForChoosing");
-
         Product product = productList.get(productChosen);
 
+        //Set productChosen to the chosen product
         session.setAttribute("productChosen", product);
 
+        //Show the current batches under a product
         List<Batch> batchList = product.sortBatches();
-
         session.setAttribute("batchList", batchList);
 
         resp.sendRedirect("webpanel.jsp");
 
     }
 
+    /** Delete Product */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Get current product
         HttpSession session = req.getSession();
         Product product = (Product) session.getAttribute("productChosen");
+
+        //Delete product from database
         product.remove();
 
+        //Find relation from database
         Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
-
         Query relation = hibSession.createQuery("From StorageProduct where productId = :i");
         relation.setParameter("i", product.getId());
         List<StorageProduct> relationElement = relation.list();
 
+        //Delete relation from database
         relationElement.get(0).remove();
 
         hibSession.close();
 
+        //Close popup
         session.setAttribute("showEditProPopUp", false);
+
+        //Close product information page
         session.setAttribute("productChosen", null);
+
         resp.sendRedirect("webpanel.jsp");
     }
 }

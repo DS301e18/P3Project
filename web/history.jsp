@@ -9,15 +9,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Historik</title>
 </head>
 <body>
-
-    <%%>
-
+    <!-- History page header -->
     <div class="productHeader">
         <label style="font-size: 40px">Historik</label>
     </div>
+
+    <!-- Search and view edit inputs -->
     <form action="History" method="post">
         <input type="text" placeholder="Indtast Historik Størrelse..." name="historyInput">
         <input type="text" placeholder="Søg..." name="historySearch" value="">
@@ -25,6 +25,7 @@
     </form>
 
     <table class="productTable">
+        <!-- History table header -->
         <tr>
             <th>Dato</th>
             <th>Vare</th>
@@ -33,6 +34,7 @@
             <th>Antal</th>
             <th>Medarbejder</th>
         </tr><%
+        //Get all transactions in the current storage
         List<Transactions> history = (List) session.getAttribute("history");
         for (Transactions transaction : history){%>
         <tr>

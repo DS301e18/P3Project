@@ -21,22 +21,23 @@ import java.util.List;
 public class StorageController extends HttpServlet{
 
 
-    /** When a storage has been chosen through the GUI*/
+    /** Show chosen storage */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Parameter with storage ID
         int storageID = Integer.parseInt(request.getParameter("buttonChosen"));
 
+        //Get list of storages in current restaurant
         HttpSession session = request.getSession();
-
         List<Storage> storages = (List) session.getAttribute("storages");
 
+        //Attribute storageChosen to the chosen storage
         session.setAttribute("storageChosen", storages.get(storageID));
 
         //If product information is open, close it
         session.setAttribute("productChosen", null);
 
         response.sendRedirect("webpanel.jsp");
-
 
     }
 
@@ -45,23 +46,30 @@ public class StorageController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Get current storage
         HttpSession session = req.getSession();
-
         Storage storage = (Storage) session.getAttribute("storageChosen");
+
+        //Delete storage from database
         storage.remove();
 
+        //Find relation to the restaurant
         Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
-
         Query relation = hibSession.createQuery("From RestaurantStorage where storageId = :i");
         relation.setParameter("i", storage.getId());
         List<RestaurantStorage> relationElement = relation.list();
 
+        //Delete relation from database
         relationElement.get(0).remove();
 
         hibSession.close();
 
+        //Close popup
         session.setAttribute("showEditSPopUp", false);
+
+        //Close storage inventory page
         session.setAttribute("storageChosen", null);
+
         resp.sendRedirect("webpanel.jsp");
 
     }

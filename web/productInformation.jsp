@@ -18,56 +18,64 @@
         Product product = (Product) session.getAttribute("productChosen");%>
         <!-- Product information header -->
         <div class="productHeader">
+            <!-- Only on mobile platform, in order to close product information -->
             <button style="float: right;" onclick="hide('productInformation')"><i class="fas fa-times"></i></button>
+
             <form action="EditProductController" method="get">
                 <label style="font-size: 40px"><%=product.getName()%></label>
-                <!-- Should only be seen by a manager -->
+                <!-- Edit button -->
                 <%if(session.getAttribute("role").equals("Chef")){%>
                     <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>
                 <%}%>
             </form>
         </div>
 
-        <div>
-            <!-- TODO: Hide style -->
+        <!-- Take and add buttons -->
+        <div id="productInfoButton">
             <button class="tab" style="border-radius: 8px 8px 0 0;" onclick="show('takeBatch', 'addBatch')">Tag Vare</button>
             <button class="tab" style="border-radius: 8px 8px 0 0;" onclick="show('addBatch', 'takeBatch')">Tilføj Vare</button>
-            <br>
-            <br>
-            <br>
         </div>
 
+        <!-- Take batch menu -->
         <table class="productTable" id="takeBatch">
+
+            <!-- Batches table header-->
             <tr>
                 <th>Dato</th>
                 <th>Batch Nummer</th>
                 <th>Antal</th>
             </tr>
-                <% List<Batch> batchList = (List) session.getAttribute("batchList");
-                int i = 0;
-                BigDecimal totalPrice = BigDecimal.valueOf(0);
-                for(Batch batch : batchList){%>
-                    <tr>
-                        <td><%=batch.getDate()%></td>
-                        <td><%=batch.getBatchNumber()%></td>
-                        <td><b><%=batch.getRemainingInBox()%></b>
-                            <form action="TakeBatch" method="post">
-                                <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input style="margin: 5px 5px 15px;" type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
-                                <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="tagProductID">
-                            </form>
-                            <form action="TakeBatch" method="get">
-                                <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="tagBoxID">
-                            </form>
-                        </td>
-                    </tr>
-                <%i++;
-                totalPrice = totalPrice.add(batch.getValue());
-                }%>
+        <% //Batches under the current product
+            List<Batch> batchList = (List) session.getAttribute("batchList");
+            int i = 0;
+
+            //Calculate total price of the product
+            BigDecimal totalPrice = BigDecimal.valueOf(0);
+            for(Batch batch : batchList){%>
+                <tr>
+                    <td><%=batch.getDate()%></td>
+                    <td><%=batch.getBatchNumber()%></td>
+                    <td><b><%=batch.getRemainingInBox()%></b>
+                        <form action="TakeBatch" method="post">
+                            <input type="hidden" name="batchChosen" value="<%=i%>">
+                            <input style="margin: 5px 5px 15px;" type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
+                            <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="tagProductID">
+                        </form>
+                        <form action="TakeBatch" method="get">
+                            <input type="hidden" name="batchChosen" value="<%=i%>">
+                            <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="tagBoxID">
+                        </form>
+                    </td>
+                </tr>
+            <%i++;
+            totalPrice = totalPrice.add(batch.getValue());
+            }%>
         </table>
 
+        <!-- Add batch menu -->
         <table class="productTable" id="addBatch" hidden>
+
+            <!-- Batches table header-->
             <tr>
                 <th>Dato</th>
                 <th>Batch Nummer</th>
@@ -85,17 +93,22 @@
             </tr>
         </table>
 
+        <!-- Total price of the product -->
         <%if(session.getAttribute("role").equals("Chef")){%>
             <div class="priceBox" style="width: 100%" id="priceBox"><a>Totale produkt pris: <%=totalPrice%> kr.</a></div>
         <%}%>
     </aside>
 
     <script>
+
+        //Get current date
+        var today = new Date();
+        document.getElementById('date').innerHTML = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
+
+        //Hide either take batch menu or add batch menu
         function show(ID1, ID2) {
             var show = document.getElementById(ID1);
             var hide = document.getElementById(ID2);
-
-            document.getElementById("priceBox").style.display = "none";
 
             if(show.style.display === "none"){
                 show.style.display = "block";
@@ -105,12 +118,10 @@
             }
         }
 
-        function hide(ID){
+        //Hide buttons to prevent double or multiple clicks
+        function hide(ID) {
             document.getElementById(ID).style.display = "none";
         }
-
-        var today = new Date();
-        document.getElementById('date').innerHTML = today.getFullYear() + "-" + today.getMonth() + "-" + today.getDate();
     </script>
 </body>
 </html>

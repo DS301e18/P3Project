@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="popUp">
-        <header id="popUpHeader">Tilføj Lager</header>
+        <header id="popUpHeader">Tilføj nyt Lager</header>
 
         <div id="popUpBody">
             <form action="SPopUp" accept-charset="ISO-8859-1" method="post">

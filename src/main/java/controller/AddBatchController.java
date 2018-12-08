@@ -15,6 +15,7 @@ import java.util.List;
 @WebServlet("/AddBatch")
 public class AddBatchController extends HttpServlet {
 
+    /** Add a new batch*/
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

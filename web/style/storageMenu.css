@@ -308,6 +308,10 @@ form {
     text-align: center;
 }
 
+#productInfoButton{
+    height: 40px;
+}
+
 @media all and (max-width: 420px) {
     .container {
         width: 100%;

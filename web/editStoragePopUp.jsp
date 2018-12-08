@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Rediger lager</title>
 </head>
 <body>
+    <!-- Get current chosen storage -->
     <%Storage storage = (Storage) session.getAttribute("storageChosen");%>
+
     <div class="popUp">
         <header id="popUpHeader">
             <label>Rediger Lager</label>

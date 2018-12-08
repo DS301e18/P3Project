@@ -8,10 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Rediger produkt</title>
 </head>
 <body>
+    <!-- Get current chosen product-->
     <%Product product = (Product) session.getAttribute("productChosen");%>
+
     <div class="popUp">
         <header id="popUpHeader">
             <label>Rediger Produkt</label>
