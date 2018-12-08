@@ -5,6 +5,10 @@ body {
     overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .topnav {
     overflow: hidden;
     background-color: #ba2924;
