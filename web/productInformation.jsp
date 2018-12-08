@@ -12,8 +12,6 @@
 <html>
 <head>
     <title>Produkt Information</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"
-          charset="UTF-8">
 </head>
 <body>
     <aside><%
@@ -51,15 +49,15 @@
                     <tr>
                         <td><%=batch.getDate()%></td>
                         <td><%=batch.getBatchNumber()%></td>
-                        <td><%=batch.getRemainingInBox()%>
+                        <td><b><%=batch.getRemainingInBox()%></b>
                             <form action="TakeBatch" method="post">
                                 <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
-                                <input type="submit" value="Tag Vare">
+                                <input style="margin: 5px 5px 15px;" type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
+                                <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="tagProductID">
                             </form>
                             <form action="TakeBatch" method="get">
                                 <input type="hidden" name="batchChosen" value="<%=i%>">
-                                <input type="submit" value="Tag én Kasse">
+                                <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="tagBoxID">
                             </form>
                         </td>
                     </tr>
@@ -77,16 +75,18 @@
             <tr>
                 <form action="AddBatch" method="post">
                 <td id="date"></td>
-                <td><input type="text" name="batchNumber"></td>
+                <td><input style="width: 80%;" type="text" name="batchNumber" placeholder="Batch nr..."></td>
                 <td>
                     <input type="text" name="addBatch" placeholder="Antal kasser...">
-                    <input type="submit" value="Tilføj Batch">
+                    <input style="width: 30%; min-width: 90px;" type="submit" value="Tilføj Batch" onclick="hide(id)" id="addBatchID">
                 </td>
                 </form>
             </tr>
         </table>
 
-        <div class="priceBox" style="width: 100%"><a>Total pris: <%=totalPrice%> kr.</a></div>
+        <%if(session.getAttribute("role").equals("Chef")){%>
+            <div class="priceBox" style="width: 100%" id="priceBox"><a>Totale produkt pris: <%=totalPrice%> kr.</a></div>
+        <%}%>
     </aside>
 
     <script>
@@ -94,12 +94,18 @@
             var show = document.getElementById(ID1);
             var hide = document.getElementById(ID2);
 
+            document.getElementById("priceBox").style.display = "none";
+
             if(show.style.display === "none"){
                 show.style.display = "block";
                 if(hide !== "none"){
                     hide.style.display = "none";
                 }
             }
+        }
+
+        function hide(ID){
+            document.getElementById(ID).style.display = "none";
         }
 
         var today = new Date();

@@ -91,6 +91,7 @@ button:focus {
     display: inline-block;
     color:white;
     opacity: 0.5;
+    margin-top: 10px;
 }
 
 .fa-plus-circle:hover{

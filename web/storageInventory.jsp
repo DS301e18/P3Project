@@ -1,6 +1,5 @@
-<%@ page import="java.util.List" %>
 <%@ page import="model.Storage" %>
-<%@ page import="model.Transactions" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 05/12/2018
@@ -55,7 +54,11 @@
         <jsp:include page="inventory.jsp"/>
 
         <!-- Price-box -->
-        <div class="priceBox"><a>Total pris: <%=storage.calculateTotalPrice()%> kr.</a></div>
+            <div class="priceBox">
+                <%if(session.getAttribute("role").equals("Chef")){%>
+                <a>Totale lagerindholds pris: <%=storage.calculateTotalPrice()%> kr.</a>
+                <%}%>
+            </div>
     </section>
 
     <!-- Register new product in the storage -->
@@ -102,6 +105,17 @@
             show1.style.display = "none";
         }
     }
+
+    function openNav() {
+        if(document.getElementById("mySidenav").style.width == 0 || document.getElementById("mySidenav").style.width == "0"){
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft= "250px";
+        }else{
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft= "0";
+        }
+    }
+
 </script>
 
 </body>

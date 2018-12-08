@@ -19,18 +19,18 @@
 
         <div id="popUpBody">
             <form action="EditProductController" accept-charset="ISO-8859-1" method="post">
-                <input type="text" placeholder="Angiv navnet på produktet..." name="editProductName" value="<%=product.getName()%>">
-                <input type="text" placeholder="Angiv antal varer i én kasse..." name="editSize" value="<%=product.getBatchSize()%>">
-                <input type="text" placeholder="Angiv pris for én kasse..." name="editPrice" value="<%=product.getPrice()%>">
-                <input type="submit" value="Rediger">
+                <input style="margin: 1px;" type="text" placeholder="Angiv navnet på produktet..." name="editProductName" value="<%=product.getName()%>">
+                <input style="margin: 1px;" type="text" placeholder="Angiv antal varer i én kasse..." name="editSize" value="<%=product.getBatchSize()%>">
+                <input style="margin: 1px;" type="text" placeholder="Angiv pris for én kasse..." name="editPrice" value="<%=product.getPrice()%>"><br><br>
+                <input style="float: right; margin-right: 70px; margin-left: 10px;" type="submit" value="Rediger">
             </form>
 
             <form action="Product" method="get">
-                <input type="submit" value="Slet">
+                <input style="float: left;margin-left: 100px;" type="submit" value="Slet">
             </form>
 
             <form action="ClosePopUp" method="get">
-                <input type="submit" value="Annuller">
+                <input style="float: right;" type="submit" value="Annuller">
             </form>
         </div>
     </div>
