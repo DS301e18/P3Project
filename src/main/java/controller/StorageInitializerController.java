@@ -21,16 +21,16 @@ public class StorageInitializerController {
 
             //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
-            Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :i");
-            aecQuery.setParameter("i", session.getAttribute("employeeID"));
-            List<RestaurantEmployee> aeclist = aecQuery.list();
-            session.setAttribute("restaurantID", aeclist.get(0).getRestaurantId());
+            Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :id");
+            aecQuery.setParameter("id", session.getAttribute("employeeID"));
+            RestaurantEmployee restaurantEmployee = (RestaurantEmployee) aecQuery.uniqueResult();
+            session.setAttribute("restaurantID", restaurantEmployee.getRestaurantId());
 
             //Instantiates which restaurant is chosen
-            Query restaurantQuery = hibSession.createQuery("From Restaurant where id = :j");
-            restaurantQuery.setParameter("j", session.getAttribute("restaurantID"));
-            session.setAttribute("restaurant", restaurantQuery.list().get(0));
-            Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+            Query restaurantQuery = hibSession.createQuery("From Restaurant where id = :id");
+            restaurantQuery.setParameter("id", session.getAttribute("restaurantID"));
+            Restaurant restaurant = (Restaurant) restaurantQuery.uniqueResult();
+            session.setAttribute("restaurant", restaurant);
 
             //Collect all storages belonging to the restaurant
             storageInfo = restaurant.allStorages();
