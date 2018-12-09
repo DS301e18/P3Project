@@ -1,6 +1,7 @@
 <%@ page import="model.Storage" %>
 <%@ page import="java.util.List" %>
-<%@ page import="controller.StorageInitializerController" %><%--
+<%@ page import="controller.StorageInitializerController" %>
+<%@ page import="controller.EmployeeController" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 26/11/2018
@@ -54,6 +55,13 @@
         <%}
 
     %>
+
+    <%
+        if(session.getAttribute("employeelist") != null){%>
+            <jsp:include page="employee.jsp"/>
+    <%}
+
+%>
 
 </body>
 </html>

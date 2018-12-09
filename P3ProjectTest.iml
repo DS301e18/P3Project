@@ -17,7 +17,7 @@
       <configuration>
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" />
-          <unit-entry name="out:artifacts:P3ProjectTest_war_exploded:WEB-INF:classes:hibernate.cfg.xml" />
+          <unit-entry name="out:artifacts:P3ProjectTest_war_exploded:WEB-INF:classes:hibernate.cfg.xml" value="79202654-7705-4c33-8d2a-4d85bbfa1a18" />
         </datasource-map>
         <naming-strategy-map />
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/out/artifacts/P3ProjectTest_war_exploded/WEB-INF/classes/hibernate.cfg.xml" />

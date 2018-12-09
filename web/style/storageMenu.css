@@ -117,6 +117,15 @@ section{
     height: 100%;
 }
 
+.employeesection{
+    border-right: solid #f2b8b6;
+    float: left;
+    width: 30%;
+    min-width: 300px;
+    height: 100%;
+    padding-left: 100px;
+}
+
 .contentBox{
     padding: 15px 15px 1px;
     background-color: #f2b8b6;
@@ -230,4 +239,20 @@ aside {
     margin: 50px auto auto;
     max-width: 800px;
     max-height: 500px;
+}
+
+.embdiv {
+    margin-top: 430px;
+    padding-bottom: 10px;
+}
+
+.fa-user-circle {
+    font-size: 80px;
+    display: inline-block;
+    color:white;
+    opacity: 0.5;
+}
+
+.fa-user-circle:hover{
+    opacity: 1;
 }
