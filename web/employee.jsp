@@ -37,18 +37,26 @@
 
             Restaurant currentResturant = new Restaurant();
 
-            //List<RestaurantEmployee> employeesShown;
+            List<Employee> employeesShown;
 
-          //  employeesShown = currentResturant.collectEmployees();
+            employeesShown = currentResturant.sortEmployees();
 
-            System.out.println(currentResturant.getName());
+            System.out.println(currentResturant.sortEmployees());
+
 
            %>
 
 
         </div>
 
-        <div class="priceBox"><a>Total pris: 69 kr.</a></div>
+        <div class="priceBox">
+            <!--Search Bar-->
+            <form action="search" accept-charset="ISO-8859-1" method="post">
+                <input type="text" placeholder="Søg..." name="search" style="
+    margin-left: 40px;">
+            </form>
+        </div>
+        </div>
     </section>
 
 </head>

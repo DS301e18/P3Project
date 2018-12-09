@@ -49,7 +49,7 @@ public class Restaurant extends AddRemove {
         this.name = name;
     }
 
-    public List<RestaurantEmployee> collectEmployees() {
+    private List<RestaurantEmployee> collectEmployees() {
         List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
