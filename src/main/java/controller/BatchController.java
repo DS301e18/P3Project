@@ -1,9 +1,6 @@
 package controller;
 
-import model.Batch;
-import model.Employee;
-import model.Storage;
-import model.Transactions;
+import model.*;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import relationClasses.ProductBatch;
@@ -19,18 +16,51 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/TakeBatch")
-public class TakeBatchController extends HttpServlet {
+@WebServlet("/Batch")
+public class BatchController extends HttpServlet {
 
-    //Items are taken
+    /** Batch is added */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //Input parameters
+        String batchNumber = req.getParameter("batchNumber");
+        int numAdd = Integer.parseInt(req.getParameter("addBatch"));
+
+        HttpSession session = req.getSession();
+
+        //Initialise necessary variables
+        List<Batch> batchList = (List) session.getAttribute("batchList");
+        Storage storage = (Storage) session.getAttribute("storageChosen");
+        Product product = (Product) session.getAttribute("productChosen");
+        Employee employee = (Employee) session.getAttribute("employee");
+
+        //Add to database
+        Batch batch = new Batch(product, batchNumber, numAdd);
+        new ProductBatch(product.getId(), batch.getId());
+
+        //Transaction
+        Transactions transactions = new Transactions();
+        transactions.registerTransaction(storage, employee, batch, batch.getOriginalBatchSize()*numAdd, "Tilføjet");
+
+        //Update batch list for the product
+        batchList.add(batch);
+        session.setAttribute("batchList", batchList);
+
+        //Redirect
+        resp.sendRedirect("webpanel.jsp");
+
+    }
+
+    /** Batch is taken */
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //Input parameters
         int batchChosenI = Integer.parseInt(req.getParameter("batchChosen"));
         int numTaken;
-        int takeBox = 0;
 
+        //If the button has been pressed without any input, default value is 1
         if(req.getParameter("takeFromBatch").equals("")){
             numTaken = 1;
         } else {
@@ -49,13 +79,14 @@ public class TakeBatchController extends HttpServlet {
 
         //If a whole box is taken
         String oneBox = req.getParameter("oneBox");
+        System.out.println(oneBox);
         if(oneBox != null){
-            if(oneBox.equals("Tag én Kasse") ){
+            if(oneBox.equals("Tag en Kasse") ){
                 numTaken = batch.getOriginalBatchSize();
             }
         }
 
-        //If a person tries to take more than there is left
+        //If a person tries to take more than there is left, the number taken is the remaining size
         if(numTaken > batch.getRemainingInBox()){
             numTaken = batch.getRemainingInBox();
         }
@@ -64,10 +95,10 @@ public class TakeBatchController extends HttpServlet {
         Session hibSession = new SessionFactoryCfg().createSessionFactory().openSession();
         Query batchQue = hibSession.createQuery("From ProductBatch where batchId = :i");
         batchQue.setParameter("i", batch.getId());
-        List<ProductBatch> relationPB = batchQue.list();
+        ProductBatch relationPB = (ProductBatch) batchQue.uniqueResult();
 
         //Take from batch
-        batch.takeFromBatch(relationPB.get(0), numTaken);
+        batch.takeFromBatch(relationPB, numTaken);
 
         hibSession.close();
 

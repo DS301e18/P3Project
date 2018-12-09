@@ -1,7 +1,8 @@
 <%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Batch" %>
-<%@ page import="java.math.BigDecimal" %><%--
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="model.Storage" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 06/12/2018
@@ -48,24 +49,20 @@
         <% //Batches under the current product
             List<Batch> batchList = (List) session.getAttribute("batchList");
             int i = 0;
-
-            //Calculate total price of the product
-            BigDecimal totalPrice = BigDecimal.valueOf(0);
             for(Batch batch : batchList){%>
                 <tr>
                     <td><%=batch.getDate()%></td>
                     <td><%=batch.getBatchNumber()%></td>
                     <td><b><%=batch.getRemainingInBox()%></b>
-                        <form action="TakeBatch" accept-charset="ISO-8859-1" method="post">
+                        <form action="Batch" method="get">
                             <input type="hidden" name="batchChosen" value="<%=i%>">
                             <input style="margin: 5px 5px 15px;" type="text" name="takeFromBatch" placeholder="Antal fra Kasse...">
                             <input style="width: 30%; min-width: 70px;" type="submit" value="Tag Vare" onclick="hide(id)" id="<%=i%>">
-                            <input style="width: 50%; min-width: 100px;" type="submit" value="Tag én Kasse" onclick="hide(id)" id="<%="t"+i%>" name="oneBox">
+                            <input style="width: 50%; min-width: 100px;" type="submit" value="Tag en Kasse" onclick="hide(id)" id="<%="t"+i%>" name="oneBox">
                         </form>
                     </td>
-                </tr>
-            <%i++;
-            totalPrice = totalPrice.add(batch.getValue());
+                </tr><%
+                i++;
             }%>
         </table>
 
@@ -79,20 +76,20 @@
                 <th>Antal</th>
             </tr>
             <tr>
-                <form action="AddBatch" method="post">
-                <td id="date"></td>
-                <td><input style="width: 80%;" type="text" name="batchNumber" placeholder="Batch nr..."></td>
-                <td>
-                    <input type="text" name="addBatch" placeholder="Antal kasser...">
-                    <input style="width: 30%; min-width: 90px;" type="submit" value="Tilføj Batch" onclick="hide(id)" id="addBatchID">
-                </td>
+                <form action="Batch" method="post">
+                    <td id="date"></td>
+                    <td><input style="width: 80%;" type="text" name="batchNumber" placeholder="Batch nr..."></td>
+                    <td>
+                        <input type="text" name="addBatch" placeholder="Antal kasser...">
+                        <input style="width: 30%; min-width: 90px;" type="submit" value="Tilføj Batch" onclick="hide(id)" id="addBatchID">
+                    </td>
                 </form>
             </tr>
         </table>
 
         <!-- Total price of the product -->
         <%if(session.getAttribute("role").equals("Chef")){%>
-            <div class="priceBox" style="width: 100%" id="priceBox"><a>Totale produkt pris: <%=totalPrice%> kr.</a></div>
+            <div class="priceBox" style="width: 100%" id="priceBox"><a>Totale produkt pris: <%=product.priceOfAllBatches()%> kr.</a></div>
         <%}%>
     </aside>
 

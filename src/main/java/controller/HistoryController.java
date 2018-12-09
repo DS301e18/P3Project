@@ -1,7 +1,8 @@
 package controller;
 
-import model.HistoryMaker;
+import model.History;
 import model.Storage;
+import model.Transactions;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/History")
 public class HistoryController extends HttpServlet {
@@ -42,9 +44,8 @@ public class HistoryController extends HttpServlet {
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
         //Sort and search history
-        HistoryMaker historyMaker = new HistoryMaker();
-        historyMaker.readHistory(numEntries, searchInput, storage);
-        session.setAttribute("history", historyMaker.getHistory());
+        List<Transactions> history = new History().readHistory(numEntries, searchInput, storage);
+        session.setAttribute("history", history);
 
         //Open history page
         session.setAttribute("historyPage", true);

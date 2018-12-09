@@ -8,52 +8,49 @@ import util.SortHistory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryMaker {
+public class History {
 
-    private Session session;
     private List<Transactions> storageHistory;
-    private List<Transactions> history;
     private List<Transactions> sortedList;
 
-    public List<Transactions> getStorageHistory() {
-        return storageHistory;
-    }
-    public List getHistory() {
-        return history;
-    }
+    /** Load history for the storage depending on input and number of entries */
+    public List<Transactions> readHistory(int numberOfEntries, String input, Storage storage){
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-    public void readHistory(int numberOfEntries, String input, Storage storage){
-
-        session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        Query query = session.createQuery("FROM Transactions where storage_id = :i");
+        //Full history of a storage
+        Query query = session.createQuery("FROM Transactions where storage_id =:i");
         query.setParameter("i", storage.getId());
         storageHistory = query.list();
 
         session.close();
 
+        //Sort list newest entry to oldest
         storageHistory.sort(new SortHistory());
 
+        //If someone has searched for something specific, return a list with only the searched item
+        List<Transactions> history;
         if(!input.equals("")){
             searchHistory(input);
+            //If number of entries is larger than the actual list (prevents overflow)
             if(numberOfEntries > sortedList.size()){
                 numberOfEntries = sortedList.size();
             }
             history = sortedList.subList(0, numberOfEntries);
         } else {
+            //Prevents overflow
             if(numberOfEntries > storageHistory.size()){
                 numberOfEntries = storageHistory.size();
             }
             history = storageHistory.subList(0, numberOfEntries);
         }
+
+        return history;
     }
 
-    public void searchHistory(String input){
-        session = new SessionFactoryCfg().getSessionFactory().openSession();
-
+    private void searchHistory(String input){
         sortedList = new ArrayList<>();
 
-        //TODO: find a method without this many if statements
+        //Can only search for employee, product and batch
         for(Transactions transactions : storageHistory){
             if(transactions.getProduct().toLowerCase().contains(input.toLowerCase())){
                 sortedList.add(transactions);
@@ -66,7 +63,5 @@ public class HistoryMaker {
             }
 
         }
-
-        session.close();
     }
 }

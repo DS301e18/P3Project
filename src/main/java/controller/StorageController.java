@@ -20,7 +20,6 @@ import java.util.List;
 @WebServlet("/Storage")
 public class StorageController extends HttpServlet{
 
-
     /** Show chosen storage */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -55,12 +54,12 @@ public class StorageController extends HttpServlet{
 
         //Find relation to the restaurant
         Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
-        Query relation = hibSession.createQuery("From RestaurantStorage where storageId = :i");
+        Query relation = hibSession.createQuery("From RestaurantStorage where storageId =:i");
         relation.setParameter("i", storage.getId());
-        List<RestaurantStorage> relationElement = relation.list();
+        RestaurantStorage relationElement = (RestaurantStorage) relation.uniqueResult();
 
         //Delete relation from database
-        relationElement.get(0).remove();
+        relationElement.remove();
 
         hibSession.close();
 
