@@ -22,7 +22,7 @@ public class StorageInitializerController {
             //Check which restaurants the employee has access too
             Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :id");
             aecQuery.setParameter("id", session.getAttribute("employeeID"));
-            RestaurantEmployee restaurantEmployee = (RestaurantEmployee) aecQuery.uniqueResult();
+            RestaurantEmployee restaurantEmployee = (RestaurantEmployee) aecQuery.list().get(0);
             session.setAttribute("restaurantID", restaurantEmployee.getRestaurantId());
 
             //Instantiates which restaurant is chosen

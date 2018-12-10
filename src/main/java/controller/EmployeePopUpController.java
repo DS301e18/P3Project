@@ -3,6 +3,7 @@ package controller;
 import model.Employee;
 import model.Restaurant;
 
+import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
 
 import javax.servlet.ServletException;
@@ -28,8 +29,8 @@ public class EmployeePopUpController extends HttpServlet {
         HttpSession session = req.getSession();
 
         Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
-        Employee employee = new Employee(employeeUsername,employeeFirstName, employeePassword, employeeLastName, "Medarbejder");
-        new RestaurantStorage(restaurant.getId(), employee.getId());
+        Employee employee = new Employee(employeeUsername, employeePassword,employeeFirstName,employeeLastName, "Medarbejder");
+        new RestaurantEmployee(restaurant.getId(), employee.getId());
 
         session.setAttribute("showEPopUp", false);
         resp.sendRedirect("webpanel.jsp");
