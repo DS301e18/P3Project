@@ -1,4 +1,8 @@
-<%--
+<%@ page import="model.SystemAdministrator" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Restaurant" %>
+<%@ page import="model.Manager" %>
+<%@ page import="model.Employee" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 10/12/2018
@@ -127,10 +131,23 @@
     </div>
 </div>
 
+<%List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
+    List<Manager> managerList = SystemAdministrator.collectManagers();%>
+
 <div class="container">
     <section>
         <label style="font-size: 30px">Restauranter</label>
         <button onclick="showPopUp('popUpRestaurant')">Tilføj restaurant</button>
+        <form>
+            <!-- Input used to know which product has been clicked and chosen-->
+            <% int i = 0;
+                for(Restaurant restaurant : restaurantList){%>
+                <button class="productButton">
+                    <input type="hidden" value="<%=i%>" name="RestaurantChosen">
+                    <label><%=restaurant.getName()%></label>
+                </button><%
+                i++;}%>
+        </form>
     </section>
 
     <aside>

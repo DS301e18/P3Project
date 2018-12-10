@@ -1,11 +1,8 @@
 package model;
 
+import org.hibernate.*;
 import util.AddRemove;
 import util.SessionFactoryCfg;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +32,18 @@ public class SystemAdministrator extends AddRemove {
     }
 
     public static List<Manager> collectManagers() {
-        List<Manager> managerList = new ArrayList<>();
+        List<Manager> managerList;
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
-        List<Manager> employeeList = session.createQuery("FROM Employee").list();
+        Query employeeQuery = session.createQuery("FROM Employee where role=:i");
+        employeeQuery.setParameter("i", "Superbruger");
 
-        for (Manager employee : employeeList) {
-            if (employee.getRole().equals("Chef")) {
-                managerList.add(employee);
-            }
-        }
+        managerList = employeeQuery.list();
 
         session.close();
+
+        System.out.println(managerList);
         return managerList;
     }
 

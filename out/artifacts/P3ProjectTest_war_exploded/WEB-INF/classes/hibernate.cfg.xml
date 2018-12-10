@@ -35,9 +35,7 @@
         <mapping resource="Restaurant.hbm.xml"/>
         <mapping resource="StorageProduct.hbm.xml"/>
         <mapping resource="Product.hbm.xml"/>
-        <mapping resource="Manager.hbm.xml"/>
         <mapping resource="ProductBatch.hbm.xml"/>
-        <mapping resource="SuperUser.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

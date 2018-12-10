@@ -9,13 +9,14 @@ public class Employee extends AddRemove {
     private String password;
     private String firstName;
     private String lastName;
-    private String role = "Medarbejder";
+    private String role;
 
-    public Employee(String username, String password, String firstName, String lastName) {
+    public Employee(String username, String password, String firstName, String lastName, String role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
 
         addObject(this);
     }

@@ -4,9 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name = "model.Employee" table = "employees">
+    <class name = "model.Employee" table = "employees" discriminator-value="Medarbejder">
 
-        <meta attribute = "class-description">
+        <meta attribute = "class-description" >
             This class contains the employee detail.
         </meta>
 
@@ -14,11 +14,18 @@
             <generator class="native"/>
         </id>
 
+        <discriminator column="type"/>
         <property name = "username" column = "username" type = "string"/>
         <property name = "password" column = "password" type = "string"/>
         <property name = "firstName" column = "firstname" type = "string"/>
         <property name = "lastName" column = "lastname" type = "string"/>
         <property name = "role" column = "role" type = "string"/>
+
+        <subclass name="model.Manager" discriminator-value="Chef">
+        </subclass>
+
+        <subclass name="model.SuperUser" discriminator-value="Superbruger">
+        </subclass>
 
     </class>
 </hibernate-mapping>
