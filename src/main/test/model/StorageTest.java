@@ -96,6 +96,16 @@ class StorageTest {
 
     @Test
     void removeStorage() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
+        Storage storage = new Storage("Test Lager");
+
+        Storage sessionStorage = session.get(Storage.class, storage.getId());
+
+        storage.remove();
+
+        assertEquals(storage.getId(), sessionStorage.getId());
+
+        session.close();
     }
 }
