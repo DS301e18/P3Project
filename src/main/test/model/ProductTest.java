@@ -31,7 +31,5 @@ class ProductTest {
 
         assertEquals(200, product.priceOfAllBatches().intValue());
 
-
-
     }
 }
