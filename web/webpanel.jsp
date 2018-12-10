@@ -57,7 +57,7 @@
     %>
 
     <%
-        if(session.getAttribute("employeelist") != null){%>
+        if(session.getAttribute("employeeList") != null){%>
             <jsp:include page="employee.jsp"/>
     <%}
 
