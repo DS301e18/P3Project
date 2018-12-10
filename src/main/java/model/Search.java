@@ -8,6 +8,23 @@ public class Search {
 
     List<Product> productList = new ArrayList<>();
 
+    public List<Employee> searchEmployee(Restaurant restaurant, String input){
+
+        List<Employee> employeeList = new ArrayList<>();
+
+        for (Employee employee : restaurant.sortEmployees()){
+
+            String name = employee.getFirstName() + " " + employee.getLastName();
+
+            if(input != null){
+                if(name.toLowerCase().contains(input.toLowerCase())){
+                    employeeList.add(employee);
+                }
+            }
+        }
+
+        return employeeList;
+    }
 
     public List<Product> searchProduct(Storage storage, String input){
 

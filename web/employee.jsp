@@ -32,7 +32,7 @@
                 <label>Medarbejdere</label>
             </form>
             <!--Search Bar-->
-            <form action="search" accept-charset="ISO-8859-1" method="post">
+            <form action="search" accept-charset="ISO-8859-1" method="get">
                 <input id="search" type="text" placeholder="Søg..." name="search">
             </form>
         </div>

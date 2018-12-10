@@ -1,8 +1,6 @@
 package controller;
 
-import model.Product;
-import model.Search;
-import model.Storage;
+import model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,5 +33,19 @@ public class SearchController extends HttpServlet {
 
         resp.sendRedirect("webpanel.jsp");
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String input = req.getParameter("search");
+
+        HttpSession session = req.getSession();
+        Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+
+        List<Employee> employeeList = new Search().searchEmployee(restaurant, input);
+
+        session.setAttribute("employeeList", employeeList);
+        resp.sendRedirect("webpanel.jsp");
     }
 }
