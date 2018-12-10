@@ -100,7 +100,7 @@ public class Product extends AddRemove {
         return totalProductBatches;
     }
 
-    public BigDecimal priceOfAllBatches(Storage storage) {
+    public BigDecimal priceOfAllBatches() {
         List<Batch> productBatches = sortBatches();
 
         BigDecimal totalPrice = new BigDecimal(0);
