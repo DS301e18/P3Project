@@ -19,7 +19,6 @@ public class StorageInitializerController {
 
         try (Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession()) {
 
-            //TODO: try to do, so an employee can belong to more than one restaurant
             //Check which restaurants the employee has access too
             Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :id");
             aecQuery.setParameter("id", session.getAttribute("employeeID"));

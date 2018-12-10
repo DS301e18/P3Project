@@ -29,21 +29,13 @@ public class LoginCheck {
             Query empQuery = session.createQuery("From Employee where username =:username and password =:password");
             empQuery.setParameter("username", username);
             empQuery.setParameter("password", password);
-            Employee foundEmployee = (Employee) empQuery.list().get(0);
 
-            if (foundEmployee.getUsername().equals(username) && foundEmployee.getPassword().equals(password)) {
+            Employee foundEmployee = (Employee) empQuery.uniqueResult();
+
+            if (foundEmployee != null) {
                 this.employee = foundEmployee;
                 return true;
             }
-
-            /*List<Employee> employeeList = session.createQuery("FROM Employee ").list();
-
-            for (Employee employee : employeeList) {
-                if (employee.getUsername().equals(username) && employee.getPassword().equals(password)) {
-                    this.employee = employee;
-                    return true;
-                }
-            }*/
 
         } catch (HibernateException e) {
             System.out.println("Found either no match or more than more match");

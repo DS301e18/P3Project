@@ -105,6 +105,7 @@ public class Storage extends AddRemove {
 
         List<StorageProduct> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();
+
         List<Product> totalStorageProducts = new ArrayList<>();
 
         for (int i = 0; i < storageProducts.size(); i++) {
