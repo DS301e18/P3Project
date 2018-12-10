@@ -31,13 +31,13 @@ public class Storage extends AddRemove {
     public void remove() {
         if ((sortProducts() != null)){
             for (int i = 0; i < sortProducts().size(); i++) {
-                removeObject(sortProducts().get(i));
+                sortProducts().get(i).remove();
             }
         }
 
         if ((collectProducts() != null)){
             for (int i = 0; i < collectProducts().size(); i++) {
-                removeObject(collectProducts().get(i));
+                collectProducts().get(i).remove();
             }
         }
 
