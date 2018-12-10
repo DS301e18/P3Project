@@ -76,6 +76,10 @@ public class Employee extends AddRemove {
         this.role = role;
     }
 
+    public void update(){
+        updateObject(this);
+    }
+
     @Override
     public String toString() {
         return "Employee{" +

@@ -10,14 +10,7 @@ public class Manager extends Employee {
     public Manager() {
     }
 
-
     public void removeManager() {
-        if ((SystemAdministrator.collectManagers() != null)){
-            for (int i = 0; i < SystemAdministrator.collectManagers().size(); i++) {
-                removeObject(SystemAdministrator.collectManagers().get(i));
-            }
-        }
-
         removeObject(this);
     }
 
