@@ -10,7 +10,6 @@ public class Manager extends Employee {
     public Manager() {
     }
 
-
     public void removeManager() {
         removeObject(this);
     }
