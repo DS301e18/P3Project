@@ -90,7 +90,7 @@ public class Restaurant extends AddRemove {
 
         for (int i = 0; i < restaurantEmployee.size(); i++) {
             for (Employee employee : employeeList) {
-                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId()) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Medarbejder")) {
                     allRestaurantEmployees.add(employee);
                 }
             }
