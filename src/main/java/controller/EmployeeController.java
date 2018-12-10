@@ -1,7 +1,9 @@
 package controller;
 
 import model.Employee;
+import model.History;
 import model.Restaurant;
+import model.Transactions;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,10 +42,16 @@ public class EmployeeController extends HttpServlet{
         //Get list of employees in current restaurant
         HttpSession session = req.getSession();
         List<Employee> employees = (List) session.getAttribute("employeesListForChoosing");
+        Employee employee = employees.get(employeeID);
+        String name = employee.getFirstName() + " " + employee.getLastName();
+
+        History history = new History();
+        List<Transactions> employeeHistory = history.readEmployeeHistory(200, name);
 
 
         //Attribute employeeChosen to the chosen employee
-        session.setAttribute("employeeChosen", employees.get(employeeID));
+        session.setAttribute("employeeChosen", employee);
+        session.setAttribute("history", employeeHistory);
 
         resp.sendRedirect("webpanel.jsp");
 

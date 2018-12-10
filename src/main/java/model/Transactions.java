@@ -22,6 +22,7 @@ public class Transactions {
     private String transtype;
     private Storage storage;
     private int storage_id;
+    private String storageName;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 
@@ -39,6 +40,7 @@ public class Transactions {
         this.product = batch.getTypeName();
         this.amount = amount;
         this.transtype = transtype;
+        this.storageName = storage.getName();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
@@ -123,6 +125,14 @@ public class Transactions {
 
     public int getStorage_id() {
         return storage_id;
+    }
+
+    public String getStorageName() {
+        return storageName;
+    }
+
+    public void setStorageName(String storageName) {
+        this.storageName = storageName;
     }
 
     public void setStorage_id(int storage_id) {
