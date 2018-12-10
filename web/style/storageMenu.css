@@ -300,8 +300,11 @@ form {
 }
 
 .embdiv {
-    margin-top: 430px;
     padding-bottom: 10px;
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    border-top: dashed #ba2924;
 }
 
 .fa-user-circle {

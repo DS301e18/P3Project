@@ -1,11 +1,6 @@
-<%@ page import="model.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Restaurant" %>
-<%@ page import="relationClasses.RestaurantEmployee" %>
-<%@ page import="org.hibernate.Session" %>
-<%@ page import="util.SessionFactoryCfg" %>
-<%@ page import="java.rmi.server.RemoteStub" %>
 <%@ page import="model.Employee" %>
 <%@ page import="model.Transactions" %>
 
