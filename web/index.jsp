@@ -42,6 +42,7 @@
     session.setAttribute("showEditProPopUp", false);
     session.setAttribute("showEPopUp", false);
     session.setAttribute("employeeMenu", false);
+    session.setAttribute("showEditEmployee", false);
 %>
 </body>
 </html>

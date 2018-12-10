@@ -77,7 +77,7 @@
                 <!-- Only on mobile platform, in order to close product information -->
                 <button style="float: right;" onclick="hide('productInformation')"><i class="fas fa-times"></i></button>
 
-                <form action="" method="get">
+                <form action="EditEmployee" method="get">
                     <label style="font-size: 40px"><%=employee.getFirstName() + " "+ employee.getLastName()%></label>
                     <!-- Edit button -->
                     <button><span style="font-size: 30px"><i class="fas fa-hammer"></i></span></button>

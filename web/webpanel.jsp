@@ -58,6 +58,10 @@
 <jsp:include page="addEmployeePopUp.jsp"/>
 <%}%>
 
+<%if((boolean) session.getAttribute("showEditEmployee")){%>
+<jsp:include page="editEmployeePopUp.jsp"/>
+<%}%>
+
 
 <%if (session.getAttribute("storageChosen") != null) {%>
 <jsp:include page="storageInventory.jsp"/>

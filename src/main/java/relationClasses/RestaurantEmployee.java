@@ -17,6 +17,10 @@ public class RestaurantEmployee extends AddRemove {
     public RestaurantEmployee() {
     }
 
+    public void remove(){
+        removeObject(this);
+    }
+
     public int getId() {
         return id;
     }
