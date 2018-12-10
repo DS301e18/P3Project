@@ -27,6 +27,7 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
+    //TODO: Remove batches as well
     public void remove() {
         if ((sortProducts() != null)){
             for (int i = 0; i < sortProducts().size(); i++) {
@@ -129,7 +130,7 @@ public class Storage extends AddRemove {
         BigDecimal totalPrice = new BigDecimal(0);
 
         for (int i = 0; i < storageProducts.size(); i++) {
-            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches(this));
+            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches());
         }
         return totalPrice;
     }

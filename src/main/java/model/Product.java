@@ -6,7 +6,6 @@ import relationClasses.ProductBatch;
 import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -83,6 +82,10 @@ public class Product extends AddRemove {
         removeObject(this);
     }
 
+    public void update(){
+        updateObject(this);
+    }
+
     private List<ProductBatch> collectBatches() {
         List<ProductBatch> productBatches = new ArrayList<>();
 
@@ -116,7 +119,7 @@ public class Product extends AddRemove {
         return totalProductBatches;
     }
 
-    public BigDecimal priceOfAllBatches(Storage storage) {
+    public BigDecimal priceOfAllBatches() {
         List<Batch> productBatches = sortBatches();
 
         BigDecimal totalPrice = new BigDecimal(0);
@@ -129,7 +132,7 @@ public class Product extends AddRemove {
 
     //funktion til at tælle antal af vare op. negativt argument fjerner antal.
     public void setBatchSize(int factor) {
-        this.batchSize += factor;
+        this.batchSize = factor;
     }
 
     public int getTotalAmountOfBatches() {

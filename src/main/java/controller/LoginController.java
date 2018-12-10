@@ -19,9 +19,11 @@ public class LoginController extends HttpServlet {
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Input parameters
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        //check login
         LoginCheck loginCheck = new LoginCheck();
         sessionFactory = loginCheck.getSessionFactory();
 

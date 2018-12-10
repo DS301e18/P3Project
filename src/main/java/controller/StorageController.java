@@ -20,15 +20,17 @@ import java.util.List;
 @WebServlet("/Storage")
 public class StorageController extends HttpServlet{
 
-    //Add Storage
+    /** Show chosen storage */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Parameter with storage ID
         int storageID = Integer.parseInt(request.getParameter("buttonChosen"));
 
+        //Get list of storages in current restaurant
         HttpSession session = request.getSession();
-
         List<Storage> storages = (List) session.getAttribute("storages");
 
+        //Attribute storageChosen to the chosen storage
         session.setAttribute("storageChosen", storages.get(storageID));
 
         //If product information is open, close it
@@ -36,31 +38,37 @@ public class StorageController extends HttpServlet{
 
         response.sendRedirect("webpanel.jsp");
 
-
     }
 
 
-    //Delete Storage
+    /** Delete Storage **/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Get current storage
         HttpSession session = req.getSession();
-
         Storage storage = (Storage) session.getAttribute("storageChosen");
+
+        //Delete storage from database
         storage.remove();
 
+        //Find relation to the restaurant
         Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        Query relation = hibSession.createQuery("From RestaurantStorage where storageId = :i");
+        Query relation = hibSession.createQuery("From RestaurantStorage where storageId =:i");
         relation.setParameter("i", storage.getId());
-        List<RestaurantStorage> relationElement = relation.list();
+        RestaurantStorage relationElement = (RestaurantStorage) relation.uniqueResult();
 
-        relationElement.get(0).remove();
+        //Delete relation from database
+        relationElement.remove();
 
         hibSession.close();
 
+        //Close popup
         session.setAttribute("showEditSPopUp", false);
+
+        //Close storage inventory page
         session.setAttribute("storageChosen", null);
+
         resp.sendRedirect("webpanel.jsp");
 
     }
