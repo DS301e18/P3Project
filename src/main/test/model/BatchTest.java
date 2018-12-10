@@ -18,7 +18,7 @@ class BatchTest {
 
         try {
             Product product = new Product("testProduct", 2, BigDecimal.valueOf(1000));
-            Batch batch = new Batch(product, "test1234");
+            Batch batch = new Batch(product, "test1234",1);
 
             //batch.takeFromBatch(1);
 
@@ -36,7 +36,7 @@ class BatchTest {
 
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
         Product product = new Product("testProduct", 4, BigDecimal.valueOf(200));
-        Batch batch = new Batch(product, "test1324");
+        Batch batch = new Batch(product, "test1324",1);
 
         Batch sessionBatch = session.get(Batch.class, batch.getId());
 

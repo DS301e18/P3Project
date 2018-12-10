@@ -33,21 +33,6 @@ public class Batch extends AddRemove {
      **/
 
     //Constructor with database connectivity included
-    public Batch(Product product, String batchNumber) {
-
-        this.batchNumber = batchNumber;
-        this.date = new Timestamp(System.currentTimeMillis());
-        this.remainingInBox = product.getBatchSize();
-        this.value = product.getPrice();
-        this.typeName = product.getName();
-        this.originalValue = product.getPrice();
-        this.originalBatchSize = product.getBatchSize();
-        this.product = product;
-
-        addObject(this);
-
-    }
-
     public Batch(Product product, String batchNumber, int numberAdded) {
 
         this.product = product;
