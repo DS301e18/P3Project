@@ -81,6 +81,16 @@ public class Manager extends Employee {
         this.role = role;
     }
 
+    public void removeManager() {
+        if ((SystemAdministrator.collectManagers() != null)){
+            for (int i = 0; i < SystemAdministrator.collectManagers().size(); i++) {
+                removeObject(SystemAdministrator.collectManagers().get(i));
+            }
+        }
+
+        removeObject(this);
+    }
+
     @Override
     public String toString() {
         return "Manager{" +
