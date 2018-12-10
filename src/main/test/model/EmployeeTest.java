@@ -14,14 +14,15 @@ class EmployeeTest {
 
     @Test
     void addEmployeeTest(){
-
             Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
-            //Employee employee = new Employee("Test","Test","Test","Test");
+            Employee employee = new Employee("Test","Test","Test","Test","Medarbejder");
 
             Employee sessionEmployee = session.get(Employee.class, employee.getId());
 
             assertEquals(employee.getId(), sessionEmployee.getId());
+
+            employee.removeEmployee();
 
             session.close();
         }
