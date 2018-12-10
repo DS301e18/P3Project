@@ -23,50 +23,6 @@ public class Employee extends AddRemove {
     public Employee() {
     }
 
-/*   public void addEmployee(){
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-        Transaction transaction = null;
-
-        try{
-            //If any attribute equals Null, throw exception
-            if(username != null && password != null && firstName != null && lastName != null){
-                transaction = session.beginTransaction();
-                session.save(this);
-                transaction.commit();
-            }
-            else {
-                throw new IllegalEmployeeException();
-            }
-
-        } catch (HibernateException e){
-            System.out.println("Couldn't save employee");
-            e.printStackTrace();
-
-        } finally {
-            session.close();
-        }
-    }
-
-    public void removeEmployee(){
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-        Transaction transaction = null;
-
-        try{
-            transaction = session.beginTransaction();
-            session.delete(this);
-            transaction.commit();
-
-        } catch (HibernateException e){
-            System.out.println("Couldn't delete employee");
-            e.printStackTrace();
-
-        } finally {
-            session.close();
-        }
-
-    }
-    */
-
     public int getId() {
         return id;
     }
