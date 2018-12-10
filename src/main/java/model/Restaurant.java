@@ -161,6 +161,10 @@ public class Restaurant extends AddRemove {
         removeObject(this);
     }
 
+    public void update(){
+        updateObject(this);
+    }
+
     @Override
     public String toString() {
         return name;
