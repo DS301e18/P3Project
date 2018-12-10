@@ -1,7 +1,9 @@
 package controller.SuperuserController;
 
+import model.Manager;
 import model.Restaurant;
 import model.SystemAdministrator;
+import relationClasses.RestaurantEmployee;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,30 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/Restaurant")
-public class RestaurantController extends HttpServlet {
+@WebServlet("/RestaurantEmployee")
+public class RestaurantEmployeeController extends HttpServlet {
 
-    /** Add new restaurant */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("newRestaurant");
-
-        new Restaurant(name);
-
-        resp.sendRedirect("superuserWebpanel.jsp");
-
-    }
-
-    /** Delete Restaurant */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int restaurantID = Integer.parseInt(req.getParameter("resIDDelete"));
+        int restaurantID = Integer.parseInt(req.getParameter("restaurantID"));
+        int managerID = Integer.parseInt(req.getParameter("managerID"));
 
         List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
-        Restaurant restaurant = restaurantList.get(restaurantID);
+        List<Manager> managerList = SystemAdministrator.collectManagers();
 
-        restaurant.removeRestaurant();
+        Restaurant restaurant = restaurantList.get(restaurantID);
+        Manager manager = managerList.get(managerID);
+
+        new RestaurantEmployee(restaurant.getId(), manager.getId());
 
         resp.sendRedirect("superuserWebpanel.jsp");
+
     }
 }

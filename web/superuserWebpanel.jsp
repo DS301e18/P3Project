@@ -155,8 +155,7 @@
             <!-- Input used to know which product has been clicked and chosen-->
             <% int i = 0;
             for(Restaurant restaurant : restaurantList){%>
-                <button class="chooseButton" onclick="chosenRestaurantFunc('<%=restaurant.getName()%>', 'restaurantID')">
-                    <input id="restaurantID" type="hidden" value="<%=i%>" name="RestaurantChosen">
+                <button class="chooseButton" value="<%=i%>" onclick="chosenRestaurantFunc('<%=restaurant.getName()%>', value)">
                     <label><%=restaurant.getName()%></label>
                 </button><%
             i++;}%>
@@ -166,7 +165,6 @@
         <label style="font-size: 30px">Chefer</label>
         <button onclick="showPopUp('popUpManager')">Tilføj chef</button>
         <!-- Input used to know which product has been clicked and chosen-->
-        <input type="hidden" id="managerID" name="manager">
         <% int j = 0;
             for(Manager manager : managerList){%>
                 <button class="chooseButton" value="<%=j%>" onclick="chosenManagerFunc('<%=manager.getFirstName()%>','<%=manager.getLastName()%>','<%=manager.getUsername()%>','<%=manager.getPassword()%>', value)">
@@ -176,17 +174,18 @@
     </aside>
     <footer style="width: 100%; height: 20%; background-color: lightblue; position: fixed; bottom: 0;">
         <div style="width: 24%; height: 100%; float: left; border-right: solid white">
-            <form>
+            <form action="EditRestaurant" accept-charset="ISO-8859-1" method="post">
                 <input id="resID" type="hidden" name="id">
                 <input id="resName" type="text" name="chosenRestaurant">
                 <input type="submit" value="Rediger">
             </form>
-            <form>
+            <form action="Restaurant" method="get">
+                <input id="resIDDelete" type="hidden" name="resIDDelete">
                 <input type="submit" value="Slet">
             </form>
         </div>
         <div style="width: 50%; height: 100%; float: left; border-right: solid white">
-            <form action="EditManager" method="post">
+            <form action="EditManager" accept-charset="ISO-8859-1" method="post">
                 <input id="manID" type="hidden" name="managerID">
                 <input id="manFirstName" type="text" name="fName">
                 <input id="manLastName" type="text" name="lName">
@@ -200,7 +199,11 @@
             </form>
         </div>
         <div style="width: 25%; height: 100%; float: left; border-right: solid white">
-            Test
+            <form action="RestaurantEmployee" method="post">
+                <input id="restaurantID" type="hidden" name="restaurantID">
+                <input id="managerID" type="hidden" name="managerID">
+                <input type="submit" id="relationMapping" value="Ansæt chef til restaurant" name="relate">
+            </form>
         </div>
     </footer>
 </div>
@@ -223,12 +226,16 @@
         }
     }
     
-    function chosenRestaurantFunc(name, id) {
+    function chosenRestaurantFunc(name, value) {
         var input = document.getElementById("resName");
         var chosenID = document.getElementById("resID");
+        var deleteID = document.getElementById("resIDDelete");
+        var relationID = document.getElementById("restaurantID");
 
         input.value = name;
-        chosenID.value = document.getElementById(id).value;
+        chosenID.value = value;
+        deleteID.value = value;
+        relationID.value = value;
     }
 
     function chosenManagerFunc(firstName, lastName, username, password, value) {
@@ -238,6 +245,7 @@
         var pword = document.getElementById("manPassword");
         var chosenID = document.getElementById("manID");
         var deleteID = document.getElementById("manIDDelete");
+        var relationID = document.getElementById("managerID");
 
         fName.value = firstName;
         lName.value = lastName;
@@ -245,6 +253,7 @@
         pword.value = password;
         chosenID.value = value;
         deleteID.value = value;
+        relationID.value = value;
     }
 </script>
 
