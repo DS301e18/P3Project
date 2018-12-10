@@ -37,13 +37,12 @@ public class SystemAdministrator extends AddRemove {
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
         Query employeeQuery = session.createQuery("FROM Employee where role=:i");
-        employeeQuery.setParameter("i", "Superbruger");
+        employeeQuery.setParameter("i", "Chef");
 
         managerList = employeeQuery.list();
 
         session.close();
 
-        System.out.println(managerList);
         return managerList;
     }
 

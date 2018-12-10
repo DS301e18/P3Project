@@ -21,7 +21,6 @@
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav" id="sideNavID">
     <!-- Generate storage buttons with functionality -->
-    <div>
     <form name="storageChooser" action="Storage" method="post">
         <input type="hidden" name="buttonChosen"><%
             int i = 0;
@@ -35,17 +34,18 @@
 
     <!-- Add storage button -->
     <%if(session.getAttribute("role").equals("Chef")){%>
+    <div>
         <!-- Add a new storage to the restaurant-->
         <form action="SPopUp" method="get">
             <button><i class="fas fa-plus-circle"></i></button>
         </form>
-    <%}%>
     </div>
     <form name="employeelist" action="Employee" method="post">
         <div class="embdiv">
             <button type="submit"><i class="fas fa-user-circle"></i></button>
         </div>
     </form>
+    <%}%>
 </div>
 
 
