@@ -134,6 +134,16 @@ public class Restaurant extends AddRemove {
         return allRestaurantStorages;
     }
 
+    public void removeRestaurant() {
+        if ((SystemAdministrator.collectRestaurants() != null)){
+            for (int i = 0; i < SystemAdministrator.collectRestaurants().size(); i++) {
+                removeObject(SystemAdministrator.collectRestaurants().get(i));
+            }
+        }
+
+        removeObject(this);
+    }
+
     @Override
     public String toString() {
         return  name;
