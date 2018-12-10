@@ -50,7 +50,7 @@ public class Storage extends AddRemove {
     }
 
     /**
-     * Methods
+     * "Methods
      */
     public int getId() {
         return id;
