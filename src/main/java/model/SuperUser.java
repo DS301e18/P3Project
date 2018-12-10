@@ -1,6 +1,6 @@
 package model;
 
-public class Manager extends Employee {
+public class SuperUser extends Employee {
 
     /**
      * Field
@@ -10,15 +10,15 @@ public class Manager extends Employee {
     private String password;
     private String firstName;
     private String lastName;
-    private String role = "Chef";
+    private String role = "Superbruger";
 
-    public Manager(String username, String password, String firstName, String lastName) {
+    public SuperUser(String username, String password, String firstName, String lastName) {
         super(username, password, firstName, lastName);
 
         addObject(this);
     }
 
-    public Manager() {
+    public SuperUser() {
     }
 
     @Override
@@ -81,16 +81,6 @@ public class Manager extends Employee {
         this.role = role;
     }
 
-    public void removeManager() {
-        if ((SystemAdministrator.collectManagers() != null)){
-            for (int i = 0; i < SystemAdministrator.collectManagers().size(); i++) {
-                removeObject(SystemAdministrator.collectManagers().get(i));
-            }
-        }
-
-        removeObject(this);
-    }
-
     @Override
     public String toString() {
         return "Manager{" +
@@ -102,4 +92,6 @@ public class Manager extends Employee {
                 ", role='" + role + '\'' +
                 '}';
     }
+
+
 }

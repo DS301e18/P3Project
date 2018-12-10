@@ -90,7 +90,25 @@ public class Restaurant extends AddRemove {
 
         for (int i = 0; i < restaurantEmployee.size(); i++) {
             for (Employee employee : employeeList) {
-                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId()) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Medarbejder")) {
+                    allRestaurantEmployees.add(employee);
+                }
+            }
+        }
+        allRestaurantEmployees.sort(Comparator.comparing(Employee::getFirstName));
+        return allRestaurantEmployees;
+    }
+
+    public List<Manager> sortManagers() {
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+
+        List<RestaurantEmployee> restaurantEmployee = collectEmployees();
+        List<Manager> employeeList = session.createQuery("FROM Employee").list();
+        List<Manager> allRestaurantEmployees = new ArrayList<>();
+
+        for (int i = 0; i < restaurantEmployee.size(); i++) {
+            for (Manager employee : employeeList) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Chef")) {
                     allRestaurantEmployees.add(employee);
                 }
             }
@@ -114,6 +132,16 @@ public class Restaurant extends AddRemove {
             }
         }
         return allRestaurantStorages;
+    }
+
+    public void removeRestaurant() {
+        if ((SystemAdministrator.collectRestaurants() != null)){
+            for (int i = 0; i < SystemAdministrator.collectRestaurants().size(); i++) {
+                removeObject(SystemAdministrator.collectRestaurants().get(i));
+            }
+        }
+
+        removeObject(this);
     }
 
     @Override
