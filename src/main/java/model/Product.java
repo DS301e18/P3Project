@@ -15,7 +15,6 @@ public class Product extends AddRemove {
     /**
      * Field
      **/
-
     private int id;
     private String name;
     private int batchSize;
