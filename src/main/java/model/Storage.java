@@ -130,8 +130,8 @@ public class Storage extends AddRemove {
         List<Product> storageProducts = sortProducts();
         BigDecimal totalPrice = new BigDecimal(0);
 
-        for (int i = 0; i < storageProducts.size(); i++) {
-            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches());
+        for (Product storageProduct : storageProducts) {
+            totalPrice = totalPrice.add(storageProduct.priceOfAllBatches());
         }
         return totalPrice;
     }

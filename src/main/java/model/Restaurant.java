@@ -146,7 +146,23 @@ public class Restaurant extends AddRemove {
             }
         }
 
+        if (sortEmployees() != null) {
+            for (int i = 0; i < sortEmployees().size(); i++) {
+                removeObject(sortEmployees().get(i));
+            }
+        }
+
+        if (collectEmployees() != null) {
+            for (int i = 0; i < collectEmployees().size(); i++) {
+                removeObject(collectEmployees().get(i));
+            }
+        }
+
         removeObject(this);
+    }
+
+    public void update(){
+        updateObject(this);
     }
 
     @Override

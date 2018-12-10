@@ -36,7 +36,7 @@
 
         .container{
             width: 100%;
-            height: 100%;
+            height: 80%;
             overflow: hidden;
         }
 
@@ -79,6 +79,20 @@
             height: 200px;
             margin: 60px 5px 5px;
             padding-top: 30px;
+        }
+
+        .chooseButton {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 15px;
+            width: 100%;
+            text-align: left;
+            text-indent: 20px;
+            background-color: white;
+        }
+
+        .chooseButton:hover, .chooseButton:focus{
+            background-color: lightblue;
         }
     </style>
 </head>
@@ -138,22 +152,57 @@
     <section>
         <label style="font-size: 30px">Restauranter</label>
         <button onclick="showPopUp('popUpRestaurant')">Tilføj restaurant</button>
-        <form>
             <!-- Input used to know which product has been clicked and chosen-->
             <% int i = 0;
-                for(Restaurant restaurant : restaurantList){%>
-                <button class="productButton">
-                    <input type="hidden" value="<%=i%>" name="RestaurantChosen">
+            for(Restaurant restaurant : restaurantList){%>
+                <button class="chooseButton" onclick="chosenRestaurantFunc('<%=restaurant.getName()%>', 'restaurantID')">
+                    <input id="restaurantID" type="hidden" value="<%=i%>" name="RestaurantChosen">
                     <label><%=restaurant.getName()%></label>
                 </button><%
-                i++;}%>
-        </form>
+            i++;}%>
     </section>
 
     <aside>
         <label style="font-size: 30px">Chefer</label>
         <button onclick="showPopUp('popUpManager')">Tilføj chef</button>
+        <!-- Input used to know which product has been clicked and chosen-->
+        <input type="hidden" id="managerID" name="manager">
+        <% int j = 0;
+            for(Manager manager : managerList){%>
+                <button class="chooseButton" value="<%=j%>" onclick="chosenManagerFunc('<%=manager.getFirstName()%>','<%=manager.getLastName()%>','<%=manager.getUsername()%>','<%=manager.getPassword()%>', value)">
+                    <label><%=manager.getFirstName() + " " + manager.getLastName()%></label>
+                </button><%
+            j++;}%>
     </aside>
+    <footer style="width: 100%; height: 20%; background-color: lightblue; position: fixed; bottom: 0;">
+        <div style="width: 24%; height: 100%; float: left; border-right: solid white">
+            <form>
+                <input id="resID" type="hidden" name="id">
+                <input id="resName" type="text" name="chosenRestaurant">
+                <input type="submit" value="Rediger">
+            </form>
+            <form>
+                <input type="submit" value="Slet">
+            </form>
+        </div>
+        <div style="width: 50%; height: 100%; float: left; border-right: solid white">
+            <form action="EditManager" method="post">
+                <input id="manID" type="hidden" name="managerID">
+                <input id="manFirstName" type="text" name="fName">
+                <input id="manLastName" type="text" name="lName">
+                <input id="manUsername" type="text" name="uName">
+                <input id="manPassword" type="text" name="pWord">
+                <input type="submit" value="Rediger">
+            </form>
+            <form action="Manager" method="get">
+                <input id="manIDDelete" type="hidden" name="manIDDelete">
+                <input type="submit" value="Slet">
+            </form>
+        </div>
+        <div style="width: 25%; height: 100%; float: left; border-right: solid white">
+            Test
+        </div>
+    </footer>
 </div>
 
 <script>
@@ -172,6 +221,30 @@
         if(hideElement.style.display === "block"){
             hideElement.style.display = "none";
         }
+    }
+    
+    function chosenRestaurantFunc(name, id) {
+        var input = document.getElementById("resName");
+        var chosenID = document.getElementById("resID");
+
+        input.value = name;
+        chosenID.value = document.getElementById(id).value;
+    }
+
+    function chosenManagerFunc(firstName, lastName, username, password, value) {
+        var fName = document.getElementById("manFirstName");
+        var lName = document.getElementById("manLastName");
+        var uname = document.getElementById("manUsername");
+        var pword = document.getElementById("manPassword");
+        var chosenID = document.getElementById("manID");
+        var deleteID = document.getElementById("manIDDelete");
+
+        fName.value = firstName;
+        lName.value = lastName;
+        uname.value = username;
+        pword.value = password;
+        chosenID.value = value;
+        deleteID.value = value;
     }
 </script>
 
