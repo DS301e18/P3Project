@@ -32,6 +32,8 @@ public class EditManagerController extends HttpServlet {
         manager.setUsername(username);
         manager.setPassword(password);
 
+        manager.update();
+
         resp.sendRedirect("superuserWebpanel.jsp");
     }
 }

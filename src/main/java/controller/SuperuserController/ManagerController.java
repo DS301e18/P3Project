@@ -39,7 +39,7 @@ public class ManagerController extends HttpServlet {
 
         Manager manager = managerList.get(managerID);
 
-        manager.removeManager();
+        manager.removeEmployee();
 
         resp.sendRedirect("superuserWebpanel.jsp");
     }
