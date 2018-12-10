@@ -19,7 +19,6 @@ public class Restaurant extends AddRemove {
      */
     private int id;
     private String name;
-    private SessionFactory factory;
 
     public Restaurant(String name) {
         this.name = name;
@@ -90,7 +89,25 @@ public class Restaurant extends AddRemove {
 
         for (int i = 0; i < restaurantEmployee.size(); i++) {
             for (Employee employee : employeeList) {
-                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId()) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Medarbejder")) {
+                    allRestaurantEmployees.add(employee);
+                }
+            }
+        }
+        allRestaurantEmployees.sort(Comparator.comparing(Employee::getFirstName));
+        return allRestaurantEmployees;
+    }
+
+    public List<Manager> sortManagers() {
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+
+        List<RestaurantEmployee> restaurantEmployee = collectEmployees();
+        List<Manager> employeeList = session.createQuery("FROM Employee").list();
+        List<Manager> allRestaurantEmployees = new ArrayList<>();
+
+        for (int i = 0; i < restaurantEmployee.size(); i++) {
+            for (Manager employee : employeeList) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Chef")) {
                     allRestaurantEmployees.add(employee);
                 }
             }
@@ -116,9 +133,25 @@ public class Restaurant extends AddRemove {
         return allRestaurantStorages;
     }
 
+    public void removeRestaurant() {
+        if (allStorages() != null) {
+            for (int i = 0; i < allStorages().size(); i++) {
+                allStorages().get(i).remove();
+            }
+        }
+
+        if (collectStorages() != null) {
+            for (int i = 0; i < collectStorages().size(); i++) {
+                collectStorages().get(i).remove();
+            }
+        }
+
+        removeObject(this);
+    }
+
     @Override
     public String toString() {
-        return  name;
+        return name;
     }
 }
 

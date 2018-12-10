@@ -19,9 +19,11 @@ public class LoginController extends HttpServlet {
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //Input parameters
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
+        //check login
         LoginCheck loginCheck = new LoginCheck();
         sessionFactory = loginCheck.getSessionFactory();
 
@@ -36,7 +38,11 @@ public class LoginController extends HttpServlet {
             session.setAttribute("employee", loginCheck.getEmployee());
 
             //Redirect
-            response.sendRedirect("webpanel.jsp");
+            if(loginCheck.getEmployee().getRole().equals("Superbruger")){
+                response.sendRedirect("superuserWebpanel.jsp");
+            }else{
+                response.sendRedirect("webpanel.jsp");
+            }
 
         } else {
             response.sendRedirect("index.jsp");

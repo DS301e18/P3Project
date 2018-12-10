@@ -27,16 +27,17 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
+    //TODO: Remove batches as well
     public void remove() {
         if ((sortProducts() != null)){
             for (int i = 0; i < sortProducts().size(); i++) {
-                removeObject(sortProducts().get(i));
+                sortProducts().get(i).remove();
             }
         }
 
         if ((collectProducts() != null)){
             for (int i = 0; i < collectProducts().size(); i++) {
-                removeObject(collectProducts().get(i));
+                collectProducts().get(i).remove();
             }
         }
 
@@ -104,6 +105,7 @@ public class Storage extends AddRemove {
 
         List<StorageProduct> storageProducts = collectProducts();
         List<Product> productList = session.createQuery("FROM Product").list();
+
         List<Product> totalStorageProducts = new ArrayList<>();
 
         for (int i = 0; i < storageProducts.size(); i++) {
@@ -129,7 +131,7 @@ public class Storage extends AddRemove {
         BigDecimal totalPrice = new BigDecimal(0);
 
         for (int i = 0; i < storageProducts.size(); i++) {
-            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches(this));
+            totalPrice = totalPrice.add(storageProducts.get(i).priceOfAllBatches());
         }
         return totalPrice;
     }

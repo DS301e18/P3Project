@@ -17,6 +17,10 @@ public class StorageProduct extends AddRemove {
     public StorageProduct() {
     }
 
+    public void remove(){
+        removeObject(this);
+    }
+
     public int getId() {
         return id;
     }

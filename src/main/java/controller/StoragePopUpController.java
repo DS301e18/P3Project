@@ -15,20 +15,28 @@ import java.io.IOException;
 @WebServlet("/SPopUp")
 public class StoragePopUpController extends HttpServlet {
 
+    /** Add Storage */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //Input parameter
         String storageName = req.getParameter("newStorage");
 
+        //Find current restaurant
         HttpSession session = req.getSession();
-
         Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+
+        //Add storage to database
         Storage storage = new Storage(storageName);
         new RestaurantStorage(restaurant.getId(), storage.getId());
 
+        //Close popup
         session.setAttribute("showSPopUp", false);
+
         resp.sendRedirect("webpanel.jsp");
     }
 
+    /** Open pop up*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

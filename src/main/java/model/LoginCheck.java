@@ -3,6 +3,9 @@ package model;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import util.SessionFactoryCfg;
 
 import java.util.List;
@@ -23,17 +26,19 @@ public class LoginCheck {
 
         try (Session session = sessionFactory.openSession()) {
             // Create list of the employees in the database
-            List<Employee> employeeList = session.createQuery("FROM Employee ").list();
+            Query empQuery = session.createQuery("From Employee where username =:username and password =:password");
+            empQuery.setParameter("username", username);
+            empQuery.setParameter("password", password);
 
-            for (Employee employee : employeeList) {
-                if (employee.getUsername().equals(username) && employee.getPassword().equals(password)) {
-                    this.employee = employee;
-                    return true;
-                }
+            Employee foundEmployee = (Employee) empQuery.uniqueResult();
+
+            if (foundEmployee != null) {
+                this.employee = foundEmployee;
+                return true;
             }
 
         } catch (HibernateException e) {
-            System.out.println("Something went wrong");
+            System.out.println("Found either no match or more than more match");
             e.printStackTrace();
             sessionFactory.close();
         }

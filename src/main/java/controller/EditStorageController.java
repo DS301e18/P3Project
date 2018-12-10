@@ -13,22 +13,26 @@ import java.io.IOException;
 @WebServlet("/EditStorageController")
 public class EditStorageController extends HttpServlet {
 
+    /** Edit storage information if edit button pressed*/
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Get parameters
         String storageName = req.getParameter("editStorageName");
 
+        //Get current attributes
         HttpSession session = req.getSession();
-
         Storage storage = (Storage) session.getAttribute("storageChosen");
         storage.setName(storageName);
         storage.update();
 
+        //Close popup
         session.setAttribute("showEditSPopUp", false);
 
         resp.sendRedirect("webpanel.jsp");
     }
 
+    /** If button pressed, show popup*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

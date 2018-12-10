@@ -14,17 +14,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<%
+<%//Get all storages under current restaurant
     List<Storage> storages = (List) session.getAttribute("storages");
 %>
 
 <!-- Side navigation (storage navigation)-->
-<div class="sideNav">
-    <div>
-    <!-- Generate storage buttons -->
+<div class="sideNav" id="sideNavID">
+    <!-- Generate storage buttons with functionality -->
     <form name="storageChooser" action="Storage" method="post">
-        <input type="hidden" name="buttonChosen">
-        <%
+        <input type="hidden" name="buttonChosen"><%
             int i = 0;
             for (Storage storage : storages) {%>
                 <button class="menuDot" onclick="storageChoice(id)" value="<%=i%>" id="<%=storage.getId()%>">
@@ -34,6 +32,7 @@
             }%>
     </form>
 
+    <!-- Add storage button -->
     <%if(session.getAttribute("role").equals("Chef")){%>
         <!-- Add a new storage to the restaurant-->
         <form action="SPopUp" method="get">
@@ -50,7 +49,6 @@
 
 
 <script>
-
     //Parameter buttonChosen gets the same value as the storage clicked on
     function storageChoice(storageID) {
         var button = document.getElementById(storageID).value;
