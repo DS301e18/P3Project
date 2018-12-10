@@ -3,7 +3,6 @@ package model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.junit.jupiter.api.Test;
 import relationClasses.RestaurantEmployee;
 import util.SessionFactoryCfg;
