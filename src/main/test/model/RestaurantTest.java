@@ -41,7 +41,7 @@ class RestaurantTest {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
-        //Employee employee = new Employee("Test", "Test", "Test", "Test");
+        Employee employee = new Employee("Test", "Test", "Test", "Test", "Medarbejder");
 
         RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
 
@@ -50,6 +50,8 @@ class RestaurantTest {
         assertEquals(restaurantEmployee.getId(), sessionRestaurantEmployee.getId());
 
         session.close();
+
+        restaurant.removeRestaurant();
     }
 
 
