@@ -3,6 +3,7 @@ package model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.junit.jupiter.api.Test;
 import relationClasses.RestaurantEmployee;
 import util.SessionFactoryCfg;
@@ -36,14 +37,6 @@ class RestaurantTest {
 
 
     @Test
-    void removeRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
-        Restaurant restaurant = new Restaurant("TestRestaurant");
-    }
-
-
-    @Test
     void relateRestaurantEmployee() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
@@ -61,17 +54,27 @@ class RestaurantTest {
 
 
     @Test
-    void sortEmployeesANDcollctEmployee(){
+    void sortEmployeesCollctEmployeeRemoveRestaurantRemoveEmployee() {
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Transaction transaction = session.beginTransaction();
 
         Restaurant restaurant = new Restaurant("ceTest");
         Employee employee = new Employee("app123", "ejh", "ce", "test", "Medarbejder");
-        new RestaurantEmployee(restaurant.getId(), employee.getId());
+        RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
 
         List<Employee> EmployeeList = new ArrayList<>();
         EmployeeList.add(employee);
 
         assertEquals(EmployeeList, restaurant.sortEmployees());
+
+        restaurant.removeRestaurant();
+        employee.removeEmployee();
+        session.delete(restaurantEmployee);
+
+        transaction.commit();
+        sessionFactory.close();
 
     }
 
