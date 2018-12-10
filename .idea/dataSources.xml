@@ -19,5 +19,14 @@ C:/Users/Ringholm/Dropbox/Aau/Datalogi kursus/P3/Github/P3Project/src/main/resou
         <property name="tinyInt1isBit" value="false" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="out:artifacts:P3ProjectTest_war_exploded:WEB-INF:classes:hibernate.cfg.xml/Hibernate" uuid="79202654-7705-4c33-8d2a-4d85bbfa1a18">
+      <imported>true</imported>
+      <configured-by-url>true</configured-by-url>
+      <remarks>Hibernate
+
+C:/Users/Kristoffer/IdeaProjects/P3Project/out/artifacts/P3ProjectTest_war_exploded/WEB-INF/classes/hibernate.cfg.xml</remarks>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://freshcase.dk/freshcas_p3?useLegacyDatetimeCode=false&amp;serverTimezone=UTC</jdbc-url>
+    </data-source>
   </component>
 </project>

@@ -40,7 +40,7 @@ class TransactionsTest {
         Transactions transactions = new Transactions();
         Transaction transaction;
 
-        e = new Employee("Kaj", "Kajesen", "KajKajKaj", "1234kaj");
+        //e = new Employee("Kaj", "Kajesen", "KajKajKaj", "1234kaj");
 
         Restaurant restaurant = new Restaurant("ålleren");
 

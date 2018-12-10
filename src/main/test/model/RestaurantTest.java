@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import relationClasses.RestaurantEmployee;
 import util.SessionFactoryCfg;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RestaurantTest {
@@ -45,7 +48,7 @@ class RestaurantTest {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
-        Employee employee = new Employee("Test", "Test", "Test", "Test");
+        //Employee employee = new Employee("Test", "Test", "Test", "Test");
 
         RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
 
@@ -57,53 +60,19 @@ class RestaurantTest {
     }
 
 
-
-    /*
     @Test
-    void resignEmployeeTest() {
+    void sortEmployeesANDcollctEmployee(){
+        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
 
-       // restaurant.resignEmployee(employee);
-        RestaurantEmployee aecDB = null;
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Restaurant restaurant = new Restaurant("ceTest");
+        Employee employee = new Employee("app123", "ejh", "ce", "test", "Medarbejder");
+        new RestaurantEmployee(restaurant.getId(), employee.getId());
 
-        try {
-            List<RestaurantEmployee> employeeList = session.createQuery("FROM RestaurantEmployee ").list();
-            for (RestaurantEmployee aec : employeeList) {
-                if (aec.getEmployeeId() == employee.getId()) {
-                    aecDB = aec;
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("could not resign employee");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        List<Employee> EmployeeList = new ArrayList<>();
+        EmployeeList.add(employee);
 
-        assertNull(aecDB);
+        assertEquals(EmployeeList, restaurant.sortEmployees());
+
     }
 
-
-    @Test
-    void removeStorage() {
-       // restaurant.removeStorage(storage);
-        RestaurantStorage assignedStorageDB = null;
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
-        try {
-            List<RestaurantStorage> storageList = session.createQuery("FROM RestaurantStorage").list();
-            for (RestaurantStorage asc : storageList) {
-                if (asc.getStorageId() == storage.getId()) {
-                    assignedStorageDB = asc;
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("no storage to remove");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        assertNull(assignedStorageDB);
-    }*/
 }

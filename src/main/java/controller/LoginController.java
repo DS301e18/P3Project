@@ -38,7 +38,11 @@ public class LoginController extends HttpServlet {
             session.setAttribute("employee", loginCheck.getEmployee());
 
             //Redirect
-            response.sendRedirect("webpanel.jsp");
+            if(loginCheck.getEmployee().getRole().equals("Superbruger")){
+                response.sendRedirect("superuserWebpanel.jsp");
+            }else{
+                response.sendRedirect("webpanel.jsp");
+            }
 
         } else {
             response.sendRedirect("index.jsp");
