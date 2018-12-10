@@ -19,7 +19,6 @@ public class Restaurant extends AddRemove {
      */
     private int id;
     private String name;
-    private SessionFactory factory;
 
     public Restaurant(String name) {
         this.name = name;
