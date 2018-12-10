@@ -1,5 +1,6 @@
 package model;
 
+import util.AddRemove;
 import util.SessionFactoryCfg;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,7 +10,7 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemAdministrator {
+public class SystemAdministrator extends AddRemove {
 
     /**
      * Fields
@@ -26,14 +27,14 @@ public class SystemAdministrator {
     /**
      * Methods
      **/
-    public List<Restaurant> collectRestaurants() {
+    public static List<Restaurant> collectRestaurants() {
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
         List<Restaurant> restaurantList = session.createQuery("FROM Restaurant").list();
         session.close();
         return restaurantList;
     }
 
-    public List<Manager> collectManagers() {
+    public static List<Manager> collectManagers() {
         List<Manager> managerList = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
@@ -48,111 +49,6 @@ public class SystemAdministrator {
 
         session.close();
         return managerList;
-    }
-
-
-
-    /*public void addManager(Manager manager){
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-            this.manager = manager;
-            session.save(manager);
-            transaction.commit();
-
-        } catch (HibernateException e){
-            System.out.println("Could not save the manager");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-    }*/
-
-    public void removeManager(Manager manager) {
-
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction;
-
-        try {
-            // Create list of the managers in the database
-            List<Manager> managerList = session.createQuery("FROM Manager").list();
-
-            for (Manager manager1 : managerList) {
-                //If the manager is found in the list, delete it
-                if (manager.getId() == manager1.getId()) {
-                    transaction = session.beginTransaction();
-                    session.delete(manager1);
-                    transaction.commit();
-                }
-            }
-        } catch (HibernateException e) {
-            System.out.println("Could not delete the manager");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-    }
-
-
-    /*public void addRestaurant(String restaurantName){
-
-        restaurant = new Restaurant();
-        restaurant.setName(restaurantName);
-
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-            session.save(restaurant);
-            transaction.commit();
-
-        } catch (HibernateException e){
-            System.out.println("Could not save the restaurant");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-    }*/
-
-    public void removeRestaurant(String restaurantName) {
-
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Transaction transaction;
-
-        try {
-            // Create list of the restaurants in the database
-            List<Restaurant> restaurantList = session.createQuery("FROM Restaurant ").list();
-
-            for (Restaurant restaurant : restaurantList) {
-                if (restaurant.getName().equals(restaurantName)) {
-                    //If the restaurant is found in the list, delete it
-                    this.restaurant = restaurant;
-                    transaction = session.beginTransaction();
-                    session.delete(this.restaurant);
-                    transaction.commit();
-                }
-            }
-
-        } catch (HibernateException e) {
-            System.out.println("Could not delete the restaurant");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
     }
 
     public Restaurant getRestaurant() {
