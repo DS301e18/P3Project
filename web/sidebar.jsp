@@ -21,6 +21,7 @@
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav" id="sideNavID">
     <!-- Generate storage buttons with functionality -->
+    <div>
     <form name="storageChooser" action="Storage" method="post">
         <input type="hidden" name="buttonChosen"><%
             int i = 0;

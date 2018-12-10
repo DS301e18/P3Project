@@ -65,7 +65,7 @@ class RestaurantTest {
         SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
 
         Restaurant restaurant = new Restaurant("ceTest");
-        Employee employee = new Employee("app123", "ejh", "ce", "test");
+        Employee employee = new Employee("app123", "ejh", "ce", "test", "Medarbejder");
         new RestaurantEmployee(restaurant.getId(), employee.getId());
 
         List<Employee> EmployeeList = new ArrayList<>();

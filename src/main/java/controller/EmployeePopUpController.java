@@ -28,7 +28,7 @@ public class EmployeePopUpController extends HttpServlet {
         HttpSession session = req.getSession();
 
         Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
-        Employee employee = new Employee(employeeUsername,employeeFirstName, employeePassword, employeeLastName);
+        Employee employee = new Employee(employeeUsername,employeeFirstName, employeePassword, employeeLastName, "Medarbejder");
         new RestaurantStorage(restaurant.getId(), employee.getId());
 
         session.setAttribute("showEPopUp", false);
