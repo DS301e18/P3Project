@@ -99,6 +99,24 @@ public class Restaurant extends AddRemove {
         return allRestaurantEmployees;
     }
 
+    public List<Manager> sortManagers() {
+        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+
+        List<RestaurantEmployee> restaurantEmployee = collectEmployees();
+        List<Manager> employeeList = session.createQuery("FROM Employee").list();
+        List<Manager> allRestaurantEmployees = new ArrayList<>();
+
+        for (int i = 0; i < restaurantEmployee.size(); i++) {
+            for (Manager employee : employeeList) {
+                if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Chef")) {
+                    allRestaurantEmployees.add(employee);
+                }
+            }
+        }
+        allRestaurantEmployees.sort(Comparator.comparing(Employee::getFirstName));
+        return allRestaurantEmployees;
+    }
+
     public List<Storage> allStorages() {
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
 
