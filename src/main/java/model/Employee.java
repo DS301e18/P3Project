@@ -24,7 +24,7 @@ public class Employee extends AddRemove {
     public Employee() {
     }
 
-    public void removeEmployee(){
+    public void remove(){
         removeObject(this);
     }
 
