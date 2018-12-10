@@ -1,7 +1,9 @@
 package model;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.junit.jupiter.api.Test;
+import util.SessionFactoryCfg;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,15 +29,15 @@ class LoginCheckTest {
     //Tester om initializere objekter er indentisk med databaser.
     @Test
     void getEmployee() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Employee employee = new Employee("Testbrugernavn", "test123", "Lille", "Peter", "Medarbejder");
         LoginCheck test2 = new LoginCheck();
-        test2.check("admin", "admin123");
-        Employee emp1 = new Employee();
-        emp1.setFirstName("Halleluja");
-        emp1.setLastName("My god");
-        emp1.setPassword("admin123");
-        emp1.setRole("Manager");
-        emp1.setUsername("admin");
-        emp1.setId(9);
-        assertEquals(emp1, test2.getEmployee());
+
+        assertTrue(test2.check(employee.getUsername(), employee.getPassword()));
+
+        employee.removeEmployee();
+
+        session.close();
     }
 }
