@@ -99,12 +99,12 @@
 
 <!-- Popup restaurant -->
 <div class="popUp" id="popUpRestaurant" style="display: none">
-    <header class="popUpHeader">Tilføj ny restaurant</header>
+    <header class="popUpHeader">Opret ny restaurant</header>
 
     <div class="popUpBody">
         <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
             <input type="text" placeholder="Angiv navnet på Restaurant..." name="newRestaurant"><br>
-            <input id="addRestaurantSubmit" type="submit" value="Registrer">
+            <input id="addRestaurantSubmit" type="submit" value="Opret">
         </form>
 
         <button onclick="closePopUp('popUpRestaurant')">Annuller</button>
@@ -112,15 +112,15 @@
 </div>
 
 <div class="popUp" id="popUpManager" style="display: none">
-    <header class="popUpHeader">Tilføj ny restaurant</header>
+    <header class="popUpHeader">Opret ny chef</header>
 
     <div class="popUpBody">
-        <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
+        <form action="Manager" accept-charset="ISO-8859-1" method="post">
             <input type="text" placeholder="Fornavn..." name="managerFirstName"><br>
             <input type="text" placeholder="Efternavn..." name="managerLastName"><br>
             <input type="text" placeholder="Brugernavn..." name="username"><br>
             <input type="text" placeholder="Password" name="password"><br>
-            <input id="addManagerSubmit" type="submit" value="Registrer">
+            <input id="addManagerSubmit" type="submit" value="Opret">
         </form>
 
         <button onclick="closePopUp('popUpManager')">Annuller</button>

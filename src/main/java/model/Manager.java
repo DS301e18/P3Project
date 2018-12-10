@@ -13,7 +13,10 @@ public class Manager extends Employee {
     private String role = "Chef";
 
     public Manager(String username, String password, String firstName, String lastName) {
-        super(username, password, firstName, lastName);
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
         addObject(this);
     }
