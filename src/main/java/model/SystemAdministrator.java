@@ -34,8 +34,18 @@ public class SystemAdministrator {
     }
 
     public List<Manager> collectManagers() {
+        List<Manager> managerList = new ArrayList<>();
+
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-        List<Manager> managerList = session.createQuery("FROM RestaurantEmployee").list();
+
+        List<Manager> employeeList = session.createQuery("FROM Employee").list();
+
+        for (Manager employee : employeeList) {
+            if (employee.getRole().equals("Chef")) {
+                managerList.add(employee);
+            }
+        }
+
         session.close();
         return managerList;
     }
