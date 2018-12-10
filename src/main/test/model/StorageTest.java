@@ -1,7 +1,10 @@
 package model;
 
 import org.hibernate.Session;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import relationClasses.ProductBatch;
 import relationClasses.StorageProduct;
 import util.SessionFactoryCfg;
 
@@ -21,6 +24,8 @@ class StorageTest {
 
         assertEquals(storage.getId(), sessionStorage.getId());
 
+        storage.remove();
+
         session.close();
     }
 
@@ -36,6 +41,8 @@ class StorageTest {
         StorageProduct sessionStorageProduct = session.get(StorageProduct.class, storageProduct.getId());
 
         assertEquals(storageProduct.getId(), sessionStorageProduct.getId());
+
+        storage.remove();
 
         session.close();
     }
@@ -57,14 +64,34 @@ class StorageTest {
 
         Storage sessionStorage = session.get(Storage.class, storage.getId());
 
-
         assertEquals(storage.sortProducts(), sessionStorage.sortProducts());
+
+        storage.remove();
 
         session.close();
     }
 
     @Test
     void calculateTotalPrice() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Storage storage = new Storage("Test Lager");
+
+        Product product = new Product("Sprite Test", 10, BigDecimal.valueOf(10));
+
+        StorageProduct storageProduct = new StorageProduct(storage.getId(), product.getId());
+
+        Batch batch = new Batch(product, "batchNumberTest", 10);
+
+        ProductBatch productBatch = new ProductBatch(product.getId(), batch.getId());
+
+        product.priceOfAllBatches();
+
+        assertEquals(100, storage.calculateTotalPrice().intValue());
+
+        storage.remove();
+
+        session.close();
     }
 
     @Test
