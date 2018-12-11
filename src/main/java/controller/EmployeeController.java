@@ -1,7 +1,9 @@
 package controller;
 
 import model.Employee;
+import model.History;
 import model.Restaurant;
+import model.Transactions;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +17,7 @@ import java.util.List;
 @WebServlet("/Employee")
 public class EmployeeController extends HttpServlet{
 
-    /** */
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
@@ -25,10 +27,33 @@ public class EmployeeController extends HttpServlet{
         List<Employee> employee = currentRestaurant.sortEmployees();
 
         session.setAttribute("employeeList", employee);
-
+        session.setAttribute("employeeMenu",true);
         session.setAttribute("storageChosen", null);
 
         response.sendRedirect("webpanel.jsp");
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //Parameter with employee ID
+        int employeeID = Integer.parseInt(req.getParameter("employeeChosenButton"));
+
+        //Get list of employees in current restaurant
+        HttpSession session = req.getSession();
+        List<Employee> employees = (List) session.getAttribute("employeesListForChoosing");
+        Employee employee = employees.get(employeeID);
+        String name = employee.getFirstName() + " " + employee.getLastName();
+
+        History history = new History();
+        List<Transactions> employeeHistory = history.readEmployeeHistory(200, name);
+
+
+        //Attribute employeeChosen to the chosen employee
+        session.setAttribute("employeeChosen", employee);
+        session.setAttribute("history", employeeHistory);
+
+        resp.sendRedirect("webpanel.jsp");
 
     }
 }

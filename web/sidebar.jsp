@@ -21,30 +21,32 @@
 <!-- Side navigation (storage navigation)-->
 <div class="sideNav" id="sideNavID">
     <!-- Generate storage buttons with functionality -->
-    <form name="storageChooser" action="Storage" method="post">
-        <input type="hidden" name="buttonChosen"><%
+    <div style="overflow: scroll; height: 80%;">
+        <form name="storageChooser" action="Storage" method="post">
+            <input type="hidden" name="buttonChosen"><%
             int i = 0;
             for (Storage storage : storages) {%>
-                <button class="menuDot" onclick="storageChoice(id)" value="<%=i%>" id="<%=storage.getId()%>">
-                    <%=storage.getName()%>
-                </button><%
+            <button class="menuDot" onclick="storageChoice(id)" value="<%=i%>" id="<%=storage.getId()%>">
+                <%=storage.getName()%>
+            </button><%
                 i++;
             }%>
-    </form>
+        </form>
+        <%if(session.getAttribute("role").equals("Chef")){%>
+            <!-- Add a new storage to the restaurant-->
+            <form action="SPopUp" method="get">
+                <button><i class="fas fa-plus-circle"></i></button>
+            </form><%
+        }%>
+    </div>
 
     <!-- Add storage button -->
     <%if(session.getAttribute("role").equals("Chef")){%>
-    <div>
-        <!-- Add a new storage to the restaurant-->
-        <form action="SPopUp" method="get">
-            <button><i class="fas fa-plus-circle"></i></button>
-        </form>
-    </div>
+    <div class="embdiv">
     <form name="employeelist" action="Employee" method="post">
-        <div class="embdiv">
             <button type="submit"><i class="fas fa-user-circle"></i></button>
-        </div>
     </form>
+    </div>
     <%}%>
 </div>
 

@@ -21,6 +21,7 @@
         <property name = "amount" column = "amount" type = "int"/>
         <property name = "name" column = "employee" type = "string"/>
         <property name = "storage_id" column="storage_id" type="int"/>
+        <property name="storageName" column="storage_name" type="string" />
 
     </class>
 </hibernate-mapping>

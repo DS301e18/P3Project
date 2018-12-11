@@ -19,7 +19,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Import Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style/storageMenu.css">
 
 </head>
@@ -38,31 +39,43 @@
     session.setAttribute("storages", storages);
 %>
 
-    <jsp:include page="navigation.jsp"/>
-    <jsp:include page="sidebar.jsp"/>
+<jsp:include page="navigation.jsp"/>
+<jsp:include page="sidebar.jsp"/>
 
-    <%if((boolean) session.getAttribute("showSPopUp")){%>
-        <jsp:include page="addStoragePopUp.jsp"/>
-    <%}%>
+<%if ((boolean) session.getAttribute("showSPopUp")) {%>
+<jsp:include page="addStoragePopUp.jsp"/>
+<%}%>
 
-    <%if((boolean) session.getAttribute("showEditSPopUp")){%>
-    <jsp:include page="editStoragePopUp.jsp"/>
-    <%}%>
+<%if ((boolean) session.getAttribute("showEditSPopUp")) {%>
+<jsp:include page="editStoragePopUp.jsp"/>
+<%}%>
 
-    <%if((boolean) session.getAttribute("showEditProPopUp")){%>
-    <jsp:include page="editProductPopUp.jsp"/>
-    <%}%>
+<%if ((boolean) session.getAttribute("showEditProPopUp")) {%>
+<jsp:include page="editProductPopUp.jsp"/>
+<%}%>
 
-    <%if(session.getAttribute("storageChosen") != null){%>
-        <jsp:include page="storageInventory.jsp"/>
-    <%}%>
+<%if ((boolean) session.getAttribute("showEPopUp")) {%>
+<jsp:include page="addEmployeePopUp.jsp"/>
+<%}%>
 
-    <%
-        if(session.getAttribute("employeeList") != null){%>
-            <jsp:include page="employee.jsp"/>
-    <%}
+<%if((boolean) session.getAttribute("showEditEmployee")){%>
+<jsp:include page="editEmployeePopUp.jsp"/>
+<%}%>
+
+
+<%if (session.getAttribute("storageChosen") != null) {%>
+<jsp:include page="storageInventory.jsp"/>
+<%}%>
+
+<%
+    if ((boolean)session.getAttribute("employeeMenu")) {%>
+<jsp:include page="employee.jsp"/>
+<%
+    }
 
 %>
+
+
 
 </body>
 </html>
