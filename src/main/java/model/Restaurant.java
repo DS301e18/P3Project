@@ -48,7 +48,7 @@ public class Restaurant extends AddRemove {
         this.name = name;
     }
 
-    private List<RestaurantEmployee> collectEmployees() {
+    public List<RestaurantEmployee> collectEmployees() {
         List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
@@ -64,7 +64,7 @@ public class Restaurant extends AddRemove {
         return restaurantEmployees;
     }
 
-    private List<RestaurantStorage> collectStorages() {
+    public List<RestaurantStorage> collectStorages() {
         List<RestaurantStorage> restaurantStorages = new ArrayList<>();
 
         Session session = new SessionFactoryCfg().getSessionFactory().openSession();
