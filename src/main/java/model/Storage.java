@@ -27,7 +27,6 @@ public class Storage extends AddRemove {
         addObject(this);
     }
 
-    //TODO: Remove batches as well
     public void remove() {
         if ((sortProducts() != null)){
             for (int i = 0; i < sortProducts().size(); i++) {

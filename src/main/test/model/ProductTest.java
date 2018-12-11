@@ -21,17 +21,16 @@ class ProductTest {
  * **/
     @Test
     void priceOfAllBatches() {
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Product product = new Product("productTest", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "qwer1234", 1);
         ProductBatch productBatch = new ProductBatch(product.getId(), batch.getId());
 
-
-
         assertEquals(200, product.priceOfAllBatches().intValue());
 
+        product.remove();
 
-
+        session.close();
     }
 }

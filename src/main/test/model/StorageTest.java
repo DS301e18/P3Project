@@ -95,7 +95,46 @@ class StorageTest {
     }
 
     @Test
-    void removeStorage() {
+    void toStringTest() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Storage storage = new Storage("Test Lager");
 
+        assertEquals("Test Lager", storage.toString());
+
+        storage.remove();
+    }
+
+    @Test
+    void updateStorage() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Storage storage = new Storage("Test Lager");
+
+        storage.setName("Lager Test");
+
+        storage.update();
+
+        Storage sessionStorage = session.get(Storage.class, storage.getId());
+
+        assertEquals(storage.getName(), sessionStorage.getName());
+
+        storage.remove();
+
+        session.close();
+    }
+
+    @Test
+    void removeStorage() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Storage storage = new Storage("Test Lager");
+
+        Storage sessionStorage = session.get(Storage.class, storage.getId());
+
+        storage.remove();
+
+        assertEquals(storage.getId(), sessionStorage.getId());
+
+        session.close();
     }
 }
