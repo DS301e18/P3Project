@@ -44,6 +44,23 @@ class RestaurantTest {
         session.close();
     }
 
+    @Test
+    void updateRestaurant() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Restaurant restaurant = new Restaurant("TestRestaurant");
+        restaurant.setName("RestaurantTest");
+        restaurant.update();
+
+        Restaurant sessionRestaurant = session.get(Restaurant.class, restaurant.getId());
+
+        assertEquals(restaurant.getId(), sessionRestaurant.getId());
+
+        restaurant.removeRestaurant();
+
+        session.close();
+    }
+
 
     @Test
     void relateRestaurantEmployee() {
