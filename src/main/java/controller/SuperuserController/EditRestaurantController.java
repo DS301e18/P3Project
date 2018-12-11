@@ -11,29 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/Restaurant")
-public class RestaurantController extends HttpServlet {
+@WebServlet("/EditRestaurant")
+public class EditRestaurantController extends HttpServlet {
 
-    /** Add new restaurant */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String name = req.getParameter("newRestaurant");
-
-        new Restaurant(name);
-
-        resp.sendRedirect("superuserWebpanel.jsp");
-
-    }
-
-    /** Delete Restaurant */
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int restaurantID = Integer.parseInt(req.getParameter("resIDDelete"));
+        int restaurantID = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("chosenRestaurant");
 
         List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
         Restaurant restaurant = restaurantList.get(restaurantID);
 
-        restaurant.removeRestaurant();
+        restaurant.setName(name);
+        restaurant.update();
 
         resp.sendRedirect("superuserWebpanel.jsp");
     }
