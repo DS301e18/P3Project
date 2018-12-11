@@ -85,7 +85,7 @@ class RestaurantTest {
     }
 
     @Test
-    void sortStorages() {
+    void sortEmployees() {
         Session session = new SessionFactoryCfg().createSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
