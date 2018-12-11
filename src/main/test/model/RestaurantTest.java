@@ -84,6 +84,32 @@ class RestaurantTest {
         session.close();
     }
 
+    @Test
+    void sortStorages() {
+        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+
+        Restaurant restaurant = new Restaurant("Test Restaurant");
+
+        Employee employee1 = new Employee("Test", "Test", "Johan", "test", "Medarbejder");
+        Employee employee2 = new Employee("Test", "Test", "Anders", "test", "Medarbejder");
+        Employee employee3 = new Employee("Test", "Test", "Life", "test", "Medarbejder");
+
+        RestaurantEmployee restaurantEmployee1 = new RestaurantEmployee(restaurant.getId(), employee1.getId());
+        RestaurantEmployee restaurantEmployee2 = new RestaurantEmployee(restaurant.getId(), employee2.getId());
+        RestaurantEmployee restaurantEmployee3 = new RestaurantEmployee(restaurant.getId(), employee3.getId());
+
+        ArrayList<Employee> arrayList = new ArrayList<>();
+        arrayList.add(employee2);
+        arrayList.add(employee1);
+        arrayList.add(employee3);
+
+        assertEquals(arrayList, restaurant.sortEmployees());
+
+        restaurant.removeRestaurant();
+
+        session.close();
+    }
+
 
     @Test
     void relateRestaurantEmployee() {

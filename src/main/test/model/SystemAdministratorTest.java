@@ -29,7 +29,7 @@ class SystemAdministratorTest {
 
         assertTrue(SystemAdministrator.collectManagers().size() >= 1);
 
-        manager.removeManager();
+        manager.removeEmployee();
 
         session.close();
     }
