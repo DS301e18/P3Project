@@ -45,8 +45,6 @@ class TransactionsTest extends AddRemove {
 
         restaurant.removeRestaurant();
 
-        removeObject(transactions);
-
         session.close();
     }
 }
