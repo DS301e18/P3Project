@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RestaurantTest {
 
@@ -36,7 +35,7 @@ class RestaurantTest {
 
     @Test
     void removeRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
 
@@ -51,7 +50,7 @@ class RestaurantTest {
 
     @Test
     void updateRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
         restaurant.setName("RestaurantTest");
@@ -68,7 +67,7 @@ class RestaurantTest {
 
     @Test
     void collectStorages() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
@@ -89,7 +88,7 @@ class RestaurantTest {
 
     @Test
     void totalPris() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
@@ -118,7 +117,7 @@ class RestaurantTest {
 
     @Test
     void sortEmployees() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
