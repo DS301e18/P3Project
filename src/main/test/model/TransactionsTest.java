@@ -41,7 +41,7 @@ class TransactionsTest extends AddRemove {
 
         Transactions foundTransactions = (Transactions) transQuery.uniqueResult();
 
-        assertTrue(foundTransactions != null);
+        assertEquals(transactions.getId(), foundTransactions.getId());
 
         restaurant.removeRestaurant();
 
