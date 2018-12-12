@@ -2,19 +2,19 @@ package model;
 
 import org.hibernate.*;
 import org.hibernate.query.Query;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import relationClasses.ProductBatch;
 import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
 import relationClasses.StorageProduct;
+import util.AddRemove;
 import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TransactionsTest {
+class TransactionsTest extends AddRemove {
 
     @Test
     void registerTransactionTest() {
@@ -44,6 +44,8 @@ class TransactionsTest {
         assertTrue(foundTransactions != null);
 
         restaurant.removeRestaurant();
+
+        removeObject(transactions);
 
         session.close();
     }
