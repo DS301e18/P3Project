@@ -25,11 +25,6 @@ class HistoryTest extends AddRemove {
         Product product = new Product("Product Test", 10, BigDecimal.valueOf(10));
         Batch batch = new Batch(product, "batchNumberTest", 10);
 
-        RestaurantStorage restaurantStorage = new RestaurantStorage(restaurant.getId(), storage.getId());
-        RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
-        StorageProduct storageProduct = new StorageProduct(storage.getId(), product.getId());
-        ProductBatch productBatch = new ProductBatch(product.getId(), batch.getId());
-
         transactions.registerTransaction(storage, employee, batch, 2, "tilføj");
 
         assertTrue(history.readEmployeeHistory(employee.getFirstName() + " " + employee.getLastName()).size() >= 1);
@@ -48,11 +43,6 @@ class HistoryTest extends AddRemove {
         Storage storage = new Storage("Test Lager");
         Product product = new Product("Product Test", 10, BigDecimal.valueOf(10));
         Batch batch = new Batch(product, "batchNumberTest", 10);
-
-        RestaurantStorage restaurantStorage = new RestaurantStorage(restaurant.getId(), storage.getId());
-        RestaurantEmployee restaurantEmployee = new RestaurantEmployee(restaurant.getId(), employee.getId());
-        StorageProduct storageProduct = new StorageProduct(storage.getId(), product.getId());
-        ProductBatch productBatch = new ProductBatch(product.getId(), batch.getId());
 
         transactions.registerTransaction(storage, employee, batch, 2, "tilføj");
 
