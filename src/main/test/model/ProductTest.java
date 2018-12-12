@@ -21,7 +21,7 @@ class ProductTest {
  * **/
     @Test
     void priceOfAllBatches() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Product product = new Product("productTest", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "qwer1234", 1);

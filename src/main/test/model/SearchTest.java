@@ -17,7 +17,7 @@ class SearchTest {
     @Test
     void searchProduct() {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction = session.beginTransaction();

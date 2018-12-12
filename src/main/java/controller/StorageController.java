@@ -1,10 +1,8 @@
 package controller;
 
-import model.Restaurant;
 import model.Storage;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
 import util.SessionFactoryCfg;
 
@@ -53,7 +51,7 @@ public class StorageController extends HttpServlet{
         storage.remove();
 
         //Find relation to the restaurant
-        Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session hibSession = SessionFactoryCfg.getSessionFactory().openSession();
         Query relation = hibSession.createQuery("From RestaurantStorage where storageId =:i");
         relation.setParameter("i", storage.getId());
         RestaurantStorage relationElement = (RestaurantStorage) relation.uniqueResult();

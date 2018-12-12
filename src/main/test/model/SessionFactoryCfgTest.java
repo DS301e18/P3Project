@@ -18,9 +18,7 @@ class SessionFactoryCfgTest {
     @Test
     public void createSessionFactoryTest(){
 
-        new SessionFactoryCfg().createSessionFactory();
-
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         session.doWork(new Work() {
             public void execute(Connection connection) throws SQLException {

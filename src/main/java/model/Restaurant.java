@@ -51,7 +51,7 @@ public class Restaurant extends AddRemove {
     public List<RestaurantEmployee> collectEmployees() {
         List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<RestaurantEmployee> restaurantEmployeesList = session.createQuery("FROM RestaurantEmployee ").list();
         for (RestaurantEmployee restaurantEmployee : restaurantEmployeesList) {
@@ -67,7 +67,7 @@ public class Restaurant extends AddRemove {
     public List<RestaurantStorage> collectStorages() {
         List<RestaurantStorage> restaurantStorages = new ArrayList<>();
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<RestaurantStorage> restaurantStorageList = session.createQuery("FROM RestaurantStorage ").list();
         for (RestaurantStorage restaurantStorage : restaurantStorageList) {
@@ -81,7 +81,7 @@ public class Restaurant extends AddRemove {
     }
 
     public List<Employee> sortEmployees() {
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<RestaurantEmployee> restaurantEmployee = collectEmployees();
         List<Employee> employeeList = session.createQuery("FROM Employee").list();
@@ -99,7 +99,7 @@ public class Restaurant extends AddRemove {
     }
 
     public List<Manager> sortManagers() {
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<RestaurantEmployee> restaurantEmployee = collectEmployees();
         List<Manager> employeeList = session.createQuery("FROM Employee").list();
@@ -117,7 +117,7 @@ public class Restaurant extends AddRemove {
     }
 
     public List<Storage> allStorages() {
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<RestaurantStorage> restaurantStorage = collectStorages();
         List<Storage> storageList = session.createQuery("FROM Storage").list();

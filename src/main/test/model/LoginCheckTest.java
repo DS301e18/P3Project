@@ -14,7 +14,6 @@ class LoginCheckTest {
     void check() {
         try{
             LoginCheck test1 = new LoginCheck();
-            test1.getSessionFactory();
             boolean result1 = test1.check("admin", "admin123");
             assertEquals(true, result1);
         }
@@ -29,7 +28,7 @@ class LoginCheckTest {
     //Tester om initializere objekter er indentisk med databaser.
     @Test
     void getEmployee() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Employee employee = new Employee("Testbrugernavn", "test123", "Lille", "Peter", "Medarbejder");
         LoginCheck test2 = new LoginCheck();

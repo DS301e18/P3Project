@@ -14,7 +14,6 @@ import java.io.IOException;
 @WebServlet("/Login")
 public class LoginController extends HttpServlet {
 
-    private SessionFactory sessionFactory;
 
     /** Login Method **/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,7 +24,6 @@ public class LoginController extends HttpServlet {
 
         //check login
         LoginCheck loginCheck = new LoginCheck();
-        sessionFactory = loginCheck.getSessionFactory();
 
         //Check if login succeeded
         if(loginCheck.check(username, password)){
@@ -46,7 +44,6 @@ public class LoginController extends HttpServlet {
 
         } else {
             response.sendRedirect("index.jsp");
-            sessionFactory.close();
         }
 
     }
@@ -59,8 +56,6 @@ public class LoginController extends HttpServlet {
         session.removeAttribute("role");
         session.invalidate();
         response.sendRedirect("index.jsp");
-
-        sessionFactory.close();
 
     }
 

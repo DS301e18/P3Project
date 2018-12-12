@@ -14,7 +14,7 @@ public class AddRemove {
 
     protected <T> void addObject(T object) {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
@@ -39,7 +39,7 @@ public class AddRemove {
 
     protected <T> void removeObject(T object) {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
@@ -63,7 +63,7 @@ public class AddRemove {
 
     protected <T> void updateObject(T object) {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;
@@ -87,7 +87,7 @@ public class AddRemove {
 
     protected <T> List collectObject(T object, String whereToQuery, int objectId) {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         List<T> objectCollection = new ArrayList<>();

@@ -21,7 +21,7 @@ class RestaurantTest {
 
     @Test
     void addRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
 
@@ -145,7 +145,7 @@ class RestaurantTest {
 
     @Test
     void relateRestaurantEmployee() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
         Employee employee = new Employee("Test", "Test", "Test", "Test", "Medarbejder");
@@ -164,8 +164,7 @@ class RestaurantTest {
 
     @Test
     void sortEmployeesCollectEmployeeRemoveRestaurantRemoveEmployee() {
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("ceTest");
         Employee employee = new Employee("app123", "ejh", "ce", "test", "Medarbejder");

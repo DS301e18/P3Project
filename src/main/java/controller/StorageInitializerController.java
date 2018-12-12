@@ -15,7 +15,7 @@ public class StorageInitializerController {
 
     public StorageInitializerController(HttpSession session) {
 
-        try (Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession()) {
+        try (Session hibSession = SessionFactoryCfg.getSessionFactory().openSession()) {
 
             //Check which restaurants the employee has access too
             Query aecQuery = hibSession.createQuery("From RestaurantEmployee where employeeId = :id");

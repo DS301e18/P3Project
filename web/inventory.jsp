@@ -18,7 +18,7 @@
     <% //Get current storage
         Storage storage = (Storage) session.getAttribute("storageChosen");%>
 
-    <div id="inventory"><%
+    <div id="invetory"><%
         //ProductList will be equal to the current product list
         List<Product> productList = (List) session.getAttribute("productList");
 
