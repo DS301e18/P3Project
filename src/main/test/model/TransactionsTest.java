@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TransactionsTest {
-    Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+    Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
     @Test
     void registerTransactionTest() {

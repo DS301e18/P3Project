@@ -16,7 +16,7 @@ class StorageTest {
 
     @Test
     void addStorage() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
 
@@ -31,7 +31,7 @@ class StorageTest {
 
     @Test
     void addStorageProductRelation() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
         Product product = new Product("Test Product", 0, BigDecimal.valueOf(0));
@@ -50,7 +50,7 @@ class StorageTest {
 
     @Test
     void sortProducts() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
 
@@ -73,7 +73,7 @@ class StorageTest {
 
     @Test
     void calculateTotalPrice() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
 
@@ -96,7 +96,7 @@ class StorageTest {
 
     @Test
     void toStringTest() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
         Storage storage = new Storage("Test Lager");
 
         assertEquals("Test Lager", storage.toString());
@@ -106,7 +106,7 @@ class StorageTest {
 
     @Test
     void updateStorage() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
 
@@ -125,7 +125,7 @@ class StorageTest {
 
     @Test
     void removeStorage() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Storage storage = new Storage("Test Lager");
 

@@ -12,7 +12,7 @@ public class SystemAdministrator extends AddRemove {
      * Methods
      **/
     public static List<Restaurant> collectRestaurants() {
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
         List<Restaurant> restaurantList = session.createQuery("FROM Restaurant").list();
         session.close();
         return restaurantList;
@@ -21,7 +21,7 @@ public class SystemAdministrator extends AddRemove {
     public static List<Manager> collectManagers() {
         List<Manager> managerList;
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Query employeeQuery = session.createQuery("FROM Employee where role=:i");
         employeeQuery.setParameter("i", "Chef");

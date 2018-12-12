@@ -14,7 +14,7 @@ class EmployeeTest {
 
     @Test
     void addEmployeeTest(){
-            Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+            Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
             Employee employee = new Employee("Test","Test","Test","Test","Medarbejder");
 
@@ -29,7 +29,7 @@ class EmployeeTest {
 
     @Test
     void addEmployeeExceptionTest(){
-        new SessionFactoryCfg().createSessionFactory().openSession();
+        SessionFactoryCfg.getSessionFactory().openSession();
         //new Employee("Test", "test", "Jørgen", "Åge");
 
         //assertThrows(IllegalEmployeeException.class, () -> employeeTest.addEmployee());
@@ -43,7 +43,7 @@ class EmployeeTest {
 
         Employee employeeTest = null;
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<Employee> employeeList = session.createQuery("FROM Employee").list();
 

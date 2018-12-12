@@ -20,7 +20,7 @@ class HistoryTest {
     @BeforeEach
     void before(){
 
-        sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        sessionFactory = SessionFactoryCfg.getSessionFactory();
 
         numberOfEntries = 2;
         history = new History();

@@ -14,7 +14,7 @@ class BatchTest {
 
     @Test
     void takeFromBatch() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         try {
             Product product = new Product("testProduct", 2, BigDecimal.valueOf(1000));
@@ -32,16 +32,12 @@ class BatchTest {
 
     @Test
     void TestAddObjectOnBatch(){
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
         Product product = new Product("testProduct", 4, BigDecimal.valueOf(200));
         Batch batch = new Batch(product, "test1324",1);
 
         Batch sessionBatch = session.get(Batch.class, batch.getId());
-
         assertEquals(batch.getId(), sessionBatch.getId());
-
         session.close();
     }
 }

@@ -5,12 +5,13 @@ import org.hibernate.Session;
 import java.text.SimpleDateFormat;
 
 import org.hibernate.Transaction;
+import util.AddRemove;
 import util.SessionFactoryCfg;
 
 
 import java.sql.Timestamp;
 
-public class Transactions {
+public class Transactions extends AddRemove {
 
     /** Field **/
     private int id;
@@ -42,21 +43,7 @@ public class Transactions {
         this.transtype = transtype;
         this.storageName = storage.getName();
 
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
-
-        Transaction transaction;
-
-        try {
-            transaction = session.beginTransaction();
-            session.save(this);
-            transaction.commit();
-
-        } catch (HibernateException e){
-            System.out.println("Could not save the transaction");
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        addObject(this);
     }
 
     public int getId() {

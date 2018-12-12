@@ -14,8 +14,8 @@ public class History {
     private List<Transactions> employeeList;
     private List<Transactions> sortedList;
 
-    public List<Transactions> readEmployeeHistory(int numberOfEntries, String input){
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+    public List<Transactions> readEmployeeHistory(String input){
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Full history of a storage
         Query query = session.createQuery("FROM Transactions where name=:i");
@@ -32,7 +32,7 @@ public class History {
 
     /** Load history for the storage depending on input and number of entries */
     public List<Transactions> readHistory(int numberOfEntries, String input, Storage storage){
-        Session session = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Full history of a storage
         Query query = session.createQuery("FROM Transactions where storage_id =:i");

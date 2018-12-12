@@ -46,7 +46,7 @@ public class EmployeeController extends HttpServlet{
         String name = employee.getFirstName() + " " + employee.getLastName();
 
         History history = new History();
-        List<Transactions> employeeHistory = history.readEmployeeHistory(200, name);
+        List<Transactions> employeeHistory = history.readEmployeeHistory(name);
 
 
         //Attribute employeeChosen to the chosen employee
