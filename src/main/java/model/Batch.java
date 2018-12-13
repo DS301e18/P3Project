@@ -73,7 +73,7 @@ public class Batch extends AddRemove {
   
     private void calcBatchValue(int amount) {
 
-        SessionFactory sessionFactory = new SessionFactoryCfg().getSessionFactory();
+        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
         Session session = sessionFactory.openSession();
 
         Transaction transaction;

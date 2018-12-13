@@ -1,9 +1,8 @@
 package model;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
+import relationClasses.ProductBatch;
 import util.SessionFactoryCfg;
 
 import java.math.BigDecimal;
@@ -14,34 +13,27 @@ class BatchTest {
 
     @Test
     void takeFromBatch() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Product product = new Product("testProduct", 2, BigDecimal.valueOf(1000));
+        Batch batch = new Batch(product, "test1234", 1);
 
-        try {
-            Product product = new Product("testProduct", 2, BigDecimal.valueOf(1000));
-            Batch batch = new Batch(product, "test1234",1);
+        ProductBatch productBatch = new ProductBatch(product.getId(), batch.getId());
 
-            //batch.takeFromBatch(1);
+        batch.takeFromBatch(productBatch, 2);
 
-        } catch (HibernateException e){
-            System.out.println("Something went wrong");
-        }finally {
-            session.close();
-        }
+        assertEquals(0, batch.getRemainingInBox());
 
+        product.remove();
     }
 
     @Test
-    void TestAddObjectOnBatch(){
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
-
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
+    void TestAddObjectOnBatch() {
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
         Product product = new Product("testProduct", 4, BigDecimal.valueOf(200));
-        Batch batch = new Batch(product, "test1324",1);
+        Batch batch = new Batch(product, "test1324", 1);
 
         Batch sessionBatch = session.get(Batch.class, batch.getId());
-
         assertEquals(batch.getId(), sessionBatch.getId());
-
+        product.remove();
         session.close();
     }
 }

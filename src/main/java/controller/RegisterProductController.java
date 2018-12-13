@@ -39,6 +39,8 @@ public class RegisterProductController extends HttpServlet {
         HttpSession session = request.getSession();
         Storage storage = (Storage) session.getAttribute("storageChosen");
 
+
+
         //Register product to database
         Product product = new Product(name, batchSize, bigCost);
         new StorageProduct(storage.getId(), product.getId());

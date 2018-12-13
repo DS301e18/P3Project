@@ -10,7 +10,7 @@ class SystemAdministratorTest {
 
     @Test
     void collectRestaurants() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
@@ -23,7 +23,7 @@ class SystemAdministratorTest {
 
     @Test
     void collectManagers() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Manager manager = new Manager("Test", "Test", "Test", "Test");
 

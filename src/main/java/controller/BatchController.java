@@ -79,7 +79,6 @@ public class BatchController extends HttpServlet {
 
         //If a whole box is taken
         String oneBox = req.getParameter("oneBox");
-        System.out.println(oneBox);
         if(oneBox != null){
             if(oneBox.equals("Tag en Kasse") ){
                 numTaken = batch.getOriginalBatchSize();
@@ -92,7 +91,7 @@ public class BatchController extends HttpServlet {
         }
 
         //Get relation, so relation can be removed if batch is empty
-        Session hibSession = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session hibSession = SessionFactoryCfg.getSessionFactory().openSession();
         Query batchQue = hibSession.createQuery("From ProductBatch where batchId = :i");
         batchQue.setParameter("i", batch.getId());
         ProductBatch relationPB = (ProductBatch) batchQue.uniqueResult();

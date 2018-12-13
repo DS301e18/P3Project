@@ -52,7 +52,7 @@
                 for (Employee employee : employeesList) {
                     employeesShownList.add(employee);%>
                 <button class="productButton" onclick="employeeChoice(id)" value="<%=i%>" id="<%=employee.getId()%>">
-                    <label><%=employee.getFirstName()%>
+                    <label><%=employee.getFirstName() + " " + employee.getLastName()%>
                     </label>
                 </button>
                 <%

@@ -32,11 +32,8 @@
     response.setHeader("Pragma", "no-cache");// HTTP 1.0
     response.setHeader("Expires", "0");// Proxies
 
-    StorageInitializerController storageList = new StorageInitializerController(session);
+    new StorageInitializerController(session);
 
-    //Make so all storages are available in all .jsp files so they aren't needed to be reloaded in every file
-    List<Storage> storages = storageList.getStorageInfo();
-    session.setAttribute("storages", storages);
 %>
 
 <jsp:include page="navigation.jsp"/>

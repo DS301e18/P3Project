@@ -46,8 +46,6 @@
                 <form action="History" method="post">
                     <button class="tab" id="historyButton" onclick="show('historyPage', 'registerProductPage')">Historik</button>
                 </form>
-
-                <!-- Breaklines TODO: should probably be done with css-->
                 <br><br>
             <%}%>
 

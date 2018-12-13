@@ -4,21 +4,23 @@ package model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
+import relationClasses.ProductBatch;
 import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
+import relationClasses.StorageProduct;
 import util.SessionFactoryCfg;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class RestaurantTest {
 
     @Test
     void addRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
 
@@ -33,7 +35,7 @@ class RestaurantTest {
 
     @Test
     void removeRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
 
@@ -48,7 +50,7 @@ class RestaurantTest {
 
     @Test
     void updateRestaurant() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
         restaurant.setName("RestaurantTest");
@@ -65,7 +67,7 @@ class RestaurantTest {
 
     @Test
     void collectStorages() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
@@ -85,8 +87,37 @@ class RestaurantTest {
     }
 
     @Test
-    void sortStorages() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+    void totalPris() {
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
+
+        Restaurant restaurant = new Restaurant("Test Restaurant");
+
+        Storage storage = new Storage("Test Lager");
+
+        RestaurantStorage restaurantStorage = new RestaurantStorage(restaurant.getId(), storage.getId());
+
+        Product product1 = new Product("Test Product",10, BigDecimal.valueOf(200));
+        Product product2 = new Product("Product Test", 10, BigDecimal.valueOf(200));
+
+        StorageProduct storageProduct1 = new StorageProduct(storage.getId(), product1.getId());
+        StorageProduct storageProduct2 = new StorageProduct(storage.getId(), product2.getId());
+
+        Batch batch1 = new Batch(product1, "Test Batch Number", 5);
+        Batch batch2 = new Batch(product2, "Test Batch Number", 5);
+
+        ProductBatch productBatch1 = new ProductBatch(product1.getId(), batch1.getId());
+        ProductBatch productBatch2 = new ProductBatch(product2.getId(), batch2.getId());
+
+        assertEquals(2000, storage.calculateTotalPrice().intValue());
+
+        restaurant.removeRestaurant();
+
+        session.close();
+    }
+
+    @Test
+    void sortEmployees() {
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
 
@@ -113,7 +144,7 @@ class RestaurantTest {
 
     @Test
     void relateRestaurantEmployee() {
-        Session session = new SessionFactoryCfg().createSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("TestRestaurant");
         Employee employee = new Employee("Test", "Test", "Test", "Test", "Medarbejder");
@@ -132,8 +163,7 @@ class RestaurantTest {
 
     @Test
     void sortEmployeesCollectEmployeeRemoveRestaurantRemoveEmployee() {
-        SessionFactory sessionFactory = new SessionFactoryCfg().createSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         Restaurant restaurant = new Restaurant("ceTest");
         Employee employee = new Employee("app123", "ejh", "ce", "test", "Medarbejder");

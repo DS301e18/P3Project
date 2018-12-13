@@ -59,7 +59,7 @@ public class ProductController extends HttpServlet {
         product.remove();
 
         //Find relation from database
-        Session hibSession = new SessionFactoryCfg().getSessionFactory().openSession();
+        Session hibSession = SessionFactoryCfg.getSessionFactory().openSession();
         Query relation = hibSession.createQuery("From StorageProduct where productId =:i");
         relation.setParameter("i", product.getId());
         StorageProduct relationElement = (StorageProduct) relation.uniqueResult();
