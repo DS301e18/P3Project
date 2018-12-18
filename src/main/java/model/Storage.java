@@ -18,23 +18,30 @@ public class Storage extends AddRemove {
     private int id;
     private String name;
 
+    /**
+     * "Methods
+     */
+
+    //Empty constructor because of AddRemove.
     public Storage() {
     }
 
+    //Constructor with database connectivity included
     public Storage(String name) {
         this.name = name;
 
         addObject(this);
     }
 
+    //Remove method
     public void remove() {
-        if ((sortProducts() != null)){
+        if ((sortProducts() != null)) {
             for (int i = 0; i < sortProducts().size(); i++) {
                 sortProducts().get(i).remove();
             }
         }
 
-        if ((collectProducts() != null)){
+        if ((collectProducts() != null)) {
             for (int i = 0; i < collectProducts().size(); i++) {
                 collectProducts().get(i).remove();
             }
@@ -44,13 +51,12 @@ public class Storage extends AddRemove {
 
     }
 
-    public void update(){
+    //Update method
+    public void update() {
         updateObject(this);
     }
 
-    /**
-     * "Methods
-     */
+    //Getters and setters
     public int getId() {
         return id;
     }
@@ -77,7 +83,7 @@ public class Storage extends AddRemove {
     private List<StorageProduct> collectProducts() {
         List<StorageProduct> storageProducts = new ArrayList<>();
 
-        Session session =SessionFactoryCfg.getSessionFactory().openSession();
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
         for (StorageProduct storageProduct : storageProductList) {
