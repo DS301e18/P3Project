@@ -14,87 +14,7 @@
 <head>
     <title>Velkommen Superbruger</title>
 
-    <style>
-        body {
-            font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
-            font-size: 15px;
-        }
-
-        .topnav {
-            overflow: hidden;
-            background-color: lightblue;
-            height: 50px;
-            padding-bottom: 10px;
-            padding-right: 10px;
-        }
-
-        button{
-            background-color: lightblue;
-            border: transparent;
-            font-size: 20px;
-        }
-
-        .container{
-            width: 100%;
-            height: 80%;
-            overflow: hidden;
-        }
-
-        section{
-            border-right: solid lightblue;
-            float: left;
-            width: 50%;
-            min-width: 300px;
-            height: 100%;
-            overflow: scroll;
-        }
-
-        aside {
-            height: 100%;
-            overflow: scroll;
-        }
-
-        .popUp{
-            background-color: darkcyan;
-            height: 300px;
-            width: 600px;
-            border-radius: 2%;
-            margin-top: 10%;
-            margin-left: 25%;
-            position: absolute;
-            text-align:center;
-            font-size: 20px;
-        }
-
-        .popUpHeader{
-            float: left;
-            padding: 20px;
-            color: white;
-            width: 100%;
-            text-align: left;
-        }
-
-        .popUpBody{
-            background-color: white;
-            height: 200px;
-            margin: 60px 5px 5px;
-            padding-top: 30px;
-        }
-
-        .chooseButton {
-            padding-top: 10px;
-            padding-bottom: 10px;
-            font-size: 15px;
-            width: 100%;
-            text-align: left;
-            text-indent: 20px;
-            background-color: white;
-        }
-
-        .chooseButton:hover, .chooseButton:focus{
-            background-color: lightblue;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style/superuserStylesheet.css">
 </head>
 <body>
 
@@ -104,6 +24,7 @@
     response.setHeader("Expires", "0");// Proxies
 %>
 
+<!-- Top navigator -->
 <div class="topnav">
     <div class="topnav-right">
         <!-- Logout button -->
@@ -115,40 +36,12 @@
     </div>
 </div>
 
-<!-- Popup restaurant -->
-<div class="popUp" id="popUpRestaurant" style="display: none">
-    <header class="popUpHeader">Opret ny restaurant</header>
-
-    <div class="popUpBody">
-        <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv navnet på Restaurant..." name="newRestaurant"><br>
-            <input id="addRestaurantSubmit" type="submit" value="Opret">
-        </form>
-
-        <button onclick="closePopUp('popUpRestaurant')">Annuller</button>
-    </div>
-</div>
-
-<div class="popUp" id="popUpManager" style="display: none">
-    <header class="popUpHeader">Opret ny chef</header>
-
-    <div class="popUpBody">
-        <form action="Manager" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Fornavn..." name="managerFirstName"><br>
-            <input type="text" placeholder="Efternavn..." name="managerLastName"><br>
-            <input type="text" placeholder="Brugernavn..." name="username"><br>
-            <input type="text" placeholder="Password" name="password"><br>
-            <input id="addManagerSubmit" type="submit" value="Opret">
-        </form>
-
-        <button onclick="closePopUp('popUpManager')">Annuller</button>
-    </div>
-</div>
-
-<%List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
+<%//Collect lists of all restaurants and all managers in the database
+    List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
     List<Manager> managerList = SystemAdministrator.collectManagers();%>
 
 <div class="container">
+    <!-- Restaurant menu -->
     <section>
         <label style="font-size: 30px">Restauranter</label>
         <button onclick="showPopUp('popUpRestaurant')">Tilføj restaurant</button>
@@ -161,6 +54,7 @@
             i++;}%>
     </section>
 
+    <!-- Manager menu -->
     <aside>
         <label style="font-size: 30px">Chefer</label>
         <button onclick="showPopUp('popUpManager')">Tilføj chef</button>
@@ -172,7 +66,11 @@
                 </button><%
             j++;}%>
     </aside>
+
+    <!-- Menus for editing restaurant and managers -->
     <footer style="width: 100%; height: 20%; background-color: lightblue; position: fixed; bottom: 0;">
+
+        <!-- Edit restaurant -->
         <div style="width: 24%; height: 100%; float: left; border-right: solid white">
             <form action="EditRestaurant" accept-charset="ISO-8859-1" method="post">
                 <input id="resID" type="hidden" name="id">
@@ -184,6 +82,8 @@
                 <input type="submit" value="Slet">
             </form>
         </div>
+
+        <!-- Edit manager -->
         <div style="width: 50%; height: 100%; float: left; border-right: solid white">
             <form action="EditManager" accept-charset="ISO-8859-1" method="post">
                 <input id="manID" type="hidden" name="managerID">
@@ -198,6 +98,8 @@
                 <input type="submit" value="Slet">
             </form>
         </div>
+
+        <!-- Assign a manager to a restaurant -->
         <div style="width: 25%; height: 100%; float: left; border-right: solid white">
             <form action="RestaurantEmployee" method="post">
                 <input id="restaurantID" type="hidden" name="restaurantID">
@@ -206,6 +108,37 @@
             </form>
         </div>
     </footer>
+</div>
+
+<!-- Popup for adding a new restaurant -->
+<div class="popUp" id="popUpRestaurant" style="display: none">
+    <header class="popUpHeader">Opret ny restaurant</header>
+
+    <div class="popUpBody">
+        <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
+            <input type="text" placeholder="Angiv navnet på Restaurant..." name="newRestaurant"><br>
+            <input id="addRestaurantSubmit" type="submit" value="Opret">
+        </form>
+
+        <button onclick="closePopUp('popUpRestaurant')">Annuller</button>
+    </div>
+</div>
+
+<!-- Pop up for adding a new manager-->
+<div class="popUp" id="popUpManager" style="display: none">
+    <header class="popUpHeader">Opret ny chef</header>
+
+    <div class="popUpBody">
+        <form action="Manager" accept-charset="ISO-8859-1" method="post">
+            <input type="text" placeholder="Fornavn..." name="managerFirstName"><br>
+            <input type="text" placeholder="Efternavn..." name="managerLastName"><br>
+            <input type="text" placeholder="Brugernavn..." name="username"><br>
+            <input type="text" placeholder="Password" name="password"><br>
+            <input id="addManagerSubmit" type="submit" value="Opret">
+        </form>
+
+        <button onclick="closePopUp('popUpManager')">Annuller</button>
+    </div>
 </div>
 
 <script>

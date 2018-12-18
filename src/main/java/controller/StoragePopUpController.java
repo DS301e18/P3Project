@@ -22,16 +22,18 @@ public class StoragePopUpController extends HttpServlet {
         //Input parameter
         String storageName = req.getParameter("newStorage");
 
-        //Find current restaurant
-        HttpSession session = req.getSession();
-        Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+        if(!storageName.equals("")){
+            //Find current restaurant
+            HttpSession session = req.getSession();
+            Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
 
-        //Add storage to database
-        Storage storage = new Storage(storageName);
-        new RestaurantStorage(restaurant.getId(), storage.getId());
+            //Add storage to database
+            Storage storage = new Storage(storageName);
+            new RestaurantStorage(restaurant.getId(), storage.getId());
 
-        //Close popup
-        session.setAttribute("showSPopUp", false);
+            //Close popup
+            session.setAttribute("showSPopUp", false);
+        }
 
         resp.sendRedirect("webpanel.jsp");
     }

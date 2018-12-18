@@ -17,13 +17,13 @@ import java.util.List;
 @WebServlet("/Employee")
 public class EmployeeController extends HttpServlet{
 
-
+    /** If menu icon has been pressed */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         Restaurant currentRestaurant = (Restaurant) session.getAttribute("restaurant");
 
+        //Get list of employees in the current restaurant
         List<Employee> employee = currentRestaurant.sortEmployees();
 
         session.setAttribute("employeeList", employee);
@@ -34,6 +34,7 @@ public class EmployeeController extends HttpServlet{
 
     }
 
+    /** Redirect to the chosen employees informations*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Parameter with employee ID
@@ -43,10 +44,9 @@ public class EmployeeController extends HttpServlet{
         HttpSession session = req.getSession();
         List<Employee> employees = (List) session.getAttribute("employeesListForChoosing");
         Employee employee = employees.get(employeeID);
-        String name = employee.getFirstName() + " " + employee.getLastName();
 
         History history = new History();
-        List<Transactions> employeeHistory = history.readEmployeeHistory(name);
+        List<Transactions> employeeHistory = history.readEmployeeHistory(employee.getId());
 
 
         //Attribute employeeChosen to the chosen employee

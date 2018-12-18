@@ -15,24 +15,30 @@ import java.util.List;
 @WebServlet("/EditManager")
 public class EditManagerController extends HttpServlet {
 
+    /** Edit manager */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //Input parameters
         int employeeID = Integer.parseInt(req.getParameter("managerID"));
         String firstName = req.getParameter("fName");
         String lastName = req.getParameter("lName");
         String username = req.getParameter("uName");
         String password = req.getParameter("pWord");
 
-        List<Manager> managerList = SystemAdministrator.collectManagers();
+        //Only update if all text fields have a value
+        if(!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals("")) {
+            List<Manager> managerList = SystemAdministrator.collectManagers();
 
-        Employee manager = managerList.get(employeeID);
+            Employee manager = managerList.get(employeeID);
 
-        manager.setFirstName(firstName);
-        manager.setLastName(lastName);
-        manager.setUsername(username);
-        manager.setPassword(password);
+            manager.setFirstName(firstName);
+            manager.setLastName(lastName);
+            manager.setUsername(username);
+            manager.setPassword(password);
 
-        manager.update();
+            manager.update();
+        }
 
         resp.sendRedirect("superuserWebpanel.jsp");
     }

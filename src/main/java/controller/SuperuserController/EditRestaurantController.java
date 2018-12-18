@@ -14,16 +14,20 @@ import java.util.List;
 @WebServlet("/EditRestaurant")
 public class EditRestaurantController extends HttpServlet {
 
+    /** Edit restaurant after input */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int restaurantID = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("chosenRestaurant");
 
-        List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
-        Restaurant restaurant = restaurantList.get(restaurantID);
+        //Only update if the restaurant has a name given
+        if(!name.equals("")){
+            List<Restaurant> restaurantList = SystemAdministrator.collectRestaurants();
+            Restaurant restaurant = restaurantList.get(restaurantID);
 
-        restaurant.setName(name);
-        restaurant.update();
+            restaurant.setName(name);
+            restaurant.update();
+        }
 
         resp.sendRedirect("superuserWebpanel.jsp");
     }

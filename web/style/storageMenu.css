@@ -343,6 +343,14 @@ form {
     height: 40px;
 }
 
+#popUpBodyEmployee{
+    background-color: #f7e8e8;
+    height: 200px;
+    margin: 60px 5px 5px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
 @media all and (max-width: 420px) {
     .container {
         width: 100%;

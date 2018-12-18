@@ -33,6 +33,7 @@ public class StorageController extends HttpServlet{
 
         //If product information is open, close it
         session.setAttribute("productChosen", null);
+        session.setAttribute("historyPage", false);
 
         response.sendRedirect("webpanel.jsp");
 
