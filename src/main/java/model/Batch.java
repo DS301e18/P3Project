@@ -51,7 +51,7 @@ public class Batch extends AddRemove {
 
     }
 
-    //Empty constructor because of AddRemove idk why
+    //Empty constructor because of AddRemove.
     public Batch() {
     }
 
