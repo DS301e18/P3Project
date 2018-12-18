@@ -180,7 +180,7 @@ public class Restaurant extends AddRemove {
         if (sortEmployees() != null) {
             //For the size of sortEmployees
             for (int i = 0; i < sortEmployees().size(); i++) {
-                //remove all indexes of employee with the method call found in the employee class
+                //remove all indexes of employee objects created with the employee constructor.
                 removeObject(sortEmployees().get(i));
             }
         }
@@ -189,7 +189,7 @@ public class Restaurant extends AddRemove {
         if (collectEmployees() != null) {
             //For the size of collectEmployees
             for (int i = 0; i < collectEmployees().size(); i++) {
-                //remove all indexes of restaurantEmployee with the method call found in the restaurantEmployee class
+                //remove all indexes of restaurantEmployee objects created with the restaurantEmployee constructor.
                 removeObject(collectEmployees().get(i));
             }
         }
