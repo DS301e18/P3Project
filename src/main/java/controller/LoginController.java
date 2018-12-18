@@ -52,8 +52,6 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
         HttpSession session = request.getSession();
-        session.removeAttribute("username");
-        session.removeAttribute("role");
         session.invalidate();
         response.sendRedirect("index.jsp");
 

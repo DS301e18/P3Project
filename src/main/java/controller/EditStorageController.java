@@ -20,14 +20,16 @@ public class EditStorageController extends HttpServlet {
         //Get parameters
         String storageName = req.getParameter("editStorageName");
 
-        //Get current attributes
-        HttpSession session = req.getSession();
-        Storage storage = (Storage) session.getAttribute("storageChosen");
-        storage.setName(storageName);
-        storage.update();
+        if(!storageName.equals("")){
+            //Get current attributes
+            HttpSession session = req.getSession();
+            Storage storage = (Storage) session.getAttribute("storageChosen");
+            storage.setName(storageName);
+            storage.update();
 
-        //Close popup
-        session.setAttribute("showEditSPopUp", false);
+            //Close popup
+            session.setAttribute("showEditSPopUp", false);
+        }
 
         resp.sendRedirect("webpanel.jsp");
     }

@@ -20,7 +20,7 @@
                 <input style="margin: 5px"  type="text" placeholder="Angiv efternavn på medarbejderen..." name="newEmployeeLastName">
                 <input style="margin: 5px"  type="text" placeholder="Angiv brugernavn på medarbejderen..." name="newEmployeeUsername">
                 <input style="margin: 5px"  type="text" placeholder="Angiv kodeord på medarbejderen..." name="newEmployeePassword"><br>
-                <input style="float: right; margin-right: 150px;" type="submit" value="Registrer">
+                <input style="float: right; margin-right: 150px;" id="registerButton" type="submit" value="Registrer" onclick="hide(id)">
             </form>
 
         <form action="ClosePopUp" method="get">
@@ -30,5 +30,11 @@
         </div>
     </div>
 
+<script>
+    //Hide buttons to prevent double or multiple clicks
+    function hide(ID) {
+        document.getElementById(ID).style.display = "none";
+    }
+</script>
 </body>
 </html>

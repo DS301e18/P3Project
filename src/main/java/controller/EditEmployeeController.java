@@ -20,17 +20,20 @@ public class EditEmployeeController extends HttpServlet {
         String firstName = req.getParameter("editFirstName");
         String lastName = req.getParameter("editLastName");
 
-        HttpSession session = req.getSession();
-        Employee employee = (Employee) session.getAttribute("employeeChosen");
+        if(!username.equals("") && !password.equals("") && !firstName.equals("") && lastName.equals("")){
+            HttpSession session = req.getSession();
+            Employee employee = (Employee) session.getAttribute("employeeChosen");
 
-        employee.setUsername(username);
-        employee.setPassword(password);
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
+            employee.setUsername(username);
+            employee.setPassword(password);
+            employee.setFirstName(firstName);
+            employee.setLastName(lastName);
 
-        employee.update();
+            employee.update();
 
-        session.setAttribute("showEditEmployee", false);
+            session.setAttribute("showEditEmployee", false);
+        }
+
         resp.sendRedirect("webpanel.jsp");
     }
 

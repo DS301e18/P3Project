@@ -14,15 +14,15 @@
 <%Employee employee = (Employee) session.getAttribute("employeeChosen");%>
 <div class="popUp">
     <header id="popUpHeader">
-        <label>Rediger Produkt</label>
+        <label>Rediger Medarbejder</label>
     </header>
 
     <div id="popUpBody">
         <form action="EditEmployee" accept-charset="ISO-8859-1" method="post">
-            <input style="margin: 1px;" type="text" placeholder="Angiv brugernavn.." name="editUsername" value="<%=employee.getUsername()%>">
-            <input style="margin: 1px;" type="text" placeholder="Angiv password..." name="editPassword" value="<%=employee.getPassword()%>">
             <input style="margin: 1px;" type="text" placeholder="Angiv fornavn..." name="editFirstName" value="<%=employee.getFirstName()%>">
-            <input style="margin: 1px;" type="text" placeholder="Angiv efterNavn..." name="editLastName" value="<%=employee.getLastName()%>"><br><br>
+            <input style="margin: 1px;" type="text" placeholder="Angiv efterNavn..." name="editLastName" value="<%=employee.getLastName()%>">
+            <input style="margin: 1px;" type="text" placeholder="Angiv brugernavn.." name="editUsername" value="<%=employee.getUsername()%>">
+            <input style="margin: 1px;" type="text" placeholder="Angiv password..." name="editPassword" value="<%=employee.getPassword()%>"><br><br>
             <input id="edit" type="submit" value="Rediger">
         </form>
 

@@ -23,26 +23,29 @@ public class RegisterProductController extends HttpServlet {
             String name = request.getParameter("name");
             int batchSize = Integer.parseInt(request.getParameter("batchSize"));
             String cost = request.getParameter("cost");
-            BigDecimal bigCost;
 
-            //Ensure that if the user doesn't write a dot, it's made for them
-            if (cost.contains(".") || cost.contains(",")) {
-                if (cost.contains(",")) {
-                    bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost").replace(",", ".")));
+            if (!name.equals("") && !cost.equals("")) {
+                BigDecimal bigCost;
+
+                //Ensure that if the user doesn't write a dot, it's made for them
+                if (cost.contains(".") || cost.contains(",")) {
+                    if (cost.contains(",")) {
+                        bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost").replace(",", ".")));
+                    } else {
+                        bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+                    }
                 } else {
-                    bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+                    bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost") + ".00"));
                 }
-            } else {
-                bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost") + ".00"));
+
+                //Get current storage
+                HttpSession session = request.getSession();
+                Storage storage = (Storage) session.getAttribute("storageChosen");
+
+                //Register product to database
+                Product product = new Product(name, batchSize, bigCost);
+                new StorageProduct(storage.getId(), product.getId());
             }
-
-            //Get current storage
-            HttpSession session = request.getSession();
-            Storage storage = (Storage) session.getAttribute("storageChosen");
-
-            //Register product to database
-            Product product = new Product(name, batchSize, bigCost);
-            new StorageProduct(storage.getId(), product.getId());
 
         } catch (NumberFormatException e){
             System.out.println("Something else than a number was entered");

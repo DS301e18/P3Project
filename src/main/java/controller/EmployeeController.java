@@ -18,6 +18,7 @@ import java.util.List;
 public class EmployeeController extends HttpServlet{
 
 
+    /** If menu icon has been pressed */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
@@ -34,6 +35,7 @@ public class EmployeeController extends HttpServlet{
 
     }
 
+    /** Redirect to the chosen employees informations*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Parameter with employee ID

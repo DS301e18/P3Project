@@ -20,19 +20,21 @@ public class EmployeePopUpController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String employeeUsername = req.getParameter("newEmployeeUsername");
         String employeeFirstName = req.getParameter("newEmployeeFirstName");
         String employeeLastName = req.getParameter("newEmployeeLastName");
+        String employeeUsername = req.getParameter("newEmployeeUsername");
         String employeePassword = req.getParameter("newEmployeePassword");
-//        String employeeRole = req.getParameter("newEmployeeRole");
 
-        HttpSession session = req.getSession();
+        if(!employeeFirstName.equals("") && !employeeLastName.equals("") && !employeeUsername.equals("") && !employeePassword.equals("")){
+            HttpSession session = req.getSession();
 
-        Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
-        Employee employee = new Employee(employeeUsername, employeePassword,employeeFirstName,employeeLastName, "Medarbejder");
-        new RestaurantEmployee(restaurant.getId(), employee.getId());
+            Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+            Employee employee = new Employee(employeeUsername, employeePassword,employeeFirstName,employeeLastName, "Medarbejder");
+            new RestaurantEmployee(restaurant.getId(), employee.getId());
 
-        session.setAttribute("showEPopUp", false);
+            session.setAttribute("showEPopUp", false);
+        }
+
         resp.sendRedirect("webpanel.jsp");
     }
 
