@@ -141,8 +141,7 @@ public class Product extends AddRemove {
                 if (batch.getId() == productBatches.get(i).getBatchId()) {
                     //Add batch to totalProductBatches
                     totalProductBatches.add(batch);
-                    //TODO remove this totalAmountOfBatches.
-                    //totalAmountOfBatches += batch.getRemainingInBox();
+                    totalAmountOfBatches += batch.getRemainingInBox();
                 }
             }
         }
