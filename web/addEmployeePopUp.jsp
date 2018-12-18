@@ -12,19 +12,22 @@
 </head>
 <body>
     <div class="popUp">
-        <label>Restaurant</label>
+        <header id="popUpHeader"><label>Restaurant</label></header>
 
-        <form action="EPopUp" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv brugernavn på medarbejderen..." name="newEmployeeUsername">
-            <input type="text" placeholder="Angiv kodeord på medarbejderen..." name="newEmployeePassword">
-            <input type="text" placeholder="Angiv fornavn på medarbejderen..." name="newEmployeeFirstName">
-            <input type="text" placeholder="Angiv efternavn på medarbejderen..." name="newEmployeeLastName">
-            <input type="submit" value="Registrer">
-        </form>
+        <div id="popUpBodyEmployee">
+            <form action="EPopUp" accept-charset="ISO-8859-1" method="post">
+                <input style="margin: 5px" type="text" placeholder="Angiv fornavn på medarbejderen..." name="newEmployeeFirstName">
+                <input style="margin: 5px"  type="text" placeholder="Angiv efternavn på medarbejderen..." name="newEmployeeLastName">
+                <input style="margin: 5px"  type="text" placeholder="Angiv brugernavn på medarbejderen..." name="newEmployeeUsername">
+                <input style="margin: 5px"  type="text" placeholder="Angiv kodeord på medarbejderen..." name="newEmployeePassword"><br>
+                <input style="float: right; margin-right: 150px;" type="submit" value="Registrer">
+            </form>
 
         <form action="ClosePopUp" method="get">
-            <input type="submit" value="Annuller">
+            <input style="margin-left: 80px" type="submit" value="Annuller">
         </form>
+
+        </div>
     </div>
 
 </body>
