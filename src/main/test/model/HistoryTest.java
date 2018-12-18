@@ -27,7 +27,7 @@ class HistoryTest extends AddRemove {
 
         transactions.registerTransaction(storage, employee, batch, 2, "tilføj");
 
-        assertTrue(history.readEmployeeHistory(employee.getFirstName() + " " + employee.getLastName()).size() >= 1);
+        assertTrue(history.readEmployeeHistory(employee.getId()).size() >= 1);
 
         restaurant.removeRestaurant();
     }

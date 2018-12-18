@@ -45,10 +45,9 @@ public class EmployeeController extends HttpServlet{
         HttpSession session = req.getSession();
         List<Employee> employees = (List) session.getAttribute("employeesListForChoosing");
         Employee employee = employees.get(employeeID);
-        String name = employee.getFirstName() + " " + employee.getLastName();
 
         History history = new History();
-        List<Transactions> employeeHistory = history.readEmployeeHistory(name);
+        List<Transactions> employeeHistory = history.readEmployeeHistory(employee.getId());
 
 
         //Attribute employeeChosen to the chosen employee

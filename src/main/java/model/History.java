@@ -14,12 +14,12 @@ public class History {
     private List<Transactions> employeeList;
     private List<Transactions> sortedList;
 
-    public List<Transactions> readEmployeeHistory(String input){
+    public List<Transactions> readEmployeeHistory(int id){
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Full history of a storage
-        Query query = session.createQuery("FROM Transactions where name=:i");
-        query.setParameter("i", input);
+        Query query = session.createQuery("FROM Transactions where employeeID=:i");
+        query.setParameter("i", id);
         employeeList = query.list();
 
         session.close();
