@@ -24,26 +24,31 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //Input parameter
-        int productChosen = Integer.parseInt(req.getParameter("productChosenButton"));
+        try{
+            //Input parameter
+            int productChosen = Integer.parseInt(req.getParameter("productChosenButton"));
 
-        HttpSession session = req.getSession();
+            HttpSession session = req.getSession();
 
-        //If history page is shown, close it
-        session.setAttribute("historyPage", false);
+            //If history page is shown, close it
+            session.setAttribute("historyPage", false);
 
-        //Current product list for storage
-        List<Product> productList = (List) session.getAttribute("productListForChoosing");
-        Product product = productList.get(productChosen);
+            //Current product list for storage
+            List<Product> productList = (List) session.getAttribute("productListForChoosing");
+            Product product = productList.get(productChosen);
 
-        //Set productChosen to the chosen product
-        session.setAttribute("productChosen", product);
+            //Set productChosen to the chosen product
+            session.setAttribute("productChosen", product);
 
-        //Show the current batches under a product
-        List<Batch> batchList = product.sortBatches();
-        session.setAttribute("batchList", batchList);
-
-        resp.sendRedirect("webpanel.jsp");
+            //Show the current batches under a product
+            List<Batch> batchList = product.sortBatches();
+            session.setAttribute("batchList", batchList);
+        } catch (NumberFormatException e){
+            System.out.println("Something else than a number was entered");
+            e.printStackTrace();
+        } finally {
+            resp.sendRedirect("webpanel.jsp");
+        }
 
     }
 

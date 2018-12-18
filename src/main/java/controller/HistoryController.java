@@ -16,8 +16,6 @@ import java.util.List;
 @WebServlet("/History")
 public class HistoryController extends HttpServlet {
 
-
-
     /** Search/sort history*/
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,24 +33,29 @@ public class HistoryController extends HttpServlet {
         int numEntries = 200;
 
         //Error handling if user hasn't written anything
-        if(numInput != null){
-            if(!numInput.equals("")){
-                numEntries = Integer.parseInt(req.getParameter("historyInput"));
+        try {
+            if(numInput != null){
+                if(!numInput.equals("")){
+                    numEntries = Integer.parseInt(req.getParameter("historyInput"));
+                }
             }
+
+            //Get current attributes
+            HttpSession session = req.getSession();
+            Storage storage = (Storage) session.getAttribute("storageChosen");
+
+            //Sort and search history
+            List<Transactions> history = new History().readHistory(numEntries, searchInput, storage);
+            session.setAttribute("history", history);
+
+            //Open history page
+            session.setAttribute("historyPage", true);
+        }catch (NumberFormatException e){
+            System.out.println("Something else than a number was entered");
+            e.printStackTrace();
+        } finally {
+            resp.sendRedirect("webpanel.jsp");
         }
-
-        //Get current attributes
-        HttpSession session = req.getSession();
-        Storage storage = (Storage) session.getAttribute("storageChosen");
-
-        //Sort and search history
-        List<Transactions> history = new History().readHistory(numEntries, searchInput, storage);
-        session.setAttribute("history", history);
-
-        //Open history page
-        session.setAttribute("historyPage", true);
-
-        resp.sendRedirect("webpanel.jsp");
     }
 
 }
