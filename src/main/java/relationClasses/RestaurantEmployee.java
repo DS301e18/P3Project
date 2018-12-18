@@ -3,10 +3,19 @@ package relationClasses;
 import util.AddRemove;
 
 public class RestaurantEmployee extends AddRemove {
+
+    /**
+     * Field
+     */
     private int id;
     private int restaurantId;
     private int employeeId;
 
+    /**
+     * "Methods
+     */
+
+    //Constructor with database connectivity included
     public RestaurantEmployee(int restaurantId, int employeeId) {
         this.restaurantId = restaurantId;
         this.employeeId = employeeId;
@@ -14,13 +23,16 @@ public class RestaurantEmployee extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public RestaurantEmployee() {
     }
 
-    public void remove(){
+    //Remove
+    public void remove() {
         removeObject(this);
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
@@ -62,14 +74,5 @@ public class RestaurantEmployee extends AddRemove {
         int result = restaurantId;
         result = 31 * result + employeeId;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "RestaurantEmployee{" +
-                "id=" + id +
-                ", restaurantId=" + restaurantId +
-                ", employeeId=" + employeeId +
-                '}';
     }
 }
