@@ -13,22 +13,28 @@ class EmployeeTest {
     private Employee employee;
 
     @Test
-    void addEmployeeTest(){
-            Session session = SessionFactoryCfg.getSessionFactory().openSession();
+    void addEmployeeTest() {
+        //Open session
+        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
-            Employee employee = new Employee("Test","Test","Test","Test","Medarbejder");
+        //Add to database
+        Employee employee = new Employee("Test", "Test", "Test", "Test", "Medarbejder");
 
-            Employee sessionEmployee = session.get(Employee.class, employee.getId());
+        //Add relation to database
+        Employee sessionEmployee = session.get(Employee.class, employee.getId());
 
-            assertEquals(employee.getId(), sessionEmployee.getId());
+        //assertEquals to ensure the expected is happening
+        assertEquals(employee.getId(), sessionEmployee.getId());
 
-            employee.removeEmployee();
+        //Removes test objects from database
+        employee.removeEmployee();
 
-            session.close();
-        }
+        //Closes the session
+        session.close();
+    }
 
     @Test
-    void addEmployeeExceptionTest(){
+    void addEmployeeExceptionTest() {
         SessionFactoryCfg.getSessionFactory().openSession();
         //new Employee("Test", "test", "Jørgen", "Åge");
 
@@ -37,7 +43,7 @@ class EmployeeTest {
 
 
     @Test
-    void removeEmployeeTest(){
+    void removeEmployeeTest() {
 
         //employee.removeEmployee();
 
@@ -47,9 +53,9 @@ class EmployeeTest {
 
         List<Employee> employeeList = session.createQuery("FROM Employee").list();
 
-        for(Employee emp : employeeList){
+        for (Employee emp : employeeList) {
 
-            if(emp.equals(employee)){
+            if (emp.equals(employee)) {
                 employeeTest = emp;
             }
         }
