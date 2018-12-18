@@ -57,9 +57,6 @@
             var button = document.getElementById(storageID).value;
             document.storageChooser.buttonChosen.value = button;
 
-            //TODO: Change the style later
-            button.style.borderRadius = "25px";
-
         }
     </script>
 </body>

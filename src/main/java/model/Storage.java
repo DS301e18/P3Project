@@ -79,7 +79,6 @@ public class Storage extends AddRemove {
      * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
      * If the ids are the same the productId is added to the list.
      */
-    //TODO change createSessionFactory to getSessionFactory
     private List<StorageProduct> collectProducts() {
         List<StorageProduct> storageProducts = new ArrayList<>();
 
@@ -104,7 +103,6 @@ public class Storage extends AddRemove {
      * The for loop and for each loop is made to compare all storageProductIds with all products in the database to add them
      * in a the returned list called totalStorageProducts.
      */
-    //TODO change createSessionFactory to getSessionFactory
     public List<Product> sortProducts() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
