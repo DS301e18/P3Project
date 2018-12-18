@@ -57,7 +57,6 @@ public class RestaurantEmployee extends AddRemove {
         this.employeeId = employeeId;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
