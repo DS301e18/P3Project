@@ -3,10 +3,19 @@ package relationClasses;
 import util.AddRemove;
 
 public class ProductBatch extends AddRemove {
+
+    /**
+     * Field
+     */
     private int id;
     private int productId;
     private int batchId;
 
+    /**
+     * "Methods
+     */
+
+    //Constructor with database connectivity included
     public ProductBatch(int productId, int batchId) {
         this.productId = productId;
         this.batchId = batchId;
@@ -14,9 +23,11 @@ public class ProductBatch extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public ProductBatch() {
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
