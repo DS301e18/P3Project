@@ -19,6 +19,7 @@ public class Transactions extends AddRemove {
      **/
     private int id;
     private String name;
+    private int employeeID;
     private String batch;
     private String product;
     private String timestamp;
@@ -40,6 +41,7 @@ public class Transactions extends AddRemove {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
         this.storage_id = storage.getId();
+        this.employeeID = employee.getId();
         this.timestamp = sdf.format(timestamp);
         this.name = employee.getFirstName() + " " + employee.getLastName();
         this.batch = batch.getBatchNumber();
@@ -130,6 +132,14 @@ public class Transactions extends AddRemove {
 
     public void setStorage_id(int storage_id) {
         this.storage_id = storage_id;
+    }
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
     public static SimpleDateFormat getSdf() {

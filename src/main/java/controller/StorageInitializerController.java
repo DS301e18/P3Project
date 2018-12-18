@@ -13,6 +13,7 @@ import java.util.List;
 
 public class StorageInitializerController {
 
+    /** Initialize all storages inside the restaurant that's accessible for the user*/
     public StorageInitializerController(HttpSession session) {
 
         try (Session hibSession = SessionFactoryCfg.getSessionFactory().openSession()) {
@@ -34,7 +35,6 @@ public class StorageInitializerController {
         } catch (HibernateException e) {
             System.out.println("Couldn't get the list.");
             e.printStackTrace();
-
         }
     }
 }

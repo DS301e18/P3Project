@@ -71,7 +71,7 @@
                     <input type="text" placeholder="Indtast navnet på produktet" name="name">
                     <input type="text" placeholder="Indtast antal per batch" name="batchSize">
                     <input type="text" placeholder="Indtast prisen for en batch" name="cost">
-                    <input type="submit" value="Registrer">
+                    <input id="registerButton" type="submit" value="Registrer" onclick="hide(id)">
                 </form>
             </div>
         </aside>
@@ -108,6 +108,11 @@
             } else{
                 show1.style.display = "none";
             }
+        }
+
+        //Hide buttons to prevent double or multiple clicks
+        function hide(ID) {
+            document.getElementById(ID).style.display = "none";
         }
     </script>
 </body>

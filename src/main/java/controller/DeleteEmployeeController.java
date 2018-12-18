@@ -17,14 +17,18 @@ import java.io.IOException;
 @WebServlet("/DeleteEmployee")
 public class DeleteEmployeeController extends HttpServlet {
 
+    /** Delete an employee */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // Find the chosen employee
         HttpSession session = req.getSession();
         Employee employee = (Employee) session.getAttribute("employeeChosen");
         employee.removeEmployee();
 
         Session hibSession = SessionFactoryCfg.getSessionFactory().openSession();
 
+        // Remove the relation between an employee and a restaurant
         Query relation = hibSession.createQuery("From RestaurantEmployee where employeeId=:i");
         relation.setParameter("i", employee.getId());
         RestaurantEmployee relationElement = (RestaurantEmployee) relation.uniqueResult();

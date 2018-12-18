@@ -19,7 +19,7 @@
         <div id="popUpBody">
             <form action="SPopUp" accept-charset="ISO-8859-1" method="post">
                 <input type="text" placeholder="Angiv navnet på lageret..." name="newStorage"><br>
-                <input id="addStorageSubmit" type="submit" value="Registrer">
+                <input id="addStorageSubmit" type="submit" value="Registrer" onclick="hide(id)">
             </form>
 
             <form action="ClosePopUp" method="get">
@@ -27,5 +27,12 @@
             </form>
         </div>
     </div>
+
+    <script>
+        //Hide buttons to prevent double or multiple clicks
+        function hide(ID) {
+            document.getElementById(ID).style.display = "none";
+        }
+    </script>
 </body>
 </html>

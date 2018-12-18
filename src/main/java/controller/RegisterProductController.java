@@ -18,34 +18,42 @@ public class RegisterProductController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        //Input parameter
-        String name = request.getParameter("name");
-        int batchSize = Integer.parseInt(request.getParameter("batchSize"));
-        String cost = request.getParameter("cost");
-        BigDecimal bigCost;
+        try {
+            //Input parameter
+            String name = request.getParameter("name");
+            int batchSize = Integer.parseInt(request.getParameter("batchSize"));
+            String cost = request.getParameter("cost");
 
-        //Ensure that if the user doesn't write a dot, it's made for them
-        if(cost.contains(".") || cost.contains(",")){
-            if(cost.contains(",")){
-                bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost").replace(",", ".")));
-            }else {
-                bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+            if (!name.equals("") && !cost.equals("")) {
+                BigDecimal bigCost;
+
+                //Ensure that if the user doesn't write a dot, it's made for them
+                if (cost.contains(".") || cost.contains(",")) {
+                    if (cost.contains(",")) {
+                        bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost").replace(",", ".")));
+                    } else {
+                        bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost")));
+                    }
+                } else {
+                    bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost") + ".00"));
+                }
+
+                //Get current storage
+                HttpSession session = request.getSession();
+                Storage storage = (Storage) session.getAttribute("storageChosen");
+
+                //Register product to database
+                Product product = new Product(name, batchSize, bigCost);
+                new StorageProduct(storage.getId(), product.getId());
             }
-        }else{
-            bigCost = BigDecimal.valueOf(Double.parseDouble(request.getParameter("cost") + ".00"));
+
+        } catch (NumberFormatException e){
+            System.out.println("Something else than a number was entered");
+            e.printStackTrace();
+
+        } finally {
+            response.sendRedirect("webpanel.jsp");
         }
-
-        //Get current storage
-        HttpSession session = request.getSession();
-        Storage storage = (Storage) session.getAttribute("storageChosen");
-
-
-
-        //Register product to database
-        Product product = new Product(name, batchSize, bigCost);
-        new StorageProduct(storage.getId(), product.getId());
-
-        response.sendRedirect("webpanel.jsp");
 
     }
 }
