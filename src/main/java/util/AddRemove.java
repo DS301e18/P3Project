@@ -11,7 +11,7 @@ import java.util.List;
 
 public class AddRemove {
 
-
+    //Add to database
     protected <T> void addObject(T object) {
 
         SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
@@ -36,7 +36,7 @@ public class AddRemove {
         }
     }
 
-
+    //Remove method
     protected <T> void removeObject(T object) {
 
         SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
@@ -61,6 +61,7 @@ public class AddRemove {
 
     }
 
+    //Update method
     protected <T> void updateObject(T object) {
 
         SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
@@ -83,31 +84,5 @@ public class AddRemove {
 
         }
 
-    }
-
-    protected <T> List collectObject(T object, String whereToQuery, int objectId) {
-
-        SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        List<T> objectCollection = new ArrayList<>();
-
-        try {
-            List<T> objectList = session.createQuery(whereToQuery).list();
-            for (T objectType : objectList) {
-                Field field = objectType.getClass().getDeclaredField("id");
-
-                if (field.equals(objectId)) {
-                    objectCollection.add(objectType);
-                }
-            }
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-
-        } catch (HibernateException e) {
-            System.out.println("Something went wrong with Hibernate");
-
-        }
-        return objectCollection;
     }
 }

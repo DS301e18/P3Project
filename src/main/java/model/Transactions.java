@@ -2,6 +2,7 @@ package model;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+
 import java.text.SimpleDateFormat;
 
 import org.hibernate.Transaction;
@@ -13,7 +14,9 @@ import java.sql.Timestamp;
 
 public class Transactions extends AddRemove {
 
-    /** Field **/
+    /**
+     * Field
+     **/
     private int id;
     private String name;
     private int employeeID;
@@ -29,7 +32,9 @@ public class Transactions extends AddRemove {
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
 
 
-    /** Methods **/
+    /**
+     * Methods
+     **/
 
     public void registerTransaction(Storage storage, Employee employee, Batch batch, int amount, String transtype) {
 
@@ -48,6 +53,7 @@ public class Transactions extends AddRemove {
         addObject(this);
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
@@ -169,19 +175,4 @@ public class Transactions extends AddRemove {
         result = 31 * result + storage_id;
         return result;
     }
-
-    @Override
-    public String toString() {
-        return "Transactions{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", batch='" + batch + '\'' +
-                ", product='" + product + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", amount=" + amount +
-                ", transtype='" + transtype + '\'' +
-                ", storage_id=" + storage_id +
-                '}';
-    }
-
 }

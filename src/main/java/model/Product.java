@@ -21,6 +21,11 @@ public class Product extends AddRemove {
     private BigDecimal price;
     private int totalAmountOfBatches;
 
+    /**
+     * Methods
+     **/
+
+    //Constructor with database connectivity included
     public Product(String name, int batchSize, BigDecimal price) {
 
         this.name = name;
@@ -30,13 +35,11 @@ public class Product extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public Product() {
     }
 
-    /**
-     * Methods
-     **/
-
+    //Getters and setters
     public BigDecimal getPrice() {
         return price;
     }
@@ -65,14 +68,15 @@ public class Product extends AddRemove {
         return batchSize;
     }
 
+    //Remove method
     public void remove() {
-        if ((sortBatches() != null)){
+        if ((sortBatches() != null)) {
             for (int i = 0; i < sortBatches().size(); i++) {
                 removeObject(sortBatches().get(i));
             }
         }
 
-        if ((collectBatches() != null)){
+        if ((collectBatches() != null)) {
             for (int i = 0; i < collectBatches().size(); i++) {
                 removeObject(collectBatches().get(i));
             }
@@ -81,10 +85,12 @@ public class Product extends AddRemove {
         removeObject(this);
     }
 
-    public void update(){
+    //Update method
+    public void update() {
         updateObject(this);
     }
 
+    //Returns a list of all batches of a product.
     private List<ProductBatch> collectBatches() {
         List<ProductBatch> productBatches = new ArrayList<>();
 
@@ -99,6 +105,7 @@ public class Product extends AddRemove {
         return productBatches;
     }
 
+    //Returns a list of all batches of a product in sorted order by name.
     public List<Batch> sortBatches() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
@@ -118,6 +125,7 @@ public class Product extends AddRemove {
         return totalProductBatches;
     }
 
+    //Calculates a total price of all batches of a product
     public BigDecimal priceOfAllBatches() {
         List<Batch> productBatches = sortBatches();
 
@@ -160,9 +168,5 @@ public class Product extends AddRemove {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
 }
 

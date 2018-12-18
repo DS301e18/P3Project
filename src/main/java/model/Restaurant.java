@@ -3,7 +3,6 @@ package model;
 import util.AddRemove;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import relationClasses.RestaurantEmployee;
 import relationClasses.RestaurantStorage;
 import util.SessionFactoryCfg;
@@ -20,18 +19,22 @@ public class Restaurant extends AddRemove {
     private int id;
     private String name;
 
+    /**
+     * Methods
+     */
+
+    //Constructor with database connectivity included
     public Restaurant(String name) {
         this.name = name;
 
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public Restaurant() {
     }
 
-    /**
-     * Methods
-     */
+    //Getter and setter
     public int getId() {
         return id;
     }
@@ -48,6 +51,7 @@ public class Restaurant extends AddRemove {
         this.name = name;
     }
 
+    //Returns a list of all employees in a restaurant
     public List<RestaurantEmployee> collectEmployees() {
         List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
@@ -64,6 +68,7 @@ public class Restaurant extends AddRemove {
         return restaurantEmployees;
     }
 
+    //Returns a list of all restaurantStorages where restaurant is this restaurant
     public List<RestaurantStorage> collectStorages() {
         List<RestaurantStorage> restaurantStorages = new ArrayList<>();
 
@@ -80,6 +85,7 @@ public class Restaurant extends AddRemove {
         return restaurantStorages;
     }
 
+    //Returns a sorted list of employees by name
     public List<Employee> sortEmployees() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
@@ -98,6 +104,7 @@ public class Restaurant extends AddRemove {
         return allRestaurantEmployees;
     }
 
+    //Returns a sorted list of managers by name
     public List<Manager> sortManagers() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
@@ -116,6 +123,7 @@ public class Restaurant extends AddRemove {
         return allRestaurantEmployees;
     }
 
+    //Returns a list of all storages in a restaurant
     public List<Storage> allStorages() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
@@ -133,6 +141,7 @@ public class Restaurant extends AddRemove {
         return allRestaurantStorages;
     }
 
+    //Removes a restaurant and all relations with it in the database
     public void removeRestaurant() {
         if (allStorages() != null) {
             for (int i = 0; i < allStorages().size(); i++) {
@@ -161,13 +170,9 @@ public class Restaurant extends AddRemove {
         removeObject(this);
     }
 
-    public void update(){
+    //Update
+    public void update() {
         updateObject(this);
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
 

@@ -1,10 +1,6 @@
 package model;
 
 import org.junit.jupiter.api.Test;
-import relationClasses.ProductBatch;
-import relationClasses.RestaurantEmployee;
-import relationClasses.RestaurantStorage;
-import relationClasses.StorageProduct;
 import util.AddRemove;
 
 import java.math.BigDecimal;
@@ -15,8 +11,8 @@ class HistoryTest extends AddRemove {
 
     @Test
     void readEmployeeHistory() {
+        //Add to database
         History history = new History();
-
         Transactions transactions = new Transactions();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
@@ -26,16 +22,17 @@ class HistoryTest extends AddRemove {
         Batch batch = new Batch(product, "batchNumberTest", 10);
 
         transactions.registerTransaction(storage, employee, batch, 2, "tilføj");
-
+        //assertEquals to ensure the expected is happening
         assertTrue(history.readEmployeeHistory(employee.getId()).size() >= 1);
 
+        //Removes test objects from database
         restaurant.removeRestaurant();
     }
 
     @Test
     void readHistory() {
+        //Add to database
         History history = new History();
-
         Transactions transactions = new Transactions();
 
         Restaurant restaurant = new Restaurant("Test Restaurant");
@@ -46,8 +43,10 @@ class HistoryTest extends AddRemove {
 
         transactions.registerTransaction(storage, employee, batch, 2, "tilføj");
 
-        assertTrue(history.readHistory(1,employee.getFirstName() + " " + employee.getLastName(),storage).size() >= 1);
+        //assertEquals to ensure the expected is happening
+        assertTrue(history.readHistory(1, employee.getFirstName() + " " + employee.getLastName(), storage).size() >= 1);
 
+        //Removes test objects from database
         restaurant.removeRestaurant();
     }
 }

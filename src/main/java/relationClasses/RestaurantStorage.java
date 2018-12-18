@@ -3,10 +3,19 @@ package relationClasses;
 import util.AddRemove;
 
 public class RestaurantStorage extends AddRemove {
+
+    /**
+     * Field
+     */
     private int id;
     private int restaurantId;
     private int storageId;
 
+    /**
+     * "Methods
+     */
+
+    //Constructor with database connectivity included
     public RestaurantStorage(int restaurantId, int storageId) {
         this.restaurantId = restaurantId;
         this.storageId = storageId;
@@ -14,13 +23,16 @@ public class RestaurantStorage extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public RestaurantStorage() {
     }
 
-    public void remove(){
+    //Remove
+    public void remove() {
         removeObject(this);
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
@@ -56,7 +68,6 @@ public class RestaurantStorage extends AddRemove {
         if (restaurantId != that.restaurantId) return false;
         return storageId == that.storageId;
     }
-
 
     @Override
     public int hashCode() {
