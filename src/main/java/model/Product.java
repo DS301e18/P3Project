@@ -128,7 +128,7 @@ public class Product extends AddRemove {
 
         //Makes a list of ProductBatch with the data from the method call: collectBatches
         List<ProductBatch> productBatches = collectBatches();
-        //Makes a list with the employee data in the database
+        //Makes a list with the batch data in the database
         List<Batch> batchList = session.createQuery("FROM Batch").list();
         //New arraylist of Batch
         List<Batch> totalProductBatches = new ArrayList<>();
@@ -139,7 +139,7 @@ public class Product extends AddRemove {
             for (Batch batch : batchList) {
                 //If batch.getId is the same as the getBatchId found in the relation list
                 if (batch.getId() == productBatches.get(i).getBatchId()) {
-                    //Add employee to allRestaurantEmployees
+                    //Add batch to totalProductBatches
                     totalProductBatches.add(batch);
                     //TODO remove this totalAmountOfBatches.
                     //totalAmountOfBatches += batch.getRemainingInBox();
