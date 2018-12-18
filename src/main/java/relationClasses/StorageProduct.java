@@ -3,10 +3,19 @@ package relationClasses;
 import util.AddRemove;
 
 public class StorageProduct extends AddRemove {
+
+    /**
+     * Field
+     */
     private int id;
     private int storageId;
     private int productId;
 
+    /**
+     * "Methods
+     */
+
+    //Constructor with database connectivity included
     public StorageProduct(int storageId, int productId) {
         this.storageId = storageId;
         this.productId = productId;
@@ -14,13 +23,16 @@ public class StorageProduct extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public StorageProduct() {
     }
 
-    public void remove(){
+    //Remove method
+    public void remove() {
         removeObject(this);
     }
 
+    //Getters and setters
     public int getId() {
         return id;
     }
