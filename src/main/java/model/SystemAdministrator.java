@@ -4,13 +4,14 @@ import org.hibernate.*;
 import util.AddRemove;
 import util.SessionFactoryCfg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SystemAdministrator extends AddRemove {
     /**
      * Methods
      **/
+
+    //Returns a list of all restaurants in the database
     public static List<Restaurant> collectRestaurants() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
         List<Restaurant> restaurantList = session.createQuery("FROM Restaurant").list();
@@ -18,6 +19,7 @@ public class SystemAdministrator extends AddRemove {
         return restaurantList;
     }
 
+    //Returns a list of all managers in the database
     public static List<Manager> collectManagers() {
         List<Manager> managerList;
 
