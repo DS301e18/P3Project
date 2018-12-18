@@ -2,6 +2,7 @@ package model;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import util.SessionFactoryCfg;
 
@@ -9,34 +10,39 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginCheckTest {
 
-    //Tester om funktionen kan finde en bruger i databasen
+    private Employee employee;
+    private LoginCheck test;
+    private boolean result;
+
+    @BeforeEach
+    void before(){
+        employee = new Employee("Testbrugernavn", "test123", "test", "test", "Medarbejder");
+        test = new LoginCheck();
+        result = test.check(employee.getUsername(), employee.getPassword());
+    }
+
+    /** Check if the employee can be found */
     @Test
     void check() {
         try{
-            LoginCheck test1 = new LoginCheck();
-            boolean result1 = test1.check("admin", "admin123");
-            assertEquals(true, result1);
+            assertTrue(result);
         }
         catch (HibernateException e){
             System.out.println("Something went wrong");
             e.printStackTrace();
+
+        } finally {
+            employee.removeEmployee();
         }
 
     }
 
-    //TODO: insert employee in the test
-    //Tester om initializere objekter er indentisk med databaser.
+    /** Check if the employee is the same */
     @Test
     void getEmployee() {
-        Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
-        Employee employee = new Employee("Testbrugernavn", "test123", "Lille", "Peter", "Medarbejder");
-        LoginCheck test2 = new LoginCheck();
-
-        assertTrue(test2.check(employee.getUsername(), employee.getPassword()));
+        assertEquals(employee, test.getEmployee());
 
         employee.removeEmployee();
-
-        session.close();
     }
 }
