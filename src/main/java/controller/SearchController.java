@@ -35,6 +35,7 @@ public class SearchController extends HttpServlet {
 
     }
 
+    /** Search for a specific employee*/
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

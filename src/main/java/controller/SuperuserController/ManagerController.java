@@ -25,16 +25,20 @@ public class ManagerController extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        new Manager(username, password, firstName, lastName);
+        if(!firstName.equals("") && !lastName.equals("") && !username.equals("") && !password.equals("")) {
+            new Manager(username, password, firstName, lastName);
+        }
 
         resp.sendRedirect("superuserWebpanel.jsp");
     }
 
+    /** Delete manager */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int managerID = Integer.parseInt(req.getParameter("manIDDelete"));
 
+        //Get all managers in the system
         List<Manager> managerList = SystemAdministrator.collectManagers();
 
         Manager manager = managerList.get(managerID);

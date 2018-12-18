@@ -11,6 +11,7 @@ public class SessionFactoryCfg {
 
     public static SessionFactory getSessionFactory() {
 
+        //If sessionFactory hasn't been made yet, make it from the cfg.xml file
         if(sessionFactory == null){
             try {
                 sessionFactory = new Configuration().configure().buildSessionFactory();

@@ -11,16 +11,16 @@ import java.util.List;
 public class History {
 
     private List<Transactions> storageHistory;
-    private List<Transactions> employeeList;
     private List<Transactions> sortedList;
 
+    /** Load the history for an employee */
     public List<Transactions> readEmployeeHistory(int id){
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Full history of a storage
         Query query = session.createQuery("FROM Transactions where employeeID=:i");
         query.setParameter("i", id);
-        employeeList = query.list();
+        List<Transactions> employeeList = query.list();
 
         session.close();
 
@@ -64,6 +64,7 @@ public class History {
         return history;
     }
 
+    /** Help function to search the input */
     private void searchHistory(String input){
         sortedList = new ArrayList<>();
 

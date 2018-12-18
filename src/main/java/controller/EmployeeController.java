@@ -17,14 +17,13 @@ import java.util.List;
 @WebServlet("/Employee")
 public class EmployeeController extends HttpServlet{
 
-
     /** If menu icon has been pressed */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
         Restaurant currentRestaurant = (Restaurant) session.getAttribute("restaurant");
 
+        //Get list of employees in the current restaurant
         List<Employee> employee = currentRestaurant.sortEmployees();
 
         session.setAttribute("employeeList", employee);

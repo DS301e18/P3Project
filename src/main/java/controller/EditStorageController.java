@@ -20,6 +20,7 @@ public class EditStorageController extends HttpServlet {
         //Get parameters
         String storageName = req.getParameter("editStorageName");
 
+        //Can't edit a storage if it has nothing written in the text field
         if(!storageName.equals("")){
             //Get current attributes
             HttpSession session = req.getSession();

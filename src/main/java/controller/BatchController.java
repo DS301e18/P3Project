@@ -51,12 +51,12 @@ public class BatchController extends HttpServlet {
                 batchList.add(batch);
                 session.setAttribute("batchList", batchList);
             }
-        } catch (NumberFormatException e){
 
+        } catch (NumberFormatException e){
             System.out.println("Something else than a number was entered");
             e.printStackTrace();
-        } finally {
 
+        } finally {
             //Redirect
             resp.sendRedirect("webpanel.jsp");
         }
@@ -125,6 +125,7 @@ public class BatchController extends HttpServlet {
         } catch (NumberFormatException e){
             System.out.println("Something else than a number was entered");
             e.printStackTrace();
+
         } finally {
             //Redirect
             resp.sendRedirect("webpanel.jsp");

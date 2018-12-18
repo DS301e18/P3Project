@@ -25,6 +25,7 @@ public class EmployeePopUpController extends HttpServlet {
         String employeeUsername = req.getParameter("newEmployeeUsername");
         String employeePassword = req.getParameter("newEmployeePassword");
 
+        //Only execute if all text fields has input
         if(!employeeFirstName.equals("") && !employeeLastName.equals("") && !employeeUsername.equals("") && !employeePassword.equals("")){
             HttpSession session = req.getSession();
 
