@@ -56,21 +56,24 @@ public class Batch extends AddRemove {
     }
 
     //Method that can take any amount from a batch of a product
-    /** If this methond is called with the amount 0 it will remove**/
+
+    /**
+     * If this methond is called with the amount 0 it will remove
+     **/
     public void takeFromBatch(ProductBatch productBatch, int amount) {
 
         this.setRemainingInBox(this.remainingInBox - amount);
 
-        if(this.getRemainingInBox() < 1){
+        if (this.getRemainingInBox() < 1) {
             removeObject(this);
             removeObject(productBatch);
 
-        }else{
+        } else {
             calcBatchValue(remainingInBox);
         }
     }
 
-  
+    //Calculate value of a batch
     private void calcBatchValue(int amount) {
 
         SessionFactory sessionFactory = SessionFactoryCfg.getSessionFactory();
@@ -78,7 +81,7 @@ public class Batch extends AddRemove {
 
         Transaction transaction;
 
-        try{
+        try {
             transaction = session.beginTransaction();
 
             MathContext mc = new MathContext(4);
@@ -92,7 +95,7 @@ public class Batch extends AddRemove {
 
             transaction.commit();
 
-        } catch (HibernateException e){
+        } catch (HibernateException e) {
             System.out.println("Could not save the object");
             e.printStackTrace();
 
@@ -102,6 +105,7 @@ public class Batch extends AddRemove {
     }
 
 
+    //Getters and setters
     public void setValue(BigDecimal value) {
         this.value = value;
     }
@@ -172,11 +176,5 @@ public class Batch extends AddRemove {
 
     public void setProduct(Product product) {
         this.product = product;
-    }
-
-    @Override
-    public String toString() {
-        return  "batchNumber='" + batchNumber + '\'' +
-                "product='" + product + '\'';
     }
 }
