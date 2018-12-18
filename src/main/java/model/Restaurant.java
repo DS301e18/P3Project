@@ -95,7 +95,7 @@ public class Restaurant extends AddRemove {
         }
         //Closes the session
         session.close();
-        //returns the arraylist
+        //returns the arraylist of all restaurantStorages of this restaurant
         return restaurantStorages;
     }
 
@@ -126,6 +126,9 @@ public class Restaurant extends AddRemove {
         }
         //Sort allRestaurantEmployees list with a Comparator comparing Employee with their first name
         allRestaurantEmployees.sort(Comparator.comparing(Employee::getFirstName));
+
+        //Closes the session
+        session.close();
         //Returning a sorted arraylist of employees of this restaurant
         return allRestaurantEmployees;
     }
@@ -153,6 +156,9 @@ public class Restaurant extends AddRemove {
                 }
             }
         }
+        //Closes the session
+        session.close();
+        //Returning an arraylist of all storages of this restaurant
         return allRestaurantStorages;
     }
 
