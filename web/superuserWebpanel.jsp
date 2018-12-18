@@ -1,8 +1,7 @@
 <%@ page import="model.SystemAdministrator" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Restaurant" %>
-<%@ page import="model.Manager" %>
-<%@ page import="model.Employee" %><%--
+<%@ page import="model.Manager" %><%--
   Created by IntelliJ IDEA.
   User: Maria
   Date: 10/12/2018
@@ -33,6 +32,37 @@
                 <button style="float: right" type="submit" value="Logout">Log ud</button>
             </form>
         </div>
+    </div>
+</div>
+
+<!-- Popup for adding a new restaurant -->
+<div class="popUp" id="popUpRestaurant" style="display: none">
+    <header class="popUpHeader">Opret ny restaurant</header>
+
+    <div class="popUpBody">
+        <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
+            <input type="text" placeholder="Angiv navnet på Restaurant..." name="newRestaurant"><br>
+            <input id="addRestaurantSubmit" type="submit" value="Opret">
+        </form>
+
+        <button onclick="closePopUp('popUpRestaurant')">Annuller</button>
+    </div>
+</div>
+
+<!-- Pop up for adding a new manager-->
+<div class="popUp" id="popUpManager" style="display: none">
+    <header class="popUpHeader">Opret ny chef</header>
+
+    <div class="popUpBody">
+        <form action="Manager" accept-charset="ISO-8859-1" method="post">
+            <input type="text" placeholder="Fornavn..." name="managerFirstName"><br>
+            <input type="text" placeholder="Efternavn..." name="managerLastName"><br>
+            <input type="text" placeholder="Brugernavn..." name="username"><br>
+            <input type="text" placeholder="Password" name="password"><br>
+            <input id="addManagerSubmit" type="submit" value="Opret">
+        </form>
+
+        <button onclick="closePopUp('popUpManager')">Annuller</button>
     </div>
 </div>
 
@@ -108,37 +138,6 @@
             </form>
         </div>
     </footer>
-</div>
-
-<!-- Popup for adding a new restaurant -->
-<div class="popUp" id="popUpRestaurant" style="display: none">
-    <header class="popUpHeader">Opret ny restaurant</header>
-
-    <div class="popUpBody">
-        <form action="Restaurant" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Angiv navnet på Restaurant..." name="newRestaurant"><br>
-            <input id="addRestaurantSubmit" type="submit" value="Opret">
-        </form>
-
-        <button onclick="closePopUp('popUpRestaurant')">Annuller</button>
-    </div>
-</div>
-
-<!-- Pop up for adding a new manager-->
-<div class="popUp" id="popUpManager" style="display: none">
-    <header class="popUpHeader">Opret ny chef</header>
-
-    <div class="popUpBody">
-        <form action="Manager" accept-charset="ISO-8859-1" method="post">
-            <input type="text" placeholder="Fornavn..." name="managerFirstName"><br>
-            <input type="text" placeholder="Efternavn..." name="managerLastName"><br>
-            <input type="text" placeholder="Brugernavn..." name="username"><br>
-            <input type="text" placeholder="Password" name="password"><br>
-            <input id="addManagerSubmit" type="submit" value="Opret">
-        </form>
-
-        <button onclick="closePopUp('popUpManager')">Annuller</button>
-    </div>
 </div>
 
 <script>

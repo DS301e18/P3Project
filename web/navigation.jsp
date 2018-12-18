@@ -1,4 +1,5 @@
-<%@ page import="model.Employee" %><%--
+<%@ page import="model.Employee" %>
+<%@ page import="model.Restaurant" %><%--
   Created by IntelliJ IDEA.
   User: Kristoffer
   Date: 30/11/2018
@@ -13,13 +14,15 @@
 <body>
 
 <%//Get current user
-    Employee employee = (Employee) session.getAttribute("employee");%>
+    Employee employee = (Employee) session.getAttribute("employee");
+    Restaurant restaurant = (Restaurant) session.getAttribute("restaurant");
+%>
 
 <div class="topnav">
     <div id="topNavID">
         <!-- Button only shown in mobile form in order to hide sidebar/storage list-->
         <button onclick="openNav()"><span style="font-size: 20px; color: white"><i class="fas fa-bars"></i></span></button>
-        <a><%=session.getAttribute("restaurant")%></a>
+        <a><%=restaurant.getName()%></a>
     </div>
     <div class="topnav-right">
         <a id="account"><%=employee.getFirstName() + " " + employee.getLastName()%></a>

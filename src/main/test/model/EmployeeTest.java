@@ -10,8 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {
 
-    private Employee employee;
-
     @Test
     void addEmployeeTest() {
         //Open session
@@ -31,37 +29,6 @@ class EmployeeTest {
 
         //Closes the session
         session.close();
-    }
-
-    @Test
-    void addEmployeeExceptionTest() {
-        SessionFactoryCfg.getSessionFactory().openSession();
-        //new Employee("Test", "test", "Jørgen", "Åge");
-
-        //assertThrows(IllegalEmployeeException.class, () -> employeeTest.addEmployee());
-    }
-
-
-    @Test
-    void removeEmployeeTest() {
-
-        //employee.removeEmployee();
-
-        Employee employeeTest = null;
-
-        Session session = SessionFactoryCfg.getSessionFactory().openSession();
-
-        List<Employee> employeeList = session.createQuery("FROM Employee").list();
-
-        for (Employee emp : employeeList) {
-
-            if (emp.equals(employee)) {
-                employeeTest = emp;
-            }
-        }
-
-        assertNull(employeeTest);
-
     }
 
 }

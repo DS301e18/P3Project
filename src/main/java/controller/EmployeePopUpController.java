@@ -20,6 +20,7 @@ public class EmployeePopUpController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //Input parameters
         String employeeFirstName = req.getParameter("newEmployeeFirstName");
         String employeeLastName = req.getParameter("newEmployeeLastName");
         String employeeUsername = req.getParameter("newEmployeeUsername");
