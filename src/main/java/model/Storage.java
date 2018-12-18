@@ -134,9 +134,4 @@ public class Storage extends AddRemove {
         }
         return totalPrice;
     }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 }
