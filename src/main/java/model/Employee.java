@@ -4,6 +4,9 @@ import util.AddRemove;
 
 public class Employee extends AddRemove {
 
+    /**
+     * Field
+     **/
     private int id;
     private String username;
     private String password;
@@ -11,6 +14,11 @@ public class Employee extends AddRemove {
     private String lastName;
     private String role;
 
+    /**
+     * Methods
+     **/
+
+    //Constructor with database connectivity included
     public Employee(String username, String password, String firstName, String lastName, String role) {
         this.username = username;
         this.password = password;
@@ -21,10 +29,12 @@ public class Employee extends AddRemove {
         addObject(this);
     }
 
+    //Empty constructor because of AddRemove.
     public Employee() {
     }
 
-    public void removeEmployee(){
+    //Getters and setters
+    public void removeEmployee() {
         removeObject(this);
     }
 
@@ -76,20 +86,8 @@ public class Employee extends AddRemove {
         this.role = role;
     }
 
-    public void update(){
+    public void update() {
         updateObject(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstname='" + firstName + '\'' +
-                ", lastname='" + lastName + '\'' +
-                ", role='" + role + '\'' +
-                '}';
     }
 
     @Override
