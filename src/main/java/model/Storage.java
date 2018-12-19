@@ -73,45 +73,31 @@ public class Storage extends AddRemove {
         this.name = name;
     }
 
-    /**
-     * Returns a list of all productIds in this storage.
-     * Creates a list of StorageProductsControllers to get all ids of the products in this storage.
-     * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
-     * If the ids are the same the productId is added to the list.
-     */
+    //Returns a list of all storageProduct where storage is this storage
     private List<StorageProduct> collectProducts() {
         //New arraylist of StorageProduct
         List<StorageProduct> storageProducts = new ArrayList<>();
 
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list with the relation data in the database
         List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
-        //For each storageProduct in the above list
+
+        //Check if the current storage id matches one from the list
         for (StorageProduct storageProduct : storageProductList) {
-            //If this storage ID is the same as the storageProduct.getRestaurantId()
             if (this.getId() == storageProduct.getStorageId()) {
-                //Adds this storageProduct to the storageProducts arraylist
                 storageProducts.add(storageProduct);
             }
         }
-        //Closes the session
+
         session.close();
-        //returns the arraylist
+
+        //returns the list of relations between the current storage and products
         return storageProducts;
     }
 
-    /**
-     * Returns a sorted by name list of all products in this storage. This list is called totalStorageProducts.
-     * A method call to collectProducts is made to get a list of all productIds in this storage.
-     * Creates a productList with all products in the database.
-     * Creates a totalStorageProduct list.
-     * The for loop and for each loop is made to compare all storageProductIds with all products in the database to add them
-     * in a the returned list called totalStorageProducts.
-     */
+    //Returns a sorted list of products by name
     public List<Product> sortProducts() {
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list of StorageProduct with the data from the method call: collectProducts
@@ -122,32 +108,23 @@ public class Storage extends AddRemove {
         //New arraylist of Product
         List<Product> totalStorageProducts = new ArrayList<>();
 
-        //Start i in 0, until i < size of storageProducts, increase with 1 each loop
+        //Compares the arraylist of relations between the product array list. Add to list if their id matches
         for (int i = 0; i < storageProducts.size(); i++) {
-            //For each product in productList
             for (Product product : productList) {
-                //If product.getId is the same as the getProductId found in the relation list
                 if (product.getId() == storageProducts.get(i).getProductId()) {
-                    //Add product to totalStorageProducts
                     totalStorageProducts.add(product);
                 }
             }
         }
         //Sort totalStorageProducts list with a Comparator comparing Product with their name
         totalStorageProducts.sort(Comparator.comparing(Product::getName));
-        //Closes the session
+
         session.close();
         //Returning a sorted arraylist of sorted products in this storage
         return totalStorageProducts;
     }
 
-    /**
-     * Returns a totalPrice of all products in a storage.
-     * Creates a list of all products in this storage with a method call to sortProducts.
-     * Ensures that totalPrice start at 0.
-     * The for loop goes through all products in this storage to get their prices and stores it in totalPrice.
-     * To ensure that we get the price of all batches of all products a method call of priceOfAllBatches in the product class is made.
-     */
+    //calculate total price of all products
     public BigDecimal calculateTotalPrice() {
         List<Product> storageProducts = sortProducts();
         BigDecimal totalPrice = new BigDecimal(0);

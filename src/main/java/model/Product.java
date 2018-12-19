@@ -102,28 +102,25 @@ public class Product extends AddRemove {
         //New arraylist of productBatches
         List<ProductBatch> productBatches = new ArrayList<>();
 
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list with the relation data in the database
         List<ProductBatch> ProductBatchList = session.createQuery("FROM ProductBatch").list();
-        //For each productBatch in the above list
+
+        //Check if the current product id matches one from the list
         for (ProductBatch productBatch : ProductBatchList) {
-            //If this product ID is the same as the productBatch.getRestaurantId()
             if (this.getId() == productBatch.getProductId()) {
-                //Adds this productBatch to the productBatches arraylist
                 productBatches.add(productBatch);
             }
         }
-        //Closes the session
+
         session.close();
-        //returns the arraylist
+        //returns the list of relations between the current product and batch
         return productBatches;
     }
 
     //Returns a list of all batches of a product in sorted order by name.
     public List<Batch> sortBatches() {
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list of ProductBatch with the data from the method call: collectBatches
@@ -133,13 +130,10 @@ public class Product extends AddRemove {
         //New arraylist of Batch
         List<Batch> totalProductBatches = new ArrayList<>();
 
-        //Start i in 0, until i < size of productBatches, increase with 1 each loop
+        //Compares the arraylist of relations between the batch array list. Add to list if their id matches
         for (int i = 0; i < productBatches.size(); i++) {
-            //For each batch in batchList
             for (Batch batch : batchList) {
-                //If batch.getId is the same as the getBatchId found in the relation list
                 if (batch.getId() == productBatches.get(i).getBatchId()) {
-                    //Add batch to totalProductBatches
                     totalProductBatches.add(batch);
                     totalAmountOfBatches += batch.getRemainingInBox();
                 }
@@ -148,7 +142,6 @@ public class Product extends AddRemove {
         //Sort totalProductBatches list with a Comparator comparing Batch with their BatchNumber
         totalProductBatches.sort(Comparator.comparing(Batch::getBatchNumber));
 
-        //Closes the session
         session.close();
         //Returning a sorted arraylist of bathces of this product
         return totalProductBatches;
