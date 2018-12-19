@@ -79,20 +79,26 @@ public class Storage extends AddRemove {
      * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
      * If the ids are the same the productId is added to the list.
      */
-    //TODO change createSessionFactory to getSessionFactory
     private List<StorageProduct> collectProducts() {
+        //New arraylist of StorageProduct
         List<StorageProduct> storageProducts = new ArrayList<>();
 
+        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
+        //Makes a list with the relation data in the database
         List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
+        //For each storageProduct in the above list
         for (StorageProduct storageProduct : storageProductList) {
+            //If this storage ID is the same as the storageProduct.getRestaurantId()
             if (this.getId() == storageProduct.getStorageId()) {
+                //Adds this storageProduct to the storageProducts arraylist
                 storageProducts.add(storageProduct);
             }
         }
-
+        //Closes the session
         session.close();
+        //returns the arraylist
         return storageProducts;
     }
 
@@ -104,23 +110,34 @@ public class Storage extends AddRemove {
      * The for loop and for each loop is made to compare all storageProductIds with all products in the database to add them
      * in a the returned list called totalStorageProducts.
      */
-    //TODO change createSessionFactory to getSessionFactory
     public List<Product> sortProducts() {
+        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
+        //Makes a list of StorageProduct with the data from the method call: collectProducts
         List<StorageProduct> storageProducts = collectProducts();
+        //Makes a list with the Product data in the database
         List<Product> productList = session.createQuery("FROM Product").list();
 
+        //New arraylist of Product
         List<Product> totalStorageProducts = new ArrayList<>();
 
+        //Start i in 0, until i < size of storageProducts, increase with 1 each loop
         for (int i = 0; i < storageProducts.size(); i++) {
+            //For each product in productList
             for (Product product : productList) {
+                //If product.getId is the same as the getProductId found in the relation list
                 if (product.getId() == storageProducts.get(i).getProductId()) {
+                    //Add product to totalStorageProducts
                     totalStorageProducts.add(product);
                 }
             }
         }
+        //Sort totalStorageProducts list with a Comparator comparing Product with their name
         totalStorageProducts.sort(Comparator.comparing(Product::getName));
+        //Closes the session
+        session.close();
+        //Returning a sorted arraylist of sorted products in this storage
         return totalStorageProducts;
     }
 
