@@ -56,22 +56,21 @@ public class Restaurant extends AddRemove {
         //New arraylist of RestaurantEmployee
         List<RestaurantEmployee> restaurantEmployees = new ArrayList<>();
 
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list with the relation data in the database
         List<RestaurantEmployee> restaurantEmployeesList = session.createQuery("FROM RestaurantEmployee ").list();
-        //For each restaurantEmployee in the above list
+
+        //Check if the current restaurant id matches one from the list
         for (RestaurantEmployee restaurantEmployee : restaurantEmployeesList) {
-            //If this restaurant ID is the same as the restaurantEmployee.getRestaurantId()
             if (this.getId() == restaurantEmployee.getRestaurantId()) {
-                //Adds this restaurantEmployee to the restaurantEmployees arraylist
                 restaurantEmployees.add(restaurantEmployee);
             }
         }
-        //Closes the session
+
         session.close();
-        //returns the arraylist
+
+        //returns the list of relations between the current restaurant and employees
         return restaurantEmployees;
     }
 
@@ -80,28 +79,26 @@ public class Restaurant extends AddRemove {
         //New arraylist of restaurantStorages
         List<RestaurantStorage> restaurantStorages = new ArrayList<>();
 
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list with the relation data in the database
         List<RestaurantStorage> restaurantStorageList = session.createQuery("FROM RestaurantStorage ").list();
-        //For each restaurantStorage in the above list
+
+        //Check if the current restaurant id matches one from the list
         for (RestaurantStorage restaurantStorage : restaurantStorageList) {
-            //If this storage ID is the same as the restaurantStorage.getRestaurantId()
             if (this.getId() == restaurantStorage.getRestaurantId()) {
-                //Adds this restaurantStorage to the restaurantStorages arraylist
                 restaurantStorages.add(restaurantStorage);
             }
         }
-        //Closes the session
+
         session.close();
-        //returns the arraylist of all restaurantStorages of this restaurant
+
+        //returns the list of relations between the current restaurant and employees
         return restaurantStorages;
     }
 
     //Returns a sorted list of employees by name
     public List<Employee> sortEmployees() {
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list of RestaurantEmployee with the data from the method call: collectEmployees
@@ -113,21 +110,19 @@ public class Restaurant extends AddRemove {
         //New arraylist of Employee
         List<Employee> allRestaurantEmployees = new ArrayList<>();
 
-        //Start i in 0, until i < size of restaurantEmployee, increase with 1 each loop
+        //Compares the arraylist of relations between the employee array list. Add to list if their id matches and the role is also "medarbejder"
         for (int i = 0; i < restaurantEmployee.size(); i++) {
-            //For each employee in employeeList
             for (Employee employee : employeeList) {
-                //If employee.getId is the same as the employeeId found in the relation list and employee.getRole is "medarbejder"
                 if (employee.getId() == restaurantEmployee.get(i).getEmployeeId() && employee.getRole().equals("Medarbejder")) {
                     //Add employee to allRestaurantEmployees
                     allRestaurantEmployees.add(employee);
                 }
             }
         }
+
         //Sort allRestaurantEmployees list with a Comparator comparing Employee with their first name
         allRestaurantEmployees.sort(Comparator.comparing(Employee::getFirstName));
 
-        //Closes the session
         session.close();
         //Returning a sorted arraylist of employees of this restaurant
         return allRestaurantEmployees;
@@ -135,28 +130,26 @@ public class Restaurant extends AddRemove {
 
     //Returns a list of all storages in a restaurant
     public List<Storage> allStorages() {
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list of RestaurantStorage with the data from the method call: collectStorages
         List<RestaurantStorage> restaurantStorage = collectStorages();
+
         //Makes a list with the storage data in the database
         List<Storage> storageList = session.createQuery("FROM Storage").list();
+
         //New arraylist of storages
         List<Storage> allRestaurantStorages = new ArrayList<>();
 
-        //Start i in 0, until i < size of restaurantStorage, increase with 1 each loop
+        //Compares the arraylist of relations between the storage array list. Add to list if their id matches
         for (int i = 0; i < restaurantStorage.size(); i++) {
-            //For each storage in storageList
             for (Storage storage : storageList) {
-                //If storage.getId is the same as the storage found in the relation list
                 if (storage.getId() == restaurantStorage.get(i).getStorageId()) {
-                    //Add storage to allRestaurantStorages
                     allRestaurantStorages.add(storage);
                 }
             }
         }
-        //Closes the session
+
         session.close();
         //Returning an arraylist of all storages of this restaurant
         return allRestaurantStorages;
