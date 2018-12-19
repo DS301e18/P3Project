@@ -73,12 +73,7 @@ public class Storage extends AddRemove {
         this.name = name;
     }
 
-    /**
-     * Returns a list of all productIds in this storage.
-     * Creates a list of StorageProductsControllers to get all ids of the products in this storage.
-     * The for each loop is looking for this storageId with all storageIds in the StorageProduct to ensure its this storage.
-     * If the ids are the same the productId is added to the list.
-     */
+    //Returns a list of all storageProduct where storage is this storage
     private List<StorageProduct> collectProducts() {
         //New arraylist of StorageProduct
         List<StorageProduct> storageProducts = new ArrayList<>();
@@ -101,14 +96,7 @@ public class Storage extends AddRemove {
         return storageProducts;
     }
 
-    /**
-     * Returns a sorted by name list of all products in this storage. This list is called totalStorageProducts.
-     * A method call to collectProducts is made to get a list of all productIds in this storage.
-     * Creates a productList with all products in the database.
-     * Creates a totalStorageProduct list.
-     * The for loop and for each loop is made to compare all storageProductIds with all products in the database to add them
-     * in a the returned list called totalStorageProducts.
-     */
+    //Returns a sorted list of products by name
     public List<Product> sortProducts() {
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
@@ -136,13 +124,7 @@ public class Storage extends AddRemove {
         return totalStorageProducts;
     }
 
-    /**
-     * Returns a totalPrice of all products in a storage.
-     * Creates a list of all products in this storage with a method call to sortProducts.
-     * Ensures that totalPrice start at 0.
-     * The for loop goes through all products in this storage to get their prices and stores it in totalPrice.
-     * To ensure that we get the price of all batches of all products a method call of priceOfAllBatches in the product class is made.
-     */
+    //calculate total price of all products
     public BigDecimal calculateTotalPrice() {
         List<Product> storageProducts = sortProducts();
         BigDecimal totalPrice = new BigDecimal(0);
