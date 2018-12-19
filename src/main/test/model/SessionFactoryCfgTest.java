@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class SessionFactoryCfgTest {
 
@@ -20,11 +21,7 @@ class SessionFactoryCfgTest {
 
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
-        session.doWork(new Work() {
-            public void execute(Connection connection) throws SQLException {
-
-            }
-        });
+        session.doWork(connection -> assertTrue(true));
     }
 
     @Test
