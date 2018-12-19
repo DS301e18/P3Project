@@ -83,22 +83,21 @@ public class Storage extends AddRemove {
         //New arraylist of StorageProduct
         List<StorageProduct> storageProducts = new ArrayList<>();
 
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list with the relation data in the database
         List<StorageProduct> storageProductList = session.createQuery("FROM StorageProduct").list();
-        //For each storageProduct in the above list
+
+        //Check if the current storage id matches one from the list
         for (StorageProduct storageProduct : storageProductList) {
-            //If this storage ID is the same as the storageProduct.getRestaurantId()
             if (this.getId() == storageProduct.getStorageId()) {
-                //Adds this storageProduct to the storageProducts arraylist
                 storageProducts.add(storageProduct);
             }
         }
-        //Closes the session
+
         session.close();
-        //returns the arraylist
+
+        //returns the list of relations between the current storage and products
         return storageProducts;
     }
 
@@ -111,7 +110,6 @@ public class Storage extends AddRemove {
      * in a the returned list called totalStorageProducts.
      */
     public List<Product> sortProducts() {
-        //Opens a session from sessionFactoryCfg
         Session session = SessionFactoryCfg.getSessionFactory().openSession();
 
         //Makes a list of StorageProduct with the data from the method call: collectProducts
@@ -122,20 +120,17 @@ public class Storage extends AddRemove {
         //New arraylist of Product
         List<Product> totalStorageProducts = new ArrayList<>();
 
-        //Start i in 0, until i < size of storageProducts, increase with 1 each loop
+        //Compares the arraylist of relations between the product array list. Add to list if their id matches
         for (int i = 0; i < storageProducts.size(); i++) {
-            //For each product in productList
             for (Product product : productList) {
-                //If product.getId is the same as the getProductId found in the relation list
                 if (product.getId() == storageProducts.get(i).getProductId()) {
-                    //Add product to totalStorageProducts
                     totalStorageProducts.add(product);
                 }
             }
         }
         //Sort totalStorageProducts list with a Comparator comparing Product with their name
         totalStorageProducts.sort(Comparator.comparing(Product::getName));
-        //Closes the session
+
         session.close();
         //Returning a sorted arraylist of sorted products in this storage
         return totalStorageProducts;
